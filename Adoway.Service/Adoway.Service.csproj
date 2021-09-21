@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Adoway.Common\Adoway.Common.csproj" />
+    <ProjectReference Include="..\Adoway.Data\Adoway.Data.csproj" />
+  </ItemGroup>
+</Project>
