@@ -1,7 +1,7 @@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { put, takeLatest } from "redux-saga/effects";
-import { getUserByToken } from "./authCrud";
+import { getCurrentUser } from "./authCrud";
 
 export const actionTypes = {
   Login: "[Login] Action",
@@ -14,23 +14,22 @@ export const actionTypes = {
 
 const initialAuthState = {
   user: undefined,
-  authToken: undefined,
+  accessToken: undefined,
 };
 
 export const reducer = persistReducer(
-  { storage, key: "v726-demo1-auth", whitelist: ["authToken"] },
+  { storage, key: "adoway-app-access-token", whitelist: ["accessToken"] },
   (state = initialAuthState, action) => {
     switch (action.type) {
       case actionTypes.Login: {
-        const { authToken } = action.payload;
-
-        return { authToken, user: undefined };
+        const { accessToken } = action.payload;
+        return { accessToken, user: undefined };
       }
 
       case actionTypes.Register: {
-        const { authToken } = action.payload;
+        const { accessToken } = action.payload;
 
-        return { authToken, user: undefined };
+        return { accessToken, user: undefined };
       }
 
       case actionTypes.Logout: {
@@ -55,10 +54,10 @@ export const reducer = persistReducer(
 );
 
 export const actions = {
-  login: (authToken) => ({ type: actionTypes.Login, payload: { authToken } }),
-  register: (authToken) => ({
+  login: (accessToken) => ({ type: actionTypes.Login, payload: { accessToken } }),
+  register: (accessToken) => ({
     type: actionTypes.Register,
-    payload: { authToken },
+    payload: { accessToken },
   }),
   logout: () => ({ type: actionTypes.Logout }),
   requestUser: (user) => ({
@@ -79,7 +78,7 @@ export function* saga() {
   });
 
   yield takeLatest(actionTypes.UserRequested, function* userRequested() {
-    const { data: user } = yield getUserByToken();
+    const { data: user } = yield getCurrentUser();
 
     yield put(actions.fulfillUser(user));
   });

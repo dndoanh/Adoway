@@ -1,18 +1,18 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Adoway.Common.Enums;
+using Adoway.Data.Entities.Base;
 
-namespace Adoway.Data.Entities.Base
+namespace Adoway.Data.Entities.UserManagement
 {
-    [Table("Settings")]
-    public class SettingEntity : BaseEntity
+    [Table("Roles")]
+    public class RoleEntity : BaseEntity
     {
         [Required]
         public string Name { get; set; }
-        [Required]
-        public string Key { get; set; }
-        public string Value { get; set; }
-
+        public string Description { get; set; }
+        public Status Status { get; set; }
         public Guid? EnterpriseId { get; set; }
         [ForeignKey("EnterpriseId")]
         public EnterpriseEntity Enterprise { get; set; }

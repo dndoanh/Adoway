@@ -25,13 +25,20 @@ namespace Adoway.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(local)\SQLSERVER;Database=Adoway;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(local);Database=Adoway;Trusted_Connection=True;");
         }
         // Base
         public DbSet<LanguageEntity> Languages { get; set; }
         public DbSet<SettingEntity> Settings { get; set; }
+        public DbSet<EnterpriseEntity> Enterpises { get; set; }
+        public DbSet<ScreenEntity> Screens { get; set; }
+        public DbSet<ScreenFunctionEntity> ScreenFunctions { get; set; }
         // User management
         public DbSet<UserEntity> Users { get; set; }
+        public DbSet<RoleEntity> Roles { get; set; }
+        public DbSet<UserInRoleEntity> UsersInRoles { get; set; }
+        public DbSet<RoleInScreenEntity> RolesInScreens { get; set; }
+        public DbSet<RoleInScreenFunctionEntity> RolesInScreenFunctions { get; set; }
         public DbSet<UserVerificationEntity> UserVerifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -53,7 +60,7 @@ namespace Adoway.Data.Context
             }
 
             // base entities config
-            modelBuilder.Entity<SettingEntity>().HasIndex(u => u.Key).IsUnique();
+            //modelBuilder.Entity<SettingEntity>().HasIndex(u => u.Key).IsUnique();
 
             // user management entities config
             modelBuilder.Entity<UserEntity>().HasIndex(u => u.Email).IsUnique();
@@ -66,7 +73,7 @@ namespace Adoway.Data.Context
                     Id = Guid.NewGuid(),
                     Name = "English",
                     Locale = "en_US",
-                    Status = Common.Enums.Status.Inactive
+                    Status = Common.Enums.Status.Active
                 },
                 new LanguageEntity
                 {
@@ -81,7 +88,8 @@ namespace Adoway.Data.Context
                 {
                     Id = Guid.NewGuid(),
                     Name = "System Admin",
-                    Email = "admin@ecc.vn",
+                    Email = "admin@adoway.com",
+                    IsSuperAdmin = true,
                     Status = Common.Enums.Status.Active,
                     Password=SecurityHelper.SHA1Hash("123456")
                 });

@@ -30,7 +30,7 @@ export function Routes() {
         </Route>
       ) : (
         /*Otherwise redirect to root page (`/`)*/
-        <Redirect from="/auth" to="/" />
+                  <Redirect from="/auth" to="/" />
       )}
 
       <Route path="/error" component={ErrorsPage} />

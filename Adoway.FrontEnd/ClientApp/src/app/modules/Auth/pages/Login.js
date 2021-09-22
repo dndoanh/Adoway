@@ -18,8 +18,8 @@ import { login } from "../_redux/authCrud";
 */
 
 const initialValues = {
-  email: "admin@demo.com",
-  password: "demo",
+  email: "admin@adoway.com",
+  password: "123456",
 };
 
 function Login(props) {
@@ -72,10 +72,10 @@ function Login(props) {
       enableLoading();
       setTimeout(() => {
         login(values.email, values.password)
-          .then(({ data: { authToken } }) => {
+          .then(({ data: { accessToken } }) => {
             disableLoading();
 
-            props.login(authToken);
+            props.login(accessToken);
           })
           .catch(() => {
             setStatus(
@@ -117,8 +117,8 @@ function Login(props) {
         ) : (
           <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
             <div className="alert-text ">
-              Use account <strong>admin@demo.com</strong> and password{" "}
-              <strong>demo</strong> to continue.
+              Use account <strong>admin@adoway.com</strong> and password{" "}
+              <strong>123456</strong> to continue.
             </div>
           </div>
         )}

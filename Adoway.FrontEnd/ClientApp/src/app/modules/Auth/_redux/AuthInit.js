@@ -2,25 +2,25 @@ import React, { useRef, useEffect, useState } from "react";
 import { shallowEqual, useSelector, connect, useDispatch } from "react-redux";
 import { LayoutSplashScreen } from "../../../../_metronic/layout";
 import * as auth from "./authRedux";
-import { getUserByToken } from "./authCrud";
+import { getCurrentUser } from "./authCrud";
 
 function AuthInit(props) {
   const didRequest = useRef(false);
   const dispatch = useDispatch();
   const [showSplashScreen, setShowSplashScreen] = useState(true);
-  const { authToken } = useSelector(
+  const { accessToken } = useSelector(
     ({ auth }) => ({
-      authToken: auth.authToken,
+      accessToken: auth.accessToken,
     }),
     shallowEqual
   );
 
-  // We should request user by authToken before rendering the application
+  // We should request user by accessToken before rendering the application
   useEffect(() => {
     const requestUser = async () => {
       try {
         if (!didRequest.current) {
-          const { data: user } = await getUserByToken();
+          const { data: user } = await getCurrentUser();
           dispatch(props.fulfillUser(user));
         }
       } catch (error) {
@@ -35,7 +35,7 @@ function AuthInit(props) {
       return () => (didRequest.current = true);
     };
 
-    if (authToken) {
+    if (accessToken) {
       requestUser();
     } else {
       dispatch(props.fulfillUser(undefined));

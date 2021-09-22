@@ -59,7 +59,7 @@ namespace Adoway.Service.UserManagement
         }
         public async Task<UserViewModel> GetByEmailPassword(string email, string password)
         {
-            var user = await _userRepo.SingleBy(u => u.Email == email && u.Password == password);
+            var user = await _userRepo.SingleBy(u => u.Email == email && u.Password == password && u.EmailVerified);
             return _mapper.Map<UserViewModel>(user);
         }
         public async Task<UserViewModel> GetByEmail(string email)

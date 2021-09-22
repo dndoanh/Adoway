@@ -19,7 +19,7 @@ namespace Adoway.Data.Entities.UserManagement
         public string AvatarUrl { get; set; }
         public Status Status { get; set; }
         public string RefreshToken { get; set; }
-
+        public bool IsSuperAdmin { get; set; }
         public Guid? LanguageId { get; set; }
         [ForeignKey("LanguageId")]
         public LanguageEntity Language { get; set; }

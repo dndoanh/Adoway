@@ -1,6 +1,6 @@
 import {
   LOGIN_URL,
-  ME_URL,
+  GET_CURR_USER_URL,
   REGISTER_URL,
   REQUEST_PASSWORD_URL,
 } from "../_redux/authCrud";
@@ -69,7 +69,7 @@ export default function mockAuth(mock) {
     return [400];
   });
 
-  mock.onGet(ME_URL).reply(({ headers: { Authorization } }) => {
+  mock.onGet(GET_CURR_USER_URL).reply(({ headers: { Authorization } }) => {
     const authToken =
       Authorization &&
       Authorization.startsWith("Bearer ") &&

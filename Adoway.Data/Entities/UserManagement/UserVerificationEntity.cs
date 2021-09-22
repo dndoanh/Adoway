@@ -9,13 +9,13 @@ namespace Adoway.Data.Entities.UserManagement
 	[Table("UserVerifications")]
 	public class UserVerificationEntity : BaseEntity
 	{
-		public Guid? UserId { get; set; }
-		public string EmailPhone { get; set; }
+		public string Email { get; set; }
 		public string Token { get; set; }
-		public bool IsEmail { get; set; }
+		public bool IsForgotPassword { get; set; }
 		public DateTime? VerifiedDate { get; set; }
 		public DateTime? ExpireDate { get; set; }
 
+		public Guid? UserId { get; set; }
 		[ForeignKey("UserId")]
 		public UserEntity User { get; set; }
 	}
