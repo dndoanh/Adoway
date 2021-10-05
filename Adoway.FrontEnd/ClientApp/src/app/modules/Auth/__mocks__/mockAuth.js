@@ -9,7 +9,6 @@ import userTableMock from "./userTableMock";
 export default function mockAuth(mock) {
   mock.onPost(LOGIN_URL).reply(({ data }) => {
     const { email, password } = JSON.parse(data);
-
     if (email && password) {
       const user = userTableMock.find(
         (x) =>
@@ -53,7 +52,7 @@ export default function mockAuth(mock) {
 
   mock.onPost(REQUEST_PASSWORD_URL).reply(({ data }) => {
     const { email } = JSON.parse(data);
-
+      debugger;
     if (email) {
       const user = userTableMock.find(
         (x) => x.email.toLowerCase() === email.toLowerCase()
@@ -69,7 +68,8 @@ export default function mockAuth(mock) {
     return [400];
   });
 
-  mock.onGet(GET_CURR_USER_URL).reply(({ headers: { Authorization } }) => {
+    mock.onGet(GET_CURR_USER_URL).reply(({ headers: { Authorization } }) => {
+        debugger;
     const authToken =
       Authorization &&
       Authorization.startsWith("Bearer ") &&
