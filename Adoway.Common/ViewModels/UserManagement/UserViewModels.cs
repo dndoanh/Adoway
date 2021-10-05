@@ -24,6 +24,19 @@ namespace Adoway.Common.ViewModels.UserManagement
     {
         public List<UserViewModel> Items { get; set; }
         public int TotalCount { get; set; }
-        public string ErrorMessage { get; set; }
+        public string ErrMsg { get; set; }
+    }
+    public class UserInRoleViewModel
+    {
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public Guid RoleId { get; set; }
+        public bool BelongTo { get; set; }
+    }
+    public class UserInRoleListViewModel
+    {
+        public List<UserInRoleViewModel> Items { get; set; }
+        public int TotalCount { get; set; }
+        public string ErrMsg { get; set; }
     }
 }

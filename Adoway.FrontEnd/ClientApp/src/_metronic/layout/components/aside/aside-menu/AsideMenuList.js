@@ -1666,6 +1666,24 @@ export function AsideMenuList({ layoutProps }) {
         </li>
         {/*end::1 Level*/}
 
+        {/*begin::1 Level*/}
+        <li
+            className={`menu-item ${getMenuItemActive("/user-management", false)}`}
+            aria-haspopup="true"
+        >
+            <NavLink className="menu-link" to="/user-profile">
+                <span className="svg-icon menu-icon">
+                    <SVG
+                        src={toAbsoluteUrl(
+                            "/media/svg/icons/Communication/Add-user.svg"
+                        )}
+                    />
+                </span>
+                <span className="menu-text">User Profile</span>
+            </NavLink>
+        </li>
+        {/*end::1 Level*/}
+
         {/* Custom */}
         {/* begin::section */}
         <li className="menu-section ">

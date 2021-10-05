@@ -5,17 +5,18 @@ using System.Text;
 
 namespace Adoway.Common.ViewModels.Base
 {
-    public class LanguageViewModel
+    public class EnterpriseViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string Locale { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
         public Status Status { get; set; }
-        public bool IsDefault { get; set; }
     }
-    public class LanguageListViewModel
+    public class EnterpriseListViewModel
     {
-        public List<LanguageViewModel> Items { get; set; }
+        public List<EnterpriseViewModel> Items { get; set; }
         public int TotalCount { get; set; }
         public string ErrMsg { get; set; }
     }

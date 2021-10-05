@@ -16,18 +16,15 @@ namespace Adoway.BackEnd.Controllers.Base
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
-    public class SystemSettingController : ApiBaseController
+    public class LanguageController : ApiBaseController
     {
         private readonly ILanguageService _languageService;
-        private readonly ISettingService _settingService;
         private readonly IMapper _mapper;
-        public SystemSettingController(IMapper mapper, ILanguageService languageService, ISettingService settingService)
+        public LanguageController(IMapper mapper, ILanguageService languageService)
         {
             _mapper = mapper;
             _languageService = languageService;
-            _settingService = settingService;
         }
-        // Language
         [HttpGet]
         public async Task<IActionResult> GetLanguageList()
         {
@@ -60,23 +57,6 @@ namespace Adoway.BackEnd.Controllers.Base
             if (ModelState.IsValid)
             {
                 var result = await _languageService.Remove(model);
-                return new ObjectResult(result);
-            }
-            return BadRequest("Could not create access token");
-        }
-        // Setting
-        [HttpGet]
-        public async Task<IActionResult> GetSettingList()
-        {
-            var result = await _settingService.GetAll();
-            return new ObjectResult(result);
-        }
-        [HttpPost]
-        public async Task<IActionResult> UpdateSetting([FromBody] List<SettingViewModel> model)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _settingService.Edit(model);
                 return new ObjectResult(result);
             }
             return BadRequest("Could not create access token");

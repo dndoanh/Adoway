@@ -16,10 +16,12 @@ namespace Adoway.Service.UserManagement
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepo;
-        public UserService(IMapper mapper, IUserRepository userRepo)
+        private readonly IUserInRoleRepository _userInRoleRepo;
+        public UserService(IMapper mapper, IUserRepository userRepo, IUserInRoleRepository userInRoleRepo)
         {
             _mapper = mapper;
             _userRepo = userRepo;
+            _userInRoleRepo = userInRoleRepo;
         }
 
         public async Task<UserViewModel> Create(UserViewModel model)
@@ -83,6 +85,12 @@ namespace Adoway.Service.UserManagement
             user.RefreshToken = model.RefreshToken;
             await _userRepo.Update(user);
             return model;
+        }
+        // users in roles
+        public async Task<List<UserInRoleViewModel>> GetUserInRoleList(Guid userId)
+        {
+            var roles = await _userInRoleRepo.FindByAsync(u => u.UserId == userId);
+            return _mapper.Map<List<UserInRoleViewModel>>(roles);
         }
     }
 }
