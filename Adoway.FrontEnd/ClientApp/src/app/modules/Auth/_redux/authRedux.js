@@ -19,7 +19,7 @@ const initialAuthState = {
 
 export const reducer = persistReducer(
   { storage, key: "adoway-app-access-token", whitelist: ["accessToken"] },
-  (state = initialAuthState, action) => {
+    (state = initialAuthState, action) => {
     switch (action.type) {
       case actionTypes.Login: {
         const { accessToken } = action.payload;
@@ -69,7 +69,8 @@ export const actions = {
 };
 
 export function* saga() {
-  yield takeLatest(actionTypes.Login, function* loginSaga() {
+    yield takeLatest(actionTypes.Login, function* loginSaga() {
+        debugger;
     yield put(actions.requestUser());
   });
 
