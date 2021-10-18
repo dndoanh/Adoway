@@ -5,17 +5,16 @@ using Microsoft.AspNetCore.Authorization;
 using Adoway.Common.ViewModels.UserManagement;
 using Adoway.Service.UserManagement;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using System;
 
 namespace Adoway.BackEnd.Controllers.RoleManagement
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    [Authorize]
     public class RoleController : ApiBaseController
     {
         private readonly IRoleService _roleService;
         private readonly IMapper _mapper;
-        public RoleController(IMapper mapper, IRoleService roleService)
+        public RoleController(IWebHostEnvironment webHostEnvironment, IMapper mapper, IRoleService roleService) : base(webHostEnvironment)
         {
             _mapper = mapper;
             _roleService = roleService;
@@ -24,7 +23,7 @@ namespace Adoway.BackEnd.Controllers.RoleManagement
         [HttpGet]
         public async Task<IActionResult> GetRoleList()
         {
-            var result = await _roleService.GetRoleListByEnterprise(this.CurrentEnterpriseId);
+            var result = await _roleService.GetRolesByEnterprise(this.CurrentEnterpriseId);
             return new ObjectResult(result);
         }
         [HttpPost]
@@ -48,11 +47,11 @@ namespace Adoway.BackEnd.Controllers.RoleManagement
             return BadRequest("Could not update role");
         }
         [HttpPost]
-        public async Task<IActionResult> DeleteRole([FromBody] RoleViewModel model)
+        public async Task<IActionResult> DeleteRole(string id)
         {
             if (ModelState.IsValid)
             {
-                var result = await _roleService.Remove(model);
+                var result = await _roleService.Remove(Guid.Parse(id));
                 return new ObjectResult(result);
             }
             return BadRequest("Could not delete role");

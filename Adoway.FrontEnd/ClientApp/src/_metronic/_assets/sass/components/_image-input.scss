@@ -10,11 +10,18 @@
 	@include border-radius($border-radius);
 	background-repeat: no-repeat;
 	background-size: cover;
-
 	// Wrapper
 	.image-input-wrapper {
 		width: 120px;
 		height: 120px;
+		@include border-radius($border-radius);
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+	.image-avatar-wrapper {
+		width: 40px;
+		height: 40px;
 		@include border-radius($border-radius);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -34,7 +41,6 @@
 			opacity: 0;
 		}
 	}
-
 	// Cancel & Remove Buttons
 	[data-action="cancel"],
 	[data-action="remove"] {
@@ -46,7 +52,6 @@
 	[data-action="cancel"] {
 		display: none;
 	}
-
 	// Input Changed State
 	&.image-input-changed {
 		[data-action="cancel"] {
@@ -57,7 +62,6 @@
 			display: none;
 		}
 	}
-
 	// Input Empty State
 	&.image-input-empty {
 		[data-action="remove"],
@@ -65,22 +69,18 @@
 			display: none;
 		}
 	}
-
 	// Circle style
 	&.image-input-circle {
 		border-radius: 50%;
-		
 		// Wrapper
 		.image-input-wrapper {
 			border-radius: 50%;
 		}
-
 		// Change Control
 		[data-action="change"] {
 			right: 5px;
 			top: 5px;
 		}
-
 		// Cancel & Remove Buttons
 		[data-action="cancel"],
 		[data-action="remove"] {
@@ -88,7 +88,6 @@
 			bottom: 5px;
 		}
 	}
-
 	// Bordered style
 	&.image-input-outline {
 		.image-input-wrapper {

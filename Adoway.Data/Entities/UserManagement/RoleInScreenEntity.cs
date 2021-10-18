@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Adoway.Common.Enums;
 using Adoway.Data.Entities.Base;
+using Adoway.Data.Entities.System;
 
 namespace Adoway.Data.Entities.UserManagement
 {

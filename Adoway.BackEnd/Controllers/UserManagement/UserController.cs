@@ -8,17 +8,17 @@ using Microsoft.AspNetCore.Authorization;
 using Adoway.Common.ViewModels.UserManagement;
 using Adoway.Service.UserManagement;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using System.Text.RegularExpressions;
+using Adoway.Common.Constants;
 
 namespace Adoway.BackEnd.Controllers.UserManagement
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    [Authorize]
     public class UserController : ApiBaseController
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        public UserController(IMapper mapper, IUserService userService)
+        public UserController(IWebHostEnvironment webHostEnvironment, IMapper mapper, IUserService userService) : base(webHostEnvironment)
         {
             _mapper = mapper;
             _userService = userService;
@@ -44,9 +44,15 @@ namespace Adoway.BackEnd.Controllers.UserManagement
             return new ObjectResult(obj);
         }
         [HttpGet]
-        public async Task<IActionResult> GetUserList()
+        public async Task<IActionResult> GetUsers()
         {
-            var result = await _userService.GetUserListByEnterprise(this.UserEnterpriseId);
+            var result = await _userService.GetUsersByEnterprise(CurrentEnterpriseId ?? UserEnterpriseId);
+            return new ObjectResult(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SearchUsers([FromBody] UserFilterViewModel model)
+        {
+            var result = await _userService.SearchUsers(model);
             return new ObjectResult(result);
         }
         [HttpPost]
@@ -54,6 +60,11 @@ namespace Adoway.BackEnd.Controllers.UserManagement
         {
             if (ModelState.IsValid)
             {
+                if (!string.IsNullOrEmpty(model.AvatarUrl) && Regex.IsMatch(model.AvatarUrl, Constants.BASE64_USERS_AVATAR_PATTERN))
+                {
+                    model.AvatarUrl = SaveFile(model.AvatarUrl, Constants.UPLOAD_FILES_USERS_AVATAR_PATH, null);
+                }
+                model.EnterpriseId = model.EnterpriseId ?? CurrentEnterpriseId ?? UserEnterpriseId;
                 var result = await _userService.Create(model);
                 return new ObjectResult(result);
             }
@@ -64,17 +75,22 @@ namespace Adoway.BackEnd.Controllers.UserManagement
         {
             if (ModelState.IsValid)
             {
+                if (!string.IsNullOrEmpty(model.AvatarUrl) && Regex.IsMatch(model.AvatarUrl, Constants.BASE64_USERS_AVATAR_PATTERN))
+                {
+                    model.AvatarUrl = SaveFile(model.AvatarUrl, Constants.UPLOAD_FILES_USERS_AVATAR_PATH, null);
+                    model.AvatarChanged = true;
+                }
                 var result = await _userService.Edit(model);
                 return new ObjectResult(result);
             }
             return BadRequest("Could not update user");
         }
         [HttpPost]
-        public async Task<IActionResult> DeleteUser([FromBody] UserViewModel model)
+        public async Task<IActionResult> DeleteUser(string id)
         {
             if (ModelState.IsValid)
             {
-                var result = await _userService.Remove(model);
+                var result = await _userService.Remove(Guid.Parse(id));
                 return new ObjectResult(result);
             }
             return BadRequest("Could not delete user");

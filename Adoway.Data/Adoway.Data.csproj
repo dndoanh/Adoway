@@ -4,10 +4,6 @@
     <TargetFramework>net5.0</TargetFramework>
     <BaseDirectory>..</BaseDirectory>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">

@@ -5,22 +5,22 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:35317",
-      "sslPort": 44355
+      "sslPort": 44388
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Ecc.BackEnd": {
+    "Adoway.BackEnd": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "",
       "applicationUrl": "https://localhost:1842;http://localhost:57951",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -19,7 +19,103 @@ namespace Adoway.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
-            modelBuilder.Entity("Adoway.Data.Entities.Base.EnterpriseEntity", b =>
+            modelBuilder.Entity("Adoway.Common.ViewModels.System.EnterpriseViewModel", b =>
+                {
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.System.LanguageViewModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Locale")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.UserManagement.RoleViewModel", b =>
+                {
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.UserManagement.UserViewModel", b =>
+                {
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConnectionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailVerified")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsOnline")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("LanguageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastLogin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+                });
+
+            modelBuilder.Entity("Adoway.Data.Entities.System.EnterpriseEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,7 +158,7 @@ namespace Adoway.Data.Migrations
                     b.ToTable("Enterprises");
                 });
 
-            modelBuilder.Entity("Adoway.Data.Entities.Base.LanguageEntity", b =>
+            modelBuilder.Entity("Adoway.Data.Entities.System.LanguageEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,29 +196,9 @@ namespace Adoway.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d22e6939-cd84-4af0-a723-a59a26ee76b2"),
-                            IsDefault = false,
-                            IsDeleted = false,
-                            Locale = "en_US",
-                            Name = "English",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("184148ce-7507-4025-9a5a-57f1687527ce"),
-                            IsDefault = true,
-                            IsDeleted = false,
-                            Locale = "vi_VN",
-                            Name = "Tiếng Việt",
-                            Status = 1
-                        });
                 });
 
-            modelBuilder.Entity("Adoway.Data.Entities.Base.ScreenEntity", b =>
+            modelBuilder.Entity("Adoway.Data.Entities.System.ScreenEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,7 +235,7 @@ namespace Adoway.Data.Migrations
                     b.ToTable("Screens");
                 });
 
-            modelBuilder.Entity("Adoway.Data.Entities.Base.ScreenFunctionEntity", b =>
+            modelBuilder.Entity("Adoway.Data.Entities.System.ScreenFunctionEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -198,7 +274,7 @@ namespace Adoway.Data.Migrations
                     b.ToTable("ScreenFunctions");
                 });
 
-            modelBuilder.Entity("Adoway.Data.Entities.Base.SettingEntity", b =>
+            modelBuilder.Entity("Adoway.Data.Entities.System.SettingEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -392,11 +468,20 @@ namespace Adoway.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsOnline")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsSuperAdmin")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("LanguageId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LastLogin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LiveConnectionId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
@@ -428,19 +513,6 @@ namespace Adoway.Data.Migrations
                     b.HasIndex("LanguageId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e83208a4-98b7-4e02-936d-369b9a70267c"),
-                            Email = "admin@adoway.com",
-                            EmailVerified = false,
-                            IsDeleted = false,
-                            IsSuperAdmin = true,
-                            Name = "System Admin",
-                            Password = "7c4a8d09ca3762af61e59520943dc26494f8941b",
-                            Status = 1
-                        });
                 });
 
             modelBuilder.Entity("Adoway.Data.Entities.UserManagement.UserInRoleEntity", b =>
@@ -534,9 +606,9 @@ namespace Adoway.Data.Migrations
                     b.ToTable("UserVerifications");
                 });
 
-            modelBuilder.Entity("Adoway.Data.Entities.Base.ScreenFunctionEntity", b =>
+            modelBuilder.Entity("Adoway.Data.Entities.System.ScreenFunctionEntity", b =>
                 {
-                    b.HasOne("Adoway.Data.Entities.Base.ScreenEntity", "Screen")
+                    b.HasOne("Adoway.Data.Entities.System.ScreenEntity", "Screen")
                         .WithMany()
                         .HasForeignKey("ScreenId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -545,9 +617,9 @@ namespace Adoway.Data.Migrations
                     b.Navigation("Screen");
                 });
 
-            modelBuilder.Entity("Adoway.Data.Entities.Base.SettingEntity", b =>
+            modelBuilder.Entity("Adoway.Data.Entities.System.SettingEntity", b =>
                 {
-                    b.HasOne("Adoway.Data.Entities.Base.EnterpriseEntity", "Enterprise")
+                    b.HasOne("Adoway.Data.Entities.System.EnterpriseEntity", "Enterprise")
                         .WithMany()
                         .HasForeignKey("EnterpriseId");
 
@@ -556,7 +628,7 @@ namespace Adoway.Data.Migrations
 
             modelBuilder.Entity("Adoway.Data.Entities.UserManagement.RoleEntity", b =>
                 {
-                    b.HasOne("Adoway.Data.Entities.Base.EnterpriseEntity", "Enterprise")
+                    b.HasOne("Adoway.Data.Entities.System.EnterpriseEntity", "Enterprise")
                         .WithMany()
                         .HasForeignKey("EnterpriseId");
 
@@ -571,7 +643,7 @@ namespace Adoway.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Adoway.Data.Entities.Base.ScreenEntity", "Screen")
+                    b.HasOne("Adoway.Data.Entities.System.ScreenEntity", "Screen")
                         .WithMany()
                         .HasForeignKey("ScreenId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -590,7 +662,7 @@ namespace Adoway.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Adoway.Data.Entities.Base.ScreenFunctionEntity", "ScreenFunction")
+                    b.HasOne("Adoway.Data.Entities.System.ScreenFunctionEntity", "ScreenFunction")
                         .WithMany()
                         .HasForeignKey("ScreenFunctionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -603,11 +675,11 @@ namespace Adoway.Data.Migrations
 
             modelBuilder.Entity("Adoway.Data.Entities.UserManagement.UserEntity", b =>
                 {
-                    b.HasOne("Adoway.Data.Entities.Base.EnterpriseEntity", "Enterprise")
+                    b.HasOne("Adoway.Data.Entities.System.EnterpriseEntity", "Enterprise")
                         .WithMany()
                         .HasForeignKey("EnterpriseId");
 
-                    b.HasOne("Adoway.Data.Entities.Base.LanguageEntity", "Language")
+                    b.HasOne("Adoway.Data.Entities.System.LanguageEntity", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId");
 

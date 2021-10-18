@@ -131,6 +131,24 @@ namespace Adoway.Data.Repositories.Base
             totalRecord = result.Count();
             return result.Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
+        public async Task<TEntity> Delete(Guid id)
+        {
+            var item = await _DbContext.DbSet<TEntity>().FindAsync(id);
+            try
+            {
+                if (item != null)
+                {
+                    _DbContext.DbSet<TEntity>().Remove(item);
+                    await _DbContext.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                item = null;
+                _Logger.LogError(ex.Message, ex);
+            }
+            return item;
+        }
         public async Task<TEntity> Delete(TEntity entity)
         {
             var item = await _DbContext.DbSet<TEntity>().FindAsync(entity.Id);

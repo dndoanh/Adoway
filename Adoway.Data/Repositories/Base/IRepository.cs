@@ -14,6 +14,7 @@ namespace Adoway.Data.Repositories.Base
         Task<TEntity> Update(TEntity dto);
         Task<IEnumerable<TEntity>> Update(List<TEntity> list);
         Task<TEntity> GetById(Guid id);
+        Task<TEntity> Delete(Guid id);
         Task<TEntity> Delete(TEntity dto);
         Task<TEntity> SingleBy(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> LastSingleBy(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, DateTime>> selector);

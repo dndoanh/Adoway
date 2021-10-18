@@ -18,7 +18,7 @@ import { login } from "../_redux/authCrud";
 */
 
 const initialValues = {
-  email: "admin@adoway.com",
+    email: "admin@adoway.com",
   password: "123456",
 };
 

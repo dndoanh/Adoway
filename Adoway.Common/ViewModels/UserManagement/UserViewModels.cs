@@ -1,6 +1,8 @@
 ﻿using Adoway.Common.Enums;
+using Adoway.Common.ViewModels.System;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Adoway.Common.ViewModels.UserManagement
 {
@@ -11,21 +13,32 @@ namespace Adoway.Common.ViewModels.UserManagement
         public string Email { get; set; }
         public bool EmailVerified { get; set; }
         public string AvatarUrl { get; set; }
-        public Status Status { get; set; }
-        public string RefreshToken { get; set; }
         public Guid? LanguageId { get; set; }
         public Guid? EnterpriseId { get; set; }
+        [NotMapped]
+        public bool AvatarChanged { get; set; }
+        public bool IsOnline { get; set; }
+        public string LiveConnectionId { get; set; }
+        public DateTime? LastLogin { get; set; }
+        public Status Status { get; set; }
+        public string RefreshToken { get; set; }
     }
     public class UserAuthViewModel : UserViewModel
     {
         public string AccessToken { get; set; }
     }
-    public class UserListViewModel
+    public class UserFilterViewModel : BaseFilterViewModel
     {
-        public List<UserViewModel> Items { get; set; }
-        public int TotalCount { get; set; }
-        public string ErrMsg { get; set; }
+        public UserFilter Filter { get; set; }
     }
+    public class UserFilter
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public Guid? EnterpriseId { get; set; }
+        public Status? Status { get; set; }
+    }
+
     public class UserInRoleViewModel
     {
         public Guid Id { get; set; }

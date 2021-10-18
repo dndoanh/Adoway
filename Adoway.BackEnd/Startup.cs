@@ -21,6 +21,7 @@ using Adoway.Data.Repositories.UserManagement;
 using Adoway.Service.UserManagement;
 using Adoway.BackEnd.Controllers.Filters;
 using Adoway.Common.Helpers;
+using Adoway.BackEnd.Controllers.LiveHub;
 
 namespace Adoway.BackEnd
 {
@@ -78,6 +79,22 @@ namespace Adoway.BackEnd
                             context.Response.Headers.Add("Token-Expired", "true");
                         }
                         return Task.CompletedTask;
+                    },
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+
+                        // If the request is for our hub...
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments("/live")))
+                        {
+                            // Read the token out of the query string
+                            if (!accessToken.Contains("Bearer"))
+                                accessToken = $"Bearer {accessToken}";
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
                     }
                 };
             });
@@ -100,11 +117,18 @@ namespace Adoway.BackEnd
               .AddClasses(classes => classes.Where(type => type.Name.EndsWith("Service")))
               .AsMatchingInterface()
               .WithTransientLifetime());
+
+            // register signalr
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // config static files
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -126,6 +150,7 @@ namespace Adoway.BackEnd
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<LiveHub>("/live");
             });
         }
     }

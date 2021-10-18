@@ -13,17 +13,17 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Adoway.BackEnd.Controllers.UserManagement
 {
-    [Route("api/[controller]/[action]")]
     public class AuthController : ApiBaseController
     {
         private IConfiguration _config;
         private readonly IMapper _mapper;
         private readonly IUserService _UserService;
         private readonly IAuthService _AuthService;
-        public AuthController(IConfiguration config, IMapper mapper, IUserService userService, IAuthService authService)
+        public AuthController(IWebHostEnvironment webHostEnvironment, IConfiguration config, IMapper mapper, IUserService userService, IAuthService authService) : base(webHostEnvironment)
         {
             _config = config;
             _mapper = mapper;

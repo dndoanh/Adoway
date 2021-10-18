@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Adoway.Common.Enums;
 using Adoway.Data.Entities.Base;
+using Adoway.Data.Entities.System;
 
 namespace Adoway.Data.Entities.UserManagement
 {
@@ -20,6 +21,9 @@ namespace Adoway.Data.Entities.UserManagement
         public Status Status { get; set; }
         public string RefreshToken { get; set; }
         public bool IsSuperAdmin { get; set; }
+        public bool IsOnline { get; set; }
+        public string LiveConnectionId { get; set; }
+        public DateTime? LastLogin { get; set; }
         public Guid? LanguageId { get; set; }
         [ForeignKey("LanguageId")]
         public LanguageEntity Language { get; set; }

@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
-using Adoway.Common.ViewModels.Base;
 using Adoway.Common.ViewModels.UserManagement;
-using Adoway.Data.Entities.Base;
 using Adoway.Data.Entities.UserManagement;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Adoway.Common.ViewModels.System;
+using Adoway.Data.Entities.System;
 
 namespace Adoway.BackEnd.Configs
 {
@@ -14,7 +10,9 @@ namespace Adoway.BackEnd.Configs
     {
         public MappingProfile()
         {
-            // Base
+            // System
+            CreateMap<EnterpriseViewModel, EnterpriseEntity>();
+            CreateMap<EnterpriseEntity, EnterpriseViewModel>();
             CreateMap<LanguageViewModel, LanguageEntity>();
             CreateMap<LanguageEntity, LanguageViewModel>();
             CreateMap<SettingViewModel, SettingEntity>();

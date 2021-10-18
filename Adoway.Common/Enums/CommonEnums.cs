@@ -14,4 +14,9 @@ namespace Adoway.Common.Enums
         Active = 1,
         Inactive = 0
     }
+    public enum SortOrder
+    {
+        asc,
+        desc
+    }
 }

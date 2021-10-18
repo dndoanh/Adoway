@@ -1,4 +1,5 @@
 ﻿using Adoway.Common.Enums;
+using Adoway.Common.ViewModels.System;
 using System;
 using System.Collections.Generic;
 
@@ -12,11 +13,20 @@ namespace Adoway.Common.ViewModels.UserManagement
         public Status Status { get; set; }
         public Guid? EnterpriseId { get; set; }
     }
-    public class RoleListViewModel
+    public class RoleAuthViewModel : RoleViewModel
     {
-        public List<RoleViewModel> Items { get; set; }
-        public int TotalCount { get; set; }
-        public string ErrMsg { get; set; }
+        public string AccessToken { get; set; }
+    }
+    public class RoleFilterViewModel : BaseFilterViewModel
+    {
+        public RoleFilter Filter { get; set; }
+    }
+    public class RoleFilter
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public Guid? EnterpriseId { get; set; }
+        public Status? Status { get; set; }
     }
     public class RoleInScreenFunctionViewModel
     {
