@@ -17,6 +17,20 @@ export const fetchUsers = queryParams => dispatch => {
     });
 };
 
+export const fetchRoles = () => dispatch => {
+    dispatch(actions.startCall({ callType: callTypes.list }));
+    return requestFromServer
+        .findAllRoles()
+        .then(response => {
+            const { totalCount, entities } = response.data;
+            dispatch(actions.usersFetched({ totalCount, entities }));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't find roles";
+            dispatch(actions.catchError({ error, callType: callTypes.list }));
+        });
+};
+
 export const selectUser = id => dispatch => {
     dispatch(actions.userSelected({ id: id }));
 };

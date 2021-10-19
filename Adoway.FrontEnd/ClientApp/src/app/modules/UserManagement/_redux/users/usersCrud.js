@@ -1,11 +1,15 @@
 import axios from "axios";
 
 export const USERS_URL = `${process.env.REACT_APP_API_URL}/user`;
+export const ROLES_URL = `${process.env.REACT_APP_API_URL}/role`;
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
 export function findUsers(queryParams) {
     return axios.post(`${USERS_URL}/searchUsers`, queryParams);
+}
+export function findAllRoles() {
+    return axios.post(`${ROLES_URL}/getRoleList`);
 }
 
 // CREATE =>  POST: add a new user to the server

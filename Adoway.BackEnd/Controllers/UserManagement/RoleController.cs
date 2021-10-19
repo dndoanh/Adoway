@@ -23,7 +23,9 @@ namespace Adoway.BackEnd.Controllers.RoleManagement
         [HttpGet]
         public async Task<IActionResult> GetRoleList()
         {
-            var result = await _roleService.GetRolesByEnterprise(this.CurrentEnterpriseId);
+
+            //var result = await _roleService.GetRolesByEnterprise(this.CurrentEnterpriseId);
+            var result = await _roleService.GetRolesByEnterprise(new Guid("96ed9594-aca2-4eda-aa45-a0d43eb026ed"));
             return new ObjectResult(result);
         }
         [HttpPost]

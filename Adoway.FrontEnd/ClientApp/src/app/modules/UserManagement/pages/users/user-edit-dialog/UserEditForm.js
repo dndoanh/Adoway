@@ -4,7 +4,7 @@
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
 import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
-import { Modal } from "react-bootstrap";
+import { Modal,Tabs,Tab,Table } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
@@ -30,6 +30,7 @@ export function UserEditForm({
     user,
     actionsLoading,
     onHide,
+    roles,
 }) {
     // Getting curret state of languages list from store (Redux)
     const { currentLanguagesState } = useSelector(
@@ -54,7 +55,7 @@ export function UserEditForm({
     const removeAvatarUrl = () => {
         setAvatarUrl("");
     };
-
+    const [key, setKey] = useState('home');
     return (
         <>
             <Formik
@@ -73,124 +74,208 @@ export function UserEditForm({
                                     <div className="spinner spinner-lg spinner-success" />
                                 </div>
                             )}
-                            <Form className="form form-label-right">
-                                <div className="form-group row">
-                                    <div className="col-lg-12">
-                                        <div
-                                            className="image-input image-input-outline"
-                                            id="kt_profile_avatar"
-                                            style={{
-                                                backgroundImage: `url(${toAbsoluteUrl(
-                                                    "/media/users/blank.png"
-                                                )}`,
-                                            }}
-                                        >
-                                            <div
-                                                className="image-input-wrapper"
-                                                style={{ backgroundImage: `${getUserAvatarUrl()}` }}
-                                            />
-                                            <label
-                                                className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                data-action="change"
-                                                data-toggle="tooltip"
-                                                title=""
-                                                data-original-title="Change avatar"
-                                            >
-                                                <i className="fa fa-pen icon-sm text-muted"></i>
-                                                <input
-                                                    type="file"
-                                                    name="avatarUrl"
-                                                    accept=".png, .jpg, .jpeg"
-                                                    onChange={(e) => {
-                                                        const fileReader = new FileReader();
-                                                        fileReader.onload = () => {
-                                                            if (fileReader.readyState === 2) {
-                                                                setFieldValue('avatarUrl', fileReader.result);
-                                                                setAvatarUrl(fileReader.result);
-                                                            }
-                                                        };
-                                                        fileReader.readAsDataURL(e.target.files[0]);
+                            <Tabs
+                                id="controlled-tab-example"
+                                activeKey={key}
+                                onSelect={(k) => setKey(k)}
+                                className="mb-3"
+                            >
+                                <Tab eventKey="home" title="Home">
+                                    <Form className="form form-label-right">
+                                        <div className="form-group row">
+                                            <div className="col-lg-12">
+                                                <div
+                                                    className="image-input image-input-outline"
+                                                    id="kt_profile_avatar"
+                                                    style={{
+                                                        backgroundImage: `url(${toAbsoluteUrl(
+                                                            "/media/users/blank.png"
+                                                        )}`,
                                                     }}
-                                                />
-                                                <input type="hidden" name="profile_avatar_remove" />
-                                            </label>
-                                            <span
-                                                className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                data-action="cancel"
-                                                data-toggle="tooltip"
-                                                title=""
-                                                data-original-title="Cancel avatar"
-                                            >
-                                                <i className="ki ki-bold-close icon-xs text-muted"></i>
-                                            </span>
-                                            <span
-                                                onClick={removeAvatarUrl}
-                                                className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                data-action="remove"
-                                                data-toggle="tooltip"
-                                                title=""
-                                                data-original-title="Remove avatar"
-                                            >
-                                                <i className="ki ki-bold-close icon-xs text-muted"></i>
-                                            </span>
+                                                >
+                                                    <div
+                                                        className="image-input-wrapper"
+                                                        style={{ backgroundImage: `${getUserAvatarUrl()}` }}
+                                                    />
+                                                    <label
+                                                        className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                                        data-action="change"
+                                                        data-toggle="tooltip"
+                                                        title=""
+                                                        data-original-title="Change avatar"
+                                                    >
+                                                        <i className="fa fa-pen icon-sm text-muted"></i>
+                                                        <input
+                                                            type="file"
+                                                            name="avatarUrl"
+                                                            accept=".png, .jpg, .jpeg"
+                                                            onChange={(e) => {
+                                                                const fileReader = new FileReader();
+                                                                fileReader.onload = () => {
+                                                                    if (fileReader.readyState === 2) {
+                                                                        setFieldValue('avatarUrl', fileReader.result);
+                                                                        setAvatarUrl(fileReader.result);
+                                                                    }
+                                                                };
+                                                                fileReader.readAsDataURL(e.target.files[0]);
+                                                            }}
+                                                        />
+                                                        <input type="hidden" name="profile_avatar_remove" />
+                                                    </label>
+                                                    <span
+                                                        className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                                        data-action="cancel"
+                                                        data-toggle="tooltip"
+                                                        title=""
+                                                        data-original-title="Cancel avatar"
+                                                    >
+                                                        <i className="ki ki-bold-close icon-xs text-muted"></i>
+                                                    </span>
+                                                    <span
+                                                        onClick={removeAvatarUrl}
+                                                        className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                                        data-action="remove"
+                                                        data-toggle="tooltip"
+                                                        title=""
+                                                        data-original-title="Remove avatar"
+                                                    >
+                                                        <i className="ki ki-bold-close icon-xs text-muted"></i>
+                                                    </span>
+                                                </div>
+                                                <span className="form-text text-muted">
+                                                    Allowed file types: png, jpg, jpeg.
+                                                </span>
+                                            </div>
                                         </div>
-                                        <span className="form-text text-muted">
-                                            Allowed file types: png, jpg, jpeg.
-                                        </span>
+                                        <div className="form-group row">
+                                            <div className="col-lg-6">
+                                                <Field
+                                                    name="name"
+                                                    component={Input}
+                                                    placeholder="Name"
+                                                    label="Name"
+                                                />
+                                            </div>
+                                            <div className="col-lg-6">
+                                                <Field
+                                                    type="email"
+                                                    name="email"
+                                                    component={Input}
+                                                    placeholder="Email"
+                                                    label="Email"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <div className="col-lg-6">
+                                                <Select name="gender" label="Gender">
+                                                    <option value="0">Male</option>
+                                                    <option value="1">Female</option>
+                                                </Select>
+                                            </div>
+                                            <div className="col-lg-6">
+                                                <Select name="userType" label="User Type">
+                                                    <option value="1">Administator</option>
+                                                    <option value="2">Operator</option>
+                                                </Select>
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <div className="col-lg-6">
+                                                <Select name="status" label="Status">
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Inactive</option>
+                                                </Select>
+                                            </div>
+                                            <div className="col-lg-6">
+                                                <Select name="languageId" label="Language">
+                                                    <option value=""></option>
+                                                    {allLanguages.map((language) => (
+                                                        <option key={language.id} value={language.id}>
+                                                            {language.name}
+                                                        </option>
+                                                    ))}
+                                                </Select>
+                                            </div>
+                                        </div>
+                                    </Form>
+                                </Tab>
+                                <Tab eventKey="profile" title="Role">
+                                    <div className="form-group row">
+                                     
+                                        <div className="col-lg-6">
+                                            <Select name="role" label="Role">
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </Select>
+                                        </div>
+                                        <div className="col-lg-4 mt-5">
+                                            <button
+                                                type="button" 
+                                                className="btn btn-primary btn-elevate mt-3"
+                                            >
+                                                Add Role
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-6">
-                                        <Field
-                                            name="name"
-                                            component={Input}
-                                            placeholder="Name"
-                                            label="Name"
-                                        />
+                                    <div className="form-group row">
+                                        <Table striped bordered hover>
+                                            <thead>
+                                                <tr>
+                                                    <th>Role Name</th>
+                                                    <th>Description</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <label>Test</label>
+                                                {roles.map(cell => {
+                                                    debugger;
+                                                    return ( cell.Name)
+                                                })}
+                                                <tr>
+                                                    <td>Role 1</td>
+                                                    <td>Otto</td>
+                                                    <td>
+                                                        <button
+                                                        type="button"
+                                                        className="btn btn-primary btn-elevate"
+                                                        >
+                                                        Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Role 2</td>
+                                                    <td>Thornton</td>
+                                                    <td>
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-primary btn-elevate"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Role 3</td>
+                                                    <td>Thornton</td>
+                                                    <td>
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-primary btn-elevate"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </Table>
                                     </div>
-                                    <div className="col-lg-6">
-                                        <Field
-                                            type="email"
-                                            name="email"
-                                            component={Input}
-                                            placeholder="Email"
-                                            label="Email"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-6">
-                                        <Select name="gender" label="Gender">
-                                            <option value="0">Male</option>
-                                            <option value="1">Female</option>
-                                        </Select>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <Select name="userType" label="User Type">
-                                            <option value="1">Administator</option>
-                                            <option value="2">Operator</option>
-                                        </Select>
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-6">
-                                        <Select name="status" label="Status">
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
-                                        </Select>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <Select name="languageId" label="Language">
-                                            <option value=""></option>
-                                            {allLanguages.map((language) => (
-                                                <option key={language.id} value={language.id}>
-                                                    {language.name}
-                                                </option>
-                                            ))}
-                                        </Select>
-                                    </div>
-                                </div>
-                            </Form>
+                                </Tab>
+                             
+                            </Tabs>
+                           
                         </Modal.Body>
                         <Modal.Footer>
                             <button
