@@ -33,6 +33,27 @@ export function AsideMenuList({ layoutProps }) {
                 </li>
                 {/*end::1 Level*/}
 
+                {/* Project Management */}
+                {/* begin::section */}
+                <li className="menu-section ">
+                    <h4 className="menu-text">Project Management</h4>
+                    <i className="menu-icon flaticon-more-v2"></i>
+                </li>
+                {/* end:: section */}
+                {/*begin::1 Level*/}
+                <li
+                    className={`menu-item ${getMenuItemActive("/projects", false)}`}
+                    aria-haspopup="true"
+                >
+                    <NavLink className="menu-link" to="/projects">
+                        <span className="svg-icon menu-icon">
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
+                        </span>
+                        <span className="menu-text">Projects</span>
+                    </NavLink>
+                </li>
+                {/*end::1 Level*/}
+
                 {/* User Management */}
                 {/* begin::section */}
                 <li className="menu-section ">
