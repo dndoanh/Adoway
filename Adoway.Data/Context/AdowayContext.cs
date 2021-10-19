@@ -23,7 +23,7 @@ namespace Adoway.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(local);Database=Adoway;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(local)\SQLEXPRESS;Database=Adoway;Trusted_Connection=True;");
         }
 
         // User management

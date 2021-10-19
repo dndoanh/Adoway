@@ -17,17 +17,20 @@ export function UserEditDialog({ id, show, onHide }) {
 
   // Users Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, userForEdit } = useSelector(
+  const { actionsLoading, userForEdit,roles } = useSelector(
     (state) => ({
       actionsLoading: state.users.actionsLoading,
       userForEdit: state.users.userForEdit,
+      roles:state.roles
     }),
     shallowEqual
   );
 
   useEffect(() => {
     // server call for getting User by id
-    dispatch(actions.selectUser(id));
+      debugger;
+      dispatch(actions.selectUser(id));
+      dispatch(actions.fetchRoles)
   }, [id, dispatch]);
 
   // server request for saving user
@@ -52,7 +55,8 @@ export function UserEditDialog({ id, show, onHide }) {
       <UserEditForm
         saveUser={saveUser}
         actionsLoading={actionsLoading}
-        user={userForEdit || usersUIProps.initUser}
+       user={userForEdit || usersUIProps.initUser}
+        roles={roles || []}
         onHide={onHide}
       />
     </Modal>
