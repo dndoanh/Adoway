@@ -10,16 +10,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Adoway.Data.Migrations
 {
     [DbContext(typeof(AdowayContext))]
-    [Migration("20211018175209_InitDb")]
+    [Migration("20211019155319_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Adoway.Common.ViewModels.System.EnterpriseViewModel", b =>
                 {
@@ -40,6 +40,8 @@ namespace Adoway.Data.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.ToView("EnterpriseViewModel");
                 });
 
             modelBuilder.Entity("Adoway.Common.ViewModels.System.LanguageViewModel", b =>
@@ -58,6 +60,8 @@ namespace Adoway.Data.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.ToView("LanguageViewModel");
                 });
 
             modelBuilder.Entity("Adoway.Common.ViewModels.UserManagement.RoleViewModel", b =>
@@ -76,14 +80,13 @@ namespace Adoway.Data.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.ToView("RoleViewModel");
                 });
 
             modelBuilder.Entity("Adoway.Common.ViewModels.UserManagement.UserViewModel", b =>
                 {
                     b.Property<string>("AvatarUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConnectionId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -107,6 +110,9 @@ namespace Adoway.Data.Migrations
                     b.Property<DateTime?>("LastLogin")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("LiveConnectionId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -115,6 +121,8 @@ namespace Adoway.Data.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.ToView("UserViewModel");
                 });
 
             modelBuilder.Entity("Adoway.Data.Entities.System.EnterpriseEntity", b =>
@@ -216,6 +224,9 @@ namespace Adoway.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -227,6 +238,9 @@ namespace Adoway.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ord")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Path")

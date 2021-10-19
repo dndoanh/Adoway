@@ -5,6 +5,7 @@ using System.Linq;
 using Adoway.Common.ViewModels.UserManagement;
 using Adoway.Data.Entities.System;
 using Adoway.Common.ViewModels.System;
+using Microsoft.Extensions.Configuration;
 
 namespace Adoway.Data.Context
 {
@@ -20,10 +21,16 @@ namespace Adoway.Data.Context
         {
             return this.Set<TEntity>();
         }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(local);Database=Adoway;Trusted_Connection=True;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                          .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                          .AddJsonFile("appsettings.json")
+                          .Build();
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("AdowayConnection"));
+            }
         }
 
         // User management
@@ -68,11 +75,11 @@ namespace Adoway.Data.Context
 
             // model builder for store procedure
             // base
-            modelBuilder.Entity<LanguageViewModel>().HasNoKey().ToTable(null);
-            modelBuilder.Entity<EnterpriseViewModel>().HasNoKey().ToTable(null);
+            modelBuilder.Entity<LanguageViewModel>().HasNoKey().ToView("LanguageViewModel");
+            modelBuilder.Entity<EnterpriseViewModel>().HasNoKey().ToView("EnterpriseViewModel");
             // user management
-            modelBuilder.Entity<UserViewModel>().HasNoKey().ToTable(null);
-            modelBuilder.Entity<RoleViewModel>().HasNoKey().ToTable(null);
+            modelBuilder.Entity<UserViewModel>().HasNoKey().ToView("UserViewModel");
+            modelBuilder.Entity<RoleViewModel>().HasNoKey().ToView("RoleViewModel");
 
         }
     }

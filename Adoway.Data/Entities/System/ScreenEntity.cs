@@ -12,6 +12,8 @@ namespace Adoway.Data.Entities.System
         [Required]
         public string Name { get; set; }
         public string Path { get; set; }
+        public string Icon { get; set; }
+        public string Ord { get; set; }
         public string Description { get; set; }
     }
 }
