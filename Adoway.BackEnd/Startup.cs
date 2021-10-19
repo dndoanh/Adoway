@@ -101,7 +101,7 @@ namespace Adoway.BackEnd
 
             // register db context
             services.AddDbContext<AdowayContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("EccConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("AdowayConnection")));
             services.AddScoped<IAdowayContext>(provider => provider.GetService<AdowayContext>());
 
             // register repositories
