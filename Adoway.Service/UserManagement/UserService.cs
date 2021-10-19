@@ -49,6 +49,8 @@ namespace Adoway.Service.UserManagement
                 userEntity.Email = model.Email;
                 userEntity.Status = model.Status;
                 userEntity.LanguageId = model.LanguageId;
+                if (model.AvatarChanged)
+                    userEntity.AvatarUrl = model.AvatarUrl;
                 var entity = await _userRepo.Update(userEntity);
                 return _mapper.Map<UserViewModel>(entity);
             }
@@ -68,11 +70,6 @@ namespace Adoway.Service.UserManagement
         public async Task<UserViewModel> GetByEmail(string email)
         {
             var user = await _userRepo.SingleBy(u => u.Email == email);
-            return _mapper.Map<UserViewModel>(user);
-        }
-        public async Task<UserViewModel> GetByUserId(string id)
-        {
-            var user = await _userRepo.SingleBy(u => u.Id == Guid.Parse(id));
             return _mapper.Map<UserViewModel>(user);
         }
         public async Task<List<UserViewModel>> GetUsersByEnterprise(Guid? enterpriseId)
@@ -119,11 +116,21 @@ namespace Adoway.Service.UserManagement
         }
 
         // users in roles
-        public async Task<List<UserInRoleViewModel>> GetUserInRoleList(Guid userId)
+        public async Task<List<UserInRoleViewModel>> GetUserInRoles(Guid userId)
         {
             var roles = await _userInRoleRepo.FindByAsync(u => u.UserId == userId);
             return _mapper.Map<List<UserInRoleViewModel>>(roles);
         }
-
+        public async Task<UserInRoleViewModel> CreateUserInRole(UserInRoleViewModel model)
+        {
+            var userInRoleEntity = _mapper.Map<UserInRoleEntity>(model);
+            var entity = await _userInRoleRepo.Insert(userInRoleEntity);
+            return _mapper.Map<UserInRoleViewModel>(entity);
+        }
+        public async Task<UserInRoleViewModel> RemoveUserInRole(Guid id)
+        {
+            var entity = await _userInRoleRepo.Delete(id);
+            return _mapper.Map<UserInRoleViewModel>(entity);
+        }
     }
 }

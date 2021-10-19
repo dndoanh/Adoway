@@ -28,20 +28,22 @@ namespace Adoway.Common.ViewModels.UserManagement
         public Guid? EnterpriseId { get; set; }
         public Status? Status { get; set; }
     }
-    public class RoleInScreenFunctionViewModel
-    {
-        public Guid Id { get; set; }
-        public Guid ScreenFunctionId { get; set; }
-        public Guid RoleId { get; set; }
-        public bool BelongTo { get; set; }
-    }
     public class RoleInScreenViewModel
     {
         public Guid Id { get; set; }
         public Guid ScreenId { get; set; }
+        public string ScreenName { get; set; }
         public Guid RoleId { get; set; }
         public bool BelongTo { get; set; }
         public List<RoleInScreenFunctionViewModel> ScreenFunctions {get;set;}
+    }
+    public class RoleInScreenFunctionViewModel
+    {
+        public Guid Id { get; set; }
+        public Guid ScreenFunctionId { get; set; }
+        public string FunctionName { get; set; }
+        public Guid RoleId { get; set; }
+        public bool BelongTo { get; set; }
     }
     public class RoleInScreenListViewModel
     {

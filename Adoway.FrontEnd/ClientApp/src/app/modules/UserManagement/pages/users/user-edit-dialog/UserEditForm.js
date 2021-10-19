@@ -140,7 +140,7 @@ export function UserEditForm({
                                     </div>
                                 </div>
                                 <div className="form-group row">
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-12">
                                         <Field
                                             name="name"
                                             component={Input}
@@ -148,7 +148,9 @@ export function UserEditForm({
                                             label="Name"
                                         />
                                     </div>
-                                    <div className="col-lg-6">
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col-lg-12">
                                         <Field
                                             type="email"
                                             name="email"
@@ -159,27 +161,7 @@ export function UserEditForm({
                                     </div>
                                 </div>
                                 <div className="form-group row">
-                                    <div className="col-lg-6">
-                                        <Select name="gender" label="Gender">
-                                            <option value="0">Male</option>
-                                            <option value="1">Female</option>
-                                        </Select>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <Select name="userType" label="User Type">
-                                            <option value="1">Administator</option>
-                                            <option value="2">Operator</option>
-                                        </Select>
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-6">
-                                        <Select name="status" label="Status">
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
-                                        </Select>
-                                    </div>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-12">
                                         <Select name="languageId" label="Language">
                                             <option value=""></option>
                                             {allLanguages.map((language) => (
@@ -187,6 +169,14 @@ export function UserEditForm({
                                                     {language.name}
                                                 </option>
                                             ))}
+                                        </Select>
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col-lg-12">
+                                        <Select name="status" label="Status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
                                         </Select>
                                     </div>
                                 </div>

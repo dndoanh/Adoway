@@ -4,6 +4,7 @@ import _ from 'lodash';
 const initialUsersState = {
     listLoading: false,
     actionsLoading: false,
+    needReload: false,
     totalCount: 0,
     entities: null,
     userForEdit: undefined,
@@ -54,6 +55,7 @@ export const usersSlice = createSlice({
         // createUser
         userCreated: (state, action) => {
             state.actionsLoading = false;
+            state.needReload = !state.needReload;
             state.error = null;
             state.entities.push(action.payload.user);
         },
@@ -61,6 +63,7 @@ export const usersSlice = createSlice({
         userUpdated: (state, action) => {
             state.error = null;
             state.actionsLoading = false;
+            state.needReload = !state.needReload;
             state.entities = state.entities.map(entity => {
                 if (entity.id === action.payload.user.id) {
                     return action.payload.user;

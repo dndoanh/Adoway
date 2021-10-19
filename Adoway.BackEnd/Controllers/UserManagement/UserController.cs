@@ -26,17 +26,7 @@ namespace Adoway.BackEnd.Controllers.UserManagement
         [HttpGet]
         public async Task<IActionResult> GetCurrentUser()
         {
-            var user = await _userService.GetByEmail(this.User.Identity.Name);
-            if (user == null)
-                return BadRequest("Could not get current user");
-            // return auth user
-            var obj = _mapper.Map<UserAuthViewModel>(user);
-            return new ObjectResult(obj);
-        }
-        [HttpGet]
-        public async Task<IActionResult> GetUserById(string id)
-        {
-            var user = await _userService.GetByUserId(id);
+            var user = await _userService.GetByEmail(User.Identity.Name);
             if (user == null)
                 return BadRequest("Could not get current user");
             // return auth user
@@ -94,6 +84,34 @@ namespace Adoway.BackEnd.Controllers.UserManagement
                 return new ObjectResult(result);
             }
             return BadRequest("Could not delete user");
+        }
+
+        // User in Roles
+        [HttpGet]
+        public async Task<IActionResult> GetUserInRoles(string id)
+        {
+            var result = await _userService.GetUserInRoles(Guid.Parse(id));
+            return new ObjectResult(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateUserInRole([FromBody] UserInRoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userService.CreateUserInRole(model);
+                return new ObjectResult(result);
+            }
+            return BadRequest("Could not create user in role");
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteUserInRole(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userService.RemoveUserInRole(Guid.Parse(id));
+                return new ObjectResult(result);
+            }
+            return BadRequest("Could not delete user in role");
         }
     }
 }

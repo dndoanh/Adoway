@@ -13,5 +13,7 @@ namespace Adoway.Service.UserManagement
         Task<RoleViewModel> Remove(Guid id);
         Task<List<RoleViewModel>> GetRolesByEnterprise(Guid? enterpriseId);
         Task<ApiResponseViewModel<RoleViewModel>> SearchRoles(RoleFilterViewModel model);
+        Task<List<RoleInScreenViewModel>> GetRoleInScreens(Guid roleId);
+        Task<List<RoleInScreenViewModel>> EditRoleInScreens(List<RoleInScreenViewModel> model);
     }
 }

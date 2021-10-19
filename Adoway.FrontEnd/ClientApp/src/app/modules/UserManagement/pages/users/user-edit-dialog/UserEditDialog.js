@@ -43,7 +43,7 @@ export function UserEditDialog({ id, show, onHide }) {
 
   return (
     <Modal
-      size="lg"
+      size="md"
       show={show}
       onHide={onHide}
       aria-labelledby="example-modal-sizes-title-lg"
