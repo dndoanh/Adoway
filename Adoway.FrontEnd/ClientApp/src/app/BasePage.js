@@ -7,6 +7,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { EnterprisesPage } from "./modules/System/pages/enterprises/EnterprisesPage";
 import { LanguagesPage } from "./modules/System/pages/languages/LanguagesPage";
 import { UsersPage } from "./modules/UserManagement/pages/users/UsersPage";
+import { RolesPage } from "./modules/UserManagement/pages/roles/RolesPage";
 
 const GoogleMaterialPage = lazy(() =>
     import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
@@ -44,6 +45,7 @@ export default function BasePage() {
 
                 {/*User Management*/}
                 <Route path="/users" component={UsersPage} />
+                <Route path="/roles" component={RolesPage} />
                 {/*System*/}
                 <Route path="/enterprises" component={EnterprisesPage} />
                 <Route path="/languages" component={LanguagesPage} />
