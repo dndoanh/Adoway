@@ -42,6 +42,7 @@ namespace Adoway.BackEnd.Controllers.UserManagement
         [HttpPost]
         public async Task<IActionResult> SearchUsers([FromBody] UserFilterViewModel model)
         {
+            model.Filter.EnterpriseId = CurrentEnterpriseId ?? UserEnterpriseId;
             var result = await _userService.SearchUsers(model);
             return new ObjectResult(result);
         }

@@ -28,6 +28,7 @@ namespace Adoway.BackEnd.Controllers.RoleManagement
         [HttpPost]
         public async Task<IActionResult> SearchRoles([FromBody] RoleFilterViewModel model)
         {
+            model.Filter.EnterpriseId = CurrentEnterpriseId ?? UserEnterpriseId;
             var result = await _roleService.SearchRoles(model);
             return new ObjectResult(result);
         }

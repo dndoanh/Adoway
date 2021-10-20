@@ -22,6 +22,8 @@ namespace Adoway.BackEnd.Configs
             CreateMap<UserViewModel, UserEntity>();
             CreateMap<UserEntity, UserViewModel>();
             CreateMap<UserViewModel, UserAuthViewModel>();
+            CreateMap<RoleViewModel, RoleEntity>();
+            CreateMap<RoleEntity, RoleViewModel>();
         }
     }
 }
