@@ -8,6 +8,7 @@ import { remarksSlice } from "../app/modules/ECommerce/_redux/remarks/remarksSli
 import { specificationsSlice } from "../app/modules/ECommerce/_redux/specifications/specificationsSlice";
 // User Management
 import { usersSlice } from "../app/modules/UserManagement/_redux/users/usersSlice";
+import { rolesSlice } from "../app/modules/UserManagement/_redux/roles/rolesSlice";
 // System
 import { enterprisesSlice } from "../app/modules/System/_redux/enterprises/enterprisesSlice";
 import { languagesSlice } from "../app/modules/System/_redux/languages/languagesSlice";
@@ -20,6 +21,7 @@ export const rootReducer = combineReducers({
     specifications: specificationsSlice.reducer,
     // User Management
     users: usersSlice.reducer,
+    roles: rolesSlice.reducer,
     // System
     enterprises: enterprisesSlice.reducer,
     languages: languagesSlice.reducer,

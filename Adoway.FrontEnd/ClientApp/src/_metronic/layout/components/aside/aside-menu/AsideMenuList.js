@@ -60,7 +60,7 @@ export function AsideMenuList({ layoutProps }) {
                     <h4 className="menu-text">User Management</h4>
                     <i className="menu-icon flaticon-more-v2"></i>
                 </li>
-                {/* end:: section */}
+                {/* end:: section */}     
                 <li
                     className={`menu-item ${getMenuItemActive("/users", false)}`}
                     aria-haspopup="true"
@@ -70,6 +70,17 @@ export function AsideMenuList({ layoutProps }) {
                             <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
                         </span>
                         <span className="menu-text">Users</span>
+                    </NavLink>
+                </li>
+                <li
+                    className={`menu-item ${getMenuItemActive("/roles", false)}`}
+                    aria-haspopup="true"
+                >
+                    <NavLink className="menu-link" to="/roles">
+                        <span className="svg-icon menu-icon">
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Shield-protected.svg")} />
+                        </span>
+                        <span className="menu-text">Roles</span>
                     </NavLink>
                 </li>
                 {/*end::1 Level*/}
