@@ -118,8 +118,19 @@ namespace Adoway.Service.UserManagement
         // users in roles
         public async Task<List<UserInRoleViewModel>> GetUserInRoles(Guid userId)
         {
-            var roles = await _userInRoleRepo.FindByAsync(u => u.UserId == userId);
-            return _mapper.Map<List<UserInRoleViewModel>>(roles);
+            var roles = await (from a in DbContext.Roles
+                               join b in DbContext.UsersInRoles on a.Id equals b.RoleId
+                               where b.UserId == userId
+                               orderby a.Name
+                               select new UserInRoleViewModel
+                               {
+                                   Id = b.Id,
+                                   RoleId = a.Id,
+                                   RoleName = a.Name,
+                                   Description = a.Description,
+                                   UserId = b.UserId
+                               }).ToListAsync(); ;
+            return roles;
         }
         public async Task<UserInRoleViewModel> CreateUserInRole(UserInRoleViewModel model)
         {

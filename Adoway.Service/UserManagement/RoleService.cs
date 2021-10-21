@@ -123,7 +123,7 @@ namespace Adoway.Service.UserManagement
                                                   BelongTo = b == null ? false : b.BelongTo
                                               }).ToListAsync();
             }
-            return _mapper.Map<List<RoleInScreenViewModel>>(roleInScreens);
+            return roleInScreens;
         }
         public async Task<List<RoleInScreenViewModel>> EditRoleInScreens(List<RoleInScreenViewModel> model)
         {
