@@ -22,3 +22,15 @@ export function updateUser(user) {
 export function deleteUser(userId) {
     return axios.post(`${USERS_URL}/deleteUser?id=${userId}`);
 }
+
+export function getUserInRoles(userId) {
+    return axios.get(`${USERS_URL}/getUserInRoles?id=${userId}`);
+}
+
+export function createUserInRole(userInRoles) {
+    return axios.post(`${USERS_URL}/createUserInRole`, userInRoles);
+}
+
+export function deteleUserInRole(userInRoles) {
+    return axios.post(`${USERS_URL}/createUserInRole`, userInRoles);
+}

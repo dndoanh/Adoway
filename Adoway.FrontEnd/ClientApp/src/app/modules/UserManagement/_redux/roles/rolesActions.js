@@ -3,6 +3,20 @@ import {rolesSlice, callTypes} from "./rolesSlice";
 
 const {actions} = rolesSlice;
 
+
+export const fetchAllRoles = dispatch => {
+    return requestFromServer
+        .getAllRoles()
+        .then(response => {
+            const workplaces = response.data;
+            dispatch(actions.allRolesFetched(workplaces));
+        })
+        .catch(error => {
+            debugger;
+            error.clientMessage = "Can't find role";
+        });
+};
+
 export const fetchRoles = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer

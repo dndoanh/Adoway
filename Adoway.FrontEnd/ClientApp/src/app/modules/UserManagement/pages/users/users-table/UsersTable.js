@@ -9,6 +9,7 @@ import paginationFactory, {
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/users/usersActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
+import * as rolesActions from "../../../../UserManagement/_redux/roles/rolesActions";
 
 import {
     getSelectRow,
@@ -31,7 +32,8 @@ export function UsersTable() {
             queryParams: usersUIContext.queryParams,
             setQueryParams: usersUIContext.setQueryParams,
             openEditUserDialog: usersUIContext.openEditUserDialog,
-            openDeleteUserDialog: usersUIContext.openDeleteUserDialog,
+            openEditUserInRoleDialog: usersUIContext.openEditUserInRoleDialog,
+            openDeleteUserDialog: usersUIContext.openDeleteUserDialog
         };
     }, [usersUIContext]);
 
@@ -53,10 +55,15 @@ export function UsersTable() {
     // get all languages for upper item
     useEffect(() => {
         // server call by queryParams
-        dispatch(languagesActions.fetchAllLanguages);
+        dispatch(rolesActions.fetchAllRoles);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        // server call by queryParams
+        dispatch(languagesActions.fetchAllLanguages);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     // Table columns
     const columns = [
         {
@@ -95,6 +102,7 @@ export function UsersTable() {
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditUserDialog: usersUIProps.openEditUserDialog,
+                openEditUserInRoleDialog: usersUIProps.openEditUserInRoleDialog,
                 openDeleteUserDialog: usersUIProps.openDeleteUserDialog,
             },
             classes: "text-right pr-0",

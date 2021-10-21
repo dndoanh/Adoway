@@ -46,6 +46,10 @@ export const rolesSlice = createSlice({
             state.entities = entities;
             state.totalCount = totalCount;
         },
+        allRolesFetched: (state, action) => {
+            const roles = action.payload;
+            state.allRoles = roles;
+        },
         // createRoles
         roleCreated: (state, action) => {
             state.actionsLoading = false;
