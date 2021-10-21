@@ -8,7 +8,8 @@ const initialUsersState = {
     totalCount: 0,
     entities: null,
     userForEdit: undefined,
-    lastError: null
+    lastError: null,
+    userInRoles:null
 };
 export const callTypes = {
     list: "list",
@@ -35,6 +36,7 @@ export const usersSlice = createSlice({
                 state.actionsLoading = true;
             }
         },
+
         // userSelected
         userSelected: (state, action) => {
             state.userForEdit = _.find(state.entities, { id: action.payload.id });

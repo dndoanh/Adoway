@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { UsersLoadingDialog } from "./users-loading-dialog/UsersLoadingDialog";
 import { UserEditDialog } from "./user-edit-dialog/UserEditDialog";
+import { UserInRoleEditDialog } from "./user-in-role-edit-dialog/UserInRoleEditDialog";
 import { UserDeleteDialog } from "./user-delete-dialog/UserDeleteDialog";
 import { UsersUIProvider } from "./UsersUIContext";
 import { UsersCard } from "./UsersCard";
@@ -13,7 +14,10 @@ export function UsersPage({ history }) {
     },
     openEditUserDialog: (id) => {
       history.push(`/users/${id}/edit`);
-    },
+      },
+      openEditUserInRoleDialog: (id) => {
+          history.push(`/users/${id}/edit-role`);
+      },
     openDeleteUserDialog: (id) => {
       history.push(`/users/${id}/delete`);
     }
@@ -42,7 +46,18 @@ export function UsersPage({ history }) {
             }}
           />
         )}
-      </Route>
+        </Route>
+          <Route path="/users/:id/edit-role">
+        {({ history, match }) => (
+            <UserInRoleEditDialog
+                show={match != null}
+                id={match && match.params.id}
+                onHide={() => {
+                    history.push("/users");
+                }}
+            />
+        )}
+    </Route>
       <Route path="/users/:id/delete">
         {({ history, match }) => (
           <UserDeleteDialog

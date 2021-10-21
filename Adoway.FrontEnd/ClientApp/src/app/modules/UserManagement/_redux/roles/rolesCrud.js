@@ -2,6 +2,15 @@ import axios from "axios";
 
 export const ROLES_URL = `${process.env.REACT_APP_API_URL}/role`;
 
+export function getRoleInScreens(id) {
+    return axios.get(`${ROLES_URL}/getRoleInScreens`,id);
+}
+
+// Method from server should return All Roles By Enterprise of the User That logged in
+export function getAllRoles() {
+    return axios.get(`${ROLES_URL}/getRoles`);
+}
+
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
 export function findRoles(queryParams) {
