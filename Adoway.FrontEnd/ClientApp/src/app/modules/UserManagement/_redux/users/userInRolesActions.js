@@ -8,7 +8,6 @@ export const fetchUserInRoles = id => dispatch => {
     return requestFromServer
         .getUserInRoles(id)
         .then(response => {
-            debugger;
             const  payload = response.data;
             dispatch(actions.userInRolesFetched(payload));
         })

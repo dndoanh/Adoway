@@ -9,7 +9,7 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-  { openEditRoleDialog, openDeleteRoleDialog }
+    { openEditRoleDialog, openDeleteRoleDialog, openEditRoleInScreensDialog }
 ) {
   return (
     <>
@@ -24,7 +24,17 @@ export function ActionsColumnFormatter(
           />
         </span>
       </a>
-      <> </>
+          <a
+              title="Edit role in screen"
+              className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+              onClick={() => openEditRoleInScreensDialog(row.id)}
+          >
+              <span className="svg-icon svg-icon-md svg-icon-primary">
+                  <SVG
+                      src={toAbsoluteUrl("/media/svg/icons/General/Attachment1.svg")}
+                  />
+              </span>
+          </a>
 
       <a
         title="Delete role"

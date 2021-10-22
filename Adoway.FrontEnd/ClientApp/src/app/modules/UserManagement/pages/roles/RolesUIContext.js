@@ -40,6 +40,7 @@ export function RolesUIProvider({ rolesUIEvents, children }) {
         initRole,
         newRoleButtonClick: rolesUIEvents.newRoleButtonClick,
         openEditRoleDialog: rolesUIEvents.openEditRoleDialog,
+        openEditRoleInScreensDialog: rolesUIEvents.openEditRoleInScreensDialog,
         openDeleteRoleDialog: rolesUIEvents.openDeleteRoleDialog
     };
 

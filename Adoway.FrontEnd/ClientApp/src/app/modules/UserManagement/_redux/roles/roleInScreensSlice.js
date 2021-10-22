@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import _ from 'lodash';
 
-const initialUsersState = {
+const initialRolesState = {
     listLoading: false,
     actionsLoading: false,
     needReload: false,
     totalCount: 0,
-    userForEdit: undefined,
+    roleForEdit: undefined,
     lastError: null,
-    userInRoles:null
+    roleInScreens:null
 };
 export const callTypes = {
     list: "list",
     action: "action"
 };
 
-export const userInRolesSlice = createSlice({
-    name: "userInRoles",
-    initialState: initialUsersState,
+export const roleInScreensSlice = createSlice({
+    name: "roleInScreens",
+    initialState: initialRolesState,
     reducers: {
         catchError: (state, action) => {
             state.error = `${action.type}: ${action.payload.error}`;
@@ -35,19 +35,19 @@ export const userInRolesSlice = createSlice({
                 state.actionsLoading = true;
             }
         },
-        userInRolesCreated: (state, action) => {
+        roleInScreensCreated: (state, action) => {
             state.actionsLoading = false;
             state.needReload = !state.needReload;
             state.error = null;
-            state.entities.push(action.payload.userInRoles);
+            state.entities.push(action.payload.roleInScreens);
         },
-        // userSelected
-        userSelected: (state, action) => {
-            state.userForEdit = _.find(state.entities, { id: action.payload.id });
+        // roleSelected
+        roleSelected: (state, action) => {
+            state.roleForEdit = _.find(state.entities, { id: action.payload.id });
         },
-        userInRolesFetched: (state, action) => {
+        roleInScreensFetched: (state, action) => {
             const roles = action.payload;
-            state.userInRoles = roles;
+            state.roleInScreens = roles;
         },
    
     }

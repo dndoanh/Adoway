@@ -26,7 +26,7 @@ export function ActionsColumnFormatter(
       </a>
      
     <a
-        title="Edit user inrole"
+        title="Edit user in role"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
               onClick={() => openEditUserInRoleDialog(row.id)}
     >

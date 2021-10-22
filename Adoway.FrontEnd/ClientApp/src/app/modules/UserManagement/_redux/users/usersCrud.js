@@ -27,10 +27,10 @@ export function getUserInRoles(userId) {
     return axios.get(`${USERS_URL}/getUserInRoles?id=${userId}`);
 }
 
-export function createUserInRole(userInRoles) {
+export function createUserInRoles(userInRoles) {
     return axios.post(`${USERS_URL}/createUserInRole`, userInRoles);
 }
 
-export function deteleUserInRole(userInRoles) {
-    return axios.post(`${USERS_URL}/createUserInRole`, userInRoles);
+export function deleteUserInRoles(id) {
+    return axios.post(`${USERS_URL}/deleteUserInRole?id=${id}`);
 }
