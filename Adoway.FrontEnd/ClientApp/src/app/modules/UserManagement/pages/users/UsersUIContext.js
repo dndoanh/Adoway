@@ -41,9 +41,11 @@ export function UsersUIProvider({ usersUIEvents, children }) {
         setQueryParams,
         initUser,
         newUserButtonClick: usersUIEvents.newUserButtonClick,
+        newUserInRolesButtonClick: usersUIEvents.newUserInRolesButtonClick,
         openEditUserDialog: usersUIEvents.openEditUserDialog,
         openDeleteUserDialog: usersUIEvents.openDeleteUserDialog,
-        openEditUserInRoleDialog: usersUIEvents.openEditUserInRoleDialog
+        openEditUserInRoleDialog: usersUIEvents.openEditUserInRoleDialog,
+        openDeleteUserInRolesDialog: usersUIEvents.openDeleteUserInRolesDialog,
     };
 
     return <UsersUIContext.Provider value={value}>{children}</UsersUIContext.Provider>;

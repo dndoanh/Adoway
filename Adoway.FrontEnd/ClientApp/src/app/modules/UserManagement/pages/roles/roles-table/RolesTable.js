@@ -30,6 +30,7 @@ export function RolesTable() {
             queryParams: rolesUIContext.queryParams,
             setQueryParams: rolesUIContext.setQueryParams,
             openEditRoleDialog: rolesUIContext.openEditRoleDialog,
+            openEditRoleInScreensDialog: rolesUIContext.openEditRoleInScreensDialog,
             openDeleteRoleDialog: rolesUIContext.openDeleteRoleDialog,
         };
     }, [rolesUIContext]);
@@ -80,6 +81,7 @@ export function RolesTable() {
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditRoleDialog: rolesUIProps.openEditRoleDialog,
+                openEditRoleInScreensDialog: rolesUIProps.openEditRoleInScreensDialog,
                 openDeleteRoleDialog: rolesUIProps.openDeleteRoleDialog,
             },
             classes: "text-right pr-0",

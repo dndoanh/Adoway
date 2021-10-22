@@ -2,18 +2,21 @@
 // Data validation is based on Yup
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
-import { Modal,Table } from "react-bootstrap";
+import { Modal, Table } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import * as actions from "../../../_redux/users/usersActions";
+import * as userInRolesActions from "../../../_redux/users/userInRolesActions";
+import { UserInRolesTable } from "../user-in-roles-table/UserInRolesTable";
 import {
     Input,
     Select,
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
+import { useUsersUIContext } from "../UsersUIContext";
 
 // Validation schema
 const UserEditSchema = Yup.object().shape({
@@ -32,6 +35,14 @@ export function UserInRoleEditForm({
     actionsLoading,
     onHide,
 }) {
+  
+    const dispatch = useDispatch();
+    const addUserInRoles = () => {
+        dispatch(userInRolesActions.createUserInRoles({
+            id:"00000000-0000-0000-0000-000000000000",roleId: selectRole, userId: user.id,belongto:false
+        }));
+    };
+    const [selectRole, setSelectRole] = useState("");
 
     const { currentRolesState } = useSelector(
         (state) => ({ currentRolesState: state.roles }),
@@ -44,15 +55,8 @@ export function UserInRoleEditForm({
         shallowEqual
     );
     const { userInRoles } = currentUserInRolesState;
-   
-    const handleAddUserInRoles = (roleId) => {
-        dispatch(userInRolesActions.createUserInRole(
-            { roleId: roleId, userId: user.id, belongto: false }
-        ));
-    };
-    const handleDeleteUserInRoles = (roleId) => {
-        dispatch(userInRolesActions.deleteUserInRole(roleId));
-    };
+
+
     return (
         <>
             <Formik
@@ -74,7 +78,11 @@ export function UserInRoleEditForm({
                             <Form className="form form-label-right">
                                 <div className="form-group row">
                                     <div className="col-lg-8">
-                                        <Select name="roleId" label="Role" >
+                                        <Select name="roleId" label="Role"
+                                            onChange={(e) => {
+                                                setSelectRole(e.target.value)
+                                            }}
+                                        >
                                             <option value=""></option>
                                             {allRoles.map((role) => (
                                                 <option key={role.id} value={role.id}>
@@ -86,49 +94,19 @@ export function UserInRoleEditForm({
                                     <div className="col-lg-4 mt-5">
                                         <button
                                             type="button"
-                                            
                                             className="btn btn-primary btn-elevate mt-3"
+                                            onClick={addUserInRoles}
                                         >
                                             Add
                                         </button>
                                     </div>
                                 </div>
-
-                              
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Table striped bordered hover>
-                                            <thead>
-                                                <tr>
-                                                    <th>Role Name</th>
-                                                    <th>Description</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {userInRoles != undefined && (
-                                                    userInRoles.map((role) =>(
-                                                        <tr>
-                                                            <td>{role.roleName}</td>
-                                                            <td>{role.description}</td>
-                                                            <td>
-                                                                <button 
-                                                                    type="button"
-                                                                    className="btn btn-primary btn-elevate"
-                                                                    onClick={() => handleDeleteUserInRoles(role.id)}
-                                                                >
-                                                                Delete
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-
-                                                    ))
-                                                 )}
-                                            </tbody>
-                                        </Table>
+                                        <UserInRolesTable />
                                     </div>
                                 </div>
-                            
+
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
@@ -139,14 +117,7 @@ export function UserInRoleEditForm({
                             >
                                 Cancel
                             </button>
-                            <> </>
-                            <button
-                                type="submit"
-                                onClick={() => handleSubmit()}
-                                className="btn btn-primary btn-elevate"
-                            >
-                                Save
-                            </button>
+                         
                         </Modal.Footer>
                     </>
                 )}
