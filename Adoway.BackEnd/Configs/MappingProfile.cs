@@ -19,11 +19,17 @@ namespace Adoway.BackEnd.Configs
             CreateMap<SettingEntity, SettingViewModel>();
 
             // User management
+            // User
             CreateMap<UserViewModel, UserEntity>();
             CreateMap<UserEntity, UserViewModel>();
+            CreateMap<UserInRoleViewModel, UserInRoleEntity>();
+            CreateMap<UserInRoleEntity, UserInRoleViewModel>();
+            // Role
             CreateMap<UserViewModel, UserAuthViewModel>();
             CreateMap<RoleViewModel, RoleEntity>();
             CreateMap<RoleEntity, RoleViewModel>();
+            CreateMap<RoleInScreenViewModel, RoleInScreenEntity>();
+            CreateMap<RoleInScreenEntity, RoleInScreenViewModel>();
         }
     }
 }

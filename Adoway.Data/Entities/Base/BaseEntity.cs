@@ -18,4 +18,8 @@ namespace Adoway.Data.Entities.Base
             return this.MemberwiseClone();
         }
     }
+    public abstract class BaseEnterpriseEntity : BaseEntity
+    {
+        public Guid? EnterpriseId { get; set; }
+    }
 }
