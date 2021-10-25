@@ -35,3 +35,11 @@ export function getRoleInScreens(roleId) {
 export function createRoleInScreens(roleId) {
     return axios.get(`${ROLES_URL}/GetRoleInScreens?id=${roleId}`);
 }
+
+export function deleteRoleInScreens(roleId) {
+    return axios.get(`${ROLES_URL}/GetRoleInScreens?id=${roleId}`);
+}
+
+export function updateRoleInScreens(roleInScreens) {
+    return axios.post(`${ROLES_URL}/updateRoleInScreens`, roleInScreens);
+}

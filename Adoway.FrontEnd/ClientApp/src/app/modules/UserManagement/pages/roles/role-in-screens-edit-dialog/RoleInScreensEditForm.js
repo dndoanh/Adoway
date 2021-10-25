@@ -18,17 +18,6 @@ import {
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
 import { useRolesUIContext } from "../RolesUIContext";
 
-// Validation schema
-const RoleEditSchema = Yup.object().shape({
-    name: Yup.string()
-        .min(3, "Minimum 3 symbols")
-        .max(50, "Maximum 50 symbols")
-        .required("Name is required"),
-    email: Yup.string()
-        .email("Invalid email")
-        .required("Email is required")
-});
-
 export function RoleInScreensEditForm({
     saveRole,
     role,
@@ -41,14 +30,11 @@ export function RoleInScreensEditForm({
         shallowEqual
     );
     const { roleInScreens } = currentRoleInScreensState;
-
-
     return (
         <>
             <Formik
                 enableReinitialize={true}
-                initialValues={role}
-                validationSchema={RoleEditSchema}
+                initialValues={roleInScreens}
                 onSubmit={(values) => {
                     saveRole(values);
                 }}
@@ -78,7 +64,13 @@ export function RoleInScreensEditForm({
                             >
                                 Cancel
                             </button>
-                         
+                            <button
+                                type="submit"
+                                onClick={() => handleSubmit()}
+                                className="btn btn-primary btn-elevate"
+                            >
+                                Save
+                            </button>
                         </Modal.Footer>
                     </>
                 )}

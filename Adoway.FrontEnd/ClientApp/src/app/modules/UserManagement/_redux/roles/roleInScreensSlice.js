@@ -49,6 +49,29 @@ export const roleInScreensSlice = createSlice({
             const roles = action.payload;
             state.roleInScreens = roles;
         },
-   
+        roleInScreensUpdated: (state, action) => {
+            state.error = null;
+            state.actionsLoading = false;
+            state.roleInScreens = state.entities.map(entity => {
+                if (entity.id === action.payload.roleInScreens.id) {
+                    return action.payload.roleInScreens;
+                }
+                return entity;
+            });
+        },
+        roleInScreensStatusUpdated: (state, action) => {
+            state.roleInScreens = state.roleInScreens.map(entity => {
+                return {
+                    ...entity,
+                    screenFunctions: entity.screenFunctions.map(sf => {
+                        if (sf.id === action.payload.id) {
+                            return { ...sf, belongTo: !sf.belongTo }
+                        }
+                        return sf;
+                    })
+                }
+               
+            });
+        },
     }
 });
