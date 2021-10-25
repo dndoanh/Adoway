@@ -36,14 +36,10 @@ export function RoleInScreensEditDialog({ id, show, onHide }) {
         dispatch(roleInScreensActions.fetchRoleInScreens(id));
     }, [id, dispatch]);
   // server request for saving role
-  const saveRole = (role) => {
-    if (!id) {
+    const saveRole = (roleInScreens) => {
       // server request for creating role
-        dispatch(roleActions.createRole(role)).then(() => onHide());
-    } else {
-      // server request for updating role
-        dispatch(roleActions.updateRole(role)).then(() => onHide());
-    }
+        debugger;
+        dispatch(roleInScreensActions.updateRoleInScreens(roleInScreens)).then(() => onHide());
   };
 
   return (

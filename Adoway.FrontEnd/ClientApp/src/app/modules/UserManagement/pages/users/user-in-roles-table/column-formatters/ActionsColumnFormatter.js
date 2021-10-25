@@ -9,14 +9,14 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openDeleteUserInRolesDialog }
+    { deleteUserInRoles }
 ) {
   return (
     <>
       <a
         title="Delete User In Role"
         className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteUserInRolesDialog(row.id)}
+              onClick={() => deleteUserInRoles(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
           <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />

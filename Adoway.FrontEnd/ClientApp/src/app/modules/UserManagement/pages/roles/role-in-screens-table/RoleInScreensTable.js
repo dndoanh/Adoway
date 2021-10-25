@@ -10,7 +10,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/roles/rolesActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
 import * as rolesActions from "../../../_redux/roles/rolesActions";
-
+import * as roleInScreensActions from "../../../_redux/roles/roleInScreensActions";
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -30,16 +30,19 @@ export function RoleInScreensTable() {
         return {
             queryParams: rolesUIContext.queryParams,
             setQueryParams: rolesUIContext.setQueryParams,
-            openDeleteRoleInScreensDialog: rolesUIContext.openDeleteRoleInScreensDialog
+            openDeleteRoleInScreensDialog: rolesUIContext.openDeleteRoleInScreensDialog,
         };
     }, [rolesUIContext]);
-
+    const dispatch = useDispatch();
     // Getting curret state of roles list from store (Redux)
     const { currentState } = useSelector(
         (state) => ({ currentState: state.roleInScreens}),
         shallowEqual
     );
     const { roleInScreens } = currentState;
+    const changeScreenFunction = (id) => {
+        dispatch(roleInScreensActions.updateRoleInScreensStatus(id))
+    }
     // Table columns
     const columns = [
         {
@@ -52,26 +55,15 @@ export function RoleInScreensTable() {
         {
             dataField: "screenFunctions",
             text: "Screen Functions",
-            formatter: (value, row) => {
-                return value.map(el => `${el.functionName}`).join(' ');
+            formatter: columnFormatters.ScreenFunctionColumnFormatter,
+            formatExtraData: {
+                changeScreenFunction: changeScreenFunction
             },
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
-        },
-        {
-            dataField: "action",
-            text: "Actions",
-            formatter: columnFormatters.ActionsColumnFormatter,
-            formatExtraData: {
-                openDeleteRoleInScreensDialog: rolesUIProps.openDeleteRoleInScreensDialog,
-            },
-            classes: "text-right pr-0",
-            headerClasses: "text-right pr-3",
-            style: {
-                minWidth: "100px",
-            },
-        },
+        }
+    
     ];
     return (
         <>

@@ -6,22 +6,28 @@ import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../../../../../_metronic/_helpers";
 
 export function ScreenFunctionColumnFormatter(
-  cellContent,
-  row,
-  rowIndex,
-    { openDeleteRoleInScreensDialog }
+  screenFunctions,
+    row,
+    rowIndex,
+    { changeScreenFunction }
 ) {
   return (
-    <>
-      <a
-        title="Delete Role In Screens"
-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteRoleInScreensDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-danger">
-          <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
-        </span>
-      </a>
+      <>
+          {screenFunctions && screenFunctions.map((value) => {
+              return (
+                  <>
+                     <input
+                        type="checkbox"
+                          defaultChecked={value.belongTo}
+                          checked={value.belongTo}
+                          onChange={()=>changeScreenFunction(value.id)}
+                      /> 
+                      <span>&nbsp;&nbsp;</span>
+                      {value.functionName}
+                      <span>&nbsp;&nbsp;</span>
+                  </>
+              );
+          })}
     </>
   );
 }

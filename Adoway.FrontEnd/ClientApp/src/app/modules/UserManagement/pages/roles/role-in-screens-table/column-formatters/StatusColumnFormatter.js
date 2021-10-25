@@ -8,12 +8,12 @@ import {
 
 export function StatusColumnFormatter(cellContent, row) {
     const getLabelCssClasses = () => {
-        return `label label-lg label-light-${RoleStatusCssClasses[row.status]
+        return `label label-lg label-light-${StatusCssClasses[row.status]
             } label-inline`;
     };
     return (
         <span className={getLabelCssClasses()}>
-            {RoleStatusTitles[row.status]}
+            {StatusTitles[row.status]}
         </span>
     );
 }

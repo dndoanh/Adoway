@@ -10,6 +10,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/users/usersActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
 import * as rolesActions from "../../../_redux/roles/rolesActions";
+import * as userInRolesActions from "../../../_redux/users/userInRolesActions";
 
 import {
     getSelectRow,
@@ -40,6 +41,13 @@ export function UserInRolesTable() {
         shallowEqual
     );
     const { userInRoles } = currentState;
+    const dispatch=useDispatch()
+    const deleteUserInRoles = (id) => {
+        // server request for deleting user by id
+        dispatch(userInRolesActions.deleteUserInRoles(id)).then(() => {
+            dispatch(userInRolesActions.fetchUserInRoles(usersUIProps.queryParams));
+        });
+    }
     // Table columns
     const columns = [
         {
@@ -61,7 +69,7 @@ export function UserInRolesTable() {
             text: "Actions",
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
-                openDeleteUserInRolesDialog: usersUIProps.openDeleteUserInRolesDialog,
+                deleteUserInRoles: deleteUserInRoles,
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

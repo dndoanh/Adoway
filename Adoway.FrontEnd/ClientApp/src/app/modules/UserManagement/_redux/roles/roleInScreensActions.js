@@ -4,7 +4,6 @@ import { roleInScreensSlice, callTypes } from "./roleInScreensSlice";
 const { actions } = roleInScreensSlice;
 
 export const fetchRoleInScreens = id => dispatch => {
-    debugger;
     dispatch(actions.startCall({ callType: callTypes.list }));
     return requestFromServer
         .getRoleInScreens(id)
@@ -41,5 +40,19 @@ export const deleteRoleInScreens= id => dispatch => {
             error.clientMessage = "Can't delete RoleInScreens";
             dispatch(actions.catchError({ error, callType: callTypes.action }));
         });
+};
+export const updateRoleInScreens = roleInScreens => dispatch => {
+    dispatch(actions.startCall({ callType: callTypes.action }));
+    return requestFromServer
+        .updateRoleInScreens(roleInScreens)
+        .catch(error => {
+            error.clientMessage = "Can't update user";
+            dispatch(actions.catchError({ error, callType: callTypes.action }));
+        });
+};
+
+export const updateRoleInScreensStatus = id => dispatch => {
+    dispatch(actions.roleInScreensStatusUpdated({id}));
+  
 };
 
