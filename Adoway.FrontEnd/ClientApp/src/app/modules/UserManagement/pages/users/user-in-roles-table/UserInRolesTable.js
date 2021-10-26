@@ -44,9 +44,7 @@ export function UserInRolesTable() {
     const dispatch=useDispatch()
     const deleteUserInRoles = (id) => {
         // server request for deleting user by id
-        dispatch(userInRolesActions.deleteUserInRoles(id)).then(() => {
-            dispatch(userInRolesActions.fetchUserInRoles(usersUIProps.queryParams));
-        });
+        dispatch(userInRolesActions.deleteUserInRoles(id));
     }
     // Table columns
     const columns = [

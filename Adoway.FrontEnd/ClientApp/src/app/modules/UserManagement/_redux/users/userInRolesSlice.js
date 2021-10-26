@@ -39,7 +39,7 @@ export const userInRolesSlice = createSlice({
             state.actionsLoading = false;
             state.needReload = !state.needReload;
             state.error = null;
-            state.entities.push(action.payload.userInRoles);
+            state.userInRoles.push(action.payload.userInRoles);
         },
         // userSelected
         userSelected: (state, action) => {
@@ -48,6 +48,11 @@ export const userInRolesSlice = createSlice({
         userInRolesFetched: (state, action) => {
             const roles = action.payload;
             state.userInRoles = roles;
+        },
+        userInRolesDeleted: (state, action) => {
+            state.error = null;
+            state.actionsLoading = false;
+            state.userInRoles = state.userInRoles.filter(el => el.id !== action.payload.id);
         },
    
     }

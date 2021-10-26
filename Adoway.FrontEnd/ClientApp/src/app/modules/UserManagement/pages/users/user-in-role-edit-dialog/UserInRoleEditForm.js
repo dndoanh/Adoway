@@ -35,12 +35,13 @@ export function UserInRoleEditForm({
     actionsLoading,
     onHide,
 }) {
-  
     const dispatch = useDispatch();
     const addUserInRoles = () => {
         dispatch(userInRolesActions.createUserInRoles({
-            id:"00000000-0000-0000-0000-000000000000",roleId: selectRole, userId: user.id,belongto:false
-        }));
+            id:"00000000-0000-0000-0000-000000000000",roleId: selectRole, userId: user.id,belongto:true
+        })).then(() => {
+            dispatch(userInRolesActions.fetchUserInRoles(user.id));
+        });
     };
     const [selectRole, setSelectRole] = useState("");
 
@@ -49,14 +50,6 @@ export function UserInRoleEditForm({
         shallowEqual
     );
     const { allRoles } = currentRolesState;
-
-    const { currentUserInRolesState } = useSelector(
-        (state) => ({ currentUserInRolesState: state.userInRoles }),
-        shallowEqual
-    );
-    const { userInRoles } = currentUserInRolesState;
-
-
     return (
         <>
             <Formik
