@@ -3,7 +3,6 @@ import {rolesSlice, callTypes} from "./rolesSlice";
 
 const {actions} = rolesSlice;
 
-
 export const fetchAllRoles = dispatch => {
     return requestFromServer
         .getAllRoles()
@@ -12,7 +11,6 @@ export const fetchAllRoles = dispatch => {
             dispatch(actions.allRolesFetched(workplaces));
         })
         .catch(error => {
-            debugger;
             error.clientMessage = "Can't find role";
         });
 };
