@@ -50,6 +50,20 @@ export function UserInRoleEditForm({
         shallowEqual
     );
     const { allRoles } = currentRolesState;
+
+    const { currentState } = useSelector(
+        (state) => ({ currentState: state.userInRoles }),
+        shallowEqual
+    );
+    const { userInRoles } = currentState;
+
+    const [filteredRoles, setFilteredRoles] = useState([]);
+    useEffect(() => {
+        let filterdList = userInRoles == null ? allRoles: allRoles.filter(o => !userInRoles.some(i => i.roleId === o.id));
+        setFilteredRoles(filterdList);
+    }, [allRoles, userInRoles]);
+
+
     return (
         <>
             <Formik
@@ -77,7 +91,7 @@ export function UserInRoleEditForm({
                                             }}
                                         >
                                             <option value=""></option>
-                                            {allRoles.map((role) => (
+                                            {filteredRoles.map((role) => (
                                                 <option key={role.id} value={role.id}>
                                                     {role.name}
                                                 </option>
