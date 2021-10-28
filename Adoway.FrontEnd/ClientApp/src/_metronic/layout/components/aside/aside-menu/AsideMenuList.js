@@ -45,22 +45,22 @@ export function AsideMenuList({ layoutProps }) {
                     className={`menu-item ${getMenuItemActive("/apartments", false)}`}
                     aria-haspopup="true"
                 >
-                    <NavLink className="menu-link" to="/projects">
+                    <NavLink className="menu-link" to="/apartments">
                         <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Owner.svg")} />
                         </span>
                         <span className="menu-text">Apartments</span>
                     </NavLink>
                 </li>
                 <li
-                    className={`menu-item ${getMenuItemActive("/contacts", false)}`}
+                    className={`menu-item ${getMenuItemActive("/contracts", false)}`}
                     aria-haspopup="true"
                 >
-                    <NavLink className="menu-link" to="/contacts">
+                    <NavLink className="menu-link" to="/contracts">
                         <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Owner.svg")} />
                         </span>
-                        <span className="menu-text">Contacts</span>
+                        <span className="menu-text">Contracts</span>
                     </NavLink>
                 </li>
                 <li
@@ -69,7 +69,7 @@ export function AsideMenuList({ layoutProps }) {
                 >
                     <NavLink className="menu-link" to="/owners">
                         <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Owner.svg")} />
                         </span>
                         <span className="menu-text">Owners</span>
                     </NavLink>
@@ -80,7 +80,7 @@ export function AsideMenuList({ layoutProps }) {
                 >
                     <NavLink className="menu-link" to="/televendors">
                         <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Owner.svg")} />
                         </span>
                         <span className="menu-text">TeleVendors</span>
                     </NavLink>
@@ -91,7 +91,7 @@ export function AsideMenuList({ layoutProps }) {
                 >
                     <NavLink className="menu-link" to="/workorders">
                         <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Owner.svg")} />
                         </span>
                         <span className="menu-text">Work Orders</span>
                     </NavLink>
@@ -102,29 +102,29 @@ export function AsideMenuList({ layoutProps }) {
                 >
                     <NavLink className="menu-link" to="/projects">
                         <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Owner.svg")} />
                         </span>
                         <span className="menu-text">Projects</span>
                     </NavLink>
                 </li>
                 {/*end::1 Level*/}
 
-                {/* User Management */}
+                {/* Owner Management */}
                 {/* begin::section */}
                 <li className="menu-section ">
-                    <h4 className="menu-text">User Management</h4>
+                    <h4 className="menu-text">Owner Management</h4>
                     <i className="menu-icon flaticon-more-v2"></i>
                 </li>
                 {/* end:: section */}     
                 <li
-                    className={`menu-item ${getMenuItemActive("/users", false)}`}
+                    className={`menu-item ${getMenuItemActive("/owners", false)}`}
                     aria-haspopup="true"
                 >
-                    <NavLink className="menu-link" to="/users">
+                    <NavLink className="menu-link" to="/owners">
                         <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Owner.svg")} />
                         </span>
-                        <span className="menu-text">Users</span>
+                        <span className="menu-text">Owners</span>
                     </NavLink>
                 </li>
                 <li

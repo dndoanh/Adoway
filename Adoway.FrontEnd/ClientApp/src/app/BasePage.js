@@ -9,6 +9,8 @@ import { LanguagesPage } from "./modules/System/pages/languages/LanguagesPage";
 import { UsersPage } from "./modules/UserManagement/pages/users/UsersPage";
 import { RolesPage } from "./modules/UserManagement/pages/roles/RolesPage";
 import { ApartmentsPage } from "./modules/ProjectManagement/pages/apartments/ApartmentsPage";
+import { ContractsPage } from "./modules/ProjectManagement/pages/contracts/ContractsPage";
+import { OwnersPage } from "./modules/ProjectManagement/pages/owners/OwnersPage";
 const GoogleMaterialPage = lazy(() =>
     import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
 );
@@ -48,6 +50,8 @@ export default function BasePage() {
                 <Route path="/roles" component={RolesPage} />
                 {/*Project Management*/}
                 <Route path="/apartments" component={ApartmentsPage} />
+                <Route path="/contracts" component={ContractsPage} />
+                <Route path="/owners" component={OwnersPage} />
                 {/*System*/}
                 <Route path="/enterprises" component={EnterprisesPage} />
                 <Route path="/languages" component={LanguagesPage} />
