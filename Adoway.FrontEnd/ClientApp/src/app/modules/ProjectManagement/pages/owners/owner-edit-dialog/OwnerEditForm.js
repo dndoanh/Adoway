@@ -15,7 +15,7 @@ import {
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
 
 // Validation schema
-const ApartmentEditSchema = Yup.object().shape({
+const OwnerEditSchema = Yup.object().shape({
     name: Yup.string()
         .min(3, "Minimum 3 symbols")
         .max(50, "Maximum 50 symbols")
@@ -25,9 +25,9 @@ const ApartmentEditSchema = Yup.object().shape({
         .required("Email is required")
 });
 
-export function ApartmentEditForm({
-    saveApartment,
-    apartment,
+export function OwnerEditForm({
+    saveOwner,
+    owner,
     actionsLoading,
     onHide,
 }) {
@@ -40,12 +40,12 @@ export function ApartmentEditForm({
     
     const [avatarUrl, setAvatarUrl] = useState("");
     useEffect(() => {
-        if (apartment.avatarUrl) {
-            setAvatarUrl(apartment.avatarUrl);
+        if (owner.avatarUrl) {
+            setAvatarUrl(owner.avatarUrl);
         }
-    }, [apartment]);
+    }, [owner]);
 
-    const getApartmentAvatarUrl = () => {
+    const getOwnerAvatarUrl = () => {
         if (!avatarUrl) {
             return "none";
         }
@@ -59,10 +59,10 @@ export function ApartmentEditForm({
         <>
             <Formik
                 enableReinitialize={true}
-                initialValues={apartment}
-                validationSchema={ApartmentEditSchema}
+                initialValues={owner}
+                validationSchema={OwnerEditSchema}
                 onSubmit={(values) => {
-                    saveApartment(values);
+                    saveOwner(values);
                 }}
             >
                 {({ values, handleSubmit, handleChange, handleBlur, setFieldValue }) => (

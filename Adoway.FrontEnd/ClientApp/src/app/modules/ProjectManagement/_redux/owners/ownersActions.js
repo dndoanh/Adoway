@@ -1,62 +1,62 @@
-import * as requestFromServer from "./usersCrud";
-import {usersSlice, callTypes} from "./usersSlice";
+import * as requestFromServer from "./ownersCrud";
+import {ownersSlice, callTypes} from "./ownersSlice";
 
-const {actions} = usersSlice;
+const {actions} = ownersSlice;
 
-export const fetchUsers = queryParams => dispatch => {
+export const fetchOwners = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findUsers(queryParams)
+    .findOwner(queryParams)
     .then(response => {
       const { totalCount, entities } = response.data;
-      dispatch(actions.usersFetched({ totalCount, entities }));
+      dispatch(actions.ownerFetched({ totalCount, entities }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find users";
+      error.clientMessage = "Can't find owner";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const selectUser = id => dispatch => {
-    dispatch(actions.userSelected({ id: id }));
+export const selectOwner = id => dispatch => {
+    dispatch(actions.ownerSelected({ id: id }));
 };
 
-export const createUser = userForCreation => dispatch => {
+export const createOwner = ownerForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createUser(userForCreation)
+    .createOwner(ownerForCreation)
     .then(response => {
-      const user = response.data;
-      dispatch(actions.userCreated({ user }));
+      const owner = response.data;
+      dispatch(actions.ownerCreated({ owner }));
     })
     .catch(error => {
-      error.clientMessage = "Can't create user";
+      error.clientMessage = "Can't create owner";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateUser = user => dispatch => {
+export const updateOwners = owner => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateUser(user)
+    .updateOwner(owner)
     .then(() => {
-        dispatch(actions.userUpdated({ user }));
+        dispatch(actions.ownerUpdated({ owner }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update user";
+      error.clientMessage = "Can't update owner";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteUser = id => dispatch => {
+export const deleteOwners = id => dispatch => {
     dispatch(actions.startCall({ callType: callTypes.action }));
     return requestFromServer
-        .deleteUser(id)
+        .deleteOwner(id)
         .then(response => {
-            dispatch(actions.userDeleted({ id }));
+            dispatch(actions.ownerDeleted({ id }));
         })
         .catch(error => {
-            error.clientMessage = "Can't delete user";
+            error.clientMessage = "Can't delete owner";
             dispatch(actions.catchError({ error, callType: callTypes.action }));
         });
 };

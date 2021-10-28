@@ -1,36 +1,36 @@
 import axios from "axios";
 
-export const USERS_URL = `${process.env.REACT_APP_API_URL}/user`;
+export const USERS_URL = `${process.env.REACT_APP_API_URL}/owner`;
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
-export function findUsers(queryParams) {
-    return axios.post(`${USERS_URL}/searchUsers`, queryParams);
+export function findOwner(queryParams) {
+    return axios.post(`${USERS_URL}/searchOwner`, queryParams);
 }
 
-// CREATE =>  POST: add a new user to the server
-export function createUser(user) {
-    return axios.post(`${USERS_URL}/createUser`, user);
+// CREATE =>  POST: add a new owner to the server
+export function createOwner(owner) {
+    return axios.post(`${USERS_URL}/createOwner`, owner);
 }
 
-// UPDATE => PUT: update the user on the server
-export function updateUser(user) {
-    return axios.post(`${USERS_URL}/updateUser`, user);
+// UPDATE => PUT: update the owner on the server
+export function updateOwner(owner) {
+    return axios.post(`${USERS_URL}/updateOwner`, owner);
 }
 
-// DELETE => delete the user from the server
-export function deleteUser(userId) {
-    return axios.post(`${USERS_URL}/deleteUser?id=${userId}`);
+// DELETE => delete the owner from the server
+export function deleteOwner(ownerId) {
+    return axios.post(`${USERS_URL}/deleteOwner?id=${ownerId}`);
 }
 
-export function getUserInRoles(userId) {
-    return axios.get(`${USERS_URL}/getUserInRoles?id=${userId}`);
+export function getOwnerInRoles(ownerId) {
+    return axios.get(`${USERS_URL}/getOwnerInRoles?id=${ownerId}`);
 }
 
-export function createUserInRoles(userInRoles) {
-    return axios.post(`${USERS_URL}/createUserInRole`, userInRoles);
+export function createOwnerInRoles(ownerInRoles) {
+    return axios.post(`${USERS_URL}/createOwnerInRole`, ownerInRoles);
 }
 
-export function deleteUserInRoles(id) {
-    return axios.post(`${USERS_URL}/deleteUserInRole?id=${id}`);
+export function deleteOwnerInRoles(id) {
+    return axios.post(`${USERS_URL}/deleteOwnerInRole?id=${id}`);
 }
