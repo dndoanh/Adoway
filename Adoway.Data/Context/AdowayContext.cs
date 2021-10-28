@@ -6,6 +6,10 @@ using Adoway.Common.ViewModels.UserManagement;
 using Adoway.Data.Entities.System;
 using Adoway.Common.ViewModels.System;
 using Microsoft.Extensions.Configuration;
+using Adoway.Data.Entities.Inventory;
+using Adoway.Data.Entities.Sales;
+using Adoway.Data.Entities.Purchase;
+using Adoway.Data.Entities.Project;
 
 namespace Adoway.Data.Context
 {
@@ -32,6 +36,22 @@ namespace Adoway.Data.Context
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("AdowayConnection"));
             }
         }
+
+        // Human Resource
+
+        // Inventory
+        public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
+        // Project
+        public DbSet<ApartmentEntity> Apartments { get; set; }
+        public DbSet<ProjectEntity> Projects { get; set; }
+        public DbSet<OwnerEntity> Owners { get; set; }
+        public DbSet<WorkOrderEntity> WorkOrders { get; set; }
+        // Purchase
+        public DbSet<SupplierEntity> Suppliers { get; set; }
+        // Sales
+        public DbSet<CustomerEntity> Customers { get; set; }
+        public DbSet<SubscriptionEntity> Subscriptions { get; set; }
 
         // User management
         public DbSet<UserEntity> Users { get; set; }

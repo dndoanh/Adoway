@@ -4,6 +4,10 @@ using Adoway.Data.Entities.UserManagement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Adoway.Data.Entities.System;
+using Adoway.Data.Entities.Inventory;
+using Adoway.Data.Entities.Project;
+using Adoway.Data.Entities.Purchase;
+using Adoway.Data.Entities.Sales;
 
 namespace Adoway.Data.Context
 {
@@ -13,7 +17,22 @@ namespace Adoway.Data.Context
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         DbSet<TEntity> DbSet<TEntity>() where TEntity : class;
-        
+
+        // Human Resource
+
+        // Inventory
+        DbSet<CategoryEntity> Categories { get; set; }
+        DbSet<ProductEntity> Products { get; set; }
+        // Project
+        DbSet<ApartmentEntity> Apartments { get; set; }
+        DbSet<ProjectEntity> Projects { get; set; }
+        DbSet<OwnerEntity> Owners { get; set; }
+        DbSet<WorkOrderEntity> WorkOrders { get; set; }
+        // Purchase
+        DbSet<SupplierEntity> Suppliers { get; set; }
+        // Sales
+        DbSet<CustomerEntity> Customers { get; set; }
+        DbSet<SubscriptionEntity> Subscriptions { get; set; }
         // User management
         DbSet<UserEntity> Users { get; set; }
         DbSet<RoleEntity> Roles { get; set; }
