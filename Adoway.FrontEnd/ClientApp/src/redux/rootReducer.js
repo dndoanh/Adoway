@@ -16,6 +16,8 @@ import { enterprisesSlice } from "../app/modules/System/_redux/enterprises/enter
 import { languagesSlice } from "../app/modules/System/_redux/languages/languagesSlice";
 // Project Management
 import { apartmentsSlice } from "../app/modules/ProjectManagement/_redux/apartments/apartmentsSlice";
+import { contractsSlice } from "../app/modules/ProjectManagement/_redux/contracts/contractsSlice";
+import { ownersSlice } from "../app/modules/ProjectManagement/_redux/owners/ownersSlice";
 
 export const rootReducer = combineReducers({
     auth: auth.reducer,
@@ -29,7 +31,9 @@ export const rootReducer = combineReducers({
     userInRoles: userInRolesSlice.reducer,
     roleInScreens: roleInScreensSlice.reducer,
     // Project Management
-    apartments: usersSlice.reducer,
+    apartments: apartmentsSlice.reducer,
+    contracts: contractsSlice.reducer,
+    owners: ownersSlice.reducer,
     // System
     enterprises: enterprisesSlice.reducer,
     languages: languagesSlice.reducer,

@@ -7,7 +7,7 @@ import paginationFactory, {
     PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/apartments/apartmentsActions";
+import * as actions from "../../../_redux/owners/ownersActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
 
 import {
@@ -18,38 +18,38 @@ import {
     sortCaret,
     headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
-import * as uiHelpers from "../ApartmentsUIHelpers";
+import * as uiHelpers from "../OwnersUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
-import { useApartmentsUIContext } from "../ApartmentsUIContext";
+import { useOwnersUIContext } from "../OwnersUIContext";
 
-export function ApartmentsTable() {
-    // Apartments UI Context
-    const apartmentsUIContext = useApartmentsUIContext();
-    const apartmentsUIProps = useMemo(() => {
+export function OwnersTable() {
+    // Owners UI Context
+    const ownersUIContext = useOwnersUIContext();
+    const ownersUIProps = useMemo(() => {
         return {
-            queryParams: apartmentsUIContext.queryParams,
-            setQueryParams: apartmentsUIContext.setQueryParams,
-            openEditApartmentDialog: apartmentsUIContext.openEditApartmentDialog,
-            openEditApartmentInRoleDialog: apartmentsUIContext.openEditApartmentInRoleDialog,
-            openDeleteApartmentDialog: apartmentsUIContext.openDeleteApartmentDialog
+            queryParams: ownersUIContext.queryParams,
+            setQueryParams: ownersUIContext.setQueryParams,
+            openEditOwnerDialog: ownersUIContext.openEditOwnerDialog,
+            openEditOwnerInRoleDialog: ownersUIContext.openEditOwnerInRoleDialog,
+            openDeleteOwnerDialog: ownersUIContext.openDeleteOwnerDialog
         };
-    }, [apartmentsUIContext]);
+    }, [ownersUIContext]);
 
-    // Getting curret state of apartments list from store (Redux)
+    // Getting curret state of owners list from store (Redux)
     const { currentState } = useSelector(
-        (state) => ({ currentState: state.apartments }),
+        (state) => ({ currentState: state.owners }),
         shallowEqual
     );
     const { totalCount, entities, listLoading, needReload } = currentState;
 
-    // Apartments Redux state
+    // Owners Redux state
     const dispatch = useDispatch();
     useEffect(() => {
         // server call by queryParams
-        dispatch(actions.fetchApartments(apartmentsUIProps.queryParams));
+        dispatch(actions.fetchOwners(ownersUIProps.queryParams));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [apartmentsUIProps.queryParams, dispatch, needReload]);
+    }, [ownersUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
   
@@ -101,9 +101,9 @@ export function ApartmentsTable() {
             text: "Actions",
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
-                openEditApartmentDialog: apartmentsUIProps.openEditApartmentDialog,
-                openEditApartmentInRoleDialog: apartmentsUIProps.openEditApartmentInRoleDialog,
-                openDeleteApartmentDialog: apartmentsUIProps.openDeleteApartmentDialog,
+                openEditOwnerDialog: ownersUIProps.openEditOwnerDialog,
+                openEditOwnerInRoleDialog: ownersUIProps.openEditOwnerInRoleDialog,
+                openDeleteOwnerDialog: ownersUIProps.openDeleteOwnerDialog,
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",
@@ -117,8 +117,8 @@ export function ApartmentsTable() {
         custom: true,
         totalSize: totalCount,
         sizePerPageList: uiHelpers.sizePerPageList,
-        sizePerPage: apartmentsUIProps.queryParams.pageSize,
-        page: apartmentsUIProps.queryParams.pageNumber,
+        sizePerPage: ownersUIProps.queryParams.pageSize,
+        page: ownersUIProps.queryParams.pageNumber,
     };
     return (
         <>
@@ -140,7 +140,7 @@ export function ApartmentsTable() {
                                 columns={columns}
                                 defaultSorted={uiHelpers.defaultSorted}
                                 onTableChange={getHandlerTableChange(
-                                    apartmentsUIProps.setQueryParams
+                                    ownersUIProps.setQueryParams
                                 )}
                                 {...paginationTableProps}
                             >
