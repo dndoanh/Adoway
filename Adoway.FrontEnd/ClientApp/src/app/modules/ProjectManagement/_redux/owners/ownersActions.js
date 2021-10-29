@@ -35,7 +35,7 @@ export const createOwner = ownerForCreation => dispatch => {
     });
 };
 
-export const updateOwners = owner => dispatch => {
+export const updateOwner = owner => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .updateOwner(owner)
@@ -48,7 +48,7 @@ export const updateOwners = owner => dispatch => {
     });
 };
 
-export const deleteOwners = id => dispatch => {
+export const deleteOwner = id => dispatch => {
     dispatch(actions.startCall({ callType: callTypes.action }));
     return requestFromServer
         .deleteOwner(id)
