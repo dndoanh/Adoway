@@ -5,6 +5,7 @@ using Adoway.Data.Entities.Base;
 
 namespace Adoway.Data.Entities.Inventory
 {
+    [Table("Categories")]
     public class CategoryEntity  : BaseEnterpriseEntity
     {
         [Required]

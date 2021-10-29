@@ -10,6 +10,7 @@ using Adoway.Data.Entities.UserManagement;
 
 namespace Adoway.Data.Entities.Project
 {
+    [Table("Projects")]
     public class ProjectEntity  : BaseEnterpriseEntity
     {
         [Required]
@@ -24,6 +25,7 @@ namespace Adoway.Data.Entities.Project
         public int SquareCount { get; set; }
         public int PortCount { get; set; }
         public int ApartmentCount { get; set; }
+        public string Description { get; set; }
         public ProjectType ProjectType { get; set; }
         public AreaType AreaType { get; set; }
         public ProjectStatus Status { get; set; }

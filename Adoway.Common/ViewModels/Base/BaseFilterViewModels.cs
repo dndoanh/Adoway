@@ -1,6 +1,7 @@
 ﻿using Adoway.Common.Enums;
+using System;
 
-namespace Adoway.Common.ViewModels.System
+namespace Adoway.Common.ViewModels.Base
 {
     public class BaseFilterViewModel
     {
@@ -8,5 +9,9 @@ namespace Adoway.Common.ViewModels.System
         public string SortField { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+    }
+    public class BaseEnterpriseFilter
+    {
+        public Guid EnterpriseId { get; set; }
     }
 }

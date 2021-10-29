@@ -10,6 +10,10 @@ using Adoway.Data.Entities.Inventory;
 using Adoway.Data.Entities.Sales;
 using Adoway.Data.Entities.Purchase;
 using Adoway.Data.Entities.Project;
+using Adoway.Common.ViewModels.Sales;
+using Adoway.Common.ViewModels.Purchase;
+using Adoway.Common.ViewModels.Project;
+using Adoway.Common.ViewModels.Inventory;
 
 namespace Adoway.Data.Context
 {
@@ -94,12 +98,26 @@ namespace Adoway.Data.Context
             modelBuilder.Entity<UserVerificationEntity>().HasIndex(u => u.Token).IsUnique();
 
             // model builder for store procedure
-            // base
+            // inventory
+            modelBuilder.Entity<CategoryViewModel>().HasNoKey().ToView("CategoryViewModel");
+            modelBuilder.Entity<ProductViewModel>().HasNoKey().ToView("ProductViewModel");
+            // project
+            modelBuilder.Entity<ApartmentViewModel>().HasNoKey().ToView("ApartmentViewModel");
+            modelBuilder.Entity<OwnerViewModel>().HasNoKey().ToView("OwnerViewModel");
+            modelBuilder.Entity<ProjectViewModel>().HasNoKey().ToView("ProjectViewModel");
+            modelBuilder.Entity<WorkOrderViewModel>().HasNoKey().ToView("WorkOrderViewModel");
+            // purchase
+            modelBuilder.Entity<SupplierViewModel>().HasNoKey().ToView("SupplierViewModel");
+            // sales
+            modelBuilder.Entity<CustomerViewModel>().HasNoKey().ToView("CustomerViewModel");
+            modelBuilder.Entity<SubscriptionViewModel>().HasNoKey().ToView("SubscriptionViewModel");
+            // system 
             modelBuilder.Entity<LanguageViewModel>().HasNoKey().ToView("LanguageViewModel");
             modelBuilder.Entity<EnterpriseViewModel>().HasNoKey().ToView("EnterpriseViewModel");
             // user management
             modelBuilder.Entity<UserViewModel>().HasNoKey().ToView("UserViewModel");
             modelBuilder.Entity<RoleViewModel>().HasNoKey().ToView("RoleViewModel");
+
 
         }
     }

@@ -11,6 +11,7 @@ using Adoway.Data.Entities.UserManagement;
 
 namespace Adoway.Data.Entities.Project
 {
+    [Table("WorkOrders")]
     public class WorkOrderEntity : BaseEnterpriseEntity
     {
         public WorkOrderType WorkOrderType { get; set; }
@@ -39,8 +40,12 @@ namespace Adoway.Data.Entities.Project
         [ForeignKey("ApartmentId")]
         public ApartmentEntity Apartment { get; set; }
         // project
-        public Guid ProjectId { get; set; }
+        public Guid? ProjectId { get; set; }
         [ForeignKey("ProjectId")]
         public ProjectEntity Project { get; set; }
+        // supplier
+        public Guid? SupplierId { get; set; }
+        [ForeignKey("SupplierId")]
+        public ProjectEntity Supplier { get; set; }
     }
 }

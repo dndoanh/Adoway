@@ -10,14 +10,17 @@ using Adoway.Data.Entities.Purchase;
 
 namespace Adoway.Data.Entities.Inventory
 {
+    [Table("Products")]
     public class ProductEntity : BaseEnterpriseEntity
     {
+        public ProductType ProductType { get; set; }
         [Required]
         public string Name { get; set; }
         public decimal SalesPrice { get; set; }
         public MeasureUnit MeasureUnit { get; set; }
         public string FeaturePhoto { get; set; }
         public string Photos { get; set; }
+        public string Description { get; set; }
         public Status Status { get; set; }
 
         public Guid CategoryId { get; set; }

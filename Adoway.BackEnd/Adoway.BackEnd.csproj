@@ -20,4 +20,7 @@
     <ProjectReference Include="..\Adoway.Data\Adoway.Data.csproj" />
     <ProjectReference Include="..\Adoway.Service\Adoway.Service.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\HumanResource\" />
+  </ItemGroup>
 </Project>

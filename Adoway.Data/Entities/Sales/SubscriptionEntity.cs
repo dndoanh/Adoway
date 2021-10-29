@@ -10,13 +10,15 @@ using Adoway.Data.Entities.Project;
 
 namespace Adoway.Data.Entities.Sales
 {
+    [Table("Subscriptions")]
     public class SubscriptionEntity : BaseEnterpriseEntity
     {
         public string ContractCode { get; set; }
         public string CustomerCode { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public int PeriodMonth { get; set; }
+        public SubscriptionPeriod SubscriptionPeriod { get; set; }
+        public decimal SalesPrice { get; set; }
         public int FreeMonth { get; set; }
         public string Description { get; set; }
         public Status Status { get; set; }

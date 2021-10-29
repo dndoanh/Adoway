@@ -1,5 +1,5 @@
 ﻿using Adoway.Common.Enums;
-using Adoway.Common.ViewModels.System;
+using Adoway.Common.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

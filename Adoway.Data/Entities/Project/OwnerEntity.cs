@@ -1,9 +1,11 @@
 ﻿using Adoway.Common.Enums;
 using Adoway.Data.Entities.Base;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Adoway.Data.Entities.Project
 {
+    [Table("Owners")]
     public class OwnerEntity  : BaseEnterpriseEntity
     {
         [Required]

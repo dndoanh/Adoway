@@ -10,4 +10,7 @@
     <ProjectReference Include="..\Adoway.Common\Adoway.Common.csproj" />
     <ProjectReference Include="..\Adoway.Data\Adoway.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="HumanResource\" />
+  </ItemGroup>
 </Project>

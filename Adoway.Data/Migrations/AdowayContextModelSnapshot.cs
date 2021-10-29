@@ -19,6 +19,399 @@ namespace Adoway.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Adoway.Common.ViewModels.Inventory.CategoryViewModel", b =>
+                {
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ParentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToView("CategoryViewModel");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.Inventory.ProductViewModel", b =>
+                {
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FeaturePhoto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("MeasureUnit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductType")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SalesPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SupplierName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToView("ProductViewModel");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.Project.ApartmentViewModel", b =>
+                {
+                    b.Property<string>("Block")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Floor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InternetLine")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("OwnerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TvLine")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToView("ApartmentViewModel");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.Project.OwnerViewModel", b =>
+                {
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.ToView("OwnerViewModel");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.Project.ProjectViewModel", b =>
+                {
+                    b.Property<DateTime?>("ActiveDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ApartmentCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AreaType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BasementCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("BeginDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("BlockCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("FloorCount")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("OwnerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PortCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SalesName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("SalesUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SquareCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TechName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TechUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.ToView("ProjectViewModel");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.Project.WorkOrderViewModel", b =>
+                {
+                    b.Property<Guid?>("ApartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ApartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RequesterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("RequesterName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("SalesmanId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SupplierName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WorkOrderCategory")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkOrderType")
+                        .HasColumnType("int");
+
+                    b.ToView("WorkOrderViewModel");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.Purchase.SupplierViewModel", b =>
+                {
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierType")
+                        .HasColumnType("int");
+
+                    b.ToView("SupplierViewModel");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.Sales.CustomerViewModel", b =>
+                {
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.ToView("CustomerViewModel");
+                });
+
+            modelBuilder.Entity("Adoway.Common.ViewModels.Sales.SubscriptionViewModel", b =>
+                {
+                    b.Property<Guid?>("ApartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ApartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContractCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("EnterpriseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("FreeMonth")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("SalesPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubscriptionPeriod")
+                        .HasColumnType("int");
+
+                    b.ToView("SubscriptionViewModel");
+                });
+
             modelBuilder.Entity("Adoway.Common.ViewModels.System.EnterpriseViewModel", b =>
                 {
                     b.Property<string>("Address")
@@ -181,6 +574,9 @@ namespace Adoway.Data.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("EnterpriseId")
                         .HasColumnType("uniqueidentifier");
 
@@ -205,6 +601,9 @@ namespace Adoway.Data.Migrations
 
                     b.Property<string>("Photos")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductType")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("SalesPrice")
                         .HasColumnType("decimal(18,6)");
@@ -240,6 +639,9 @@ namespace Adoway.Data.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("EnterpriseId")
                         .HasColumnType("uniqueidentifier");
 
@@ -262,6 +664,9 @@ namespace Adoway.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
@@ -269,6 +674,8 @@ namespace Adoway.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("ProjectId");
 
@@ -358,6 +765,9 @@ namespace Adoway.Data.Migrations
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("EnterpriseId")
                         .HasColumnType("uniqueidentifier");
@@ -451,7 +861,7 @@ namespace Adoway.Data.Migrations
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ProjectId")
+                    b.Property<Guid?>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("RequesterId")
@@ -465,6 +875,9 @@ namespace Adoway.Data.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<Guid?>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("WorkOrderCategory")
                         .HasColumnType("int");
@@ -483,6 +896,8 @@ namespace Adoway.Data.Migrations
                     b.HasIndex("RequesterId");
 
                     b.HasIndex("SalesmanId");
+
+                    b.HasIndex("SupplierId");
 
                     b.ToTable("WorkOrders");
                 });
@@ -529,6 +944,9 @@ namespace Adoway.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -631,16 +1049,19 @@ namespace Adoway.Data.Migrations
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("PeriodMonth")
-                        .HasColumnType("int");
-
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("SalesPrice")
+                        .HasColumnType("decimal(18,6)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubscriptionPeriod")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1179,11 +1600,17 @@ namespace Adoway.Data.Migrations
 
             modelBuilder.Entity("Adoway.Data.Entities.Project.ApartmentEntity", b =>
                 {
+                    b.HasOne("Adoway.Data.Entities.Sales.CustomerEntity", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
+
                     b.HasOne("Adoway.Data.Entities.Project.ProjectEntity", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Owner");
 
                     b.Navigation("Project");
                 });
@@ -1223,9 +1650,7 @@ namespace Adoway.Data.Migrations
 
                     b.HasOne("Adoway.Data.Entities.Project.ProjectEntity", "Project")
                         .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjectId");
 
                     b.HasOne("Adoway.Data.Entities.UserManagement.UserEntity", "Requester")
                         .WithMany()
@@ -1237,6 +1662,10 @@ namespace Adoway.Data.Migrations
                         .WithMany()
                         .HasForeignKey("SalesmanId");
 
+                    b.HasOne("Adoway.Data.Entities.Project.ProjectEntity", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId");
+
                     b.Navigation("Apartment");
 
                     b.Navigation("Customer");
@@ -1246,6 +1675,8 @@ namespace Adoway.Data.Migrations
                     b.Navigation("Requester");
 
                     b.Navigation("Salesman");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("Adoway.Data.Entities.Sales.SubscriptionEntity", b =>
