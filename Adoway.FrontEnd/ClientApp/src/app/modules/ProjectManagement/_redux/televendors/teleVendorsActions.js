@@ -1,62 +1,62 @@
-import * as requestFromServer from "./usersCrud";
-import {usersSlice, callTypes} from "./usersSlice";
+import * as requestFromServer from "./teleVendorsCrud";
+import {teleVendorsSlice, callTypes} from "./teleVendorsSlice";
 
-const {actions} = usersSlice;
+const {actions} = teleVendorsSlice;
 
-export const fetchUsers = queryParams => dispatch => {
+export const fetchTeleVendors = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findUsers(queryParams)
+    .findTeleVendors(queryParams)
     .then(response => {
       const { totalCount, entities } = response.data;
-      dispatch(actions.usersFetched({ totalCount, entities }));
+      dispatch(actions.teleVendorsFetched({ totalCount, entities }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find users";
+      error.clientMessage = "Can't find teleVendors";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const selectUser = id => dispatch => {
-    dispatch(actions.userSelected({ id: id }));
+export const selectTeleVendor = id => dispatch => {
+    dispatch(actions.teleVendorSelected({ id: id }));
 };
 
-export const createUser = userForCreation => dispatch => {
+export const createTeleVendor = teleVendorForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createUser(userForCreation)
+    .createTeleVendor(teleVendorForCreation)
     .then(response => {
-      const user = response.data;
-      dispatch(actions.userCreated({ user }));
+      const teleVendor = response.data;
+      dispatch(actions.teleVendorCreated({ teleVendor }));
     })
     .catch(error => {
-      error.clientMessage = "Can't create user";
+      error.clientMessage = "Can't create teleVendor";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateUser = user => dispatch => {
+export const updateTeleVendor = teleVendor => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateUser(user)
+    .updateTeleVendor(teleVendor)
     .then(() => {
-        dispatch(actions.userUpdated({ user }));
+        dispatch(actions.teleVendorUpdated({ teleVendor }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update user";
+      error.clientMessage = "Can't update teleVendor";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteUser = id => dispatch => {
+export const deleteTeleVendor = id => dispatch => {
     dispatch(actions.startCall({ callType: callTypes.action }));
     return requestFromServer
-        .deleteUser(id)
+        .deleteTeleVendor(id)
         .then(response => {
-            dispatch(actions.userDeleted({ id }));
+            dispatch(actions.teleVendorDeleted({ id }));
         })
         .catch(error => {
-            error.clientMessage = "Can't delete user";
+            error.clientMessage = "Can't delete teleVendor";
             dispatch(actions.catchError({ error, callType: callTypes.action }));
         });
 };

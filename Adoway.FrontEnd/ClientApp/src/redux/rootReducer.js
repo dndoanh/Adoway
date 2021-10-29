@@ -18,6 +18,11 @@ import { languagesSlice } from "../app/modules/System/_redux/languages/languages
 import { apartmentsSlice } from "../app/modules/ProjectManagement/_redux/apartments/apartmentsSlice";
 import { contractsSlice } from "../app/modules/ProjectManagement/_redux/contracts/contractsSlice";
 import { ownersSlice } from "../app/modules/ProjectManagement/_redux/owners/ownersSlice";
+import { teleVendorsSlice } from "../app/modules/ProjectManagement/_redux/teleVendors/teleVendorsSlice";
+import { workOrdersSlice } from "../app/modules/ProjectManagement/_redux/workorders/workOrdersSlice";
+import { projectsSlice } from "../app/modules/ProjectManagement/_redux/projects/projectsSlice";
+import { departmentsSlice } from "../app/modules/HumanResourceManagement/_redux/departments/departmentsSlice";
+import { employeesSlice } from "../app/modules/HumanResourceManagement/_redux/employees/employeesSlice";
 
 export const rootReducer = combineReducers({
     auth: auth.reducer,
@@ -34,9 +39,15 @@ export const rootReducer = combineReducers({
     apartments: apartmentsSlice.reducer,
     contracts: contractsSlice.reducer,
     owners: ownersSlice.reducer,
+    teleVendors: ownersSlice.reducer,
+    workOrders: workOrdersSlice.reducer,
+    projects: projectsSlice.reducer,
+    // HR Management
+    departments: departmentsSlice.reducer,
+    employees: employeesSlice.reducer,
     // System
     enterprises: enterprisesSlice.reducer,
-    languages: languagesSlice.reducer,
+    languages: teleVendorsSlice.reducer,
 });
 
 export function* rootSaga() {

@@ -11,6 +11,12 @@ import { RolesPage } from "./modules/UserManagement/pages/roles/RolesPage";
 import { ApartmentsPage } from "./modules/ProjectManagement/pages/apartments/ApartmentsPage";
 import { ContractsPage } from "./modules/ProjectManagement/pages/contracts/ContractsPage";
 import { OwnersPage } from "./modules/ProjectManagement/pages/owners/OwnersPage";
+import { TeleVendorsPage } from "./modules/ProjectManagement/pages/teleVendors/TeleVendorsPage";
+import { WorkOrdersPage } from "./modules/ProjectManagement/pages/workOrders/WorkOrdersPage";
+import { ProjectsPage } from "./modules/ProjectManagement/pages/projects/ProjectsPage";
+import { DepartmentsPage } from "./modules/HumanResourceManagement/pages/departments/DepartmentsPage";
+import { EmployeesPage } from "./modules/HumanResourceManagement/pages/employees/EmployeesPage";
+
 const GoogleMaterialPage = lazy(() =>
     import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
 );
@@ -52,6 +58,12 @@ export default function BasePage() {
                 <Route path="/apartments" component={ApartmentsPage} />
                 <Route path="/contracts" component={ContractsPage} />
                 <Route path="/owners" component={OwnersPage} />
+                <Route path="/televendors" component={TeleVendorsPage} />
+                <Route path="/workorders" component={WorkOrdersPage} />
+                <Route path="/projects" component={ProjectsPage} />
+                {/*HR Management*/}
+                <Route path="/departments" component={DepartmentsPage} />
+                <Route path="/employees" component={EmployeesPage} />
                 {/*System*/}
                 <Route path="/enterprises" component={EnterprisesPage} />
                 <Route path="/languages" component={LanguagesPage} />

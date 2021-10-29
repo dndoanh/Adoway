@@ -31,12 +31,6 @@ export function OwnerEditForm({
     actionsLoading,
     onHide,
 }) {
-    // Getting curret state of languages list from store (Redux)
-    const { currentLanguagesState } = useSelector(
-        (state) => ({ currentLanguagesState: state.languages }),
-        shallowEqual
-    );
-    const { allLanguages } = currentLanguagesState;
     
     const [avatarUrl, setAvatarUrl] = useState("");
     useEffect(() => {
@@ -44,16 +38,6 @@ export function OwnerEditForm({
             setAvatarUrl(owner.avatarUrl);
         }
     }, [owner]);
-
-    const getOwnerAvatarUrl = () => {
-        if (!avatarUrl) {
-            return "none";
-        }
-        return `url(${avatarUrl})`;
-    };
-    const removeAvatarUrl = () => {
-        setAvatarUrl("");
-    };
 
     return (
         <>
@@ -88,10 +72,10 @@ export function OwnerEditForm({
                                     <div className="col-lg-12">
                                         <Field
                                             type="text"
-                                            name="floor"
+                                            name="address"
                                             component={Input}
-                                            placeholder="Floor"
-                                            label="Floor"
+                                            placeholder="Adress"
+                                            label="Address"
                                         />
                                     </div>
                                 </div>
@@ -99,10 +83,10 @@ export function OwnerEditForm({
                                     <div className="col-lg-12">
                                         <Field
                                             type="text"
-                                            name="floor"
+                                            name="contactName"
                                             component={Input}
-                                            placeholder="Floor"
-                                            label="Floor"
+                                            placeholder="ContactName"
+                                            label="ContactName"
                                         />
                                     </div>
                                 </div>
@@ -110,10 +94,10 @@ export function OwnerEditForm({
                                     <div className="col-lg-12">
                                         <Field
                                             type="text"
-                                            name="block"
+                                            name="contactPhone"
                                             component={Input}
-                                            placeholder="Block"
-                                            label="Block"
+                                            placeholder="ContactPhone"
+                                            label="ContactPhone"
                                         />
                                     </div>
                                 </div>
@@ -121,22 +105,19 @@ export function OwnerEditForm({
                                     <div className="col-lg-12">
                                         <Field
                                             type="text"
-                                            name="block"
+                                            name="contactEmail"
                                             component={Input}
-                                            placeholder="Internet Line"
-                                            label="Internet Line"
+                                            placeholder="Contact Email"
+                                            label="Contact Email"
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Field
-                                            type="text"
-                                            name="block"
-                                            component={Input}
-                                            placeholder="TV Line"
-                                            label="TV Line"
-                                        />
+                                        <Select name="status" label="Status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </Select>
                                     </div>
                                 </div>
                                 {/*<div className="form-group row">*/}
