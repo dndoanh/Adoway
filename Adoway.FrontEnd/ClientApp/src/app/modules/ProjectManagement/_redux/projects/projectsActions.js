@@ -1,62 +1,62 @@
-import * as requestFromServer from "./usersCrud";
-import {usersSlice, callTypes} from "./usersSlice";
+import * as requestFromServer from "./projectsCrud";
+import {projectsSlice, callTypes} from "./projectsSlice";
 
-const {actions} = usersSlice;
+const {actions} = projectsSlice;
 
-export const fetchUsers = queryParams => dispatch => {
+export const fetchProjects = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findUsers(queryParams)
+    .findProjects(queryParams)
     .then(response => {
       const { totalCount, entities } = response.data;
-      dispatch(actions.usersFetched({ totalCount, entities }));
+      dispatch(actions.projectsFetched({ totalCount, entities }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find users";
+      error.clientMessage = "Can't find projects";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const selectUser = id => dispatch => {
-    dispatch(actions.userSelected({ id: id }));
+export const selectProject = id => dispatch => {
+    dispatch(actions.projectSelected({ id: id }));
 };
 
-export const createUser = userForCreation => dispatch => {
+export const createProject = projectForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createUser(userForCreation)
+    .createProject(projectForCreation)
     .then(response => {
-      const user = response.data;
-      dispatch(actions.userCreated({ user }));
+      const project = response.data;
+      dispatch(actions.projectCreated({ project }));
     })
     .catch(error => {
-      error.clientMessage = "Can't create user";
+      error.clientMessage = "Can't create project";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateUser = user => dispatch => {
+export const updateProject = project => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateUser(user)
+    .updateProject(project)
     .then(() => {
-        dispatch(actions.userUpdated({ user }));
+        dispatch(actions.projectUpdated({ project }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update user";
+      error.clientMessage = "Can't update project";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteUser = id => dispatch => {
+export const deleteProject = id => dispatch => {
     dispatch(actions.startCall({ callType: callTypes.action }));
     return requestFromServer
-        .deleteUser(id)
+        .deleteProject(id)
         .then(response => {
-            dispatch(actions.userDeleted({ id }));
+            dispatch(actions.projectDeleted({ id }));
         })
         .catch(error => {
-            error.clientMessage = "Can't delete user";
+            error.clientMessage = "Can't delete project";
             dispatch(actions.catchError({ error, callType: callTypes.action }));
         });
 };

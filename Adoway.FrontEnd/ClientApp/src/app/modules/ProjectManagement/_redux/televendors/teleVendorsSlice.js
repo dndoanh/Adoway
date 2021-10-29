@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import _ from 'lodash';
 
-const initialUsersState = {
+const initialTeleVendorsState = {
     listLoading: false,
     actionsLoading: false,
     needReload: false,
     totalCount: 0,
     entities: null,
-    userForEdit: undefined,
+    teleVendorForEdit: undefined,
     lastError: null,
-    userInRoles:null
+    teleVendorInRoles:null
 };
 export const callTypes = {
     list: "list",
     action: "action"
 };
 
-export const usersSlice = createSlice({
-    name: "users",
-    initialState: initialUsersState,
+export const teleVendorsSlice = createSlice({
+    name: "teleVendors",
+    initialState: initialTeleVendorsState,
     reducers: {
         catchError: (state, action) => {
             state.error = `${action.type}: ${action.payload.error}`;
@@ -37,12 +37,12 @@ export const usersSlice = createSlice({
             }
         },
 
-        // userSelected
-        userSelected: (state, action) => {
-            state.userForEdit = _.find(state.entities, { id: action.payload.id });
+        // teleVendorSelected
+        teleVendorSelected: (state, action) => {
+            state.teleVendorForEdit = _.find(state.entities, { id: action.payload.id });
         },
-        // findUsers
-        usersFetched: (state, action) => {
+        // findTeleVendors
+        teleVendorsFetched: (state, action) => {
             const { totalCount, entities } = action.payload;
             state.listLoading = false;
             state.error = null;
@@ -54,27 +54,27 @@ export const usersSlice = createSlice({
             });
             
         },
-        // createUser
-        userCreated: (state, action) => {
+        // createTeleVendor
+        teleVendorCreated: (state, action) => {
             state.actionsLoading = false;
             state.needReload = !state.needReload;
             state.error = null;
-            state.entities.push(action.payload.user);
+            state.entities.push(action.payload.teleVendor);
         },
-        // updateUser
-        userUpdated: (state, action) => {
+        // updateTeleVendor
+        teleVendorUpdated: (state, action) => {
             state.error = null;
             state.actionsLoading = false;
             state.needReload = !state.needReload;
             state.entities = state.entities.map(entity => {
-                if (entity.id === action.payload.user.id) {
-                    return action.payload.user;
+                if (entity.id === action.payload.teleVendor.id) {
+                    return action.payload.teleVendor;
                 }
                 return entity;
             });
         },
-        // deleteUser
-        userDeleted: (state, action) => {
+        // deleteTeleVendor
+        teleVendorDeleted: (state, action) => {
             state.error = null;
             state.actionsLoading = false;
             state.entities = state.entities.filter(el => el.id !== action.payload.id);

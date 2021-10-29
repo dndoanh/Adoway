@@ -1,62 +1,62 @@
-import * as requestFromServer from "./usersCrud";
-import {usersSlice, callTypes} from "./usersSlice";
+import * as requestFromServer from "./workOrdersCrud";
+import {workOrdersSlice, callTypes} from "./workOrdersSlice";
 
-const {actions} = usersSlice;
+const {actions} = workOrdersSlice;
 
-export const fetchUsers = queryParams => dispatch => {
+export const fetchWorkOrders = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findUsers(queryParams)
+    .findWorkOrders(queryParams)
     .then(response => {
       const { totalCount, entities } = response.data;
-      dispatch(actions.usersFetched({ totalCount, entities }));
+      dispatch(actions.workOrdersFetched({ totalCount, entities }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find users";
+      error.clientMessage = "Can't find workOrders";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const selectUser = id => dispatch => {
-    dispatch(actions.userSelected({ id: id }));
+export const selectWorkOrder = id => dispatch => {
+    dispatch(actions.workOrderSelected({ id: id }));
 };
 
-export const createUser = userForCreation => dispatch => {
+export const createWorkOrder = workOrderForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createUser(userForCreation)
+    .createWorkOrder(workOrderForCreation)
     .then(response => {
-      const user = response.data;
-      dispatch(actions.userCreated({ user }));
+      const workOrder = response.data;
+      dispatch(actions.workOrderCreated({ workOrder }));
     })
     .catch(error => {
-      error.clientMessage = "Can't create user";
+      error.clientMessage = "Can't create workOrder";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateUser = user => dispatch => {
+export const updateWorkOrder = workOrder => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateUser(user)
+    .updateWorkOrder(workOrder)
     .then(() => {
-        dispatch(actions.userUpdated({ user }));
+        dispatch(actions.workOrderUpdated({ workOrder }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update user";
+      error.clientMessage = "Can't update workOrder";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteUser = id => dispatch => {
+export const deleteWorkOrder = id => dispatch => {
     dispatch(actions.startCall({ callType: callTypes.action }));
     return requestFromServer
-        .deleteUser(id)
+        .deleteWorkOrder(id)
         .then(response => {
-            dispatch(actions.userDeleted({ id }));
+            dispatch(actions.workOrderDeleted({ id }));
         })
         .catch(error => {
-            error.clientMessage = "Can't delete user";
+            error.clientMessage = "Can't delete workOrder";
             dispatch(actions.catchError({ error, callType: callTypes.action }));
         });
 };
