@@ -31,12 +31,6 @@ export function OwnerEditForm({
     actionsLoading,
     onHide,
 }) {
-    // Getting curret state of languages list from store (Redux)
-    const { currentLanguagesState } = useSelector(
-        (state) => ({ currentLanguagesState: state.languages }),
-        shallowEqual
-    );
-    const { allLanguages } = currentLanguagesState;
     
     const [avatarUrl, setAvatarUrl] = useState("");
     useEffect(() => {
@@ -44,16 +38,6 @@ export function OwnerEditForm({
             setAvatarUrl(owner.avatarUrl);
         }
     }, [owner]);
-
-    const getOwnerAvatarUrl = () => {
-        if (!avatarUrl) {
-            return "none";
-        }
-        return `url(${avatarUrl})`;
-    };
-    const removeAvatarUrl = () => {
-        setAvatarUrl("");
-    };
 
     return (
         <>
