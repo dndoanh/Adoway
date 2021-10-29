@@ -12,10 +12,8 @@ namespace Adoway.BackEnd.Controllers.Project
     public class ProjectController : ApiBaseController
     {
         private readonly IProjectService _projectService;
-        private readonly IMapper _mapper;
-        public ProjectController(IWebHostEnvironment webHostEnvironment, IMapper mapper, IProjectService projectService) : base(webHostEnvironment)
+        public ProjectController(IWebHostEnvironment webHostEnvironment, IProjectService projectService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _projectService = projectService;
         }
         [HttpGet]
@@ -25,7 +23,7 @@ namespace Adoway.BackEnd.Controllers.Project
             return new ObjectResult(result);
         }
         [HttpPost]
-        public async Task<IActionResult> SearchCategorries([FromBody] ProjectFilterViewModel model)
+        public async Task<IActionResult> SearchProjects([FromBody] ProjectFilterViewModel model)
         {
             var result = await _projectService.SearchProjects(model);
             return new ObjectResult(result);

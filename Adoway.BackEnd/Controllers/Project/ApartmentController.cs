@@ -11,23 +11,21 @@ namespace Adoway.BackEnd.Controllers.Project
 {
     public class ApartmentController : ApiBaseController
     {
-        private readonly IApartmentService _apartmentService;
-        private readonly IMapper _mapper;
-        public ApartmentController(IWebHostEnvironment webHostEnvironment, IMapper mapper, IApartmentService apartmentService) : base(webHostEnvironment)
+        private readonly IApartmentService _apartService;
+        public ApartmentController(IWebHostEnvironment webHostEnvironment, IApartmentService apartmentService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
-            _apartmentService = apartmentService;
+            _apartService = apartmentService;
         }
         [HttpGet]
         public async Task<IActionResult> GetApartments(string projectId)
         {
-            var result = await _apartmentService.GetApartments(CurrentEnterpriseId ?? UserEnterpriseId, Guid.Parse(projectId));
+            var result = await _apartService.GetApartments(CurrentEnterpriseId ?? UserEnterpriseId, Guid.Parse(projectId));
             return new ObjectResult(result);
         }
         [HttpPost]
-        public async Task<IActionResult> SearchCategorries([FromBody] ApartmentFilterViewModel model)
+        public async Task<IActionResult> SearchApartments([FromBody] ApartmentFilterViewModel model)
         {
-            var result = await _apartmentService.SearchApartments(model);
+            var result = await _apartService.SearchApartments(model);
             return new ObjectResult(result);
         }
         [HttpPost]
@@ -35,7 +33,7 @@ namespace Adoway.BackEnd.Controllers.Project
         {
             if (ModelState.IsValid)
             {
-                var result = await _apartmentService.Create(model);
+                var result = await _apartService.Create(model);
                 return new ObjectResult(result);
             }
             return BadRequest("Could not create apartment");
@@ -45,7 +43,7 @@ namespace Adoway.BackEnd.Controllers.Project
         {
             if (ModelState.IsValid)
             {
-                var result = await _apartmentService.Edit(model);
+                var result = await _apartService.Edit(model);
                 return new ObjectResult(result);
             }
             return BadRequest("Could not update apartment");
@@ -55,7 +53,7 @@ namespace Adoway.BackEnd.Controllers.Project
         {
             if (ModelState.IsValid)
             {
-                var result = await _apartmentService.Remove(Guid.Parse(id));
+                var result = await _apartService.Remove(Guid.Parse(id));
                 return new ObjectResult(result);
             }
             return BadRequest("Could not delete apartment");

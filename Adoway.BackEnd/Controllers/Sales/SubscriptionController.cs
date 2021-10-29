@@ -12,14 +12,12 @@ namespace Adoway.BackEnd.Controllers.Sales
     public class SubscriptionController : ApiBaseController
     {
         private readonly ISubscriptionService _subscriptionService;
-        private readonly IMapper _mapper;
-        public SubscriptionController(IWebHostEnvironment webHostEnvironment, IMapper mapper, ISubscriptionService subscriptionService) : base(webHostEnvironment)
+        public SubscriptionController(IWebHostEnvironment webHostEnvironment, ISubscriptionService subscriptionService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _subscriptionService = subscriptionService;
         }
         [HttpPost]
-        public async Task<IActionResult> SearchCategorries([FromBody] SubscriptionFilterViewModel model)
+        public async Task<IActionResult> SearchSubscriptions([FromBody] SubscriptionFilterViewModel model)
         {
             var result = await _subscriptionService.SearchSubscriptions(model);
             return new ObjectResult(result);

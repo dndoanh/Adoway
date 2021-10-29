@@ -12,10 +12,8 @@ namespace Adoway.BackEnd.Controllers.System
     public class LanguageController : ApiBaseController
     {
         private readonly ILanguageService _languageService;
-        private readonly IMapper _mapper;
-        public LanguageController(IWebHostEnvironment webHostEnvironment, IMapper mapper, ILanguageService languageService) : base(webHostEnvironment)
+        public LanguageController(IWebHostEnvironment webHostEnvironment, ILanguageService languageService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _languageService = languageService;
         }
         // Language

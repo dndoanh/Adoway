@@ -12,10 +12,8 @@ namespace Adoway.BackEnd.Controllers.System
     public class SettingController : ApiBaseController
     {
         private readonly ISettingService _settingService;
-        private readonly IMapper _mapper;
-        public SettingController(IWebHostEnvironment webHostEnvironment, IMapper mapper, ISettingService settingService) : base(webHostEnvironment)
+        public SettingController(IWebHostEnvironment webHostEnvironment, ISettingService settingService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _settingService = settingService;
         }
         // Setting

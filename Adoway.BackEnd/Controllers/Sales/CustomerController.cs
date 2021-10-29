@@ -12,10 +12,8 @@ namespace Adoway.BackEnd.Controllers.Sales
     public class CustomerController : ApiBaseController
     {
         private readonly ICustomerService _customerService;
-        private readonly IMapper _mapper;
-        public CustomerController(IWebHostEnvironment webHostEnvironment, IMapper mapper, ICustomerService customerService) : base(webHostEnvironment)
+        public CustomerController(IWebHostEnvironment webHostEnvironment, ICustomerService customerService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _customerService = customerService;
         }
         [HttpGet]
@@ -25,7 +23,7 @@ namespace Adoway.BackEnd.Controllers.Sales
             return new ObjectResult(result);
         }
         [HttpPost]
-        public async Task<IActionResult> SearchCategorries([FromBody] CustomerFilterViewModel model)
+        public async Task<IActionResult> SearchCustomers([FromBody] CustomerFilterViewModel model)
         {
             var result = await _customerService.SearchCustomers(model);
             return new ObjectResult(result);

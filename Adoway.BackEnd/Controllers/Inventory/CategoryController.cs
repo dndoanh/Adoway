@@ -12,10 +12,8 @@ namespace Adoway.BackEnd.Controllers.Inventory
     public class CategoryController : ApiBaseController
     {
         private readonly ICategoryService _categoryService;
-        private readonly IMapper _mapper;
-        public CategoryController(IWebHostEnvironment webHostEnvironment, IMapper mapper, ICategoryService categoryService) : base(webHostEnvironment)
+        public CategoryController(IWebHostEnvironment webHostEnvironment, ICategoryService categoryService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _categoryService = categoryService;
         }
         [HttpGet]

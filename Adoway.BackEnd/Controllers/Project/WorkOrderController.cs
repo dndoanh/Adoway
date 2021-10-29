@@ -12,14 +12,12 @@ namespace Adoway.BackEnd.Controllers.Project
     public class WorkOrderController : ApiBaseController
     {
         private readonly IWorkOrderService _workOrderService;
-        private readonly IMapper _mapper;
-        public WorkOrderController(IWebHostEnvironment webHostEnvironment, IMapper mapper, IWorkOrderService workOrderService) : base(webHostEnvironment)
+        public WorkOrderController(IWebHostEnvironment webHostEnvironment, IWorkOrderService workOrderService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _workOrderService = workOrderService;
         }
         [HttpPost]
-        public async Task<IActionResult> SearchCategorries([FromBody] WorkOrderFilterViewModel model)
+        public async Task<IActionResult> SearchWorkOrders([FromBody] WorkOrderFilterViewModel model)
         {
             var result = await _workOrderService.SearchWorkOrders(model);
             return new ObjectResult(result);

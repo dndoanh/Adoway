@@ -12,10 +12,8 @@ namespace Adoway.BackEnd.Controllers.Purchase
     public class SupplierController : ApiBaseController
     {
         private readonly ISupplierService _supplierService;
-        private readonly IMapper _mapper;
-        public SupplierController(IWebHostEnvironment webHostEnvironment, IMapper mapper, ISupplierService supplierService) : base(webHostEnvironment)
+        public SupplierController(IWebHostEnvironment webHostEnvironment, ISupplierService supplierService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _supplierService = supplierService;
         }
         [HttpGet]
@@ -25,7 +23,7 @@ namespace Adoway.BackEnd.Controllers.Purchase
             return new ObjectResult(result);
         }
         [HttpPost]
-        public async Task<IActionResult> SearchCategorries([FromBody] SupplierFilterViewModel model)
+        public async Task<IActionResult> SearchSuppliers([FromBody] SupplierFilterViewModel model)
         {
             var result = await _supplierService.SearchSuppliers(model);
             return new ObjectResult(result);

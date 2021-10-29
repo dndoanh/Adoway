@@ -12,10 +12,8 @@ namespace Adoway.BackEnd.Controllers.Inventory
     public class SupplierController : ApiBaseController
     {
         private readonly IProductService _productService;
-        private readonly IMapper _mapper;
-        public SupplierController(IWebHostEnvironment webHostEnvironment, IMapper mapper, IProductService productService) : base(webHostEnvironment)
+        public SupplierController(IWebHostEnvironment webHostEnvironment, IProductService productService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _productService = productService;
         }
         [HttpGet]
