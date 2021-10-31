@@ -19,13 +19,11 @@ namespace Adoway.BackEnd.Controllers.UserManagement
 {
     public class AuthController : ApiBaseController
     {
-        private IConfiguration _config;
         private readonly IMapper _mapper;
         private readonly IUserService _UserService;
         private readonly IAuthService _AuthService;
-        public AuthController(IWebHostEnvironment webHostEnvironment, IConfiguration config, IMapper mapper, IUserService userService, IAuthService authService) : base(webHostEnvironment)
+        public AuthController(IWebHostEnvironment webHostEnvironment, IMapper mapper, IUserService userService, IAuthService authService) : base(webHostEnvironment)
         {
-            _config = config;
             _mapper = mapper;
             _UserService = userService;
             _AuthService = authService;

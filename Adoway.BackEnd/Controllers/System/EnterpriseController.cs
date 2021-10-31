@@ -9,13 +9,11 @@ using Adoway.Common.ViewModels.System;
 
 namespace Adoway.BackEnd.Controllers.System
 {
-    public class EnterpriseController : ApiBaseController
+    public class CategoryController : ApiBaseController
     {
         private readonly IEnterpriseService _enterpriseService;
-        private readonly IMapper _mapper;
-        public EnterpriseController(IWebHostEnvironment webHostEnvironment, IMapper mapper, IEnterpriseService enterpriseService) : base(webHostEnvironment)
+        public CategoryController(IWebHostEnvironment webHostEnvironment, IEnterpriseService enterpriseService) : base(webHostEnvironment)
         {
-            _mapper = mapper;
             _enterpriseService = enterpriseService;
         }
         [HttpGet]

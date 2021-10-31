@@ -6,6 +6,14 @@ using Adoway.Common.ViewModels.UserManagement;
 using Adoway.Data.Entities.System;
 using Adoway.Common.ViewModels.System;
 using Microsoft.Extensions.Configuration;
+using Adoway.Data.Entities.Inventory;
+using Adoway.Data.Entities.Sales;
+using Adoway.Data.Entities.Purchase;
+using Adoway.Data.Entities.Project;
+using Adoway.Common.ViewModels.Sales;
+using Adoway.Common.ViewModels.Purchase;
+using Adoway.Common.ViewModels.Project;
+using Adoway.Common.ViewModels.Inventory;
 
 namespace Adoway.Data.Context
 {
@@ -32,6 +40,22 @@ namespace Adoway.Data.Context
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("AdowayConnection"));
             }
         }
+
+        // Human Resource
+
+        // Inventory
+        public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
+        // Project
+        public DbSet<ApartmentEntity> Apartments { get; set; }
+        public DbSet<ProjectEntity> Projects { get; set; }
+        public DbSet<OwnerEntity> Owners { get; set; }
+        public DbSet<WorkOrderEntity> WorkOrders { get; set; }
+        // Purchase
+        public DbSet<SupplierEntity> Suppliers { get; set; }
+        // Sales
+        public DbSet<CustomerEntity> Customers { get; set; }
+        public DbSet<SubscriptionEntity> Subscriptions { get; set; }
 
         // User management
         public DbSet<UserEntity> Users { get; set; }
@@ -74,12 +98,26 @@ namespace Adoway.Data.Context
             modelBuilder.Entity<UserVerificationEntity>().HasIndex(u => u.Token).IsUnique();
 
             // model builder for store procedure
-            // base
+            // inventory
+            modelBuilder.Entity<CategoryViewModel>().HasNoKey().ToView("CategoryViewModel");
+            modelBuilder.Entity<ProductViewModel>().HasNoKey().ToView("ProductViewModel");
+            // project
+            modelBuilder.Entity<ApartmentViewModel>().HasNoKey().ToView("ApartmentViewModel");
+            modelBuilder.Entity<OwnerViewModel>().HasNoKey().ToView("OwnerViewModel");
+            modelBuilder.Entity<ProjectViewModel>().HasNoKey().ToView("ProjectViewModel");
+            modelBuilder.Entity<WorkOrderViewModel>().HasNoKey().ToView("WorkOrderViewModel");
+            // purchase
+            modelBuilder.Entity<SupplierViewModel>().HasNoKey().ToView("SupplierViewModel");
+            // sales
+            modelBuilder.Entity<CustomerViewModel>().HasNoKey().ToView("CustomerViewModel");
+            modelBuilder.Entity<SubscriptionViewModel>().HasNoKey().ToView("SubscriptionViewModel");
+            // system 
             modelBuilder.Entity<LanguageViewModel>().HasNoKey().ToView("LanguageViewModel");
             modelBuilder.Entity<EnterpriseViewModel>().HasNoKey().ToView("EnterpriseViewModel");
             // user management
             modelBuilder.Entity<UserViewModel>().HasNoKey().ToView("UserViewModel");
             modelBuilder.Entity<RoleViewModel>().HasNoKey().ToView("RoleViewModel");
+
 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Adoway.Common.Enums;
+using Adoway.Common.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 

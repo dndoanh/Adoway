@@ -7,6 +7,6 @@ namespace Adoway.Common.Enums
     public enum CustomerType
     {
         Individual = 1,
-        Company = 2
+        Business = 2
     }
 }

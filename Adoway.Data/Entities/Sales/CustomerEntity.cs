@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using Adoway.Common.Enums;
@@ -8,6 +9,7 @@ using Adoway.Data.Entities.Base;
 
 namespace Adoway.Data.Entities.Sales
 {
+    [Table("Customers")]
     public class CustomerEntity : BaseEnterpriseEntity
     {
         public CustomerType CustomerType { get; set; }

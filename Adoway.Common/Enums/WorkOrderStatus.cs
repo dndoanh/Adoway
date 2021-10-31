@@ -30,6 +30,5 @@ namespace Adoway.Common.Enums
     {
         Internet=1,
         CableTVNetwork=2,
-
     }
 }
