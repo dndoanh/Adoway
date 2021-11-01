@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Adoway.Data.Entities.Project
 {
     [Table("Apartments")]
-    public class ApartmentEntity : BaseEnterpriseEntity
     public class ApartmentEntity  : BaseEnterpriseEntity
     {
         [Required]
