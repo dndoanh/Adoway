@@ -5,7 +5,7 @@ export const USERS_URL = `${process.env.REACT_APP_API_URL}/owner`;
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
 export function findOwner(queryParams) {
-    return axios.post(`${USERS_URL}/searchOwner`, queryParams);
+    return axios.post(`${USERS_URL}/searchOwners`, queryParams);
 }
 
 // CREATE =>  POST: add a new owner to the server

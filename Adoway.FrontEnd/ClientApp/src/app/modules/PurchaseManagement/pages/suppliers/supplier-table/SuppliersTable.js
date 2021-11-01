@@ -7,8 +7,7 @@ import paginationFactory, {
     PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/owners/ownersActions";
-import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
+import * as actions from "../../../_redux/suppliers/suppliersActions";
 
 import {
     getSelectRow,
@@ -18,47 +17,38 @@ import {
     sortCaret,
     headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
-import * as uiHelpers from "../OwnersUIHelpers";
+import * as uiHelpers from "../SuppliersUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
-import { useOwnersUIContext } from "../OwnersUIContext";
+import { useSuppliersUIContext } from "../SuppliersUIContext";
 
-export function OwnersTable() {
-    // Owners UI Context
-    const ownersUIContext = useOwnersUIContext();
-    const ownersUIProps = useMemo(() => {
+export function SuppliersTable() {
+    // Suppliers UI Context
+    const suppliersUIContext = useSuppliersUIContext();
+    const suppliersUIProps = useMemo(() => {
         return {
-            queryParams: ownersUIContext.queryParams,
-            setQueryParams: ownersUIContext.setQueryParams,
-            openEditOwnerDialog: ownersUIContext.openEditOwnerDialog,
-            openEditOwnerInRoleDialog: ownersUIContext.openEditOwnerInRoleDialog,
-            openDeleteOwnerDialog: ownersUIContext.openDeleteOwnerDialog
+            queryParams: suppliersUIContext.queryParams,
+            setQueryParams: suppliersUIContext.setQueryParams,
+            openEditSupplierDialog: suppliersUIContext.openEditSupplierDialog,
+            openDeleteSupplierDialog: suppliersUIContext.openDeleteSupplierDialog
         };
-    }, [ownersUIContext]);
+    }, [suppliersUIContext]);
 
-    // Getting curret state of owners list from store (Redux)
+    // Getting curret state of suppliers list from store (Redux)
     const { currentState } = useSelector(
-        (state) => ({ currentState: state.owners }),
+        (state) => ({ currentState: state.suppliers }),
         shallowEqual
     );
     const { totalCount, entities, listLoading, needReload } = currentState;
 
-    // Owners Redux state
+    // Suppliers Redux state
     const dispatch = useDispatch();
     useEffect(() => {
         // server call by queryParams
-        dispatch(actions.fetchOwners(ownersUIProps.queryParams));
+        dispatch(actions.fetchSuppliers(suppliersUIProps.queryParams));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ownersUIProps.queryParams, dispatch, needReload]);
+    }, [suppliersUIProps.queryParams, dispatch, needReload]);
 
-    // get all languages for upper item
-  
-
-    useEffect(() => {
-        // server call by queryParams
-        dispatch(languagesActions.fetchAllLanguages);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
     // Table columns
     const columns = [
         {
@@ -109,8 +99,9 @@ export function OwnersTable() {
             text: "Actions",
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
-                openEditOwnerDialog: ownersUIProps.openEditOwnerDialog,
-                openDeleteOwnerDialog: ownersUIProps.openDeleteOwnerDialog,
+                openEditSupplierDialog: suppliersUIProps.openEditSupplierDialog,
+                openEditSupplierInRoleDialog: suppliersUIProps.openEditSupplierInRoleDialog,
+                openDeleteSupplierDialog: suppliersUIProps.openDeleteSupplierDialog,
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",
@@ -124,8 +115,8 @@ export function OwnersTable() {
         custom: true,
         totalSize: totalCount,
         sizePerPageList: uiHelpers.sizePerPageList,
-        sizePerPage: ownersUIProps.queryParams.pageSize,
-        page: ownersUIProps.queryParams.pageNumber,
+        sizePerPage: suppliersUIProps.queryParams.pageSize,
+        page: suppliersUIProps.queryParams.pageNumber,
     };
     return (
         <>
@@ -147,7 +138,7 @@ export function OwnersTable() {
                                 columns={columns}
                                 defaultSorted={uiHelpers.defaultSorted}
                                 onTableChange={getHandlerTableChange(
-                                    ownersUIProps.setQueryParams
+                                    suppliersUIProps.setQueryParams
                                 )}
                                 {...paginationTableProps}
                             >
