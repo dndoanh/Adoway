@@ -25,14 +25,20 @@ namespace Adoway.BackEnd.Controllers.Project
         [HttpPost]
         public async Task<IActionResult> SearchProjects([FromBody] ProjectFilterViewModel model)
         {
-            var result = await _projectService.SearchProjects(model);
-            return new ObjectResult(result);
+            if (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue)
+            {
+                model.Filter.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
+                var result = await _projectService.SearchProjects(model);
+                return new ObjectResult(result);
+            }
+            return BadRequest("Could not search project");
         }
         [HttpPost]
         public async Task<IActionResult> CreateProject([FromBody] ProjectViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue))
             {
+                model.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
                 var result = await _projectService.Create(model);
                 return new ObjectResult(result);
             }

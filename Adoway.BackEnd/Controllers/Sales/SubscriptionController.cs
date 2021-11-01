@@ -19,14 +19,20 @@ namespace Adoway.BackEnd.Controllers.Sales
         [HttpPost]
         public async Task<IActionResult> SearchSubscriptions([FromBody] SubscriptionFilterViewModel model)
         {
-            var result = await _subscriptionService.SearchSubscriptions(model);
-            return new ObjectResult(result);
+            if (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue)
+            {
+                model.Filter.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
+                var result = await _subscriptionService.SearchSubscriptions(model);
+                return new ObjectResult(result);
+            }
+            return BadRequest("Could not search subscription");
         }
         [HttpPost]
         public async Task<IActionResult> CreateSubscription([FromBody] SubscriptionViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue))
             {
+                model.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
                 var result = await _subscriptionService.Create(model);
                 return new ObjectResult(result);
             }

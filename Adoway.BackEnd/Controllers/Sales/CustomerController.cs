@@ -25,14 +25,20 @@ namespace Adoway.BackEnd.Controllers.Sales
         [HttpPost]
         public async Task<IActionResult> SearchCustomers([FromBody] CustomerFilterViewModel model)
         {
-            var result = await _customerService.SearchCustomers(model);
-            return new ObjectResult(result);
+            if (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue)
+            {
+                model.Filter.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
+                var result = await _customerService.SearchCustomers(model);
+                return new ObjectResult(result);
+            }
+            return BadRequest("Could not search customer");
         }
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CustomerViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue))
             {
+                model.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
                 var result = await _customerService.Create(model);
                 return new ObjectResult(result);
             }

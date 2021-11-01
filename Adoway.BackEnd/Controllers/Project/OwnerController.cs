@@ -25,14 +25,20 @@ namespace Adoway.BackEnd.Controllers.Project
         [HttpPost]
         public async Task<IActionResult> SearchOwners([FromBody] OwnerFilterViewModel model)
         {
-            var result = await _ownerService.SearchOwners(model);
-            return new ObjectResult(result);
+            if (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue)
+            {
+                model.Filter.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
+                var result = await _ownerService.SearchOwners(model);
+                return new ObjectResult(result);
+            }
+            return BadRequest("Could not search owner");
         }
         [HttpPost]
         public async Task<IActionResult> CreateOwner([FromBody] OwnerViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue))
             {
+                model.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
                 var result = await _ownerService.Create(model);
                 return new ObjectResult(result);
             }

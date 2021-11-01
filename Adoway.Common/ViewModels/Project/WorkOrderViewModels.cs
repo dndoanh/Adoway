@@ -33,6 +33,8 @@ namespace Adoway.Common.ViewModels.Project
     public class WorkOrderFilter : BaseEnterpriseFilter
     {
         public string Code { get; set; }
+        public string ProjectName { get; set; }
+        public string SupplierName { get; set; }
         public string RequesterName { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
