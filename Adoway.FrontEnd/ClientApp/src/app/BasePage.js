@@ -14,8 +14,11 @@ import { OwnersPage } from "./modules/ProjectManagement/pages/owners/OwnersPage"
 import { TeleVendorsPage } from "./modules/ProjectManagement/pages/teleVendors/TeleVendorsPage";
 import { WorkOrdersPage } from "./modules/ProjectManagement/pages/workOrders/WorkOrdersPage";
 import { ProjectsPage } from "./modules/ProjectManagement/pages/projects/ProjectsPage";
-import { DepartmentsPage } from "./modules/HumanResourceManagement/pages/departments/DepartmentsPage";
-import { EmployeesPage } from "./modules/HumanResourceManagement/pages/employees/EmployeesPage";
+import { SubscriptionsPage } from "./modules/SalesManagement/pages/subscriptions/SubscriptionsPage";
+import { CustomersPage } from "./modules/SalesManagement/pages/customers/CustomersPage";
+import { SuppliersPage } from "./modules/PurchaseManagement/pages/suppliers/SuppliersPage";
+import { ProductsPage } from "./modules/InventoryManagement/pages/products/ProductsPage";
+import { CategoriesPage } from "./modules/InventoryManagement/pages/categories/CategoriesPage";
 
 const GoogleMaterialPage = lazy(() =>
     import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
@@ -61,9 +64,17 @@ export default function BasePage() {
                 <Route path="/televendors" component={TeleVendorsPage} />
                 <Route path="/workorders" component={WorkOrdersPage} />
                 <Route path="/projects" component={ProjectsPage} />
-                {/*HR Management*/}
-                <Route path="/departments" component={DepartmentsPage} />
-                <Route path="/employees" component={EmployeesPage} />
+                {/*Sale*/}
+                <Route path="/subscriptions" component={SubscriptionsPage} />
+                <Route path="/customers" component={CustomersPage} />
+                {/*Sale*/}
+                <Route path="/subscriptions" component={SubscriptionsPage} />
+                <Route path="/customers" component={CustomersPage} />
+                {/*Purchase*/}
+                <Route path="/suppliers" component={SuppliersPage} />
+                {/*Inventory*/}
+                <Route path="/products" component={ProductsPage} />
+                <Route path="/categories" component={CategoriesPage} />
                 {/*System*/}
                 <Route path="/enterprises" component={EnterprisesPage} />
                 <Route path="/languages" component={LanguagesPage} />

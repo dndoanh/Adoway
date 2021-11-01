@@ -9,14 +9,14 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openEditOwnerDialog, openDeleteOwnerDialog }
+    { openEditSupplierDialog, openEditSupplierInRoleDialog, openDeleteSupplierDialog }
 ) {
   return (
     <>
       <a
         title="Edit user"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-              onClick={() => openEditOwnerDialog(row.id)}
+        onClick={() => openEditSupplierDialog(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">
           <SVG
@@ -24,13 +24,10 @@ export function ActionsColumnFormatter(
           />
         </span>
       </a>
-     
-
-         
       <a
         title="Delete user"
         className="btn btn-icon btn-light btn-hover-danger btn-sm"
-              onClick={() => openDeleteOwnerDialog(row.id)}
+        onClick={() => openDeleteSupplierDialog(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
           <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />

@@ -2,8 +2,6 @@ import { all } from "redux-saga/effects";
 import { combineReducers } from "redux";
 
 import * as auth from "../app/modules/Auth/_redux/authRedux";
-import { customersSlice } from "../app/modules/ECommerce/_redux/customers/customersSlice";
-import { productsSlice } from "../app/modules/ECommerce/_redux/products/productsSlice";
 import { remarksSlice } from "../app/modules/ECommerce/_redux/remarks/remarksSlice";
 import { specificationsSlice } from "../app/modules/ECommerce/_redux/specifications/specificationsSlice";
 // User Management
@@ -21,13 +19,18 @@ import { ownersSlice } from "../app/modules/ProjectManagement/_redux/owners/owne
 import { teleVendorsSlice } from "../app/modules/ProjectManagement/_redux/teleVendors/teleVendorsSlice";
 import { workOrdersSlice } from "../app/modules/ProjectManagement/_redux/workorders/workOrdersSlice";
 import { projectsSlice } from "../app/modules/ProjectManagement/_redux/projects/projectsSlice";
-import { departmentsSlice } from "../app/modules/HumanResourceManagement/_redux/departments/departmentsSlice";
-import { employeesSlice } from "../app/modules/HumanResourceManagement/_redux/employees/employeesSlice";
+// Sales
+import { subscriptionsSlice } from "../app/modules/SalesManagement/_redux/subscriptions/subscriptionsSlice";
+import { customersSlice } from "../app/modules/SalesManagement/_redux/customers/customersSlice";
+//Purchase
+import { suppliersSlice } from "../app/modules/PurchaseManagement/_redux/suppliers/suppliersSlice";
+//Inventory
+import { productsSlice } from "../app/modules/InventoryManagement/_redux/products/productsSlice";
+import { categoriesSlice } from "../app/modules/InventoryManagement/_redux/categories/categoriesSlice";
 
 export const rootReducer = combineReducers({
     auth: auth.reducer,
-    customers: customersSlice.reducer,
-    products: productsSlice.reducer,
+  /*  products: productsSlice.reducer,*/
     remarks: remarksSlice.reducer,
     specifications: specificationsSlice.reducer,
     // User Management
@@ -39,15 +42,19 @@ export const rootReducer = combineReducers({
     apartments: apartmentsSlice.reducer,
     contracts: contractsSlice.reducer,
     owners: ownersSlice.reducer,
-    teleVendors: ownersSlice.reducer,
-    workOrders: workOrdersSlice.reducer,
+    teleVendors: teleVendorsSlice.reducer,
     projects: projectsSlice.reducer,
-    // HR Management
-    departments: departmentsSlice.reducer,
-    employees: employeesSlice.reducer,
+    // Sales
+    subscriptions:  subscriptionsSlice.reducer,
+    customers: customersSlice.reducer,
+    // Purchase
+    suppliers: suppliersSlice.reducer,
+    // Inventory
+    products: productsSlice.reducer,
+    categories:  categoriesSlice.reducer,
     // System
     enterprises: enterprisesSlice.reducer,
-    languages: teleVendorsSlice.reducer,
+    languages: languagesSlice.reducer,
 });
 
 export function* rootSaga() {

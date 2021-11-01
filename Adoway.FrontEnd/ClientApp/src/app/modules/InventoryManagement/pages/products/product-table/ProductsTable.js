@@ -7,7 +7,7 @@ import paginationFactory, {
     PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/owners/ownersActions";
+import * as actions from "../../../_redux/products/productsActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
 
 import {
@@ -18,38 +18,38 @@ import {
     sortCaret,
     headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
-import * as uiHelpers from "../OwnersUIHelpers";
+import * as uiHelpers from "../ProductsUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
-import { useOwnersUIContext } from "../OwnersUIContext";
+import { useProductsUIContext } from "../ProductsUIContext";
 
-export function OwnersTable() {
-    // Owners UI Context
-    const ownersUIContext = useOwnersUIContext();
-    const ownersUIProps = useMemo(() => {
+export function ProductsTable() {
+    // Products UI Context
+    const productsUIContext = useProductsUIContext();
+    const productsUIProps = useMemo(() => {
         return {
-            queryParams: ownersUIContext.queryParams,
-            setQueryParams: ownersUIContext.setQueryParams,
-            openEditOwnerDialog: ownersUIContext.openEditOwnerDialog,
-            openEditOwnerInRoleDialog: ownersUIContext.openEditOwnerInRoleDialog,
-            openDeleteOwnerDialog: ownersUIContext.openDeleteOwnerDialog
+            queryParams: productsUIContext.queryParams,
+            setQueryParams: productsUIContext.setQueryParams,
+            openEditProductDialog: productsUIContext.openEditProductDialog,
+            openEditProductInRoleDialog: productsUIContext.openEditProductInRoleDialog,
+            openDeleteProductDialog: productsUIContext.openDeleteProductDialog
         };
-    }, [ownersUIContext]);
+    }, [productsUIContext]);
 
-    // Getting curret state of owners list from store (Redux)
+    // Getting curret state of products list from store (Redux)
     const { currentState } = useSelector(
-        (state) => ({ currentState: state.owners }),
+        (state) => ({ currentState: state.products }),
         shallowEqual
     );
     const { totalCount, entities, listLoading, needReload } = currentState;
 
-    // Owners Redux state
+    // Products Redux state
     const dispatch = useDispatch();
     useEffect(() => {
         // server call by queryParams
-        dispatch(actions.fetchOwners(ownersUIProps.queryParams));
+        dispatch(actions.fetchProducts(productsUIProps.queryParams));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ownersUIProps.queryParams, dispatch, needReload]);
+    }, [productsUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
   
@@ -69,39 +69,31 @@ export function OwnersTable() {
             headerSortingClasses,
         },
         {
-            dataField: "address",
-            text: "Address",
+            dataField: "floor",
+            text: "Floor",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "contactName",
-            text: "Contact Name",
+            dataField: "block",
+            text: "Block",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "contactPhone",
-            text: "Contact Phone",
+            dataField: "internetLine",
+            text: "Internet Line",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "contactEmail",
-            text: "Contact Email",
+            dataField: "TV Line",
+            text: "TV Line",
             sort: true,
             sortCaret: sortCaret,
-            headerSortingClasses,
-        },
-        {
-            dataField: "status",
-            text: "Status",
-            sort: true,
-            sortCaret: sortCaret,
-            formatter: columnFormatters.StatusColumnFormatter,
             headerSortingClasses,
         },
         {
@@ -109,8 +101,9 @@ export function OwnersTable() {
             text: "Actions",
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
-                openEditOwnerDialog: ownersUIProps.openEditOwnerDialog,
-                openDeleteOwnerDialog: ownersUIProps.openDeleteOwnerDialog,
+                openEditProductDialog: productsUIProps.openEditProductDialog,
+                openEditProductInRoleDialog: productsUIProps.openEditProductInRoleDialog,
+                openDeleteProductDialog: productsUIProps.openDeleteProductDialog,
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",
@@ -124,8 +117,8 @@ export function OwnersTable() {
         custom: true,
         totalSize: totalCount,
         sizePerPageList: uiHelpers.sizePerPageList,
-        sizePerPage: ownersUIProps.queryParams.pageSize,
-        page: ownersUIProps.queryParams.pageNumber,
+        sizePerPage: productsUIProps.queryParams.pageSize,
+        page: productsUIProps.queryParams.pageNumber,
     };
     return (
         <>
@@ -147,7 +140,7 @@ export function OwnersTable() {
                                 columns={columns}
                                 defaultSorted={uiHelpers.defaultSorted}
                                 onTableChange={getHandlerTableChange(
-                                    ownersUIProps.setQueryParams
+                                    productsUIProps.setQueryParams
                                 )}
                                 {...paginationTableProps}
                             >
