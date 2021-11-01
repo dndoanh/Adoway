@@ -23,7 +23,7 @@ namespace Adoway.BackEnd.Controllers.Inventory
             return new ObjectResult(result);
         }
         [HttpPost]
-        public async Task<IActionResult> SearchCategorries([FromBody] CategoryFilterViewModel model)
+        public async Task<IActionResult> SearchCategories([FromBody] CategoryFilterViewModel model)
         {
             if (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue)
             {
