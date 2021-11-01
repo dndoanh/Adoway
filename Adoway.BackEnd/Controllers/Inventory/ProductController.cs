@@ -23,16 +23,22 @@ namespace Adoway.BackEnd.Controllers.Inventory
             return new ObjectResult(result);
         }
         [HttpPost]
-        public async Task<IActionResult> SearchCategorries([FromBody] ProductFilterViewModel model)
+        public async Task<IActionResult> SearchProducts([FromBody] ProductFilterViewModel model)
         {
-            var result = await _productService.SearchProducts(model);
-            return new ObjectResult(result);
+            if (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue)
+            {
+                model.Filter.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
+                var result = await _productService.SearchProducts(model);
+                return new ObjectResult(result);
+            }
+            return BadRequest("Could not search product");
         }
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] ProductViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue))
             {
+                model.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
                 var result = await _productService.Create(model);
                 return new ObjectResult(result);
             }

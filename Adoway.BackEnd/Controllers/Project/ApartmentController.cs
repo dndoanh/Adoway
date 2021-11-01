@@ -25,14 +25,20 @@ namespace Adoway.BackEnd.Controllers.Project
         [HttpPost]
         public async Task<IActionResult> SearchApartments([FromBody] ApartmentFilterViewModel model)
         {
-            var result = await _apartService.SearchApartments(model);
-            return new ObjectResult(result);
+            if (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue)
+            {
+                model.Filter.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
+                var result = await _apartService.SearchApartments(model);
+                return new ObjectResult(result);
+            }
+            return BadRequest("Could not search apartment");
         }
         [HttpPost]
         public async Task<IActionResult> CreateApartment([FromBody] ApartmentViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && (CurrentEnterpriseId.HasValue || UserEnterpriseId.HasValue))
             {
+                model.EnterpriseId = (Guid)(CurrentEnterpriseId ?? UserEnterpriseId);
                 var result = await _apartService.Create(model);
                 return new ObjectResult(result);
             }
