@@ -1,8 +1,20 @@
 import * as requestFromServer from "./customersCrud";
 import {customersSlice, callTypes} from "./customersSlice";
 
-const {actions} = customersSlice;
+const { actions } = customersSlice;
 
+export const fetchAllCustomers = dispatch => {
+    debugger;
+    return requestFromServer
+        .getAllCustomers()
+        .then(response => {
+            const workplaces = response.data;
+            dispatch(actions.allCustomersFetched(workplaces));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't find Owners";
+        });
+};
 export const fetchCustomers = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer

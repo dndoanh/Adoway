@@ -7,6 +7,7 @@ const initialOwnerState = {
     needReload: false,
     totalCount: 0,
     entities: null,
+    allOwners:[],
     ownerForEdit: undefined,
     lastError: null,
     ownerInRoles:null
@@ -72,6 +73,10 @@ export const ownersSlice = createSlice({
                 }
                 return entity;
             });
+        },
+        allOwnersFetched: (state, action) => {
+            const owners = action.payload;
+            state.allOwners = owners;
         },
         // deleteOwner
         ownerDeleted: (state, action) => {

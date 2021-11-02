@@ -69,29 +69,19 @@ export function CategoriesTable() {
             headerSortingClasses,
         },
         {
-            dataField: "floor",
-            text: "Floor",
+            dataField: "description",
+            text: "Description",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "block",
-            text: "Block",
-            sort: true,
-            sortCaret: sortCaret,
-            headerSortingClasses,
-        },
-        {
-            dataField: "internetLine",
-            text: "Internet Line",
-            sort: true,
-            sortCaret: sortCaret,
-            headerSortingClasses,
-        },
-        {
-            dataField: "TV Line",
-            text: "TV Line",
+            dataField: "parent",
+            text: "Parent",
+            formatter: columnFormatters.ParentFormatter,
+            formatExtraData: {
+              
+            },
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,

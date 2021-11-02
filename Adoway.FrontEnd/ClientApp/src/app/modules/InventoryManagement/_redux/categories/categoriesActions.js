@@ -22,7 +22,7 @@ export const selectCategory = id => dispatch => {
 };
 
 export const createCategory = categoryForCreation => dispatch => {
-  dispatch(actions.startCall({ callType: callTypes.action }));
+    dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .createCategory(categoryForCreation)
     .then(response => {

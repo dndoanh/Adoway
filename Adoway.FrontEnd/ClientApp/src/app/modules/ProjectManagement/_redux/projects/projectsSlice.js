@@ -6,10 +6,10 @@ const initialProjectsState = {
     actionsLoading: false,
     needReload: false,
     totalCount: 0,
-    entities: null,
+    projects: null,
     projectForEdit: undefined,
     lastError: null,
-    projectInRoles:null
+    projects:null
 };
 export const callTypes = {
     list: "list",
@@ -39,16 +39,16 @@ export const projectsSlice = createSlice({
 
         // projectSelected
         projectSelected: (state, action) => {
-            state.projectForEdit = _.find(state.entities, { id: action.payload.id });
+            state.projectForEdit = _.find(state.projects, { id: action.payload.id });
         },
         // findProjects
         projectsFetched: (state, action) => {
-            const { totalCount, entities } = action.payload;
+            const { totalCount, projects } = action.payload;
             state.listLoading = false;
             state.error = null;
-            state.entities = entities;
+            state.projects = projects;
             state.totalCount = totalCount;
-            state.entities = state.entities.map(entity => {
+            state.projects = state.projects.map(entity => {
                 entity.dob = entity.dob && new Date(entity.dob) || null;
                 return entity;
             });
@@ -59,25 +59,29 @@ export const projectsSlice = createSlice({
             state.actionsLoading = false;
             state.needReload = !state.needReload;
             state.error = null;
-            state.entities.push(action.payload.project);
+            state.projects.push(action.payload.project);
         },
         // updateProject
         projectUpdated: (state, action) => {
             state.error = null;
             state.actionsLoading = false;
             state.needReload = !state.needReload;
-            state.entities = state.entities.map(entity => {
+            state.projects = state.projects.map(entity => {
                 if (entity.id === action.payload.project.id) {
                     return action.payload.project;
                 }
                 return entity;
             });
         },
+        allProjectsFetched: (state, action) => {
+            const projects = action.payload;
+            state.allProjects = projects;
+        },
         // deleteProject
         projectDeleted: (state, action) => {
             state.error = null;
             state.actionsLoading = false;
-            state.entities = state.entities.filter(el => el.id !== action.payload.id);
+            state.projects = state.projects.filter(el => el.id !== action.payload.id);
         },
     }
 });

@@ -19,10 +19,7 @@ const ApartmentEditSchema = Yup.object().shape({
     name: Yup.string()
         .min(3, "Minimum 3 symbols")
         .max(50, "Maximum 50 symbols")
-        .required("Name is required"),
-    email: Yup.string()
-        .email("Invalid email")
-        .required("Email is required")
+        .required("Name is required")
 });
 
 export function ApartmentEditForm({
@@ -31,29 +28,18 @@ export function ApartmentEditForm({
     actionsLoading,
     onHide,
 }) {
-    // Getting curret state of languages list from store (Redux)
-    const { currentLanguagesState } = useSelector(
-        (state) => ({ currentLanguagesState: state.languages }),
+  
+    const { currentProjectsState } = useSelector(
+        (state) => ({ currentProjectsState: state.projects }),
         shallowEqual
     );
-    const { allLanguages } = currentLanguagesState;
+    const { allProjects } = currentProjectsState;
     
-    const [avatarUrl, setAvatarUrl] = useState("");
-    useEffect(() => {
-        if (apartment.avatarUrl) {
-            setAvatarUrl(apartment.avatarUrl);
-        }
-    }, [apartment]);
-
-    const getApartmentAvatarUrl = () => {
-        if (!avatarUrl) {
-            return "none";
-        }
-        return `url(${avatarUrl})`;
-    };
-    const removeAvatarUrl = () => {
-        setAvatarUrl("");
-    };
+    const { currentOwnersState } = useSelector(
+        (state) => ({ currentOwnersState: state.customers }),
+        shallowEqual
+    );
+    const { allCustomers } = currentOwnersState;
 
     return (
         <>
@@ -81,6 +67,16 @@ export function ApartmentEditForm({
                                             component={Input}
                                             placeholder="Name"
                                             label="Name"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col-lg-12">
+                                        <Field
+                                            name="description"
+                                            as="textarea"
+                                            className="form-control"
+                                            label="Description"
                                         />
                                     </div>
                                 </div>
@@ -121,7 +117,7 @@ export function ApartmentEditForm({
                                     <div className="col-lg-12">
                                         <Field
                                             type="text"
-                                            name="block"
+                                            name="internetLine"
                                             component={Input}
                                             placeholder="Internet Line"
                                             label="Internet Line"
@@ -132,33 +128,38 @@ export function ApartmentEditForm({
                                     <div className="col-lg-12">
                                         <Field
                                             type="text"
-                                            name="block"
+                                            name="tvLine"
                                             component={Input}
                                             placeholder="TV Line"
                                             label="TV Line"
                                         />
                                     </div>
                                 </div>
-                                {/*<div className="form-group row">*/}
-                                {/*    <div className="col-lg-12">*/}
-                                {/*        <Select name="languageId" label="Language">*/}
-                                {/*            <option value=""></option>*/}
-                                {/*            {allLanguages.map((language) => (*/}
-                                {/*                <option key={language.id} value={language.id}>*/}
-                                {/*                    {language.name}*/}
-                                {/*                </option>*/}
-                                {/*            ))}*/}
-                                {/*        </Select>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-                                {/*<div className="form-group row">*/}
-                                {/*    <div className="col-lg-12">*/}
-                                {/*        <Select name="status" label="Status">*/}
-                                {/*            <option value="1">Active</option>*/}
-                                {/*            <option value="0">Inactive</option>*/}
-                                {/*        </Select>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
+                                <div className="form-group row">
+                                    <div className="col-lg-12">
+                                        <Select name="ownerId" label="Owner">
+                                            <option value=""></option>
+                                            {allCustomers && allCustomers.map((owner) => (
+                                                <option key={owner.id} value={owner.id}>
+                                                    {owner.name}
+                                                </option>
+                                            ))}
+                                        </Select>
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col-lg-12">
+                                        <Select name="projectId" label="Project">
+                                            <option value=""></option>
+                                            {allProjects && allProjects.map((project) => (
+                                                <option key={project.id} value={project.id}>
+                                                    {project.name}
+                                                </option>
+                                            ))}
+                                        </Select>
+                                    </div>
+                                </div>
+                               
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>

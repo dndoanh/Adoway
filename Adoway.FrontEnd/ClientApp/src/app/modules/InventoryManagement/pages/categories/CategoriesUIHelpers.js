@@ -9,7 +9,7 @@ export const sizePerPageList = [
 export const initialFilter = {
   filter: {
     name: "",
-    email: ""
+    description: ""
   },
   sortOrder: "asc", // asc||desc
   sortField: "name",

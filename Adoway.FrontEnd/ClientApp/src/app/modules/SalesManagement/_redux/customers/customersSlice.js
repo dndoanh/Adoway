@@ -7,6 +7,7 @@ const initialCustomersState = {
     needReload: false,
     totalCount: 0,
     entities: null,
+    allOwners: [],
     customerForEdit: undefined,
     lastError: null,
     customerInRoles:null
@@ -72,6 +73,10 @@ export const customersSlice = createSlice({
                 }
                 return entity;
             });
+        },
+        allCustomersFetched: (state, action) => {
+            const customers = action.payload;
+            state.allCustomers = customers;
         },
         // deleteCustomer
         customerDeleted: (state, action) => {

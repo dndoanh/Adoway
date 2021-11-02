@@ -5,8 +5,7 @@ export const USERS_URL = `${process.env.REACT_APP_API_URL}/category`;
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
 export function findCategories(queryParams) {
-    debugger;
-    return axios.post(`${USERS_URL}/searchCategorries`, queryParams);
+    return axios.post(`${USERS_URL}/searchCategories`, queryParams);
 }
 
 // CREATE =>  POST: add a new category to the server

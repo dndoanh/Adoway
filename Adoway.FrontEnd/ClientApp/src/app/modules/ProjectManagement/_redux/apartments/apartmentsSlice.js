@@ -7,6 +7,7 @@ const initialApartmentsState = {
     needReload: false,
     totalCount: 0,
     entities: null,
+    allProjects:[],
     apartmentForEdit: undefined,
     lastError: null,
     apartmentInRoles:null

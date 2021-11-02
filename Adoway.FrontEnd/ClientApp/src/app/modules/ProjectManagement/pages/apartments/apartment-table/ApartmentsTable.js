@@ -9,6 +9,8 @@ import paginationFactory, {
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/apartments/apartmentsActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
+import * as projectsActions from "../../../../ProjectManagement/_redux/projects/projectsActions";
+import * as customersActions from "../../../../SalesManagement/_redux/customers/customersActions";
 
 import {
     getSelectRow,
@@ -56,7 +58,8 @@ export function ApartmentsTable() {
 
     useEffect(() => {
         // server call by queryParams
-        dispatch(languagesActions.fetchAllLanguages);
+        dispatch(projectsActions.fetchAllProjects);
+        dispatch(customersActions.fetchAllCustomers);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
@@ -90,7 +93,7 @@ export function ApartmentsTable() {
             headerSortingClasses,
         },
         {
-            dataField: "TV Line",
+            dataField: "tvLine",
             text: "TV Line",
             sort: true,
             sortCaret: sortCaret,

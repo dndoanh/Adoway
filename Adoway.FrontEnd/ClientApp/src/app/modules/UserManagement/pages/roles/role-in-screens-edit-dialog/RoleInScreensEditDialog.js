@@ -38,7 +38,6 @@ export function RoleInScreensEditDialog({ id, show, onHide }) {
   // server request for saving role
     const saveRole = (roleInScreens) => {
       // server request for creating role
-        debugger;
         dispatch(roleInScreensActions.updateRoleInScreens(roleInScreens)).then(() => onHide());
   };
 

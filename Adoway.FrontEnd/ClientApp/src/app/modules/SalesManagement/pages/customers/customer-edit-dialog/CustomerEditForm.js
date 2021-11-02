@@ -32,28 +32,6 @@ export function CustomerEditForm({
     onHide,
 }) {
     // Getting curret state of languages list from store (Redux)
-    const { currentLanguagesState } = useSelector(
-        (state) => ({ currentLanguagesState: state.languages }),
-        shallowEqual
-    );
-    const { allLanguages } = currentLanguagesState;
-    
-    const [avatarUrl, setAvatarUrl] = useState("");
-    useEffect(() => {
-        if (customer.avatarUrl) {
-            setAvatarUrl(customer.avatarUrl);
-        }
-    }, [customer]);
-
-    const getCustomerAvatarUrl = () => {
-        if (!avatarUrl) {
-            return "none";
-        }
-        return `url(${avatarUrl})`;
-    };
-    const removeAvatarUrl = () => {
-        setAvatarUrl("");
-    };
 
     return (
         <>
@@ -86,12 +64,20 @@ export function CustomerEditForm({
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
+                                        <Select name="customerType" label="CustomerType">
+                                            <option value="1">Individual</option>
+                                            <option value="2">Business</option>
+                                        </Select>
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col-lg-12">
                                         <Field
                                             type="text"
-                                            name="floor"
+                                            name="phone"
                                             component={Input}
-                                            placeholder="Floor"
-                                            label="Floor"
+                                            placeholder="Phone"
+                                            label="Phone"
                                         />
                                     </div>
                                 </div>
@@ -99,10 +85,10 @@ export function CustomerEditForm({
                                     <div className="col-lg-12">
                                         <Field
                                             type="text"
-                                            name="floor"
+                                            name="email"
                                             component={Input}
-                                            placeholder="Floor"
-                                            label="Floor"
+                                            placeholder="Email"
+                                            label="Email"
                                         />
                                     </div>
                                 </div>
@@ -110,55 +96,21 @@ export function CustomerEditForm({
                                     <div className="col-lg-12">
                                         <Field
                                             type="text"
-                                            name="block"
+                                            name="address"
                                             component={Input}
-                                            placeholder="Block"
-                                            label="Block"
+                                            placeholder="Address"
+                                            label="Address"
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Field
-                                            type="text"
-                                            name="block"
-                                            component={Input}
-                                            placeholder="Internet Line"
-                                            label="Internet Line"
-                                        />
+                                        <Select name="status" label="Status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </Select>
                                     </div>
                                 </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-12">
-                                        <Field
-                                            type="text"
-                                            name="block"
-                                            component={Input}
-                                            placeholder="TV Line"
-                                            label="TV Line"
-                                        />
-                                    </div>
-                                </div>
-                                {/*<div className="form-group row">*/}
-                                {/*    <div className="col-lg-12">*/}
-                                {/*        <Select name="languageId" label="Language">*/}
-                                {/*            <option value=""></option>*/}
-                                {/*            {allLanguages.map((language) => (*/}
-                                {/*                <option key={language.id} value={language.id}>*/}
-                                {/*                    {language.name}*/}
-                                {/*                </option>*/}
-                                {/*            ))}*/}
-                                {/*        </Select>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-                                {/*<div className="form-group row">*/}
-                                {/*    <div className="col-lg-12">*/}
-                                {/*        <Select name="status" label="Status">*/}
-                                {/*            <option value="1">Active</option>*/}
-                                {/*            <option value="0">Inactive</option>*/}
-                                {/*        </Select>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>

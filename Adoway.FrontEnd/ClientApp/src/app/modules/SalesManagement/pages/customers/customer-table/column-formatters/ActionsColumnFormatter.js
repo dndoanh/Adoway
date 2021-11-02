@@ -9,14 +9,14 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openEditUserDialog, openEditUserInRoleDialog, openDeleteUserDialog }
+    { openEditCustomerDialog, openDeleteCustomerDialog }
 ) {
   return (
     <>
       <a
         title="Edit user"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditUserDialog(row.id)}
+        onClick={() => openEditCustomerDialog(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">
           <SVG
@@ -24,23 +24,10 @@ export function ActionsColumnFormatter(
           />
         </span>
       </a>
-     
-    <a
-        title="Edit user in role"
-        className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-              onClick={() => openEditUserInRoleDialog(row.id)}
-    >
-        <span className="svg-icon svg-icon-md svg-icon-primary">
-            <SVG
-                src={toAbsoluteUrl("/media/svg/icons/General/Attachment1.svg")}
-            />
-        </span>
-    </a>
-         
       <a
         title="Delete user"
         className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteUserDialog(row.id)}
+        onClick={() => openDeleteCustomerDialog(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
           <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
