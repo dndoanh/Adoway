@@ -72,6 +72,7 @@ namespace Adoway.Service.Project
             var result = await this.DbContext.DbSet<ApartmentViewModel>().FromSqlRaw("EXEC SP_SearchApartments @ProjectName, @OwnerName, @Name, @Floor, @Block, @InternetLine, @TvLine, @EnterpriseId, @ProjectId, @SortOrder, @SortField, @PageNumber, @PageSize, @TotalCount OUTPUT",
                 SqlParameterHelper.AddNullableStringParameter("@ProjectName", model.Filter.ProjectName),
                 SqlParameterHelper.AddNullableStringParameter("@OwnerName", model.Filter.OwnerName),
+                SqlParameterHelper.AddNullableStringParameter("@Name", model.Filter.Name),
                 SqlParameterHelper.AddNullableStringParameter("@Floor", model.Filter.Floor),
                 SqlParameterHelper.AddNullableStringParameter("@Block", model.Filter.Block),
                 SqlParameterHelper.AddNullableStringParameter("@InternetLine", model.Filter.InternetLine),
