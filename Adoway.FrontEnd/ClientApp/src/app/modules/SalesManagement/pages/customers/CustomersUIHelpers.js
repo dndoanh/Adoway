@@ -1,5 +1,7 @@
 export const CustomerStatusCssClasses = ["danger", "success", "info", ""];
 export const CustomerStatusTitles = ["Inactive", "Active", ""];
+export const CustomerTypeCssClasses = ["primary", "success"];
+export const CustomerTypeTitles = ["Individual", "Bussiness"];
 export const defaultSorted = [{ dataField: "name", order: "asc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },

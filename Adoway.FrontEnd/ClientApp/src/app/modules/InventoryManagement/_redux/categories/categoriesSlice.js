@@ -56,6 +56,7 @@ export const categoriesSlice = createSlice({
         },
         // createCategory
         categoryCreated: (state, action) => {
+            debugger;
             state.actionsLoading = false;
             state.needReload = !state.needReload;
             state.error = null;

@@ -3,8 +3,20 @@ import {projectsSlice, callTypes} from "./projectsSlice";
 
 const {actions} = projectsSlice;
 
+export const fetchAllProjects = dispatch => {
+    return requestFromServer
+        .getAllProjects()
+        .then(response => {
+            const workplaces = response.data;
+            dispatch(actions.allProjectsFetched(workplaces));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't find Owners";
+        });
+};
+
 export const fetchProjects = queryParams => dispatch => {
-  dispatch(actions.startCall({ callType: callTypes.list }));
+    dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
     .findProjects(queryParams)
     .then(response => {

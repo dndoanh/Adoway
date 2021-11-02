@@ -12,7 +12,6 @@ import {
     Select,
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
-import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
 
 // Validation schema
 const CategoryEditSchema = Yup.object().shape({
@@ -20,9 +19,6 @@ const CategoryEditSchema = Yup.object().shape({
         .min(3, "Minimum 3 symbols")
         .max(50, "Maximum 50 symbols")
         .required("Name is required"),
-    email: Yup.string()
-        .email("Invalid email")
-        .required("Email is required")
 });
 
 export function CategoryEditForm({
@@ -32,29 +28,16 @@ export function CategoryEditForm({
     onHide,
 }) {
     // Getting curret state of languages list from store (Redux)
-    const { currentLanguagesState } = useSelector(
-        (state) => ({ currentLanguagesState: state.languages }),
+    const { currentCategoriesState } = useSelector(
+        (state) => ({ currentCategoriesState: state.categories }),
         shallowEqual
     );
-    const { allLanguages } = currentLanguagesState;
-    
-    const [avatarUrl, setAvatarUrl] = useState("");
+    const { entities } = currentCategoriesState;
+    const [filteredCategories, setFilteredCategories] = useState([]);
     useEffect(() => {
-        if (category.avatarUrl) {
-            setAvatarUrl(category.avatarUrl);
-        }
-    }, [category]);
-
-    const getCategoryAvatarUrl = () => {
-        if (!avatarUrl) {
-            return "none";
-        }
-        return `url(${avatarUrl})`;
-    };
-    const removeAvatarUrl = () => {
-        setAvatarUrl("");
-    };
-
+        let filterdList = category == null ? entities : entities.filter(e => e.id != category.id);
+        setFilteredCategories(filterdList);
+    }, [entities, category]);
     return (
         <>
             <Formik
@@ -87,78 +70,27 @@ export function CategoryEditForm({
                                 <div className="form-group row">
                                     <div className="col-lg-12">
                                         <Field
-                                            type="text"
-                                            name="floor"
-                                            component={Input}
-                                            placeholder="Floor"
-                                            label="Floor"
+                                            name="description"
+                                            as="textarea"
+                                            className="form-control"
+                                            label="Description"
                                         />
                                     </div>
                                 </div>
+                            
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Field
-                                            type="text"
-                                            name="floor"
-                                            component={Input}
-                                            placeholder="Floor"
-                                            label="Floor"
-                                        />
+                                        <Select name="parentId" label="Parent">
+                                            <option value=""></option>
+                                            {filteredCategories.map((entity) => (
+                                                <option key={entity.id} value={entity.id}>
+                                                    {entity.name}
+                                                </option>
+                                            ))}
+                                        </Select>
                                     </div>
                                 </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-12">
-                                        <Field
-                                            type="text"
-                                            name="block"
-                                            component={Input}
-                                            placeholder="Block"
-                                            label="Block"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-12">
-                                        <Field
-                                            type="text"
-                                            name="block"
-                                            component={Input}
-                                            placeholder="Internet Line"
-                                            label="Internet Line"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-12">
-                                        <Field
-                                            type="text"
-                                            name="block"
-                                            component={Input}
-                                            placeholder="TV Line"
-                                            label="TV Line"
-                                        />
-                                    </div>
-                                </div>
-                                {/*<div className="form-group row">*/}
-                                {/*    <div className="col-lg-12">*/}
-                                {/*        <Select name="languageId" label="Language">*/}
-                                {/*            <option value=""></option>*/}
-                                {/*            {allLanguages.map((language) => (*/}
-                                {/*                <option key={language.id} value={language.id}>*/}
-                                {/*                    {language.name}*/}
-                                {/*                </option>*/}
-                                {/*            ))}*/}
-                                {/*        </Select>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-                                {/*<div className="form-group row">*/}
-                                {/*    <div className="col-lg-12">*/}
-                                {/*        <Select name="status" label="Status">*/}
-                                {/*            <option value="1">Active</option>*/}
-                                {/*            <option value="0">Inactive</option>*/}
-                                {/*        </Select>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
+                           
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
