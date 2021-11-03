@@ -18,7 +18,7 @@ export function WorkOrderDeleteDialog({ id, show, onHide }) {
   // WorkOrders Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.workOrders.actionsLoading }),
+    (state) => ({ isLoading: state.workorders.actionsLoading }),
     shallowEqual
   );
 

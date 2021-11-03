@@ -73,6 +73,11 @@ export const workOrdersSlice = createSlice({
                 return entity;
             });
         },
+        workOrderFetched: (state, action) => {
+            state.actionsLoading = false;
+            state.workOrderForEdit = action.payload.workOrderForEdit;
+            state.error = null;
+        },
         // deleteWorkOrder
         workOrderDeleted: (state, action) => {
             state.error = null;

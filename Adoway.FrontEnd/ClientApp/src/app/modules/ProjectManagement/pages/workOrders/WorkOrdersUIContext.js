@@ -40,6 +40,7 @@ export function WorkOrdersUIProvider({ workOrdersUIEvents, children }) {
         setQueryParamsBase,
         setQueryParams,
         initWorkOrder,
+        openWorkOrderPage: workOrdersUIEvents.openEditWorkOrderPage,
         newWorkOrderButtonClick: workOrdersUIEvents.newWorkOrderButtonClick,
         newWorkOrderInRolesButtonClick: workOrdersUIEvents.newWorkOrderInRolesButtonClick,
         openEditWorkOrderDialog: workOrdersUIEvents.openEditWorkOrderDialog,

@@ -7,6 +7,9 @@ export const USERS_URL = `${process.env.REACT_APP_API_URL}/workOrder`;
 export function findWorkOrders(queryParams) {
     return axios.post(`${USERS_URL}/searchWorkOrders`, queryParams);
 }
+export function getWorkOrderById(workOrdertId) {
+    return axios.get(`${USERS_URL}/${workOrdertId}`);
+}
 
 // CREATE =>  POST: add a new workOrder to the server
 export function createWorkOrder(workOrder) {

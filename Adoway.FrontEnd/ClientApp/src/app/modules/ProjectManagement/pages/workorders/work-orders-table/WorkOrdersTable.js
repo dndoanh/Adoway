@@ -31,14 +31,13 @@ export function WorkOrdersTable() {
             queryParams: workOrdersUIContext.queryParams,
             setQueryParams: workOrdersUIContext.setQueryParams,
             openEditWorkOrderDialog: workOrdersUIContext.openEditWorkOrderDialog,
-            openEditWorkOrderInRoleDialog: workOrdersUIContext.openEditWorkOrderInRoleDialog,
             openDeleteWorkOrderDialog: workOrdersUIContext.openDeleteWorkOrderDialog
         };
     }, [workOrdersUIContext]);
 
     // Getting curret state of workOrders list from store (Redux)
     const { currentState } = useSelector(
-        (state) => ({ currentState: state.workOrders }),
+        (state) => ({ currentState: state.workorders }),
         shallowEqual
     );
     const { totalCount, entities, listLoading, needReload } = currentState;
@@ -46,6 +45,7 @@ export function WorkOrdersTable() {
     // WorkOrders Redux state
     const dispatch = useDispatch();
     useEffect(() => {
+     
         // server call by queryParams
         dispatch(actions.fetchWorkOrders(workOrdersUIProps.queryParams));
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -130,7 +130,6 @@ export function WorkOrdersTable() {
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditWorkOrderDialog: workOrdersUIProps.openEditWorkOrderDialog,
-                openEditWorkOrderInRoleDialog: workOrdersUIProps.openEditWorkOrderInRoleDialog,
                 openDeleteWorkOrderDialog: workOrdersUIProps.openDeleteWorkOrderDialog,
             },
             classes: "text-right pr-0",

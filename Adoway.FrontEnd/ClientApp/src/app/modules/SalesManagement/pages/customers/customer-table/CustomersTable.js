@@ -8,7 +8,7 @@ import paginationFactory, {
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/customers/customersActions";
-import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
+import * as projectsActions from "../../../../ProjectManagement/_redux/projects/projectsActions";
 
 import {
     getSelectRow,
@@ -56,7 +56,7 @@ export function CustomersTable() {
 
     useEffect(() => {
         // server call by queryParams
-        dispatch(languagesActions.fetchAllLanguages);
+        dispatch(projectsActions.fetchAllProjects);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns

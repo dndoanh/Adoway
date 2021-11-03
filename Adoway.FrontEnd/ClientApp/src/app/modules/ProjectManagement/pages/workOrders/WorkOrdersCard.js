@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { WorkOrdersFilter } from "./workOrders-filter/WorkOrdersFilter";
-import { WorkOrdersTable } from "./workOrders-table/WorkOrdersTable";
+import { WorkOrdersFilter } from "./work-orders-filter/WorkOrdersFilter";
+import { WorkOrdersTable } from "./work-orders-table/WorkOrdersTable";
 import { useWorkOrdersUIContext } from "./WorkOrdersUIContext";
 
 export function WorkOrdersCard() {
@@ -26,7 +26,7 @@ export function WorkOrdersCard() {
             className="btn btn-primary"
             onClick={workOrdersUIProps.newWorkOrderButtonClick}
           >
-            New WorkOrder
+            New Work Order
           </button>
         </CardHeaderToolbar>
       </CardHeader>

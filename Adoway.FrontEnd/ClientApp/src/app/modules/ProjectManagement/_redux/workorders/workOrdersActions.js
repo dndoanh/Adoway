@@ -16,6 +16,23 @@ export const fetchWorkOrders = queryParams => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
+export const fetchWorkOrder = id => dispatch => {
+    if (!id) {
+        return dispatch(actions.workOrderFetched({ workOrderForEdit: undefined }));
+    }
+
+    dispatch(actions.startCall({ callType: callTypes.action }));
+    return requestFromServer
+        .getWorkOrderById(id)
+        .then(response => {
+            const workorder = response.data;
+            dispatch(actions.workOrderFetched({ workOrderForEdit: workorder }));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't find product";
+            dispatch(actions.catchError({ error, callType: callTypes.action }));
+        });
+};
 
 export const selectWorkOrder = id => dispatch => {
     dispatch(actions.workOrderSelected({ id: id }));

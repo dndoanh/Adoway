@@ -14,9 +14,7 @@ import { enterprisesSlice } from "../app/modules/System/_redux/enterprises/enter
 import { languagesSlice } from "../app/modules/System/_redux/languages/languagesSlice";
 // Project Management
 import { apartmentsSlice } from "../app/modules/ProjectManagement/_redux/apartments/apartmentsSlice";
-import { contractsSlice } from "../app/modules/ProjectManagement/_redux/contracts/contractsSlice";
 import { ownersSlice } from "../app/modules/ProjectManagement/_redux/owners/ownersSlice";
-import { teleVendorsSlice } from "../app/modules/ProjectManagement/_redux/teleVendors/teleVendorsSlice";
 import { workOrdersSlice } from "../app/modules/ProjectManagement/_redux/workorders/workOrdersSlice";
 import { projectsSlice } from "../app/modules/ProjectManagement/_redux/projects/projectsSlice";
 // Sales
@@ -40,10 +38,9 @@ export const rootReducer = combineReducers({
     roleInScreens: roleInScreensSlice.reducer,
     // Project Management
     apartments: apartmentsSlice.reducer,
-    contracts: contractsSlice.reducer,
     owners: ownersSlice.reducer,
-    teleVendors: teleVendorsSlice.reducer,
     projects: projectsSlice.reducer,
+    workorders: workOrdersSlice.reducer,
     // Sales
     subscriptions:  subscriptionsSlice.reducer,
     customers: customersSlice.reducer,

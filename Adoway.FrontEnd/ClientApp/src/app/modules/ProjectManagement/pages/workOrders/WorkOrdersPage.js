@@ -1,57 +1,42 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { WorkOrdersLoadingDialog } from "./workOrders-loading-dialog/WorkOrdersLoadingDialog";
-import { WorkOrderEditDialog } from "./workOrder-edit-dialog/WorkOrderEditDialog";
-import { WorkOrderDeleteDialog } from "./workOrder-delete-dialog/WorkOrderDeleteDialog";
+import { WorkOrdersLoadingDialog } from "./work-orders-loading-dialog/WorkOrdersLoadingDialog";
+import { WorkOrderDeleteDialog } from "./work-order-delete-dialog/WorkOrderDeleteDialog";
 import { WorkOrdersUIProvider } from "./WorkOrdersUIContext";
 import { WorkOrdersCard } from "./WorkOrdersCard";
+import { WorkOrderEdit } from "./work-order-edit/WorkOrderEdit";
+import { ContentRoute } from "../../../../../_metronic/layout";
 
 export function WorkOrdersPage({ history }) {
     const workOrdersUIEvents = {
         newWorkOrderButtonClick: () => {
-            history.push("/workOrders/new");
+            history.push("/workorders/new");
         },
         newWorkOrderInRolesButtonClick: () => {
-            history.push("/workOrders/new-workOrder-in-roles");
+            history.push("/work-orders/new-workOrder-in-roles");
         },
         openEditWorkOrderDialog: (id) => {
-            history.push(`/workOrders/${id}/edit`);
+            history.push(`/work-orders/${id}/edit`);
         },
         openEditWorkOrderInRoleDialog: (id) => {
-            history.push(`/workOrders/${id}/edit-role`);
+            history.push(`/work-orders/${id}/edit-role`);
         },
         openDeleteWorkOrderDialog: (id) => {
-            history.push(`/workOrders/${id}/delete`);
+            history.push(`/work-orders/${id}/delete`);
         },
         openDeleteWorkOrderInRolesDialog: (id) => {
-            history.push(`/workOrders/${id}/delete-workOrder-in-roles`);
+            history.push(`/work-orders/${id}/delete-workOrder-in-roles`);
         }
     }
 
     return (
         <WorkOrdersUIProvider workOrdersUIEvents={workOrdersUIEvents}>
             <WorkOrdersLoadingDialog />
-            <Route path="/workOrders/new">
-                {({ history, match }) => (
-                    <WorkOrderEditDialog
-                        show={match != null}
-                        onHide={() => {
-                            history.push("/workOrders");
-                        }}
-                    />
-                )}
-            </Route>
-            <Route path="/workOrders/:id/edit">
-                {({ history, match }) => (
-                    <WorkOrderEditDialog
-                        show={match != null}
-                        id={match && match.params.id}
-                        onHide={() => {
-                            history.push("/workOrders");
-                        }}
-                    />
-                )}
-            </Route>
+            <ContentRoute path="/workorders/new" component={WorkOrderEdit} />
+            <ContentRoute
+                path="/workorders/:id/edit"
+                component={WorkOrderEdit}
+            />
             <Route path="/workOrders/:id/delete">
                 {({ history, match }) => (
                     <WorkOrderDeleteDialog

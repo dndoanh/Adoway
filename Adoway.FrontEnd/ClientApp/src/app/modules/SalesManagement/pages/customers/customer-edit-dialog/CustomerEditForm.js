@@ -32,7 +32,11 @@ export function CustomerEditForm({
     onHide,
 }) {
     // Getting curret state of languages list from store (Redux)
-
+    const { currentProjectsState } = useSelector(
+        (state) => ({ currentProjectsState: state.projects }),
+        shallowEqual
+    );
+    const { allProjects } = currentProjectsState;
     return (
         <>
             <Formik
@@ -101,6 +105,18 @@ export function CustomerEditForm({
                                             placeholder="Address"
                                             label="Address"
                                         />
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col-lg-12">
+                                        <Select name="projectId" label="Project">
+                                            <option value=""></option>
+                                            {allProjects && allProjects.map((project) => (
+                                                <option key={project.id} value={project.id}>
+                                                    {project.name}
+                                                </option>
+                                            ))}
+                                        </Select>
                                     </div>
                                 </div>
                                 <div className="form-group row">
