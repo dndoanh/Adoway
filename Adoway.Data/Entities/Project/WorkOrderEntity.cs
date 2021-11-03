@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Adoway.Common.Enums;
 using Adoway.Data.Entities.Base;
+using Adoway.Data.Entities.Purchase;
 using Adoway.Data.Entities.Sales;
 using Adoway.Data.Entities.UserManagement;
 
@@ -46,6 +47,6 @@ namespace Adoway.Data.Entities.Project
         // supplier
         public Guid? SupplierId { get; set; }
         [ForeignKey("SupplierId")]
-        public ProjectEntity Supplier { get; set; }
+        public SupplierEntity Supplier { get; set; }
     }
 }
