@@ -14,6 +14,7 @@ namespace Adoway.Common.ViewModels.Sales
         public string Email { get; set; }
         public string Address { get; set; }
         public Status Status { get; set; }
+        public Guid? ProjectId { get; set; }
     }
     public class CustomerFilterViewModel : BaseFilterViewModel
     {
@@ -25,6 +26,7 @@ namespace Adoway.Common.ViewModels.Sales
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
+        public Guid? ProjectId { get; set; }
         public CustomerType? CustomerType { get; set; }
         public Status? Status { get; set; }
     }

@@ -46,6 +46,7 @@ namespace Adoway.Service.Sales
                 customerEntity.Email = model.Email;
                 customerEntity.Address = model.Address;
                 customerEntity.Status = model.Status;
+                customerEntity.ProjectId = model.ProjectId;
                 var entity = await _customerRepo.Update(customerEntity);
                 return _mapper.Map<CustomerViewModel>(entity);
             }
@@ -69,12 +70,13 @@ namespace Adoway.Service.Sales
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Output,
             };
-            var result = await this.DbContext.DbSet<CustomerViewModel>().FromSqlRaw("EXEC SP_SearchCustomers @Name, @Phone, @Email, @Address, @EnterpriseId, @CustomerType, @Status, @SortOrder, @SortField, @PageNumber, @PageSize, @TotalCount OUTPUT",
+            var result = await this.DbContext.DbSet<CustomerViewModel>().FromSqlRaw("EXEC SP_SearchCustomers @Name, @Phone, @Email, @Address, @EnterpriseId, @ProjectId, @CustomerType, @Status, @SortOrder, @SortField, @PageNumber, @PageSize, @TotalCount OUTPUT",
                 SqlParameterHelper.AddNullableStringParameter("@Name", model.Filter.Name),
                 SqlParameterHelper.AddNullableStringParameter("@Phone", model.Filter.Phone),
                 SqlParameterHelper.AddNullableStringParameter("@Email", model.Filter.Email),
                 SqlParameterHelper.AddNullableStringParameter("@Address", model.Filter.Address),
                 SqlParameterHelper.AddNullableGuid("@EnterpriseId", model.Filter.EnterpriseId),
+                SqlParameterHelper.AddNullableGuid("@ProjectId", model.Filter.ProjectId),
                 SqlParameterHelper.AddNullableInt("@CustomerType", (int?)model.Filter.CustomerType),
                 SqlParameterHelper.AddNullableInt("@Status", (int?)model.Filter.Status),
                 SqlParameterHelper.AddNullableStringParameter("@SortOrder", model.SortOrder.ToString()),

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Adoway.Common.Enums;
 using Adoway.Data.Entities.Base;
+using Adoway.Data.Entities.Project;
 
 namespace Adoway.Data.Entities.Sales
 {
@@ -19,5 +20,8 @@ namespace Adoway.Data.Entities.Sales
         public string Email { get; set; }
         public string Address { get; set; }
         public Status Status { get; set; }
+        public Guid? ProjectId { get; set; }
+        [ForeignKey("ProjectId")]
+        public ProjectEntity Project { get; set; }
     }
 }
