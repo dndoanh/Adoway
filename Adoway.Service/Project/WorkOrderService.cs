@@ -63,8 +63,8 @@ namespace Adoway.Service.Project
             };
             var result = await this.DbContext.DbSet<WorkOrderViewModel>().FromSqlRaw("EXEC SP_SearchWorkOrders @Code, @ProjectName, @SupplierName, @RequesterName, @FromDate, @ToDate, @EnterpriseId, @WorkOrderType, @WorkOrderCategory, @ProjectId, @SupplierId, @Status, @SortOrder, @SortField, @PageNumber, @PageSize, @TotalCount OUTPUT",
                 SqlParameterHelper.AddNullableStringParameter("@Code", model.Filter.Code),
-                SqlParameterHelper.AddNullableStringParameter("@RequesterName", model.Filter.ProjectName),
-                SqlParameterHelper.AddNullableStringParameter("@RequesterName", model.Filter.SupplierName),
+                SqlParameterHelper.AddNullableStringParameter("@ProjectName", model.Filter.ProjectName),
+                SqlParameterHelper.AddNullableStringParameter("@SupplierName", model.Filter.SupplierName),
                 SqlParameterHelper.AddNullableStringParameter("@RequesterName", model.Filter.RequesterName),
                 SqlParameterHelper.AddNullableDateTimeParameter("@FromDate", model.Filter.FromDate),
                 SqlParameterHelper.AddNullableDateTimeParameter("@ToDate", model.Filter.ToDate),
