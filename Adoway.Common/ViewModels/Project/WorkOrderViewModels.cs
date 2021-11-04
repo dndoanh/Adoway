@@ -38,8 +38,8 @@ namespace Adoway.Common.ViewModels.Project
         public string RequesterName { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
-        public WorkOrderType WorkOrderType { get; set; }
-        public WorkOrderCategory WorkOrderCategory { get; set; }
+        public WorkOrderType? WorkOrderType { get; set; }
+        public WorkOrderCategory? WorkOrderCategory { get; set; }
         public Guid? ProjectId { get; set; }
         public Guid? SupplierId { get; set; }
         public WorkOrderStatus? Status { get; set; }
