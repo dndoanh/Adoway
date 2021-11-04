@@ -2,41 +2,27 @@
 // Data validation is based on Yup
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React from "react";
+import React, { useEffect, useState}  from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 import {
-  AVAILABLE_COLORS,
-  AVAILABLE_MANUFACTURES,
+    Input, Select, DatePickerField
+} from "../../../../../../_metronic/_partials/controls";
+import { shallowEqual, useSelector, useDispatch} from "react-redux";
+import {
+
   WorkOrderStatusTitles,
-  WorkOrderConditionTitles,
+    WorkOrderTypeTitles,
+    WorkOrderCategoryTitles
 } from "../WorkOrdersUIHelpers";
+import * as apartmentsActions from "../../../../ProjectManagement/_redux/apartments/apartmentsActions";
 
 // Validation schema
 const WorkOrderEditSchema = Yup.object().shape({
-  model: Yup.string()
-    .min(2, "Minimum 2 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Model is required"),
-  manufacture: Yup.string()
-    .min(2, "Minimum 2 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Manufacture is required"),
-  modelYear: Yup.number()
-    .min(1950, "1950 is minimum")
-    .max(2020, "2020 is maximum")
-    .required("Model year is required"),
-  mileage: Yup.number()
-    .min(0, "0 is minimum")
-    .max(1000000, "1000000 is maximum")
-    .required("Mileage is required"),
-  color: Yup.string().required("Color is required"),
-  price: Yup.number()
-    .min(1, "$1 is minimum")
-    .max(1000000, "$1000000 is maximum")
-    .required("Price is required"),
-  VINCode: Yup.string().required("VINCode is required"),
+    code: Yup.string()
+        .min(2, "Minimum 2 symbols")
+        .max(50, "Maximum 50 symbols")
+        .required("Model is required"),
 });
 
 export function WorkOrderEditForm({
@@ -44,6 +30,35 @@ export function WorkOrderEditForm({
   btnRef,
   saveWorkOrder,
 }) {
+    const dispatch = useDispatch();
+    const { currentProjectsState } = useSelector(
+        (state) => ({ currentProjectsState: state.projects }),
+        shallowEqual
+    );
+    const { allProjects } = currentProjectsState;
+
+    const { currentUsersState } = useSelector(
+        (state) => ({ currentUsersState: state.users }),
+        shallowEqual
+    );
+    const { allUsers } = currentUsersState;
+
+    const { currentCustomersState } = useSelector(
+        (state) => ({ currentCustomersState: state.customers }),
+        shallowEqual
+    );
+    const { allCustomers } = currentCustomersState;
+
+    const { currentApartmentsState } = useSelector(
+        (state) => ({ currentApartmentsState: state.apartments }),
+        shallowEqual
+    );
+    const { entities } = currentApartmentsState;
+    const [filterApartments, setFilterApartments] = useState([]);
+    useEffect(() => {
+        //setFilterApartments(workorder.projectId==null ? filterApartments : entities.find(e => e.projectId = workorder.projectId));
+        setFilterApartments(entities)
+    }, [workorder.projectId]);
   return (
     <>
       <Formik
@@ -60,84 +75,124 @@ export function WorkOrderEditForm({
               <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
-                    name="model"
+                    name="code"
                     component={Input}
-                    placeholder="Model"
-                    label="Model"
+                    placeholder="Code"
+                    label="Code"
                   />
                 </div>
                 <div className="col-lg-4">
-                  <Select name="manufacture" label="Manufacture">
-                    {AVAILABLE_MANUFACTURES.map((manufacture) => (
-                      <option key={manufacture} value={manufacture}>
-                        {manufacture}
-                      </option>
-                    ))}
-                  </Select>
+                    <Select name="workOrderType" label="WorkOrderType">
+                        {WorkOrderTypeTitles.map((status, index) => (
+                            <option key={status} value={index}>
+                                {status}
+                            </option>
+                        ))}
+                        {/*<option key="1" value="1">LM</option>*/}
+                        {/*<option key="2" value="2">SC</option>*/}
+                        {/*<option key="3" value="3">DD</option>*/}
+                        {/*<option key="4" value="4">KS</option>*/}
+                        {/*<option key="5" value="5">HT</option>*/}
+                        {/*<option key="6" value="6">TC</option>*/}
+
+                    </Select>
+                 </div>
+                <div className="col-lg-4">
+                    <Select name="workOrderCategory" label="WorkOrderCategory">
+                        {WorkOrderCategoryTitles.map((status, index) => (
+                            <option key={status} value={index}>
+                                {status}
+                            </option>
+                        ))}
+                    </Select>
+                </div>
+             </div>
+            <div className="form-group row">
+                <div className="col-lg-4">
+                    <Select name="projectId" label="Project">
+                        <option value=""></option>
+                        {allProjects && allProjects.map((project) => (
+                            <option key={project.id} value={project.id}>
+                                {project.name}
+                            </option>
+                        ))}
+                    </Select>
                 </div>
                 <div className="col-lg-4">
-                  <Field
-                    type="number"
-                    name="modelYear"
-                    component={Input}
-                    placeholder="Model year"
-                    label="Model year"
-                  />
+                    <Select name="supplierId" label="Supplier">
+                        <option value=""></option>
+                        {allProjects && allProjects.map((project) => (
+                            <option key={project.id} value={project.id}>
+                                {project.name}
+                            </option>
+                        ))}
+                    </Select>
+                </div>
+                <div className="col-lg-4">
+                    <Select name="apartmentId" label="Apartment">
+                        <option value=""></option>
+                        {filterApartments && filterApartments.map((apartment) => (
+                            <option key={apartment.id} value={apartment.id}>
+                                {apartment.name}
+                            </option>
+                        ))}
+                    </Select>
+                </div>
+</div>
+              <div className="form-group row">
+                <div className="col-lg-4">
+                    <Select name="customerId" label="Customer">
+                        <option value=""></option>
+                        {allCustomers && allCustomers.map((customer) => (
+                            <option key={customer.id} value={customer.id}>
+                                {customer.name}
+                            </option>
+                        ))}
+                    </Select>
+                </div>
+                <div className="col-lg-4">
+                    <DatePickerField
+                        name="startDate"
+                        component={Input}
+                        placeholder="Start Date"
+                        label="Start Date"
+                    />
+                </div>
+                <div className="col-lg-4">
+                    <DatePickerField
+                        name="endDate"
+                        component={Input}
+                        placeholder="End Date"
+                        label="End Date"
+                    />
                 </div>
               </div>
               <div className="form-group row">
                 <div className="col-lg-4">
-                  <Field
-                    type="number"
-                    name="mileage"
-                    component={Input}
-                    placeholder="Mileage"
-                    label="Mileage"
-                  />
+                        <Select name="salesmanId" label="Salesman">
+                        <option value=""></option>
+                            {allUsers && allUsers.map((user) => (
+                                <option key={user.id} value={user.id}>
+                                    {user.name}
+                            </option>
+                        ))}
+                    </Select>
                 </div>
                 <div className="col-lg-4">
-                  <Select name="color" label="Color">
-                    {AVAILABLE_COLORS.map((color) => (
-                      <option key={color} value={color}>
-                        {color}
-                      </option>
-                    ))}
-                  </Select>
-                </div>
-                <div className="col-lg-4">
-                  <Field
-                    type="number"
-                    name="price"
-                    component={Input}
-                    placeholder="Price"
-                    label="Price ($)"
-                    customFeedbackLabel="Please enter Price"
-                  />
-                </div>
-              </div>
-              <div className="form-group row">
-                <div className="col-lg-4">
-                  <Field
-                    name="VINCode"
-                    component={Input}
-                    placeholder="VIN code"
-                    label="VIN code"
-                  />
+                 <Select name="requesterId" label="Requester">
+                        <option value=""></option>
+                        {allUsers && allUsers.map((user) => (
+                            <option key={user.id} value={user.id}>
+                                {user.name}
+                            </option>
+                        ))}
+                    </Select>
                 </div>
                 <div className="col-lg-4">
                   <Select name="status" label="Status">
                     {WorkOrderStatusTitles.map((status, index) => (
                       <option key={status} value={index}>
                         {status}
-                      </option>
-                    ))}
-                  </Select>
-                </div>
-                <div className="col-lg-4">
-                  <Select name="condition" label="Condition">
-                    {WorkOrderConditionTitles.map((condition, index) => (
-                      <option key={condition} value={index}>
-                        {condition}
                       </option>
                     ))}
                   </Select>

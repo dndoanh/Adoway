@@ -7,6 +7,7 @@ const initialUsersState = {
     needReload: false,
     totalCount: 0,
     entities: null,
+    allUsers:[],
     userForEdit: undefined,
     lastError: null,
     userInRoles:null
@@ -72,6 +73,10 @@ export const usersSlice = createSlice({
                 }
                 return entity;
             });
+        },
+        allUsersFetched: (state, action) => {
+            const users = action.payload;
+            state.allUsers = users ;
         },
         // deleteUser
         userDeleted: (state, action) => {

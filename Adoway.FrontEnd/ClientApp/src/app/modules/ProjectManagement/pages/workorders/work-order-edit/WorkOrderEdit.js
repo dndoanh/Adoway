@@ -15,16 +15,8 @@ import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls
 
 const initWorkOrder = {
   id: undefined,
-  model: "",
-  manufacture: "Pontiac",
-  modelYear: 2020,
-  mileage: 0,
-  description: "",
-  color: "Red",
-  price: 10000,
-  condition: 1,
-  status: 0,
-  VINCode: "",
+  code: "",
+    projectId: null
 };
 
 export function WorkOrderEdit({
@@ -49,11 +41,11 @@ export function WorkOrderEdit({
     shallowEqual
   );
 
-  useEffect(() => {
-    dispatch(actions.fetchWorkOrder(id));
+    useEffect(() => {
+        dispatch(actions.selectWorkOrder(id));
   }, [id, dispatch]);
 
-  useEffect(() => {
+    useEffect(() => {
     let _title = id ? "" : "New Work Order";
     if (workOrderForEdit && id) {
         _title = `Edit product`;
@@ -64,7 +56,7 @@ export function WorkOrderEdit({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workOrderForEdit, id]);
 
-  const saveWorkOrder = (values) => {
+    const saveWorkOrder = (values) => {
     if (!id) {
       dispatch(actions.createWorkOrder(values)).then(() => backToWorkOrdersList());
     } else {

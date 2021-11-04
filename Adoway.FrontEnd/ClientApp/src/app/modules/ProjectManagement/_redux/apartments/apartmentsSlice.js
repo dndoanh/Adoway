@@ -7,7 +7,7 @@ const initialApartmentsState = {
     needReload: false,
     totalCount: 0,
     entities: null,
-    allProjects:[],
+    allApartments:[],
     apartmentForEdit: undefined,
     lastError: null,
     apartmentInRoles:null
@@ -73,6 +73,10 @@ export const apartmentsSlice = createSlice({
                 }
                 return entity;
             });
+        },
+        allAapartmentsFetched: (state, action) => {
+            const apartments = action.payload;
+            state.allApartments = apartments;
         },
         // deleteApartment
         apartmentDeleted: (state, action) => {

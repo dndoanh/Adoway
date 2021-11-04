@@ -4,27 +4,30 @@
 import React from "react";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../../../../../_metronic/_helpers";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openEditWorkOrderDialog, openDeleteWorkOrderDialog }
+    { openEditWorkOrderPage, openDeleteWorkOrderDialog }
 ) {
   return (
     <>
-      <a
-        title="Edit user"
-        className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditWorkOrderDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-primary">
-          <SVG
-            src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
-          />
-        </span>
-      </a>
-     
+    <OverlayTrigger
+        overlay={<Tooltip id="work-orders-edit-tooltip">Edit work order</Tooltip>}
+    >
+        <a
+            className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+            onClick={() => openEditWorkOrderPage(row.id)}
+        >
+            <span className="svg-icon svg-icon-md svg-icon-primary">
+                <SVG
+                    src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+                />
+            </span>
+        </a>
+    </OverlayTrigger>
          
       <a
         title="Delete user"

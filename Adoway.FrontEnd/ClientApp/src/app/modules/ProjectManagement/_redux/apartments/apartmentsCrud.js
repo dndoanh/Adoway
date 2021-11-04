@@ -8,6 +8,11 @@ export function findApartments(queryParams) {
     return axios.post(`${USERS_URL}/searchApartments`, queryParams);
 }
 
+export function getAllApartments() {
+    return axios.get(USERS_URL + '/getApartments');
+}
+
+
 // CREATE =>  POST: add a new apartment to the server
 export function createApartment(apartment) {
     return axios.post(`${USERS_URL}/createApartment`, apartment);

@@ -17,6 +17,19 @@ export const fetchApartments = queryParams => dispatch => {
     });
 };
 
+export const fetchAllApartments = dispatch => {
+    debugger;
+    return requestFromServer
+        .getAllApartments()
+        .then(response => {
+            const workplaces = response.data;
+            dispatch(actions.allApartmentsFetched(workplaces));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't find Owners";
+        });
+};
+
 export const selectApartment = id => dispatch => {
     dispatch(actions.apartmentSelected({ id: id }));
 };

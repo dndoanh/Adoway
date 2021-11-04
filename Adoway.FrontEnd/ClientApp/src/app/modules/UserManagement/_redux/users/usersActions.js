@@ -16,6 +16,17 @@ export const fetchUsers = queryParams => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
+export const fetchAllUsers = dispatch => {
+    return requestFromServer
+        .getAllUsers()
+        .then(response => {
+            const workplaces = response.data;
+            dispatch(actions.allUsersFetched(workplaces));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't find Owners";
+        });
+};
 
 export const selectUser = id => dispatch => {
     dispatch(actions.userSelected({ id: id }));

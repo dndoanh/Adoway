@@ -1,5 +1,7 @@
-export const WorkOrderStatusCssClasses = ["danger", "success", "info", ""];
-export const WorkOrderStatusTitles = ["Inactive", "Active", ""];
+export const WorkOrderStatusCssClasses = ["danger", "success", "info", "primary","secondary","warning"];
+export const WorkOrderStatusTitles = ["","Draft", "Passed", "InProgress", "Finished", " Done", "Pending", "Suspended", "Returned"];
+export const WorkOrderTypeTitles = ["","LM", "SC", "DD", "KS", " HT", "TC"];
+export const WorkOrderCategoryTitles = ["","Internet", "CableTVNetwork"];
 export const defaultSorted = [{ dataField: "name", order: "asc" }];
 export const WorkOrderConditionTitles = ["New", "Used"];
 export const sizePerPageList = [
