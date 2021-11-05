@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { SubscriptionsFilter } from "./subscription-filter/SubscriptionsFilter";
-import { SubscriptionsTable } from "./subscription-table/SubscriptionsTable";
+import { SubscriptionsFilter } from "./subscriptions-filter/SubscriptionsFilter";
+import { SubscriptionsTable } from "./subscriptions-table/SubscriptionsTable";
 import { useSubscriptionsUIContext } from "./SubscriptionsUIContext";
 
 export function SubscriptionsCard() {
@@ -26,7 +26,7 @@ export function SubscriptionsCard() {
             className="btn btn-primary"
             onClick={subscriptionsUIProps.newSubscriptionButtonClick}
           >
-            New Subscription
+            New Work Order
           </button>
         </CardHeaderToolbar>
       </CardHeader>

@@ -40,12 +40,9 @@ export function SubscriptionsUIProvider({ subscriptionsUIEvents, children }) {
         setQueryParamsBase,
         setQueryParams,
         initSubscription,
+        openEditSubscriptionPage: subscriptionsUIEvents.openEditSubscriptionPage,
         newSubscriptionButtonClick: subscriptionsUIEvents.newSubscriptionButtonClick,
-        newSubscriptionInRolesButtonClick: subscriptionsUIEvents.newSubscriptionInRolesButtonClick,
-        openEditSubscriptionDialog: subscriptionsUIEvents.openEditSubscriptionDialog,
         openDeleteSubscriptionDialog: subscriptionsUIEvents.openDeleteSubscriptionDialog,
-        openEditSubscriptionInRoleDialog: subscriptionsUIEvents.openEditSubscriptionInRoleDialog,
-        openDeleteSubscriptionInRolesDialog: subscriptionsUIEvents.openDeleteSubscriptionInRolesDialog,
     };
 
     return <SubscriptionsUIContext.Provider value={value}>{children}</SubscriptionsUIContext.Provider>;

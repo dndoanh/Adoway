@@ -40,12 +40,9 @@ export function ProjectsUIProvider({ projectsUIEvents, children }) {
         setQueryParamsBase,
         setQueryParams,
         initProject,
+        openEditProjectPage: projectsUIEvents.openEditProjectPage,
         newProjectButtonClick: projectsUIEvents.newProjectButtonClick,
-        newProjectInRolesButtonClick: projectsUIEvents.newProjectInRolesButtonClick,
-        openEditProjectDialog: projectsUIEvents.openEditProjectDialog,
         openDeleteProjectDialog: projectsUIEvents.openDeleteProjectDialog,
-        openEditProjectInRoleDialog: projectsUIEvents.openEditProjectInRoleDialog,
-        openDeleteProjectInRolesDialog: projectsUIEvents.openDeleteProjectInRolesDialog,
     };
 
     return <ProjectsUIContext.Provider value={value}>{children}</ProjectsUIContext.Provider>;

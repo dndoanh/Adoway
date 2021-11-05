@@ -3,6 +3,18 @@ import {categoriesSlice, callTypes} from "./categoriesSlice";
 
 const {actions} = categoriesSlice;
 
+export const fetchAllCategories = dispatch => {
+    return requestFromServer
+        .getAllCategories()
+        .then(response => {
+            const workplaces = response.data;
+            dispatch(actions.allCategoriesFetched(workplaces));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't find Owners";
+        });
+};
+
 export const fetchCategories = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer

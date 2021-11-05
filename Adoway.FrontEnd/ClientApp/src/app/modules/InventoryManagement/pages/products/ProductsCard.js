@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { ProductsFilter } from "./product-filter/ProductsFilter";
-import { ProductsTable } from "./product-table/ProductsTable";
+import { ProductsFilter } from "./products-filter/ProductsFilter";
+import { ProductsTable } from "./products-table/ProductsTable";
 import { useProductsUIContext } from "./ProductsUIContext";
 
 export function ProductsCard() {

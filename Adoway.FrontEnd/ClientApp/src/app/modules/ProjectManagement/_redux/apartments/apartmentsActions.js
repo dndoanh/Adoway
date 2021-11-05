@@ -18,7 +18,6 @@ export const fetchApartments = queryParams => dispatch => {
 };
 
 export const fetchAllApartments = dispatch => {
-    debugger;
     return requestFromServer
         .getAllApartments()
         .then(response => {

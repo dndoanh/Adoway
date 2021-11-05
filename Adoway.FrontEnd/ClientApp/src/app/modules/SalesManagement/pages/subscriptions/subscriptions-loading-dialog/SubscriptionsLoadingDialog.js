@@ -5,7 +5,7 @@ import { LoadingDialog } from "../../../../../../_metronic/_partials/controls";
 export function SubscriptionsLoadingDialog() {
   // Subscriptions Redux state
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.subscriptions.listLoading }),
+    (state) => ({ isLoading: state.customers.listLoading }),
     shallowEqual
   );
   // looking for loading/dispatch

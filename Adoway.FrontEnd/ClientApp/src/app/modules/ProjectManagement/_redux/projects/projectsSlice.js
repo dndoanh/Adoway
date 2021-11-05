@@ -6,7 +6,7 @@ const initialProjectsState = {
     actionsLoading: false,
     needReload: false,
     totalCount: 0,
-    projects: null,
+    entities: null,
     projectForEdit: undefined,
     lastError: null,
     projects:null
@@ -39,19 +39,15 @@ export const projectsSlice = createSlice({
 
         // projectSelected
         projectSelected: (state, action) => {
-            state.projectForEdit = _.find(state.projects, { id: action.payload.id });
+            state.projectForEdit = _.find(state.entities, { id: action.payload.id });
         },
         // findProjects
         projectsFetched: (state, action) => {
-            const { totalCount, projects } = action.payload;
+            const { totalCount, entities} = action.payload;
             state.listLoading = false;
             state.error = null;
-            state.projects = projects;
+            state.entities = entities;
             state.totalCount = totalCount;
-            state.projects = state.projects.map(entity => {
-                entity.dob = entity.dob && new Date(entity.dob) || null;
-                return entity;
-            });
             
         },
         // createProject
@@ -59,14 +55,14 @@ export const projectsSlice = createSlice({
             state.actionsLoading = false;
             state.needReload = !state.needReload;
             state.error = null;
-            state.projects.push(action.payload.project);
+            state.entities.push(action.payload.project);
         },
         // updateProject
         projectUpdated: (state, action) => {
             state.error = null;
             state.actionsLoading = false;
             state.needReload = !state.needReload;
-            state.projects = state.projects.map(entity => {
+            state.entities = state.projects.map(entity => {
                 if (entity.id === action.payload.project.id) {
                     return action.payload.project;
                 }
@@ -81,7 +77,7 @@ export const projectsSlice = createSlice({
         projectDeleted: (state, action) => {
             state.error = null;
             state.actionsLoading = false;
-            state.projects = state.projects.filter(el => el.id !== action.payload.id);
+            state.entities = state.projects.filter(el => el.id !== action.payload.id);
         },
     }
 });

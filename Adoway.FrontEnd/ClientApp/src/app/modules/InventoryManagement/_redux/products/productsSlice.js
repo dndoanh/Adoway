@@ -7,6 +7,7 @@ const initialProductsState = {
     needReload: false,
     totalCount: 0,
     entities: null,
+    allProducts:[],
     productForEdit: undefined,
     lastError: null,
     productInRoles:null
@@ -53,6 +54,10 @@ export const productsSlice = createSlice({
                 return entity;
             });
             
+        },
+        allProductsFetched: (state, action) => {
+            const products = action.payload;
+            state.allProducts = products;
         },
         // createProduct
         productCreated: (state, action) => {

@@ -74,7 +74,7 @@ export const apartmentsSlice = createSlice({
                 return entity;
             });
         },
-        allAapartmentsFetched: (state, action) => {
+        allApartmentsFetched: (state, action) => {
             const apartments = action.payload;
             state.allApartments = apartments;
         },

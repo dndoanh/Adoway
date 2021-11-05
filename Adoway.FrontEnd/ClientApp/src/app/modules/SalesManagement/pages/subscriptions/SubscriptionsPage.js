@@ -1,57 +1,34 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { SubscriptionsLoadingDialog } from "./subscriptions-loading-dialog/SubscriptionsLoadingDialog";
-import { SubscriptionEditDialog } from "./subscription-edit-dialog/SubscriptionEditDialog";
 import { SubscriptionDeleteDialog } from "./subscription-delete-dialog/SubscriptionDeleteDialog";
 import { SubscriptionsUIProvider } from "./SubscriptionsUIContext";
 import { SubscriptionsCard } from "./SubscriptionsCard";
+import { SubscriptionEdit } from "./subscription-edit/SubscriptionEdit";
+import { ContentRoute } from "../../../../../_metronic/layout";
 
 export function SubscriptionsPage({ history }) {
     const subscriptionsUIEvents = {
         newSubscriptionButtonClick: () => {
             history.push("/subscriptions/new");
         },
-        newSubscriptionInRolesButtonClick: () => {
-            history.push("/subscriptions/new-subscription-in-roles");
-        },
-        openEditSubscriptionDialog: (id) => {
+        openEditSubscriptionPage: (id) => {
             history.push(`/subscriptions/${id}/edit`);
-        },
-        openEditSubscriptionInRoleDialog: (id) => {
-            history.push(`/subscriptions/${id}/edit-role`);
         },
         openDeleteSubscriptionDialog: (id) => {
             history.push(`/subscriptions/${id}/delete`);
         },
-        openDeleteSubscriptionInRolesDialog: (id) => {
-            history.push(`/subscriptions/${id}/delete-subscription-in-roles`);
-        }
+       
     }
 
     return (
         <SubscriptionsUIProvider subscriptionsUIEvents={subscriptionsUIEvents}>
             <SubscriptionsLoadingDialog />
-            <Route path="/subscriptions/new">
-                {({ history, match }) => (
-                    <SubscriptionEditDialog
-                        show={match != null}
-                        onHide={() => {
-                            history.push("/subscriptions");
-                        }}
-                    />
-                )}
-            </Route>
-            <Route path="/subscriptions/:id/edit">
-                {({ history, match }) => (
-                    <SubscriptionEditDialog
-                        show={match != null}
-                        id={match && match.params.id}
-                        onHide={() => {
-                            history.push("/subscriptions");
-                        }}
-                    />
-                )}
-            </Route>
+            <ContentRoute path="/subscriptions/new" component={SubscriptionEdit} />
+            <ContentRoute
+                path="/subscriptions/:id/edit"
+                component={SubscriptionEdit}
+            />
             <Route path="/subscriptions/:id/delete">
                 {({ history, match }) => (
                     <SubscriptionDeleteDialog

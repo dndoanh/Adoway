@@ -7,6 +7,9 @@ export const USERS_URL = `${process.env.REACT_APP_API_URL}/product`;
 export function findProducts(queryParams) {
     return axios.post(`${USERS_URL}/searchProducts`, queryParams);
 }
+export function getAllProducts() {
+    return axios.get(USERS_URL + '/getProducts');
+}
 
 // CREATE =>  POST: add a new product to the server
 export function createProduct(product) {

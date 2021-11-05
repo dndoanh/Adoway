@@ -2,24 +2,24 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { shallowEqual, useSelector } from "react-redux";
-import * as actions from "../../../_redux/workorders/workOrdersActions";
+import * as actions from "../../../_redux/projects/projectsActions";
 import {
   Card,
   CardBody,
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../../_metronic/_partials/controls";
-import { WorkOrderEditForm } from "./WorkOrderEditForm";
+import { ProjectEditForm } from "./ProjectEditForm";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 
-const initWorkOrder = {
+const initProject = {
   id: undefined,
   code: "",
     projectId: null
 };
 
-export function WorkOrderEdit({
+export function ProjectEdit({
   history,
   match: {
     params: { id },
@@ -33,46 +33,47 @@ export function WorkOrderEdit({
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
-    const { actionsLoading, workOrderForEdit } = useSelector(
+    const { actionsLoading, projectForEdit } = useSelector(
     (state) => ({
-          actionsLoading: state.workorders.actionsLoading,
-          workOrderForEdit: state.workorders.workOrderForEdit,
+          actionsLoading: state.projects.actionsLoading,
+          projectForEdit: state.projects.projectForEdit,
     }),
     shallowEqual
   );
 
     useEffect(() => {
-        dispatch(actions.selectWorkOrder(id));
+        debugger;
+        dispatch(actions.selectProject(id));
   }, [id, dispatch]);
 
     useEffect(() => {
     let _title = id ? "" : "New Work Order";
-    if (workOrderForEdit && id) {
-        _title = `Edit Work Order`;
+    if (projectForEdit && id) {
+        _title = `Edit product`;
     }
 
     setTitle(_title);
     suhbeader.setTitle(_title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [workOrderForEdit, id]);
+  }, [projectForEdit, id]);
 
-    const saveWorkOrder = (values) => {
+    const saveProject = (values) => {
     if (!id) {
-      dispatch(actions.createWorkOrder(values)).then(() => backToWorkOrdersList());
+      dispatch(actions.createProject(values)).then(() => backToProjectsList());
     } else {
-      dispatch(actions.updateWorkOrder(values)).then(() => backToWorkOrdersList());
+      dispatch(actions.updateProject(values)).then(() => backToProjectsList());
     }
   };
 
   const btnRef = useRef();  
-  const saveWorkOrderClick = () => {
+  const saveProjectClick = () => {
     if (btnRef && btnRef.current) {
       btnRef.current.click();
     }
   };
 
-  const backToWorkOrdersList = () => {
-    history.push(`/workorders`);
+  const backToProjectsList = () => {
+    history.push(`/projects`);
   };
 
   return (
@@ -82,7 +83,7 @@ export function WorkOrderEdit({
         <CardHeaderToolbar>
           <button
             type="button"
-            onClick={backToWorkOrdersList}
+            onClick={backToProjectsList}
             className="btn btn-light"
           >
             <i className="fa fa-arrow-left"></i>
@@ -97,7 +98,7 @@ export function WorkOrderEdit({
           <button
             type="submit"
             className="btn btn-primary ml-2"
-            onClick={saveWorkOrderClick}
+            onClick={saveProjectClick}
           >
             Save
           </button>
@@ -125,7 +126,7 @@ export function WorkOrderEdit({
                   role="button"
                   aria-selected={(tab === "remarks").toString()}
                 >
-                  Tab 1
+                  Project remarks
                 </a>
               </li>
               <li className="nav-item" onClick={() => setTab("specs")}>
@@ -135,7 +136,7 @@ export function WorkOrderEdit({
                   role="tab"
                   aria-selected={(tab === "specs").toString()}
                 >
-                 Tab 2
+                  Project specifications
                 </a>
               </li>
             </>
@@ -143,20 +144,20 @@ export function WorkOrderEdit({
         </ul>
         <div className="mt-5">
           {tab === "basic" && (
-            <WorkOrderEditForm
+            <ProjectEditForm
               actionsLoading={actionsLoading}
-              workorder={workOrderForEdit || initWorkOrder}
+              project={projectForEdit || initProject}
               btnRef={btnRef}
-              saveWorkOrder={saveWorkOrder}
+              saveProject={saveProject}
             />
           )}
           {/*{tab === "remarks" && id && (*/}
-          {/*  <RemarksUIProvider currentWorkOrderId={id}>*/}
+          {/*  <RemarksUIProvider currentProjectId={id}>*/}
           {/*    <Remarks />*/}
           {/*  </RemarksUIProvider>*/}
           {/*)}*/}
           {/*{tab === "specs" && id && (*/}
-          {/*  <SpecificationsUIProvider currentWorkOrderId={id}>*/}
+          {/*  <SpecificationsUIProvider currentProjectId={id}>*/}
           {/*    <Specifications />*/}
           {/*  </SpecificationsUIProvider>*/}
           {/*)}*/}

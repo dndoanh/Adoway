@@ -40,12 +40,9 @@ export function ProductsUIProvider({ productsUIEvents, children }) {
         setQueryParamsBase,
         setQueryParams,
         initProduct,
+        openEditProductPage: productsUIEvents.openEditProductPage,
         newProductButtonClick: productsUIEvents.newProductButtonClick,
-        newProductInRolesButtonClick: productsUIEvents.newProductInRolesButtonClick,
-        openEditProductDialog: productsUIEvents.openEditProductDialog,
         openDeleteProductDialog: productsUIEvents.openDeleteProductDialog,
-        openEditProductInRoleDialog: productsUIEvents.openEditProductInRoleDialog,
-        openDeleteProductInRolesDialog: productsUIEvents.openDeleteProductInRolesDialog,
     };
 
     return <ProductsUIContext.Provider value={value}>{children}</ProductsUIContext.Provider>;

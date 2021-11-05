@@ -7,6 +7,7 @@ const initialCategoriesState = {
     needReload: false,
     totalCount: 0,
     entities: null,
+    allCategories:[],
     categoryForEdit: undefined,
     lastError: null,
     categoryInRoles:null
@@ -73,6 +74,10 @@ export const categoriesSlice = createSlice({
                 }
                 return entity;
             });
+        },
+        allCategoriesFetched: (state, action) => {
+            const categories = action.payload;
+            state.allCategories = categories;
         },
         // deleteCategory
         categoryDeleted: (state, action) => {

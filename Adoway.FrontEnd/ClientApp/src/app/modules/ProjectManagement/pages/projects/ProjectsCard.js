@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { ProjectsFilter } from "./project-filter/ProjectsFilter";
-import { ProjectsTable } from "./project-table/ProjectsTable";
+import { ProjectsFilter } from "./projects-filter/ProjectsFilter";
+import { ProjectsTable } from "./projects-table/ProjectsTable";
 import { useProjectsUIContext } from "./ProjectsUIContext";
 
 export function ProjectsCard() {
@@ -26,7 +26,7 @@ export function ProjectsCard() {
             className="btn btn-primary"
             onClick={projectsUIProps.newProjectButtonClick}
           >
-            New Project
+            New Work Order
           </button>
         </CardHeaderToolbar>
       </CardHeader>

@@ -88,12 +88,6 @@ export function WorkOrderEditForm({
                                 {status}
                             </option>
                         ))}
-                        {/*<option key="1" value="1">LM</option>*/}
-                        {/*<option key="2" value="2">SC</option>*/}
-                        {/*<option key="3" value="3">DD</option>*/}
-                        {/*<option key="4" value="4">KS</option>*/}
-                        {/*<option key="5" value="5">HT</option>*/}
-                        {/*<option key="6" value="6">TC</option>*/}
 
                     </Select>
                  </div>

@@ -17,6 +17,18 @@ export const fetchProducts = queryParams => dispatch => {
     });
 };
 
+export const fetchAllProducts = dispatch => {
+    debugger;
+    return requestFromServer
+        .getAllProducts()
+        .then(response => {
+            const workplaces = response.data;
+            dispatch(actions.allProductsFetched(workplaces));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't find Owners";
+        });
+};
 export const selectProduct = id => dispatch => {
     dispatch(actions.productSelected({ id: id }));
 };

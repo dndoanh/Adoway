@@ -2,24 +2,24 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { shallowEqual, useSelector } from "react-redux";
-import * as actions from "../../../_redux/workorders/workOrdersActions";
+import * as actions from "../../../_redux/subscriptions/subscriptionsActions";
 import {
   Card,
   CardBody,
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../../_metronic/_partials/controls";
-import { WorkOrderEditForm } from "./WorkOrderEditForm";
+import { SubscriptionEditForm } from "./SubscriptionEditForm";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 
-const initWorkOrder = {
+const initSubscription = {
   id: undefined,
   code: "",
-    projectId: null
+    subscriptionId: null
 };
 
-export function WorkOrderEdit({
+export function SubscriptionEdit({
   history,
   match: {
     params: { id },
@@ -33,46 +33,48 @@ export function WorkOrderEdit({
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
-    const { actionsLoading, workOrderForEdit } = useSelector(
+    const { actionsLoading, subscriptionForEdit } = useSelector(
     (state) => ({
-          actionsLoading: state.workorders.actionsLoading,
-          workOrderForEdit: state.workorders.workOrderForEdit,
+          actionsLoading: state.subscriptions.actionsLoading,
+          subscriptionForEdit: state.subscriptions.subscriptionForEdit,
     }),
     shallowEqual
   );
 
     useEffect(() => {
-        dispatch(actions.selectWorkOrder(id));
+        debugger;
+        dispatch(actions.selectSubscription(id));
   }, [id, dispatch]);
 
     useEffect(() => {
-    let _title = id ? "" : "New Work Order";
-    if (workOrderForEdit && id) {
-        _title = `Edit Work Order`;
+    let _title = id ? "" : "New Subscription";
+    if (subscriptionForEdit && id) {
+        _title = `Edit Subscription`;
     }
 
     setTitle(_title);
     suhbeader.setTitle(_title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [workOrderForEdit, id]);
+  }, [subscriptionForEdit, id]);
 
-    const saveWorkOrder = (values) => {
-    if (!id) {
-      dispatch(actions.createWorkOrder(values)).then(() => backToWorkOrdersList());
+    const saveSubscription = (values) => {
+        if (!id) {
+            debugger;
+      dispatch(actions.createSubscription(values)).then(() => backToSubscriptionsList());
     } else {
-      dispatch(actions.updateWorkOrder(values)).then(() => backToWorkOrdersList());
+      dispatch(actions.updateSubscription(values)).then(() => backToSubscriptionsList());
     }
   };
 
   const btnRef = useRef();  
-  const saveWorkOrderClick = () => {
+  const saveSubscriptionClick = () => {
     if (btnRef && btnRef.current) {
       btnRef.current.click();
     }
   };
 
-  const backToWorkOrdersList = () => {
-    history.push(`/workorders`);
+  const backToSubscriptionsList = () => {
+    history.push(`/subscriptions`);
   };
 
   return (
@@ -82,7 +84,7 @@ export function WorkOrderEdit({
         <CardHeaderToolbar>
           <button
             type="button"
-            onClick={backToWorkOrdersList}
+            onClick={backToSubscriptionsList}
             className="btn btn-light"
           >
             <i className="fa fa-arrow-left"></i>
@@ -97,7 +99,7 @@ export function WorkOrderEdit({
           <button
             type="submit"
             className="btn btn-primary ml-2"
-            onClick={saveWorkOrderClick}
+            onClick={saveSubscriptionClick}
           >
             Save
           </button>
@@ -125,7 +127,7 @@ export function WorkOrderEdit({
                   role="button"
                   aria-selected={(tab === "remarks").toString()}
                 >
-                  Tab 1
+                  Subscription remarks
                 </a>
               </li>
               <li className="nav-item" onClick={() => setTab("specs")}>
@@ -135,7 +137,7 @@ export function WorkOrderEdit({
                   role="tab"
                   aria-selected={(tab === "specs").toString()}
                 >
-                 Tab 2
+                  Subscription specifications
                 </a>
               </li>
             </>
@@ -143,20 +145,20 @@ export function WorkOrderEdit({
         </ul>
         <div className="mt-5">
           {tab === "basic" && (
-            <WorkOrderEditForm
+            <SubscriptionEditForm
               actionsLoading={actionsLoading}
-              workorder={workOrderForEdit || initWorkOrder}
+              subscription={subscriptionForEdit || initSubscription}
               btnRef={btnRef}
-              saveWorkOrder={saveWorkOrder}
+              saveSubscription={saveSubscription}
             />
           )}
           {/*{tab === "remarks" && id && (*/}
-          {/*  <RemarksUIProvider currentWorkOrderId={id}>*/}
+          {/*  <RemarksUIProvider currentSubscriptionId={id}>*/}
           {/*    <Remarks />*/}
           {/*  </RemarksUIProvider>*/}
           {/*)}*/}
           {/*{tab === "specs" && id && (*/}
-          {/*  <SpecificationsUIProvider currentWorkOrderId={id}>*/}
+          {/*  <SpecificationsUIProvider currentSubscriptionId={id}>*/}
           {/*    <Specifications />*/}
           {/*  </SpecificationsUIProvider>*/}
           {/*)}*/}
