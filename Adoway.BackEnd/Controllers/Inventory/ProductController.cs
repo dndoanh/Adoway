@@ -9,10 +9,10 @@ using Adoway.Common.ViewModels.Inventory;
 
 namespace Adoway.BackEnd.Controllers.Inventory
 {
-    public class SupplierController : ApiBaseController
+    public class ProductController : ApiBaseController
     {
         private readonly IProductService _productService;
-        public SupplierController(IWebHostEnvironment webHostEnvironment, IProductService productService) : base(webHostEnvironment)
+        public ProductController(IWebHostEnvironment webHostEnvironment, IProductService productService) : base(webHostEnvironment)
         {
             _productService = productService;
         }
