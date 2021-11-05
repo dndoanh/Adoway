@@ -8,7 +8,10 @@ import paginationFactory, {
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/workorders/workOrdersActions";
-import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
+import * as projectsActions from "../../../../ProjectManagement/_redux/projects/projectsActions";
+import * as usersActions from "../../../../UserManagement/_redux/users/usersActions";
+import * as customersActions from "../../../../SalesManagement/_redux/customers/customersActions";
+import * as apartmentsActions from "../../../../ProjectManagement/_redux/apartments/apartmentsActions";
 
 import {
     getSelectRow,
@@ -30,7 +33,7 @@ export function WorkOrdersTable() {
         return {
             queryParams: workOrdersUIContext.queryParams,
             setQueryParams: workOrdersUIContext.setQueryParams,
-            openEditWorkOrderDialog: workOrdersUIContext.openEditWorkOrderDialog,
+            openEditWorkOrderPage: workOrdersUIContext.openEditWorkOrderPage,
             openDeleteWorkOrderDialog: workOrdersUIContext.openDeleteWorkOrderDialog
         };
     }, [workOrdersUIContext]);
@@ -56,7 +59,10 @@ export function WorkOrdersTable() {
 
     useEffect(() => {
         // server call by queryParams
-        dispatch(languagesActions.fetchAllLanguages);
+        dispatch(projectsActions.fetchAllProjects);
+        dispatch(usersActions.fetchAllUsers);
+        dispatch(customersActions.fetchAllCustomers);
+        dispatch(apartmentsActions.fetchApartments({ filter: { name: "" }, sortOrder: "asc", sortField: "name", pageNumber: 1, pageSize: 10 }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
@@ -69,57 +75,68 @@ export function WorkOrdersTable() {
             headerSortingClasses,
         },
         {
-            dataField: "StartDate",
-            text: "StartDate",
+            dataField: "workOrderType",
+            text: "Work Order Type",
+            sort: true,
+            formatter: columnFormatters.TypeColumnFormatter,
+            sortCaret: sortCaret,
+            headerSortingClasses,
+        },
+        {
+            dataField: "workOrderCategory",
+            text: "Work Order Category",
+            sort: true,
+            formatter: columnFormatters.CategoryColumnFormatter,
+            sortCaret: sortCaret,
+            headerSortingClasses,
+        },
+        {
+            dataField: "startDate",
+            text: "Start Date",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "EndDate",
-            text: "EndDate",
+            dataField: "endDate",
+            text: "End Date",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
-        {
-            dataField: "description",
-            text: "Description",
-            sort: true,
-            sortCaret: sortCaret,
-            headerSortingClasses,
-        },
+      
         {
             dataField: "status",
             text: "Status",
             sort: true,
             sortCaret: sortCaret,
+            formatter: columnFormatters.StatusColumnFormatter,
             headerSortingClasses,
         },
         {
-            dataField: "requester",
-            text: "requester",
+            dataField: "requesterName",
+            text: "Requester Name",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "salesman",
-            text: "requester",
+            dataField: "salesmanName",
+            text: "Salesman Name",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "apartment",
-            text: "Apartment",
+            dataField: "apartmentName",
+            text: "Apartment Name",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "project",
-            text: "Project",
+            dataField: "projectName",
+            text: "ProjectName",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -129,7 +146,7 @@ export function WorkOrdersTable() {
             text: "Actions",
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
-                openEditWorkOrderDialog: workOrdersUIProps.openEditWorkOrderDialog,
+                openEditWorkOrderPage: workOrdersUIProps.openEditWorkOrderPage,
                 openDeleteWorkOrderDialog: workOrdersUIProps.openDeleteWorkOrderDialog,
             },
             classes: "text-right pr-0",

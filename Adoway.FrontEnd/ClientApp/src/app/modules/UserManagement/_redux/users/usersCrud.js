@@ -8,6 +8,10 @@ export function findUsers(queryParams) {
     return axios.post(`${USERS_URL}/searchUsers`, queryParams);
 }
 
+export function getAllUsers() {
+    return axios.get(USERS_URL + '/getUsers');
+}
+
 // CREATE =>  POST: add a new user to the server
 export function createUser(user) {
     return axios.post(`${USERS_URL}/createUser`, user);

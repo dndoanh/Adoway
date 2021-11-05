@@ -12,21 +12,13 @@ export function WorkOrdersPage({ history }) {
         newWorkOrderButtonClick: () => {
             history.push("/workorders/new");
         },
-        newWorkOrderInRolesButtonClick: () => {
-            history.push("/work-orders/new-workOrder-in-roles");
-        },
-        openEditWorkOrderDialog: (id) => {
-            history.push(`/work-orders/${id}/edit`);
-        },
-        openEditWorkOrderInRoleDialog: (id) => {
-            history.push(`/work-orders/${id}/edit-role`);
+        openEditWorkOrderPage: (id) => {
+            history.push(`/workorders/${id}/edit`);
         },
         openDeleteWorkOrderDialog: (id) => {
-            history.push(`/work-orders/${id}/delete`);
+            history.push(`/workorders/${id}/delete`);
         },
-        openDeleteWorkOrderInRolesDialog: (id) => {
-            history.push(`/work-orders/${id}/delete-workOrder-in-roles`);
-        }
+       
     }
 
     return (
@@ -37,13 +29,13 @@ export function WorkOrdersPage({ history }) {
                 path="/workorders/:id/edit"
                 component={WorkOrderEdit}
             />
-            <Route path="/workOrders/:id/delete">
+            <Route path="/workorders/:id/delete">
                 {({ history, match }) => (
                     <WorkOrderDeleteDialog
                         show={match != null}
                         id={match && match.params.id}
                         onHide={() => {
-                            history.push("/workOrders");
+                            history.push("/workorders");
                         }}
                     />
                 )}

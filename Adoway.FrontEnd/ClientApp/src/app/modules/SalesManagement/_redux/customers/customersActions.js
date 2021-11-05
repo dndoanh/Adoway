@@ -4,7 +4,6 @@ import {customersSlice, callTypes} from "./customersSlice";
 const { actions } = customersSlice;
 
 export const fetchAllCustomers = dispatch => {
-    debugger;
     return requestFromServer
         .getAllCustomers()
         .then(response => {

@@ -40,13 +40,9 @@ export function WorkOrdersUIProvider({ workOrdersUIEvents, children }) {
         setQueryParamsBase,
         setQueryParams,
         initWorkOrder,
-        openWorkOrderPage: workOrdersUIEvents.openEditWorkOrderPage,
+        openEditWorkOrderPage: workOrdersUIEvents.openEditWorkOrderPage,
         newWorkOrderButtonClick: workOrdersUIEvents.newWorkOrderButtonClick,
-        newWorkOrderInRolesButtonClick: workOrdersUIEvents.newWorkOrderInRolesButtonClick,
-        openEditWorkOrderDialog: workOrdersUIEvents.openEditWorkOrderDialog,
         openDeleteWorkOrderDialog: workOrdersUIEvents.openDeleteWorkOrderDialog,
-        openEditWorkOrderInRoleDialog: workOrdersUIEvents.openEditWorkOrderInRoleDialog,
-        openDeleteWorkOrderInRolesDialog: workOrdersUIEvents.openDeleteWorkOrderInRolesDialog,
     };
 
     return <WorkOrdersUIContext.Provider value={value}>{children}</WorkOrdersUIContext.Provider>;
