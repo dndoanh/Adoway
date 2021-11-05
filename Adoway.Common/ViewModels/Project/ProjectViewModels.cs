@@ -13,7 +13,6 @@ namespace Adoway.Common.ViewModels.Project
         public Guid? SalesUserId { get; set; }
         public string SalesName { get; set; }
         public Guid? TechUserId { get; set; }
-        public string TechName { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public DateTime? ActiveDate { get; set; }
