@@ -14,6 +14,10 @@ using Adoway.Common.ViewModels.Sales;
 using Adoway.Common.ViewModels.Purchase;
 using Adoway.Common.ViewModels.Project;
 using Adoway.Common.ViewModels.Inventory;
+using Adoway.Data.Entities.Payment;
+using Adoway.Data.Entities.Calendar;
+using Adoway.Common.ViewModels.Calendar;
+using Adoway.Common.ViewModels.Payment;
 
 namespace Adoway.Data.Context
 {
@@ -41,7 +45,10 @@ namespace Adoway.Data.Context
             }
         }
 
-        // Human Resource
+        // Calendar
+        public DbSet<EventEntity> Events { get; set; }
+        public DbSet<EventAttendeeEntity> EventAttendees { get; set; }
+        public DbSet<MeetingRoomEntity> MeetingRooms { get; set; }
 
         // Inventory
         public DbSet<CategoryEntity> Categories { get; set; }
@@ -56,7 +63,9 @@ namespace Adoway.Data.Context
         // Sales
         public DbSet<CustomerEntity> Customers { get; set; }
         public DbSet<SubscriptionEntity> Subscriptions { get; set; }
-
+        public DbSet<InvoiceEntity> Invoices { get; set; }
+        // Payment
+        public DbSet<PaymentRequestEntity> PaymentRequests { get; set; }
         // User management
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<RoleEntity> Roles { get; set; }
@@ -98,6 +107,9 @@ namespace Adoway.Data.Context
             modelBuilder.Entity<UserVerificationEntity>().HasIndex(u => u.Token).IsUnique();
 
             // model builder for store procedure
+            // calendar
+            modelBuilder.Entity<MeetingRoomViewModel>().HasNoKey().ToView("MeetingRoomViewModel");
+            modelBuilder.Entity<EventViewModel>().HasNoKey().ToView("EventViewModel");
             // inventory
             modelBuilder.Entity<CategoryViewModel>().HasNoKey().ToView("CategoryViewModel");
             modelBuilder.Entity<ProductViewModel>().HasNoKey().ToView("ProductViewModel");
@@ -111,14 +123,15 @@ namespace Adoway.Data.Context
             // sales
             modelBuilder.Entity<CustomerViewModel>().HasNoKey().ToView("CustomerViewModel");
             modelBuilder.Entity<SubscriptionViewModel>().HasNoKey().ToView("SubscriptionViewModel");
+            modelBuilder.Entity<InvoiceViewModel>().HasNoKey().ToView("InvoiceViewModel");
+            // payment
+            modelBuilder.Entity<PaymentRequestViewModel>().HasNoKey().ToView("PaymentRequestViewModel");
             // system 
             modelBuilder.Entity<LanguageViewModel>().HasNoKey().ToView("LanguageViewModel");
             modelBuilder.Entity<EnterpriseViewModel>().HasNoKey().ToView("EnterpriseViewModel");
             // user management
             modelBuilder.Entity<UserViewModel>().HasNoKey().ToView("UserViewModel");
             modelBuilder.Entity<RoleViewModel>().HasNoKey().ToView("RoleViewModel");
-
-
         }
     }
 }

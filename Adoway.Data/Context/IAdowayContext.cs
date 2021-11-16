@@ -8,6 +8,8 @@ using Adoway.Data.Entities.Inventory;
 using Adoway.Data.Entities.Project;
 using Adoway.Data.Entities.Purchase;
 using Adoway.Data.Entities.Sales;
+using Adoway.Data.Entities.Calendar;
+using Adoway.Data.Entities.Payment;
 
 namespace Adoway.Data.Context
 {
@@ -18,8 +20,10 @@ namespace Adoway.Data.Context
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         DbSet<TEntity> DbSet<TEntity>() where TEntity : class;
 
-        // Human Resource
-
+        // Calendar
+        DbSet<EventEntity> Events { get; set; }
+        DbSet<EventAttendeeEntity> EventAttendees { get; set; }
+        DbSet<MeetingRoomEntity> MeetingRooms { get; set; }
         // Inventory
         DbSet<CategoryEntity> Categories { get; set; }
         DbSet<ProductEntity> Products { get; set; }
@@ -33,6 +37,9 @@ namespace Adoway.Data.Context
         // Sales
         DbSet<CustomerEntity> Customers { get; set; }
         DbSet<SubscriptionEntity> Subscriptions { get; set; }
+        DbSet<InvoiceEntity> Invoices { get; set; }
+        // Payment
+        DbSet<PaymentRequestEntity> PaymentRequests { get; set; }
         // User management
         DbSet<UserEntity> Users { get; set; }
         DbSet<RoleEntity> Roles { get; set; }
