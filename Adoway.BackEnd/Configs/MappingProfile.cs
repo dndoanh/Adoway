@@ -11,6 +11,10 @@ using Adoway.Data.Entities.Purchase;
 using Adoway.Common.ViewModels.Purchase;
 using Adoway.Data.Entities.Sales;
 using Adoway.Common.ViewModels.Sales;
+using Adoway.Common.ViewModels.Calendar;
+using Adoway.Data.Entities.Calendar;
+using Adoway.Common.ViewModels.Payment;
+using Adoway.Data.Entities.Payment;
 
 namespace Adoway.BackEnd.Configs
 {
@@ -20,6 +24,13 @@ namespace Adoway.BackEnd.Configs
         {
             // Human Resource
 
+            // Calendar 
+            CreateMap<MeetingRoomViewModel, MeetingRoomEntity>();
+            CreateMap<MeetingRoomEntity, MeetingRoomViewModel>();
+            CreateMap<EventViewModel, EventEntity>();
+            CreateMap<EventEntity, EventViewModel>();
+            CreateMap<AttendeeViewModel, EventAttendeeEntity>();
+            CreateMap<EventAttendeeEntity, AttendeeViewModel>();
             // Inventory
             CreateMap<CategoryViewModel, CategoryEntity>();
             CreateMap<CategoryEntity, CategoryViewModel>();
@@ -42,6 +53,11 @@ namespace Adoway.BackEnd.Configs
             CreateMap<CustomerEntity, CustomerViewModel>();
             CreateMap<SubscriptionViewModel, SubscriptionEntity>();
             CreateMap<SubscriptionEntity, SubscriptionViewModel>();
+            CreateMap<InvoiceViewModel, InvoiceEntity>();
+            CreateMap<InvoiceEntity, InvoiceViewModel>();
+            // Payment
+            CreateMap<PaymentRequestViewModel, PaymentRequestEntity>();
+            CreateMap<PaymentRequestEntity, PaymentRequestViewModel>();
             // System
             CreateMap<EnterpriseViewModel, EnterpriseEntity>();
             CreateMap<EnterpriseEntity, EnterpriseViewModel>();
