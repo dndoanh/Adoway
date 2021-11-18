@@ -14,6 +14,7 @@ namespace Adoway.Common.ViewModels.Calendar
         public EventStatus Status { get; set; }
         public Guid MeetingRoomId { get; set; }
         public string MeetingRoomName { get; set; }
+        public string AttendeeIds { get; set; }
         public List<AttendeeViewModel> Attendees { get; set; }
     }
     public class AttendeeViewModel : BaseEnterpriseViewModel
