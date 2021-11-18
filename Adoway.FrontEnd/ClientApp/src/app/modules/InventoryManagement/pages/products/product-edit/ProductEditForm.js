@@ -76,7 +76,7 @@ export function ProductEditForm({
              </div>
             <div className="form-group row">
                  <div className="col-lg-6">
-                    <Select name="meatureUnit" label="Meature Unit">
+                    <Select name="measureUnit" label="Measure Unit">
                         {ProductTypeTitles.map((status, index) => (
                             <option key={status} value={index}>
                                 {status}
@@ -85,18 +85,20 @@ export function ProductEditForm({
                     </Select>
                  </div>
                 <div className="col-lg-6">
-                        <Select name="status" label="Status">
-                            {ProductStatusTitles.map((status, index) => (
-                                <option key={status} value={index}>
-                                    {status}
-                                </option>
-                            ))}
-                        </Select>
+                    <Select name="status" label="Status">
+                            <option value=""></option>
+                        {ProductStatusTitles.map((status, index) => (
+                            <option key={status} value={index}>
+                                {status}
+                            </option>
+                        ))}
+                    </Select>
                   </div>
              </div>
             <div className="form-group row">
                 <div className="col-lg-6">
-                    <Select name="categoryId" label="Category">
+                     <Select name="categoryId" label="Category">
+                        <option value=""></option>
                         {allCategories.map((c) => (
                             <option key={c.id} value={c.id}>
                                 {c.name}
@@ -106,6 +108,7 @@ export function ProductEditForm({
                  </div>
                 <div className="col-lg-6">
                     <Select name="supplierId" label="Supplier">
+                        <option value=""></option>
                         {allUsers.map((s) => (
                             <option key={s.id} value={s.id}>
                                 {s.name}

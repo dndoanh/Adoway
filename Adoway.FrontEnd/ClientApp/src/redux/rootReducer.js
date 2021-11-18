@@ -26,6 +26,14 @@ import { suppliersSlice } from "../app/modules/PurchaseManagement/_redux/supplie
 import { productsSlice } from "../app/modules/InventoryManagement/_redux/products/productsSlice";
 import { categoriesSlice } from "../app/modules/InventoryManagement/_redux/categories/categoriesSlice";
 
+import { testsSlice } from "../app/modules/ProjectManagement/_redux/tests/testsSlice";
+/*import { paymentsSlice } from "../app/modules/PurchaseManagement/_redux/payments/paymentsSlice";*/
+
+import { meetingRoomsSlice } from "../app/modules/Calendar/_redux/meetingrooms/meetingRoomsSlice";
+import { eventsSlice } from "../app/modules/Calendar/_redux/events/eventsSlice";
+import { invoicesSlice } from "../app/modules/SalesManagement/_redux/invoices/invoicesSlice";
+
+
 export const rootReducer = combineReducers({
     auth: auth.reducer,
   /*  products: productsSlice.reducer,*/
@@ -46,12 +54,21 @@ export const rootReducer = combineReducers({
     customers: customersSlice.reducer,
     // Purchase
     suppliers: suppliersSlice.reducer,
+
     // Inventory
     products: productsSlice.reducer,
     categories:  categoriesSlice.reducer,
     // System
     enterprises: enterprisesSlice.reducer,
     languages: languagesSlice.reducer,
+
+    tests: testsSlice.reducer,
+/*    payments: paymentsSlice.reducer,*/
+
+    meetingrooms: meetingRoomsSlice.reducer,
+    events: eventsSlice.reducer,
+
+    invoices: invoicesSlice.reducer
 });
 
 export function* rootSaga() {

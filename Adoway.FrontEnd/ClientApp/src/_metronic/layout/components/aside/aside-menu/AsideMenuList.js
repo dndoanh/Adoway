@@ -86,7 +86,33 @@ export function AsideMenuList({ layoutProps }) {
                     </NavLink>
                 </li>
                
-           
+                <li className="menu-section ">
+                    <h4 className="menu-text">Calendar</h4>
+                    <i className="menu-icon flaticon-more-v2"></i>
+                </li>
+                {/* end:: section */}
+                <li
+                    className={`menu-item ${getMenuItemActive("/meetingrooms", false)}`}
+                    aria-haspopup="true"
+                >
+                    <NavLink className="menu-link" to="/meetingrooms">
+                        <span className="svg-icon menu-icon">
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Route.svg")} />
+                        </span>
+                        <span className="menu-text">Meeting Rooms</span>
+                    </NavLink>
+                </li>
+                <li
+                    className={`menu-item ${getMenuItemActive("/events", false)}`}
+                    aria-haspopup="true"
+                >
+                    <NavLink className="menu-link" to="/events">
+                        <span className="svg-icon menu-icon">
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
+                        </span>
+                        <span className="menu-text">Events</span>
+                    </NavLink>
+                </li>
                 {/*end::1 Level*/}
                 {/* System */}
                 {/* begin::section */}
@@ -115,6 +141,17 @@ export function AsideMenuList({ layoutProps }) {
                             <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
                         </span>
                         <span className="menu-text">Customers</span>
+                    </NavLink>
+                </li>
+                <li
+                    className={`menu-item ${getMenuItemActive("/invoices", false)}`}
+                    aria-haspopup="true"
+                >
+                    <NavLink className="menu-link" to="/invoices">
+                        <span className="svg-icon menu-icon">
+                            <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
+                        </span>
+                        <span className="menu-text">Invoices</span>
                     </NavLink>
                 </li>
                 {/* System */}

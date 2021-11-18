@@ -12,6 +12,7 @@ import { I18nProvider } from "../_metronic/i18n";
 import { LayoutSplashScreen, MaterialThemeProvider } from "../_metronic/layout";
 import { ToastProvider } from 'react-toast-notifications';
 
+
 export default function App({ store, persistor, basename }) {
     return (
         <ToastProvider>
