@@ -43,22 +43,6 @@ export function EventEditForm({
     );
     const { allMeetingRooms } = currentRoomsState;
 
-    const { currentEventState } = useSelector(
-        (state) => ({ currentEventState: state.events }),
-        shallowEqual
-    );
-    const { eventForEdit } = currentEventState;
-
-    const [attendees, setAttendees] = useState([])
-   
-    useEffect(() => {
-        if (eventForEdit) {
-            let idList = eventForEdit.attendeeIds.split(',').map(i => i.toLowerCase());
-            let selectedAttendees = allUsers.filter(x => idList.includes(x.id)).map(u => ({value: u.id,label: u.name}));
-            setAttendees(selectedAttendees)
-        }
-    }, [eventForEdit, allUsers]);
-
     return (
         <>
             <Formik
@@ -97,8 +81,10 @@ export function EventEditForm({
                                                 value: user.id,
                                                 label: user.name
                                             }))}
-                                            values={attendees}
-                                          
+                                            values={allUsers.filter(x => event.attendeeIds.toLowerCase().includes(x.id.toLowerCase())).map((user) => ({
+                                                value: user.id,
+                                                label: user.name
+                                            }))}
                                         />
                                     </div>
                                 </div>
