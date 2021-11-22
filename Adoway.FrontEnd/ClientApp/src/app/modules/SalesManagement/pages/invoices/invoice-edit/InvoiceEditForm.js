@@ -47,7 +47,12 @@ export function InvoiceEditForm({
         shallowEqual
     );
     const { allProjects } = currentProjectsState;
-  
+    const [attachedFile, setFile] = useState("");
+    useEffect(() => {
+        if (invoice.attachments) {
+            setFile(invoice.attachment);
+        }
+    }, [invoice]);
   return (
     <>
       <Formik
@@ -58,7 +63,7 @@ export function InvoiceEditForm({
           saveInvoice(values);
         }}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, setFieldValue }) => (
           <>
             <Form className="form form-label-right">
               <div className="form-group row">
@@ -99,11 +104,32 @@ export function InvoiceEditForm({
                 </div>
                 <div className="col-lg-4">
                     <Field
-                        name="attachment"
+                        name="attachments"
                         component={Input}
-                        placeholder="attachment"
-                        label="Attachment"
+                        placeholder="attachments"
+                        label="Attachments"
+                        value={attachedFile || invoice.attachments}
                     />
+                    <input
+                        type="file"
+                        name="attachment"
+                        onChange={(e) => {
+                            const fileReader = new FileReader();
+                            fileReader.onload = () => {
+                                if (fileReader.readyState === 2) {
+                                    setFieldValue('attachments', fileReader.result);
+                                    setFile(fileReader.result);
+                                }
+                            };
+                            fileReader.readAsDataURL(e.target.files[0]);
+                        }}
+                    />
+                </div>
+                <div className="col-lg-4">
+                    <Select name="paymentStatus" label="Payment Status">
+                        <option value="1">Unpaid</option>
+                        <option value="2">Paid</option>
+                    </Select>
                 </div>
             </div>
               <div className="form-group row">

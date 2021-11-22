@@ -45,7 +45,6 @@ export function EventDetailDialog({ id, show, onHide,start,end }) {
 
   useEffect(() => {
     // server call for getting Event by id
-      debugger;
     dispatch(actions.selectEvent(id));
   }, [id, dispatch]);
 
@@ -53,11 +52,11 @@ export function EventDetailDialog({ id, show, onHide,start,end }) {
     const saveEvent = (event) => {
     if (!id) {
       // server request for creating event
+        const { id, ...eventForCreate } = event;
         dispatch(actions.createEvent({
-            ...event,
-            id:123,
-            start: moment(event.start, 'DD/MM/YYYY HH:mm:ss').toDate() ,
-            end: moment(event.end, 'DD/MM/YYYY HH:mm:ss').toDate(),
+            ...eventForCreate,
+            startDate: moment(event.startDate, 'DD/MM/YYYY HH:mm:ss').toDate(),
+            endDate: moment(event.endDate, 'DD/MM/YYYY HH:mm:ss').toDate(),
             //start: event.start,
             //end:event.end
         }));

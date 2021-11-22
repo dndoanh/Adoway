@@ -51,7 +51,6 @@ export function EventEditDialog({ id, show, onHide,start,end }) {
     const saveEvent = (event) => {
     if (!id) {
       // server request for creating event
-        debugger;
         const { id, ...eventForCreate } = event;
         const attendees = event.attendees.map(a => ({
             AttendeeId :a.value,

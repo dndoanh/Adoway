@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 # User upload files
 **/UploadFiles
+/Adoway.FrontEnd/ClientApp/src/app/modules/UserManagement/pages/roles/role-in-screen-dialog/RoleInScreenEditDialog.js
+/Adoway.FrontEnd/ClientApp/src/app/modules/UserManagement/pages/roles/role-in-screen-dialog/RoleInScreenEditDialogHeader.js
+/Adoway.FrontEnd/ClientApp/src/app/modules/UserManagement/pages/roles/role-in-screen-dialog/RoleInScreenEditForm.js

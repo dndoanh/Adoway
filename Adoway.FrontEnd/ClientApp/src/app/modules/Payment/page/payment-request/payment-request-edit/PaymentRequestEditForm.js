@@ -68,7 +68,7 @@ export function PaymentRequestEditForm({
                   <>
                       <Form className="form form-label-right">
                           <div className="form-group row">
-                              <HorizontalNonLinearStepper name="status" />
+                              <HorizontalNonLinearStepper name="status" value={paymentRequest.status || 0 } />
                            </div>
                         
                           <div className="form-group row">

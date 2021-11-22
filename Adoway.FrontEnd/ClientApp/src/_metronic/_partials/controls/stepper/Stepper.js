@@ -42,20 +42,24 @@ function getStepContent(step) {
         case 5:
             return 'Paying';
         case 6:
-            return ' Done';
+            return 'Done';
         default:
             return 'Unknown step';
     }
 }
 
-export function HorizontalNonLinearStepper(props) {
+export function HorizontalNonLinearStepper({ name, options, value, label }) {
     const classes = useStyles();
-    const [field, meta] = useField(props);
-    const { touched, error } = meta;
-    const [activeStep, setActiveStep] = React.useState(field.value);
+    //const [field, meta] = useField(props);
+    //const { touched, error } = meta;
+    const [activeStep, setActiveStep] = React.useState(value || 1);
     const [completed, setCompleted] = React.useState({});
 
- 
+    const [field, state, { setValue, setTouched }] = useField(name);
+    React.useEffect(() => {
+        debugger;
+        setValue(state?.value);
+    }, []);
 
     const steps = getSteps();
     debugger;
@@ -83,6 +87,7 @@ export function HorizontalNonLinearStepper(props) {
                 steps.findIndex((step, i) => !(i in completed))
                 : activeStep + 1;
         setActiveStep(newActiveStep);
+        setValue(newActiveStep)
     }
 
     function handleBack() {
@@ -90,6 +95,7 @@ export function HorizontalNonLinearStepper(props) {
     }
 
     const handleStep = step => () => {
+        setValue(step);
         setActiveStep(step);
     };
 
