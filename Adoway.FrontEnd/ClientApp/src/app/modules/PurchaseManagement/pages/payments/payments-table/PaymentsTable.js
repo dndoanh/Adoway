@@ -7,13 +7,13 @@ import paginationFactory, {
     PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/invoices/invoicesActions";
-import * as invoicesActions from "../../../../SalesManagement/_redux/invoices/invoicesActions";
+import * as actions from "../../../_redux/payments/paymentsActions";
+import * as paymentsActions from "../../../../PaymentManagement/_redux/payments/paymentsActions";
 import * as usersActions from "../../../../UserManagement/_redux/users/usersActions";
-import * as ownersActions from "../../../../ProjectManagement/_redux/owners/ownersActions";
-import * as suppliersActions from "../../../../PurchaseManagement/_redux/suppliers/suppliersActions";
-import * as projectsActions from "../../../../ProjectManagement/_redux/projects/projectsActions";
 import * as customersActions from "../../../../SalesManagement/_redux/customers/customersActions";
+import * as apartmentsActions from "../../../../PaymentManagement/_redux/apartments/apartmentsActions";
+import * as ownersActions from "../../../../PaymentManagement/_redux/owners/ownersActions";
+
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -22,102 +22,110 @@ import {
     sortCaret,
     headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
-import * as uiHelpers from "../InvoicesUIHelpers";
+import * as uiHelpers from "../PaymentsUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
-import { useInvoicesUIContext } from "../InvoicesUIContext";
+import { usePaymentsUIContext } from "../PaymentsUIContext";
 
-export function InvoicesTable() {
-    // Invoices UI Context
-    const invoicesUIContext = useInvoicesUIContext();
-    const invoicesUIProps = useMemo(() => {
+export function PaymentsTable() {
+    // Payments UI Context
+    const paymentsUIContext = usePaymentsUIContext();
+    const paymentsUIProps = useMemo(() => {
         return {
-            queryParams: invoicesUIContext.queryParams,
-            setQueryParams: invoicesUIContext.setQueryParams,
-            openEditInvoicePage: invoicesUIContext.openEditInvoicePage,
-            openDeleteInvoiceDialog: invoicesUIContext.openDeleteInvoiceDialog
+            queryParams: paymentsUIContext.queryParams,
+            setQueryParams: paymentsUIContext.setQueryParams,
+            openEditPaymentPage: paymentsUIContext.openEditPaymentPage,
+            openDeletePaymentDialog: paymentsUIContext.openDeletePaymentDialog
         };
-    }, [invoicesUIContext]);
+    }, [paymentsUIContext]);
 
-    // Getting curret state of invoices list from store (Redux)
+    // Getting curret state of payments list from store (Redux)
     const { currentState } = useSelector(
-        (state) => ({ currentState: state.invoices }),
+        (state) => ({ currentState: state.payments }),
         shallowEqual
     );
   
     const { totalCount, entities, listLoading, needReload } = currentState;
 
-    // Invoices Redux state
+    // Payments Redux state
     const dispatch = useDispatch();
     useEffect(() => {
      
         // server call by queryParams
-        dispatch(actions.fetchInvoices(invoicesUIProps.queryParams));
+        dispatch(actions.fetchPayments(paymentsUIProps.queryParams));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [invoicesUIProps.queryParams, dispatch, needReload]);
+    }, [paymentsUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
   
 
     useEffect(() => {
         // server call by queryParams
-   /*     dispatch(suppliersActions.fetchAllSuppliers());*/
-        dispatch(suppliersActions.fetchSuppliers({ filter: { name: "" }, sortOrder: "asc", sortField: "name", pageNumber: 1, pageSize: 1000 }));
-        dispatch(projectsActions.fetchAllProjects);
-        dispatch(customersActions.fetchAllCustomers);
+        dispatch(usersActions.fetchAllUsers);
+        dispatch(ownersActions.fetchAllOwners);
+        //dispatch(apartmentsActions.fetchApartments({ filter: { name: "" }, sortOrder: "asc", sortField: "name", pageNumber: 1, pageSize: 10 }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
     const columns = [
         {
-            dataField: "invoiceNo",
-            text: "InvoiceNo",
+            dataField: "code",
+            text: "Code",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "invoicedDate",
-            text: "Invoiced Date",
+            dataField: "name",
+            text: "Name",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
       
         {
-            dataField: "dueDate",
-            text: "Due Date",
+            dataField: "activeDate",
+            text: "Active Date",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "customerName",
-            text: "Customer Name",
+            dataField: "beginDate",
+            text: "Begin Date",
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "supplierName",
-            text: "Supplier Name",
+            dataField: "status",
+            text: "Status",
             sort: true,
             sortCaret: sortCaret,
+            formatter: columnFormatters.StatusColumnFormatter,
             headerSortingClasses,
         },
         {
-            dataField: "projectName",
-            text: "Project Name",
+            dataField: "areaType",
+            text: "Area Type",
             sort: true,
             sortCaret: sortCaret,
+            formatter: columnFormatters.AreaColumnFormatter,
             headerSortingClasses,
         },
         {
-            dataField: "paymentStatus",
-            text: "Payment Status",
+            dataField: "paymentType",
+            text: "Payment Type",
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.TypeColumnFormatter,
+            headerSortingClasses,
+        },
+        {
+            dataField: "ownerName",
+            text: "Owner Name",
+            sort: true,
+            sortCaret: sortCaret,
             headerSortingClasses,
         },
 
@@ -126,8 +134,8 @@ export function InvoicesTable() {
             text: "Actions",
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
-                openEditInvoicePage: invoicesUIProps.openEditInvoicePage,
-                openDeleteInvoiceDialog: invoicesUIProps.openDeleteInvoiceDialog,
+                openEditPaymentPage: paymentsUIProps.openEditPaymentPage,
+                openDeletePaymentDialog: paymentsUIProps.openDeletePaymentDialog,
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",
@@ -141,8 +149,8 @@ export function InvoicesTable() {
         custom: true,
         totalSize: totalCount,
         sizePerPageList: uiHelpers.sizePerPageList,
-        sizePerPage: invoicesUIProps.queryParams.pageSize,
-        page: invoicesUIProps.queryParams.pageNumber,
+        sizePerPage: paymentsUIProps.queryParams.pageSize,
+        page: paymentsUIProps.queryParams.pageNumber,
     };
     return (
         <>
@@ -164,7 +172,7 @@ export function InvoicesTable() {
                                 columns={columns}
                                 defaultSorted={uiHelpers.defaultSorted}
                                 onTableChange={getHandlerTableChange(
-                                    invoicesUIProps.setQueryParams
+                                    paymentsUIProps.setQueryParams
                                 )}
                                 {...paginationTableProps}
                             >

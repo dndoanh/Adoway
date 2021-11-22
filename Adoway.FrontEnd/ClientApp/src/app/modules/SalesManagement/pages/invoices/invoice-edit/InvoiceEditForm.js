@@ -18,7 +18,7 @@ import {
 
 // Validation schema
 const InvoiceEditSchema = Yup.object().shape({
-    code: Yup.string()
+    invoiceNo: Yup.string()
         .min(2, "Minimum 2 symbols")
         .max(50, "Maximum 50 symbols")
         .required("Model is required"),
@@ -29,30 +29,24 @@ export function InvoiceEditForm({
   btnRef,
   saveInvoice,
 }) {
-    const dispatch = useDispatch();
-    const { currentInvoicesState } = useSelector(
-        (state) => ({ currentInvoicesState: state.invoices }),
-        shallowEqual
-    );
-    const { allInvoices } = currentInvoicesState;
 
-    const { currentUsersState } = useSelector(
-        (state) => ({ currentUsersState: state.users }),
+    const { currentCustomersState } = useSelector(
+        (state) => ({ currentCustomersState: state.customers }),
         shallowEqual
     );
-    const { allUsers } = currentUsersState;
+    const { allCustomers } = currentCustomersState;
 
-    const { currentOwnersState } = useSelector(
-        (state) => ({ currentOwnersState: state.owners }),
+    const { currentSuppliersState } = useSelector(
+        (state) => ({ currentSuppliersState: state.suppliers }),
         shallowEqual
     );
-    const { allOwners } = currentOwnersState;
+    const { entities } = currentSuppliersState;
 
-    const { currentApartmentsState } = useSelector(
-        (state) => ({ currentApartmentsState: state.apartments }),
+    const { currentProjectsState } = useSelector(
+        (state) => ({ currentProjectsState: state.projects }),
         shallowEqual
     );
-    const { entities } = currentApartmentsState;
+    const { allProjects } = currentProjectsState;
   
   return (
     <>
@@ -108,78 +102,15 @@ export function InvoiceEditForm({
                         name="attachment"
                         component={Input}
                         placeholder="attachment"
-                        label="Amount"
-                        type="number"
+                        label="Attachment"
                     />
                 </div>
-                <div className="col-lg-4">
-                    <Select name="paymentType" label="PaymentType">
-                        {InvoiceTypeTitles.map((status, index) => (
-                            <option key={status} value={index}>
-                                {status}
-                            </option>
-                        ))}
-                    </Select>
-                </div>
-             
             </div>
               <div className="form-group row">
                 <div className="col-lg-4">
-                    <Field
-                        name="blockCount"
-                        component={Input}
-                        placeholder="BlockCount"
-                        label="BlockCount"
-                    />
-                </div>
-                <div className="col-lg-4">
-                    <Field
-                        name="floorCount"
-                        component={Input}
-                        placeholder="Floor Count"
-                        label="Floor Count"
-                    />
-                </div>
-                 <div className="col-lg-4">
-                    <Field
-                        name="basementCount"
-                        component={Input}
-                        placeholder="Basement Count"
-                        label="Basement Count"
-                    />
-                </div>
-              </div>
-              <div className="form-group row">
-                <div className="col-lg-4">
-                    <Field
-                        name="squareCount"
-                        component={Input}
-                        placeholder="Square Count"
-                        label="Square Count"
-                    />
-                </div>
-                <div className="col-lg-4">
-                    <Field
-                        name="portCount"
-                        component={Input}
-                        placeholder="Port Count"
-                        label="Port Count"
-                    />
-                </div>
-                 <div className="col-lg-4">
-                    <Field
-                        name="apartmentCount"
-                        component={Input}
-                        placeholder="Apartmnent Count"
-                        label="Apartmnent Count"
-                    />
-                </div>
-              </div>
-              <div className="form-group row">
-                <div className="col-lg-4">
-                        <Select name="ownerId" label="Owner">
+                   <Select name="customerId" label="Customer">
                         <option value=""></option>
-                            {allOwners  && allOwners.map((user) => (
+                            {allCustomers  && allCustomers.map((user) => (
                                 <option key={user.id} value={user.id}>
                                     {user.name}
                             </option>
@@ -187,45 +118,34 @@ export function InvoiceEditForm({
                     </Select>
                 </div>
                 <div className="col-lg-4">
-                 <Select name="salesUserId" label="Sale user">
+                 <Select name="supplierId" label="Supplier">
                         <option value=""></option>
-                        {allUsers && allUsers.map((user) => (
-                            <option key={user.id} value={user.id}>
-                                {user.name}
+                        { entities &&  entities.map((s) => (
+                            <option key={s.id} value={s.id}>
+                                {s.name}
                             </option>
                         ))}
                     </Select>
                 </div>
                 <div className="col-lg-4">
-                    <Select name="techUserId" label="Tech User">
+                    <Select name="projectId" label="Project">
                         <option value=""></option>
-                        {allUsers && allUsers.map((user) => (
+                        {allProjects && allProjects.map((user) => (
                             <option key={user.id} value={user.id}>
                                 {user.name}
                             </option>
                         ))}
                     </Select>
                 </div>
-                          </div>
-                <div className="form-group row">
-                    <div className="col-lg-4">
-                      <Select name="areaType" label="Area">
-                        {InvoiceAreaTitles.map((status, index) => (
-                            <option key={status} value={index}>
-                                {status}
-                            </option>
-                        ))}
-                                    
-                    </Select>
-                    </div>
-                  
-                </div>
+             </div>
+    
               <div className="form-group">
                 <label>Description</label>
                 <Field
                   name="description"
                   as="textarea"
                   className="form-control"
+                    rows="4"
                 />
               </div>
               <button

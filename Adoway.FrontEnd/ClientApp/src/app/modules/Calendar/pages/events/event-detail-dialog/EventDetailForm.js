@@ -70,7 +70,6 @@ export function EventDetailForm({
                                     </div>
                                 </div>
                                
-                               
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>

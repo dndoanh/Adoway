@@ -81,7 +81,7 @@ export function EventEditForm({
                                                 value: user.id,
                                                 label: user.name
                                             }))}
-                                            values={allUsers.filter(x => event.attendeeIds.toLowerCase().includes(x.id.toLowerCase())).map((user) => ({
+                                            values={allUsers && allUsers.filter(x => event.attendeeIds?.toLowerCase().includes(x.id?.toLowerCase())).map((user) => ({
                                                 value: user.id,
                                                 label: user.name
                                             }))}

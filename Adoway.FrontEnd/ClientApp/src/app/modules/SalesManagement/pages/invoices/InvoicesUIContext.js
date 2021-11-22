@@ -28,11 +28,11 @@ export function InvoicesUIProvider({ invoicesUIEvents, children }) {
 
     const initInvoice = {
         id: undefined,
-        name: "",
-        email: "",
-        languageId: undefined,
-        status: 0,
-        avatarUrl: null
+        invoiceNo: "",
+        supplierId: undefined,
+        projectId: undefined,
+        paymentStatus: 0,
+       
     };
 
     const value = {

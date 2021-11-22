@@ -34,4 +34,8 @@ export {SVGIcon} from "./SVGIcon";
 export { ModalProgressBar } from "./ModalProgressBar";
 
 //Calendar
-export { BigCalendar} from "./big-calendar/BigCalendar";
+export { BigCalendar } from "./big-calendar/BigCalendar";
+
+//stepper
+
+export {HorizontalNonLinearStepper } from "./stepper/Stepper"

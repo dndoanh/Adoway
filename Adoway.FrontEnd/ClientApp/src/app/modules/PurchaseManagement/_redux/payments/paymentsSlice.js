@@ -1,25 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import _ from 'lodash';
 
-const initialCustomersState = {
+const initialPaymentsState = {
     listLoading: false,
     actionsLoading: false,
     needReload: false,
     totalCount: 0,
     entities: null,
-    allCustomers: [],
-    customerForEdit: undefined,
+    paymentForEdit: undefined,
     lastError: null,
-    customerInRoles:null
+    payments:null
 };
 export const callTypes = {
     list: "list",
     action: "action"
 };
 
-export const customersSlice = createSlice({
-    name: "customers",
-    initialState: initialCustomersState,
+export const paymentsSlice = createSlice({
+    name: "payments",
+    initialState: initialPaymentsState,
     reducers: {
         catchError: (state, action) => {
             state.error = `${action.type}: ${action.payload.error}`;
@@ -38,51 +37,47 @@ export const customersSlice = createSlice({
             }
         },
 
-        // customerSelected
-        customerSelected: (state, action) => {
-            state.customerForEdit = _.find(state.entities, { id: action.payload.id });
+        // paymentSelected
+        paymentSelected: (state, action) => {
+            state.paymentForEdit = _.find(state.entities, { id: action.payload.id });
         },
-        // findCustomers
-        customersFetched: (state, action) => {
-            const { totalCount, entities } = action.payload;
+        // findPayments
+        paymentsFetched: (state, action) => {
+            const { totalCount, entities} = action.payload;
             state.listLoading = false;
             state.error = null;
             state.entities = entities;
             state.totalCount = totalCount;
-            state.entities = state.entities.map(entity => {
-                entity.dob = entity.dob && new Date(entity.dob) || null;
-                return entity;
-            });
             
         },
-        // createCustomer
-        customerCreated: (state, action) => {
+        // createPayment
+        paymentCreated: (state, action) => {
             state.actionsLoading = false;
             state.needReload = !state.needReload;
             state.error = null;
-            state.entities.push(action.payload.customer);
+            state.entities.push(action.payload.payment);
         },
-        // updateCustomer
-        customerUpdated: (state, action) => {
+        // updatePayment
+        paymentUpdated: (state, action) => {
             state.error = null;
             state.actionsLoading = false;
             state.needReload = !state.needReload;
-            state.entities = state.entities.map(entity => {
-                if (entity.id === action.payload.customer.id) {
-                    return action.payload.customer;
+            state.entities = state.payments.map(entity => {
+                if (entity.id === action.payload.payment.id) {
+                    return action.payload.payment;
                 }
                 return entity;
             });
         },
-        allCustomersFetched: (state, action) => {
-            const customers = action.payload;
-            state.allCustomers = customers;
+        allPaymentsFetched: (state, action) => {
+            const payments = action.payload;
+            state.allPayments = payments;
         },
-        // deleteCustomer
-        customerDeleted: (state, action) => {
+        // deletePayment
+        paymentDeleted: (state, action) => {
             state.error = null;
             state.actionsLoading = false;
-            state.entities = state.entities.filter(el => el.id !== action.payload.id);
+            state.entities = state.payments.filter(el => el.id !== action.payload.id);
         },
     }
 });

@@ -2,24 +2,24 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { shallowEqual, useSelector } from "react-redux";
-import * as actions from "../../../_redux/invoices/invoicesActions";
+import * as actions from "../../../_redux/payments/paymentsActions";
 import {
   Card,
   CardBody,
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../../_metronic/_partials/controls";
-import { InvoiceEditForm } from "./InvoiceEditForm";
+import { PaymentEditForm } from "./PaymentEditForm";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 
-const initInvoice = {
+const initPayment = {
   id: undefined,
   code: "",
-    invoiceId: null
+    paymentId: null
 };
 
-export function InvoiceEdit({
+export function PaymentEdit({
   history,
   match: {
     params: { id },
@@ -33,46 +33,47 @@ export function InvoiceEdit({
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
-    const { actionsLoading, invoiceForEdit } = useSelector(
+    const { actionsLoading, paymentForEdit } = useSelector(
     (state) => ({
-          actionsLoading: state.invoices.actionsLoading,
-          invoiceForEdit: state.invoices.invoiceForEdit,
+          actionsLoading: state.payments.actionsLoading,
+          paymentForEdit: state.payments.paymentForEdit,
     }),
     shallowEqual
   );
 
     useEffect(() => {
-        dispatch(actions.selectInvoice(id));
+        debugger;
+        dispatch(actions.selectPayment(id));
   }, [id, dispatch]);
 
     useEffect(() => {
-    let _title = id ? "" : "New Invoice";
-    if (invoiceForEdit && id) {
-        _title = `Edit invoice`;
+    let _title = id ? "" : "New Work Order";
+    if (paymentForEdit && id) {
+        _title = `Edit product`;
     }
 
     setTitle(_title);
     suhbeader.setTitle(_title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [invoiceForEdit, id]);
+  }, [paymentForEdit, id]);
 
-    const saveInvoice = (values) => {
+    const savePayment = (values) => {
     if (!id) {
-      dispatch(actions.createInvoice(values)).then(() => backToInvoicesList());
+      dispatch(actions.createPayment(values)).then(() => backToPaymentsList());
     } else {
-      dispatch(actions.updateInvoice(values)).then(() => backToInvoicesList());
+      dispatch(actions.updatePayment(values)).then(() => backToPaymentsList());
     }
   };
 
   const btnRef = useRef();  
-  const saveInvoiceClick = () => {
+  const savePaymentClick = () => {
     if (btnRef && btnRef.current) {
       btnRef.current.click();
     }
   };
 
-  const backToInvoicesList = () => {
-    history.push(`/invoices`);
+  const backToPaymentsList = () => {
+    history.push(`/payments`);
   };
 
   return (
@@ -82,7 +83,7 @@ export function InvoiceEdit({
         <CardHeaderToolbar>
           <button
             type="button"
-            onClick={backToInvoicesList}
+            onClick={backToPaymentsList}
             className="btn btn-light"
           >
             <i className="fa fa-arrow-left"></i>
@@ -97,7 +98,7 @@ export function InvoiceEdit({
           <button
             type="submit"
             className="btn btn-primary ml-2"
-            onClick={saveInvoiceClick}
+            onClick={savePaymentClick}
           >
             Save
           </button>
@@ -125,7 +126,7 @@ export function InvoiceEdit({
                   role="button"
                   aria-selected={(tab === "remarks").toString()}
                 >
-                  Invoice remarks
+                  Payment remarks
                 </a>
               </li>
               <li className="nav-item" onClick={() => setTab("specs")}>
@@ -135,7 +136,7 @@ export function InvoiceEdit({
                   role="tab"
                   aria-selected={(tab === "specs").toString()}
                 >
-                  Invoice specifications
+                  Payment specifications
                 </a>
               </li>
             </>
@@ -143,20 +144,20 @@ export function InvoiceEdit({
         </ul>
         <div className="mt-5">
           {tab === "basic" && (
-            <InvoiceEditForm
+            <PaymentEditForm
               actionsLoading={actionsLoading}
-              invoice={invoiceForEdit || initInvoice}
+              payment={paymentForEdit || initPayment}
               btnRef={btnRef}
-              saveInvoice={saveInvoice}
+              savePayment={savePayment}
             />
           )}
           {/*{tab === "remarks" && id && (*/}
-          {/*  <RemarksUIProvider currentInvoiceId={id}>*/}
+          {/*  <RemarksUIProvider currentPaymentId={id}>*/}
           {/*    <Remarks />*/}
           {/*  </RemarksUIProvider>*/}
           {/*)}*/}
           {/*{tab === "specs" && id && (*/}
-          {/*  <SpecificationsUIProvider currentInvoiceId={id}>*/}
+          {/*  <SpecificationsUIProvider currentPaymentId={id}>*/}
           {/*    <Specifications />*/}
           {/*  </SpecificationsUIProvider>*/}
           {/*)}*/}

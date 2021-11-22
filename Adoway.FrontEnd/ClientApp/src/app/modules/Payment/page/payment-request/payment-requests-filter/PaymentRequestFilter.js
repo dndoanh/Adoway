@@ -2,18 +2,17 @@ import React, { useMemo } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Formik } from "formik";
 import { isEqual } from "lodash";
-import { useInvoicesUIContext } from "../InvoicesUIContext";
+import { usePaymentRequestsUIContext } from "../PaymentRequestsUIContext";
 import {
     Input, Select, DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
 
 const prepareFilter = (queryParams, values) => {
-    const { paymentStatus, searchText, supplierId, projectId } = values;
+    const { status, searchText, projectId } = values;
     const newQueryParams = { ...queryParams };
     const filter = {};
     // Filter by status
-    filter.paymentStatus = paymentStatus !== "" ? +paymentStatus : undefined;
-    filter.supplierId = supplierId !== "" ? supplierId : undefined;
+    filter.status = status !== "" ? +status : undefined;
     filter.projectId = projectId !== "" ? projectId : undefined;
     // Filter by all fields
     //filter.name = searchText;
@@ -24,23 +23,23 @@ const prepareFilter = (queryParams, values) => {
     return newQueryParams;
 };
 
-export function InvoicesFilter({ listLoading }) {
-    // Invoices UI Context
-    const invoicesUIContext = useInvoicesUIContext();
-    const invoicesUIProps = useMemo(() => {
+export function PaymentRequestsFilter({ listLoading }) {
+    // PaymentRequests UI Context
+    const paymentRequestsUIContext = usePaymentRequestsUIContext();
+    const paymentRequestsUIProps = useMemo(() => {
         return {
-            queryParams: invoicesUIContext.queryParams,
-            setQueryParams: invoicesUIContext.setQueryParams,
+            queryParams: paymentRequestsUIContext.queryParams,
+            setQueryParams: paymentRequestsUIContext.setQueryParams,
         };
-    }, [invoicesUIContext]);
+    }, [paymentRequestsUIContext]);
 
     // queryParams, setQueryParams,
     const applyFilter = (values) => {
-        const newQueryParams = prepareFilter(invoicesUIProps.queryParams, values);
-        if (!isEqual(newQueryParams, invoicesUIProps.queryParams)) {
+        const newQueryParams = prepareFilter(paymentRequestsUIProps.queryParams, values);
+        if (!isEqual(newQueryParams, paymentRequestsUIProps.queryParams)) {
             newQueryParams.pageNumber = 1;
             // update list by queryParams
-            invoicesUIProps.setQueryParams(newQueryParams);
+            paymentRequestsUIProps.setQueryParams(newQueryParams);
         }
     };
     const { currentProjectsState } = useSelector(
@@ -59,8 +58,7 @@ export function InvoicesFilter({ listLoading }) {
         <>
             <Formik
                 initialValues={{
-                    paymentStatus: "", // values => All=""/Inactive=0/Active=1
-                    supplierId: undefined,
+                    status: "", // values => All=""/Inactive=0/Active=1
                     projectId: undefined,
                     searchText: "",
                 }}
@@ -80,11 +78,11 @@ export function InvoicesFilter({ listLoading }) {
                             <div className="col-lg-2">
                                 <select
                                     className="form-control"
-                                    name="paymentStatus"
+                                    name="status"
                                     placeholder="Filter by Status"
                                     // TODO: Change this code
                                     onChange={(e) => {
-                                        setFieldValue("paymentStatus", e.target.value);
+                                        setFieldValue("status", e.target.value);
                                         handleSubmit();
                                     }}
                                     onBlur={handleBlur}
@@ -109,23 +107,6 @@ export function InvoicesFilter({ listLoading }) {
                                 >
                                     <option value="">All</option>
                                     {allProjects && allProjects.map((user) => (
-                                        <option key={user.id} value={user.id}>
-                                            {user.name}
-                                        </option>
-                                    ))}
-                                </Select>
-                            </div>
-                            <div className="col-lg-2">
-                                <Select name="supplierId"
-                                    onChange={(e) => {
-                                        setFieldValue("supplierId", e.target.value);
-                                        handleSubmit();
-                                    }}
-                                    value={values.supplierId}
-                                    placeholder="Filter by Project"
-                                >
-                                    <option value="">All</option>
-                                    {entities && entities.map((user) => (
                                         <option key={user.id} value={user.id}>
                                             {user.name}
                                         </option>

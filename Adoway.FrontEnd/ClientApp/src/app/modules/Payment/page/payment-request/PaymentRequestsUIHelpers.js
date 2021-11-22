@@ -1,9 +1,9 @@
-export const InvoiceStatusCssClasses = ["danger", "success", "info", "primary","secondary","warning"];
-export const InvoiceStatusTitles = ["", "Develop", "Return", "Active ", "Over"];
-export const InvoiceAreaTitles = ["", "EastArea", "WestArea"];
-export const InvoiceTypeTitles = ["", " Unpaid", "Paid"];
+export const PaymentRequestStatusCssClasses = ["danger", "success", "info", "primary","secondary","warning"];
+export const PaymentRequestStatusTitles = ["", "Develop", "Return", "Active ", "Over"];
+export const PaymentRequestAreaTitles = ["", "EastArea", "WestArea"];
+export const PaymentRequestTypeTitles = ["", " Draft", "Confirmed", "Verified", "Approved", "Paying", "Done","Canceled"];
 export const defaultSorted = [{ dataField: "name", order: "asc" }];
-export const InvoiceConditionTitles = ["New", "Used"];
+export const PaymentRequestConditionTitles = ["New", "Used"];
 export const sizePerPageList = [
   { text: "3", value: 3 },
   { text: "5", value: 5 },
@@ -11,7 +11,7 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-    invoiceNo: "",
+    paymentRequestNo: "",
     supplierId:"",
     projectId:""
   },

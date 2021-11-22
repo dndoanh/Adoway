@@ -26,7 +26,7 @@ export function InvoicesCard() {
             className="btn btn-primary"
             onClick={invoicesUIProps.newInvoiceButtonClick}
           >
-            New Work Order
+            New Invoice
           </button>
         </CardHeaderToolbar>
       </CardHeader>

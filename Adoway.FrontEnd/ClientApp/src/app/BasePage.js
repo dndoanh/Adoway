@@ -17,10 +17,10 @@ import { CustomersPage } from "./modules/SalesManagement/pages/customers/Custome
 import { SuppliersPage } from "./modules/PurchaseManagement/pages/suppliers/SuppliersPage";
 import { ProductsPage } from "./modules/InventoryManagement/pages/products/ProductsPage";
 import { CategoriesPage } from "./modules/InventoryManagement/pages/categories/CategoriesPage";
-import { TestsPage } from "./modules/ProjectManagement/pages/tests/TestsPage";
 import { MeetingRoomsPage } from "./modules/Calendar/pages/meetingrooms/MeetingRoomsPage";
 import {EventsPage } from "./modules/Calendar/pages/events/EventsPage";
 import { InvoicesPage } from "./modules/SalesManagement/pages/invoices/InvoicesPage";
+import { PaymentRequestsPage } from "./modules/Payment/page/payment-request/PaymentRequestsPage";
 
 const GoogleMaterialPage = lazy(() =>
     import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
@@ -63,7 +63,6 @@ export default function BasePage() {
                 <Route path="/apartments" component={ApartmentsPage} />
                 <Route path="/owners" component={OwnersPage} />
                 <Route path="/workorders" component={WorkOrdersPage} />
-                <Route path="/tests" component={TestsPage} />
 
                 <Route path="/projects" component={ProjectsPage} />
                 {/*Sale*/}
@@ -88,6 +87,8 @@ export default function BasePage() {
                 <Route path="/events" component={EventsPage} />
 
                 <Route path="/invoices" component={InvoicesPage} />
+                <Route path="/paymentrequests" component={PaymentRequestsPage} />
+                
             </Switch>
         </Suspense>
     );
