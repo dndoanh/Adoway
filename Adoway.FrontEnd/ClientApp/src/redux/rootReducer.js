@@ -62,8 +62,6 @@ export const rootReducer = combineReducers({
     // System
     enterprises: enterprisesSlice.reducer,
     languages: languagesSlice.reducer,
-
-    tests: testsSlice.reducer,
 /*    payments: paymentsSlice.reducer,*/
 
     meetingrooms: meetingRoomsSlice.reducer,
