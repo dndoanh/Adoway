@@ -31,6 +31,8 @@ namespace Adoway.BackEnd.Controllers.UserManagement
                 return BadRequest("Could not get current user");
             // return auth user
             var obj = _mapper.Map<UserAuthViewModel>(user);
+            obj.Screens = await _userService.GetUserScreens(obj.Id);
+            obj.Functions = await _userService.GetUserFunctions(obj.Id);
             return new ObjectResult(obj);
         }
         [HttpGet]
