@@ -15,6 +15,7 @@ using Adoway.Service.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using Adoway.Common.ViewModels.System;
 
 namespace Adoway.Service.UserManagement
 {
@@ -129,7 +130,7 @@ namespace Adoway.Service.UserManagement
                                    RoleName = a.Name,
                                    Description = a.Description,
                                    UserId = b.UserId
-                               }).ToListAsync(); ;
+                               }).ToListAsync();
             return roles;
         }
         public async Task<UserInRoleViewModel> CreateUserInRole(UserInRoleViewModel model)
@@ -142,6 +143,37 @@ namespace Adoway.Service.UserManagement
         {
             var entity = await _userInRoleRepo.Delete(id);
             return _mapper.Map<UserInRoleViewModel>(entity);
+        }
+        public async Task<List<ScreenViewModel>> GetUserScreens(Guid userId)
+        {
+            var screens = await (from a in DbContext.Roles
+                                 join b in DbContext.UsersInRoles on a.Id equals b.RoleId
+                                 join c in DbContext.RolesInScreens on a.Id equals c.RoleId
+                                 join d in DbContext.Screens on c.ScreenId equals d.Id
+                                 where b.UserId == userId
+                                 orderby d.Ord
+                                 select new ScreenViewModel
+                                 {
+                                     Name = d.Name,
+                                     Path = d.Path,
+                                     Icon = d.Icon,
+                                     IsUpper = d.IsUpper
+                                 }).Distinct().ToListAsync();
+            return screens;
+        }
+        public async Task<List<ScreenFunctionViewModel>> GetUserFunctions(Guid userId)
+        {
+            var functions = await (from a in DbContext.ScreenFunctions
+                               join b in DbContext.RolesInScreenFunctions on a.Id equals b.ScreenFunctionId
+                               join c in DbContext.Roles on b.RoleId equals c.Id
+                               join d in DbContext.UsersInRoles on c.Id equals d.RoleId
+                               where d.UserId == userId && b.BelongTo
+                               select new ScreenFunctionViewModel
+                               {
+                                   Code = a.Code,
+                                   Name = a.Name
+                               }).Distinct().ToListAsync();
+            return functions;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Adoway.Common.ViewModels.Base;
+using Adoway.Common.ViewModels.System;
 using Adoway.Common.ViewModels.UserManagement;
 using Adoway.Data.Entities.UserManagement;
 
@@ -21,5 +22,7 @@ namespace Adoway.Service.UserManagement
         Task<List<UserInRoleViewModel>> GetUserInRoles(Guid userId);
         Task<UserInRoleViewModel> CreateUserInRole(UserInRoleViewModel model);
         Task<UserInRoleViewModel> RemoveUserInRole(Guid id);
+        Task<List<ScreenViewModel>> GetUserScreens(Guid userId);
+        Task<List<ScreenFunctionViewModel>> GetUserFunctions(Guid userId);
     }
 }

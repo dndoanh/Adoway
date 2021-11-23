@@ -15,5 +15,6 @@ namespace Adoway.Data.Entities.System
         public string Icon { get; set; }
         public string Ord { get; set; }
         public string Description { get; set; }
+        public bool IsUpper { get; set; }
     }
 }

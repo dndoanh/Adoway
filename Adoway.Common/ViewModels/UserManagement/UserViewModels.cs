@@ -1,5 +1,6 @@
 ﻿using Adoway.Common.Enums;
 using Adoway.Common.ViewModels.Base;
+using Adoway.Common.ViewModels.System;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,10 +23,13 @@ namespace Adoway.Common.ViewModels.UserManagement
         public DateTime? LastLogin { get; set; }
         public Status Status { get; set; }
         public string RefreshToken { get; set; }
+        public bool IsSuperAdmin { get; set; }
     }
     public class UserAuthViewModel : UserViewModel
     {
         public string AccessToken { get; set; }
+        public List<ScreenViewModel> Screens { get; set; }
+        public List<ScreenFunctionViewModel> Functions { get; set; }
     }
     public class UserFilterViewModel : BaseFilterViewModel
     {

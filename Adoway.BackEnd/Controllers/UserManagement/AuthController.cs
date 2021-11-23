@@ -52,6 +52,8 @@ namespace Adoway.BackEnd.Controllers.UserManagement
                     // return auth user
                     var obj = _mapper.Map<UserAuthViewModel>(user);
                     obj.AccessToken = accessToken;
+                    obj.Screens = await _UserService.GetUserScreens(obj.Id);
+                    obj.Functions = await _UserService.GetUserFunctions(obj.Id);
                     return new ObjectResult(obj);
                 }
             }

@@ -10,6 +10,8 @@ namespace Adoway.Data.Entities.System
     public class ScreenFunctionEntity : BaseEntity
     {
         [Required]
+        public string Code { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Description { get; set; }
         public Guid ScreenId { get; set; }
