@@ -157,8 +157,9 @@ namespace Adoway.Service.UserManagement
                                      Name = d.Name,
                                      Path = d.Path,
                                      Icon = d.Icon,
-                                     IsUpper = d.IsUpper
-                                 }).Distinct().ToListAsync();
+                                     IsUpper = d.IsUpper,
+                                     Ord = d.Ord
+                                 }).Distinct().OrderBy(z=>z.Ord).ToListAsync();
             return screens;
         }
         public async Task<List<ScreenFunctionViewModel>> GetUserFunctions(Guid userId)

@@ -12,6 +12,7 @@ namespace Adoway.Common.ViewModels.System
         public string Path { get; set; }
         public string Icon { get; set; }
         public bool IsUpper { get; set; }
+        public string Ord { get; set; }
     }
     public class ScreenFunctionViewModel
     {
