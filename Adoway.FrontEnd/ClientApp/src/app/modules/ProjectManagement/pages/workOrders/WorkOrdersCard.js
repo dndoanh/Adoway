@@ -8,6 +8,7 @@ import {
 import { WorkOrdersFilter } from "./work-orders-filter/WorkOrdersFilter";
 import { WorkOrdersTable } from "./work-orders-table/WorkOrdersTable";
 import { useWorkOrdersUIContext } from "./WorkOrdersUIContext";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function WorkOrdersCard() {
   const workOrdersUIContext = useWorkOrdersUIContext();
@@ -17,6 +18,9 @@ export function WorkOrdersCard() {
     };
   }, [workOrdersUIContext]);
 
+
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const AddWorkOrder= user.functions.find(x => x.code == "CreateWorkOrder")
   return (
     <Card>
       <CardHeader title="WorkOrders list">

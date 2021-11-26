@@ -36,8 +36,6 @@ export function EventsTable() {
         dispatch(usersActions.fetchAllUsers);
         dispatch(roomsActions.fetchAllMeetingRooms)
         dispatch(eventsActions.fetchEvents({ filter: { title: "" }, pageSize:100,pageNumber:1,sortOrder:"asc", sortField:"title"}))
-        
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const eventPropGetter = ( event ) => {
@@ -46,12 +44,15 @@ export function EventsTable() {
             style: style
         };
     }
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const Add = user.functions.find(x => x.code == "CreateEvent")
+    const Edit = user.functions.find(x => x.code == "EditEvent")
     return (
         <>
             <BigCalendar
                 events={eventList}
-                onSelectSlot={eventUIProps.openNewDetailPage}
-                onSelectEvent={eventUIProps.openDetailPage}
+                onSelectSlot={Add && eventUIProps.openNewPage}
+                onSelectEvent={Edit && eventUIProps.openEditPage}
                 eventPropGetter={eventPropGetter}
             />
         </>

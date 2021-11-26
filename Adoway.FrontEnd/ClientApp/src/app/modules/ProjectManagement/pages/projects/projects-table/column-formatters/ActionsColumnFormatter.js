@@ -10,34 +10,39 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openEditProjectPage, openDeleteProjectDialog }
+    { openEditProjectPage, openDeleteProjectDialog, Edit, Delete }
 ) {
   return (
-    <>
-    <OverlayTrigger
-        overlay={<Tooltip id="projects-edit-tooltip">Edit work order</Tooltip>}
-    >
-        <a
-            className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-            onClick={() => openEditProjectPage(row.id)}
-        >
-            <span className="svg-icon svg-icon-md svg-icon-primary">
-                <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
-                />
-            </span>
-        </a>
-    </OverlayTrigger>
-         
-      <a
-        title="Delete user"
-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteProjectDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-danger">
-          <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
-        </span>
-      </a>
+      <>
+          {
+              Edit &&
+              <OverlayTrigger
+                  overlay={<Tooltip id="projects-edit-tooltip">Edit work order</Tooltip>}
+              >
+                  <a
+                      className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                      onClick={() => openEditProjectPage(row.id)}
+                  >
+                      <span className="svg-icon svg-icon-md svg-icon-primary">
+                          <SVG
+                              src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+                          />
+                      </span>
+                  </a>
+              </OverlayTrigger>
+          }
+          {
+              Delete &&
+              <a
+                  title="Delete user"
+                  className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                  onClick={() => openDeleteProjectDialog(row.id)}
+              >
+                  <span className="svg-icon svg-icon-md svg-icon-danger">
+                      <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
+                  </span>
+              </a>
+          }
     </>
   );
 }

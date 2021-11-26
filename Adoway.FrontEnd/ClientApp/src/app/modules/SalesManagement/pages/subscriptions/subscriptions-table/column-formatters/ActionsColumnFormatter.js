@@ -10,34 +10,40 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openEditSubscriptionPage, openDeleteSubscriptionDialog }
+    { openEditSubscriptionPage, openDeleteSubscriptionDialog,Edit,Delete }
 ) {
   return (
-    <>
-    <OverlayTrigger
-        overlay={<Tooltip id="subscriptions-edit-tooltip">Edit work order</Tooltip>}
-    >
-        <a
-            className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-            onClick={() => openEditSubscriptionPage(row.id)}
-        >
-            <span className="svg-icon svg-icon-md svg-icon-primary">
-                <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
-                />
-            </span>
-        </a>
-    </OverlayTrigger>
-         
-      <a
-        title="Delete user"
-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteSubscriptionDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-danger">
-          <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
-        </span>
-      </a>
+      <>
+          {
+              Edit &&
+              <OverlayTrigger
+                  overlay={<Tooltip id="subscriptions-edit-tooltip">Edit work order</Tooltip>}
+              >
+                  <a
+                      className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                      onClick={() => openEditSubscriptionPage(row.id)}
+                  >
+                      <span className="svg-icon svg-icon-md svg-icon-primary">
+                          <SVG
+                              src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+                          />
+                      </span>
+                  </a>
+              </OverlayTrigger>
+          }
+          {
+              Delete &&
+              <a
+                  title="Delete user"
+                  className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                  onClick={() => openDeleteSubscriptionDialog(row.id)}
+              >
+                  <span className="svg-icon svg-icon-md svg-icon-danger">
+                      <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
+                  </span>
+              </a>
+          }
+    
     </>
   );
 }

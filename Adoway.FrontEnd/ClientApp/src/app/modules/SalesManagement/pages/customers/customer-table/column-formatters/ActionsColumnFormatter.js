@@ -9,30 +9,36 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openEditCustomerDialog, openDeleteCustomerDialog }
+    { openEditCustomerDialog, openDeleteCustomerDialog,Edit,Delete }
 ) {
   return (
-    <>
-      <a
-        title="Edit user"
-        className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditCustomerDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-primary">
-          <SVG
-            src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
-          />
-        </span>
-      </a>
-      <a
-        title="Delete user"
-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteCustomerDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-danger">
-          <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
-        </span>
-      </a>
+      <>
+          {
+              Edit &&
+              <a
+                  title="Edit user"
+                  className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  onClick={() => openEditCustomerDialog(row.id)}
+              >
+                  <span className="svg-icon svg-icon-md svg-icon-primary">
+                      <SVG
+                          src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+                      />
+                  </span>
+              </a>
+          }
+          {
+              Delete &&
+              <a
+                  title="Delete user"
+                  className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                  onClick={() => openDeleteCustomerDialog(row.id)}
+              >
+                  <span className="svg-icon svg-icon-md svg-icon-danger">
+                      <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
+                  </span>
+              </a>
+          }
     </>
   );
 }

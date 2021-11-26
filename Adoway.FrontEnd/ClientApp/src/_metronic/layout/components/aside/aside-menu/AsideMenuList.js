@@ -5,16 +5,19 @@ import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function AsideMenuList({ layoutProps }) {
     const location = useLocation();
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    debugger;
     const getMenuItemActive = (url, hasSubmenu = false) => {
         return checkIsActive(location, url)
             ? ` ${!hasSubmenu &&
             "menu-item-active"} menu-item-open menu-item-not-hightlighted`
             : "";
     };
-
+    const AdminMenu = ["System", "Enterprise","Language","Setting","User","Role","User Management"]
     return (
         <>
             {/* begin::Menu Nav */}
@@ -23,6 +26,7 @@ export function AsideMenuList({ layoutProps }) {
                 <li
                     className={`menu-item ${getMenuItemActive("/dashboard", false)}`}
                     aria-haspopup="true"
+
                 >
                     <NavLink className="menu-link" to="/dashboard">
                         <span className="svg-icon menu-icon">
@@ -31,274 +35,51 @@ export function AsideMenuList({ layoutProps }) {
                         <span className="menu-text">Dashboard</span>
                     </NavLink>
                 </li>
-                {/*end::1 Level*/}
-                {/*end::1 Level*/}
-                {/* Project Management */}
-                {/* begin::section */}
-                <li className="menu-section ">
-                    <h4 className="menu-text">Project</h4>
-                    <i className="menu-icon flaticon-more-v2"></i>
-                </li>
-                {/* end:: section */}
-                {/*begin::1 Level*/}
-                <li
-                    className={`menu-item ${getMenuItemActive("/workorders", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/workorders">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/save.svg")} />
-                        </span>
-                        <span className="menu-text">Work Orders</span>
-                    </NavLink>
-                </li>
-                <li
-                    className={`menu-item ${getMenuItemActive("/projects", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/projects">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/fire.svg")} />
-                        </span>
-                        <span className="menu-text">Projects</span>
-                    </NavLink>
-                </li>
-                <li
-                    className={`menu-item ${getMenuItemActive("/apartments", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/apartments">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/sad.svg")} />
-                        </span>
-                        <span className="menu-text">Apartments</span>
-                    </NavLink>
-                </li>
-                <li
-                    className={`menu-item ${getMenuItemActive("/owners", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/owners">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/size.svg")} />
-                        </span>
-                        <span className="menu-text">Owners</span>
-                    </NavLink>
-                </li>
-               
-                <li className="menu-section ">
-                    <h4 className="menu-text">Calendar</h4>
-                    <i className="menu-icon flaticon-more-v2"></i>
-                </li>
-                {/* end:: section */}
-                <li
-                    className={`menu-item ${getMenuItemActive("/meetingrooms", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/meetingrooms">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Route.svg")} />
-                        </span>
-                        <span className="menu-text">Meeting Rooms</span>
-                    </NavLink>
-                </li>
-                <li
-                    className={`menu-item ${getMenuItemActive("/events", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/events">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
-                        </span>
-                        <span className="menu-text">Events</span>
-                    </NavLink>
-                </li>
-                /// -----------------////
-                <li className="menu-section ">
-                    <h4 className="menu-text">Payment</h4>
-                    <i className="menu-icon flaticon-more-v2"></i>
-                </li>
-                {/* end:: section */}
-                <li
-                    className={`menu-item ${getMenuItemActive("/paymentrequests", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/paymentrequests">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Route.svg")} />
-                        </span>
-                        <span className="menu-text">Payment Request</span>
-                    </NavLink>
-                </li>
-
-               /////----------------////
-                {/*end::1 Level*/}
-                {/* System */}
-                {/* begin::section */}
-                <li className="menu-section ">
-                    <h4 className="menu-text">Sales</h4>
-                    <i className="menu-icon flaticon-more-v2"></i>
-                </li>
-                {/* end:: section */}
-                <li
-                    className={`menu-item ${getMenuItemActive("/subscriptions", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/subscriptions">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Route.svg")} />
-                        </span>
-                        <span className="menu-text">Subscriptions</span>
-                    </NavLink>
-                </li>
-                <li
-                    className={`menu-item ${getMenuItemActive("/customers", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/customers">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
-                        </span>
-                        <span className="menu-text">Customers</span>
-                    </NavLink>
-                </li>
-                <li
-                    className={`menu-item ${getMenuItemActive("/invoices", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/invoices">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
-                        </span>
-                        <span className="menu-text">Invoices</span>
-                    </NavLink>
-                </li>
-                {/* System */}
-                {/* begin::section */}
-                <li className="menu-section ">
-                    <h4 className="menu-text">Purchases</h4>
-                    <i className="menu-icon flaticon-more-v2"></i>
-                </li>
-                {/* end:: section */}
-                <li
-                    className={`menu-item ${getMenuItemActive("/suppliers", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/suppliers">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Route.svg")} />
-                        </span>
-                        <span className="menu-text">Suppliers</span>
-                    </NavLink>
-                </li>
-                {/*end::1 Level*/}
-                {/* begin::section */}
-                <li className="menu-section ">
-                    <h4 className="menu-text">Inventory</h4>
-                    <i className="menu-icon flaticon-more-v2"></i>
-                </li>
-                {/* end:: section */}
-                <li
-                    className={`menu-item ${getMenuItemActive("/categories", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/categories">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/waiting.svg")} />
-                        </span>
-                        <span className="menu-text">Product Categories</span>
-                    </NavLink>
-                </li>
-                <li
-                    className={`menu-item ${getMenuItemActive("/products", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/products">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Route.svg")} />
-                        </span>
-                        <span className="menu-text">Product</span>
-                    </NavLink>
-                </li>
-                {/*end::1 Level*/}
-                {/* User Management */}
-                {/* begin::section */}
-                <li className="menu-section ">
-                    <h4 className="menu-text">User Management</h4>
-                    <i className="menu-icon flaticon-more-v2"></i>
-                </li>
-                {/* end:: section */}     
-                <li
-                    className={`menu-item ${getMenuItemActive("/users", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/users">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
-                        </span>
-                        <span className="menu-text">User</span>
-                    </NavLink>
-                </li>
-                <li
-                    className={`menu-item ${getMenuItemActive("/roles", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/roles">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Shield-protected.svg")} />
-                        </span>
-                        <span className="menu-text">Roles</span>
-                    </NavLink>
-                </li>
-                {/*end::1 Level*/}
-                {/*end::1 Level*/}
-                {/* System */}
-                {/* begin::section */}
-                <li className="menu-section ">
-                    <h4 className="menu-text">Systems</h4>
-                    <i className="menu-icon flaticon-more-v2"></i>
-                </li>
-                {/* end:: section */}
-                <li
-                    className={`menu-item ${getMenuItemActive("/enterprises", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/enterprises">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Route.svg")} />
-                        </span>
-                        <span className="menu-text">Enterprises</span>
-                    </NavLink>
-                </li>
-                <li
-                    className={`menu-item ${getMenuItemActive("/languages", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/languages">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
-                        </span>
-                        <span className="menu-text">Languages</span>
-                    </NavLink>
-                </li>
-                {/*end::1 Level*/}
-
-                {/*begin::1 Level*/}
-                <li
-                    className={`menu-item ${getMenuItemActive("/settings", false)}`}
-                    aria-haspopup="true"
-                >
-                    <NavLink className="menu-link" to="/settings">
-                        <span className="svg-icon menu-icon">
-                            <SVG src={toAbsoluteUrl("/media/svg/icons/General/Settings-2.svg")} />
-                        </span>
-                        <span className="menu-text">Settings</span>
-                    </NavLink>
-                </li>
-                {/*end::1 Level*/}
+                {user.screens && user.screens.filter(s => !AdminMenu.includes(s.name)).map(u => (
+                    <>
+                        {
+                            u.isUpper ?
+                                <li className="menu-section "> 
+                                    <h4 className="menu-text">{u.name}</h4>
+                                </li> :
+                                <li
+                                    className={`menu-item ${getMenuItemActive(u.path, false)}`}
+                                    aria-haspopup="true"
+                                >
+                                    <NavLink className="menu-link" to={`${u.path}`}>
+                                        <span className="svg-icon menu-icon">
+                                            <SVG src={toAbsoluteUrl(u.icon)} />
+                                        </span>
+                                        <span className="menu-text">{u.name}</span>
+                                    </NavLink>
+                                </li>
+                        }
+                    </>
+                   ))
+                }
+                {user.isSuperAdmin && user.screens && user.screens.filter(s => AdminMenu.includes(s.name)).map(u => (
+                    <>
+                        {
+                            u.isUpper ?
+                                <li className="menu-section ">
+                                    <h4 className="menu-text">{u.name}</h4>
+                                </li> :
+                                <li
+                                    className={`menu-item ${getMenuItemActive(u.path, false)}`}
+                                    aria-haspopup="true"
+                                >
+                                    <NavLink className="menu-link" to={`${u.path}`}>
+                                        <span className="svg-icon menu-icon">
+                                            <SVG src={toAbsoluteUrl(u.icon)} />
+                                        </span>
+                                        <span className="menu-text">{u.name}</span>
+                                    </NavLink>
+                                </li>
+                        }
+                    </>
+                ))
+                }
             </ul>
-
-            {/* end::Menu Nav */}
         </>
     );
 }

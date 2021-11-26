@@ -57,7 +57,9 @@ export function ProjectsTable() {
     }, [projectsUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
-  
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const Delete = user.functions.find(x => x.code == "DeleteSupplier")
+    const Edit = user.functions.find(x => x.code == "EditSupplier")
 
     useEffect(() => {
         // server call by queryParams
@@ -136,6 +138,8 @@ export function ProjectsTable() {
             formatExtraData: {
                 openEditProjectPage: projectsUIProps.openEditProjectPage,
                 openDeleteProjectDialog: projectsUIProps.openDeleteProjectDialog,
+                Delete: Delete,
+                Edit: Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

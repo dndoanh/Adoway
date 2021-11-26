@@ -10,34 +10,39 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openEditWorkOrderPage, openDeleteWorkOrderDialog }
+    { openEditWorkOrderPage, openDeleteWorkOrderDialog,Delete,Edit }
 ) {
   return (
-    <>
-    <OverlayTrigger
-        overlay={<Tooltip id="work-orders-edit-tooltip">Edit work order</Tooltip>}
-    >
-        <a
-            className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-            onClick={() => openEditWorkOrderPage(row.id)}
-        >
-            <span className="svg-icon svg-icon-md svg-icon-primary">
-                <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
-                />
-            </span>
-        </a>
-    </OverlayTrigger>
-         
-      <a
-        title="Delete user"
-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteWorkOrderDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-danger">
-          <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
-        </span>
-      </a>
+      <>
+          {
+              Edit &&
+              <OverlayTrigger
+                  overlay={<Tooltip id="work-orders-edit-tooltip">Edit work order</Tooltip>}
+              >
+                  <a
+                      className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                      onClick={() => openEditWorkOrderPage(row.id)}
+                  >
+                      <span className="svg-icon svg-icon-md svg-icon-primary">
+                          <SVG
+                              src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+                          />
+                      </span>
+                  </a>
+              </OverlayTrigger>
+          }
+          {
+              Delete &&
+              <a
+                  title="Delete user"
+                  className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                  onClick={() => openDeleteWorkOrderDialog(row.id)}
+              >
+                  <span className="svg-icon svg-icon-md svg-icon-danger">
+                      <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
+                  </span>
+              </a>
+          }
     </>
   );
 }

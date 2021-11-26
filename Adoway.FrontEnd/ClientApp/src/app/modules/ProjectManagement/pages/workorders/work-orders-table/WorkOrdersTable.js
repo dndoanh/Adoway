@@ -48,14 +48,15 @@ export function WorkOrdersTable() {
     // WorkOrders Redux state
     const dispatch = useDispatch();
     useEffect(() => {
-     
         // server call by queryParams
         dispatch(actions.fetchWorkOrders(workOrdersUIProps.queryParams));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [workOrdersUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
-  
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const Delete = user.functions.find(x => x.code == "DeleteSupplier")
+    const Edit = user.functions.find(x => x.code == "EditSupplier")
 
     useEffect(() => {
         // server call by queryParams
@@ -148,6 +149,8 @@ export function WorkOrdersTable() {
             formatExtraData: {
                 openEditWorkOrderPage: workOrdersUIProps.openEditWorkOrderPage,
                 openDeleteWorkOrderDialog: workOrdersUIProps.openDeleteWorkOrderDialog,
+                Delete: Delete,
+                Edit: Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

@@ -43,6 +43,8 @@ export function EventEditForm({
     );
     const { allMeetingRooms } = currentRoomsState;
 
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const Delete = user.functions.find(x => x.code == "DeleteEvent")
     return (
         <>
             <Formik
@@ -151,16 +153,16 @@ export function EventEditForm({
                             </button>
                     
                             <> </>
-                            {/*{id && (*/}
-                            {/*    <button*/}
-                            {/*        type="button"*/}
-                            {/*        onClick={() => handleDelete(event.id)}*/}
-                            {/*        className="btn btn-danger btn-elevate"*/}
-                            {/*    >*/}
-                            {/*        Delete*/}
-                            {/*    </button>*/}
-                            {/*    )*/}
-                            {/*}*/}
+                            {id && Delete && (
+                                <button
+                                    type="button"
+                                    onClick={() => handleDelete(event.id)}
+                                    className="btn btn-danger btn-elevate"
+                                >
+                                    Delete
+                                </button>
+                                )
+                            }
                             <> </>
                             <button
                                 type="submit"

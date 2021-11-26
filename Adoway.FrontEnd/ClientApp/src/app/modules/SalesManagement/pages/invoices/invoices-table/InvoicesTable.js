@@ -57,7 +57,10 @@ export function InvoicesTable() {
     }, [invoicesUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
-  
+
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const Delete = user.functions.find(x => x.code == "DeleteInvoice")
+    const Edit = user.functions.find(x => x.code == "EditInvoice")
 
     useEffect(() => {
         // server call by queryParams
@@ -128,6 +131,8 @@ export function InvoicesTable() {
             formatExtraData: {
                 openEditInvoicePage: invoicesUIProps.openEditInvoicePage,
                 openDeleteInvoiceDialog: invoicesUIProps.openDeleteInvoiceDialog,
+                Edit: Edit,
+                Delete: Delete
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

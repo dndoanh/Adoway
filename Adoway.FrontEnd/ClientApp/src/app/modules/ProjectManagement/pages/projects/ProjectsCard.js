@@ -8,6 +8,7 @@ import {
 import { ProjectsFilter } from "./projects-filter/ProjectsFilter";
 import { ProjectsTable } from "./projects-table/ProjectsTable";
 import { useProjectsUIContext } from "./ProjectsUIContext";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function ProjectsCard() {
   const projectsUIContext = useProjectsUIContext();
@@ -17,6 +18,9 @@ export function ProjectsCard() {
     };
   }, [projectsUIContext]);
 
+
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const AddProject = user.functions.find(x => x.code == "CreateProject")
   return (
     <Card>
       <CardHeader title="Projects list">

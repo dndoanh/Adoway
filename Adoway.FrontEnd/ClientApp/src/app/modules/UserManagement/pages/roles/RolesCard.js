@@ -8,6 +8,7 @@ import {
 import { RolesFilter } from "./roles-filter/RolesFilter";
 import { RolesTable } from "./roles-table/RolesTable";
 import { useRolesUIContext } from "./RolesUIContext";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function RolesCard() {
   const rolesUIContext = useRolesUIContext();
@@ -17,17 +18,22 @@ export function RolesCard() {
     };
   }, [rolesUIContext]);
 
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const AddRole = user.functions.find(x => x.code == "CreateRole")
   return (
     <Card>
       <CardHeader title="Roles list">
         <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={rolesUIProps.newRoleButtonClick}
-          >
-            New Role
-          </button>
+            {
+                AddRole &&
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={rolesUIProps.newRoleButtonClick}
+                >
+                    New Role
+                </button>
+            }
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>

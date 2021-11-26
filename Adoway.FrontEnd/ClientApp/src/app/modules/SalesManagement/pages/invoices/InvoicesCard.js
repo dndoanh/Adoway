@@ -8,6 +8,7 @@ import {
 import { InvoicesFilter } from "./invoices-filter/InvoicesFilter";
 import { InvoicesTable } from "./invoices-table/InvoicesTable";
 import { useInvoicesUIContext } from "./InvoicesUIContext";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function InvoicesCard() {
   const invoicesUIContext = useInvoicesUIContext();
@@ -16,18 +17,22 @@ export function InvoicesCard() {
       newInvoiceButtonClick: invoicesUIContext.newInvoiceButtonClick,
     };
   }, [invoicesUIContext]);
-
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const AddInvoice = user.functions.find(x => x.code == "CreateInvoice")
   return (
     <Card>
       <CardHeader title="Invoices list">
         <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={invoicesUIProps.newInvoiceButtonClick}
-          >
-            New Invoice
-          </button>
+        {
+            AddInvoice  &&
+            <button
+                type="button"
+                className="btn btn-primary"
+                onClick={invoicesUIProps.newInvoiceButtonClick}
+            >
+                New Invoice
+            </button>
+        }
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>

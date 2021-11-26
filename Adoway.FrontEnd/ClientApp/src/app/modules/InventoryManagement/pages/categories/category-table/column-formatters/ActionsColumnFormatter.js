@@ -9,31 +9,36 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openEditCategoryDialog, openEditCategoryInRoleDialog, openDeleteCategoryDialog }
+    { openEditCategoryDialog, openEditCategoryInRoleDialog, openDeleteCategoryDialog,Edit,Delete }
 ) {
   return (
-    <>
-      <a
-        title="Edit category"
-        className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditCategoryDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-primary">
-          <SVG
-            src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
-          />
-        </span>
-      </a>
-         
-      <a
-        title="Delete category"
-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteCategoryDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-danger">
-          <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
-        </span>
-      </a>
+      <>
+          {
+              Edit &&
+              <a
+                  title="Edit category"
+                  className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  onClick={() => openEditCategoryDialog(row.id)}
+              >
+                  <span className="svg-icon svg-icon-md svg-icon-primary">
+                      <SVG
+                          src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+                      />
+                  </span>
+              </a>
+          }
+          {
+              Delete &&
+              <a
+                  title="Delete category"
+                  className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                  onClick={() => openDeleteCategoryDialog(row.id)}
+              >
+                  <span className="svg-icon svg-icon-md svg-icon-danger">
+                      <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
+                  </span>
+              </a>
+          }
     </>
   );
 }

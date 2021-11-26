@@ -22,6 +22,7 @@ import * as uiHelpers from "../ContractsUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useContractsUIContext } from "../ContractsUIContext";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 export function ContractsTable() {
     // Contracts UI Context
@@ -52,7 +53,9 @@ export function ContractsTable() {
     }, [contractsUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
-  
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const Delete = user.functions.find(x => x.code == "DeleteSupplier")
+    const Edit = user.functions.find(x => x.code == "EditSupplier")
 
     useEffect(() => {
         // server call by queryParams
@@ -104,6 +107,8 @@ export function ContractsTable() {
                 openEditContractDialog: contractsUIProps.openEditContractDialog,
                 openEditContractInRoleDialog: contractsUIProps.openEditContractInRoleDialog,
                 openDeleteContractDialog: contractsUIProps.openDeleteContractDialog,
+                Delete: Delete,
+                Edit: Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

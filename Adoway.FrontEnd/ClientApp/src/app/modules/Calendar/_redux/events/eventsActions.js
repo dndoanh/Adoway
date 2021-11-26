@@ -25,10 +25,12 @@ export const fetchEvents = queryParams => dispatch => {
         });
 };
 export const createEvent = eventForCreation => dispatch => {
+    debugger;
     dispatch(actions.startCall({ callType: callTypes.action }));
     return requestFromServer
         .createEvent(eventForCreation)
         .then(response => {
+            debugger;
             const event = response.data;
             dispatch(actions.eventCreated({ event }));
         })

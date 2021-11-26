@@ -13,7 +13,6 @@ import * as usersActions from "../../../../UserManagement/_redux/users/usersActi
 //import * as apartmentsActions from "../../../../ProductManagement/_redux/apartments/apartmentsActions";
 import * as ownersActions from "../../../../ProjectManagement/_redux/owners/ownersActions";
 import * as categoriesActions from "../../../../InventoryManagement/_redux/categories/categoriesActions";
-
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -57,7 +56,9 @@ export function ProductsTable() {
     }, [productsUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
-  
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const Delete = user.functions.find(x => x.code == "DeleteSupplier")
+    const Edit = user.functions.find(x => x.code == "EditSupplier")
 
     useEffect(() => {
         // server call by queryParams
@@ -112,6 +113,8 @@ export function ProductsTable() {
             formatExtraData: {
                 openEditProductPage: productsUIProps.openEditProductPage,
                 openDeleteProductDialog: productsUIProps.openDeleteProductDialog,
+                Delete: Delete,
+                Edit: Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

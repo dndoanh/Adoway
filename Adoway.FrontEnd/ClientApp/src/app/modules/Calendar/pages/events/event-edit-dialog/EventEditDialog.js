@@ -56,16 +56,12 @@ export function EventEditDialog({ id, show, onHide,start,end }) {
             AttendeeId :a.value,
             AttendeeName:a.label
         }));
-        //Date.prototype.toJSON = function () { return moment(this).format(); }
-        //var start = moment(event.startDate, 'DD/MM/YYYY HH:mm:ss').toDate()
 
         dispatch(actions.createEvent({
             ...eventForCreate,
             startDate: moment(event.startDate, 'DD/MM/YYYY HH:mm:ss').toDate() ,
             endDate: moment(event.endDate, 'DD/MM/YYYY HH:mm:ss').toDate(),
             attendees: attendees
-            //start: event.start,
-            //end:event.end
         }));
         onHide();
     } else {

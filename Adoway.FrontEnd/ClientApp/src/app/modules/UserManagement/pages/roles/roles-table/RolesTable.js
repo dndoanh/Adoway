@@ -50,6 +50,9 @@ export function RolesTable() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [rolesUIProps.queryParams, dispatch]);
 
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const DeleteRole = user.functions.find(x => x.code == "DeleteRole")
+    const EditRole = user.functions.find(x => x.code == "EditRole")
 
     // Table columns
     const columns = [
@@ -83,6 +86,8 @@ export function RolesTable() {
                 openEditRoleDialog: rolesUIProps.openEditRoleDialog,
                 openEditRoleInScreensDialog: rolesUIProps.openEditRoleInScreensDialog,
                 openDeleteRoleDialog: rolesUIProps.openDeleteRoleDialog,
+                DeleteRole: DeleteRole,
+                EditRole: EditRole
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

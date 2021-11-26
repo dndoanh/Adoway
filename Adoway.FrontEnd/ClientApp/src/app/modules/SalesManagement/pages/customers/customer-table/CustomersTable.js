@@ -53,6 +53,9 @@ export function CustomersTable() {
 
     // get all languages for upper item
   
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const Delete = user.functions.find(x => x.code == "DeleteCustomer")
+    const Edit = user.functions.find(x => x.code == "EditCustomer")
 
     useEffect(() => {
         // server call by queryParams
@@ -113,6 +116,8 @@ export function CustomersTable() {
                 openEditCustomerDialog: customersUIProps.openEditCustomerDialog,
                 openEditCustomerInRoleDialog: customersUIProps.openEditCustomerInRoleDialog,
                 openDeleteCustomerDialog: customersUIProps.openDeleteCustomerDialog,
+                Edit: Edit,
+                Delete: Delete
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

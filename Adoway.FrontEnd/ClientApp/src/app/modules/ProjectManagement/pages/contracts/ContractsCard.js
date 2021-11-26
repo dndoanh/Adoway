@@ -8,6 +8,7 @@ import {
 import { ContractsFilter } from "./contract-filter/ContractsFilter";
 import { ContractsTable } from "./contract-table/ContractsTable";
 import { useContractsUIContext } from "./ContractsUIContext";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function ContractsCard() {
   const contractsUIContext = useContractsUIContext();
@@ -17,6 +18,8 @@ export function ContractsCard() {
     };
   }, [contractsUIContext]);
 
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const AddContract = user.functions.find(x => x.code == "CreateContract")
   return (
     <Card>
       <CardHeader title="Contracts list">

@@ -49,6 +49,10 @@ export function SuppliersTable() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [suppliersUIProps.queryParams, dispatch, needReload]);
 
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const Delete = user.functions.find(x => x.code == "DeleteSupplier")
+    const Edit = user.functions.find(x => x.code == "EditSupplier")
+
     // Table columns
     const columns = [
         {
@@ -102,6 +106,8 @@ export function SuppliersTable() {
                 openEditSupplierDialog: suppliersUIProps.openEditSupplierDialog,
                 openEditSupplierInRoleDialog: suppliersUIProps.openEditSupplierInRoleDialog,
                 openDeleteSupplierDialog: suppliersUIProps.openDeleteSupplierDialog,
+                Delete: Delete,
+                Edit:Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

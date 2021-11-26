@@ -8,6 +8,7 @@ import {
 import { SuppliersFilter } from "./supplier-filter/SuppliersFilter";
 import { SuppliersTable } from "./supplier-table/SuppliersTable";
 import { useSuppliersUIContext } from "./SuppliersUIContext";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function SuppliersCard() {
   const suppliersUIContext = useSuppliersUIContext();
@@ -17,17 +18,22 @@ export function SuppliersCard() {
     };
   }, [suppliersUIContext]);
 
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const AddSupplier = user.functions.find(x => x.code == "CreateSupplier")
   return (
     <Card>
       <CardHeader title="Suppliers list">
         <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={suppliersUIProps.newSupplierButtonClick}
-          >
-            New Supplier
-          </button>
+            {
+                AddSupplier &&
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={suppliersUIProps.newSupplierButtonClick}
+                >
+                    New Supplier
+                </button>
+            }
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>

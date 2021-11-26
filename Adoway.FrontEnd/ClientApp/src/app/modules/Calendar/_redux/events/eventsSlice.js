@@ -55,11 +55,12 @@ export const eventsSlice = createSlice({
         },
         // createEvent
         eventCreated: (state, action) => {
+            debugger;
             state.actionsLoading = false;
             state.needReload = !state.needReload;
             state.error = null;
-            action.payload.eventForCreation.allDay = false;
-            state.entities.push(action.payload.eventForCreation);
+       /*     action.payload.eventForCreation.allDay = false;*/
+            state.entities.push(action.payload.event);
         },
         // updateEvent
         eventUpdated: (state, action) => {

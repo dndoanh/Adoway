@@ -64,6 +64,11 @@ export function UsersTable() {
         dispatch(languagesActions.fetchAllLanguages);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const DeleteUser = user.functions.find(x => x.code == "DeleteUser")
+    const EditUser = user.functions.find(x => x.code == "EditUser")
+
     // Table columns
     const columns = [
         {
@@ -104,6 +109,8 @@ export function UsersTable() {
                 openEditUserDialog: usersUIProps.openEditUserDialog,
                 openEditUserInRoleDialog: usersUIProps.openEditUserInRoleDialog,
                 openDeleteUserDialog: usersUIProps.openDeleteUserDialog,
+                DeleteUser: DeleteUser,
+                EditUser: EditUser
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

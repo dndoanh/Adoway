@@ -9,7 +9,6 @@ import paginationFactory, {
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/categories/categoriesActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
-
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -52,7 +51,9 @@ export function CategoriesTable() {
     }, [categoriesUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
-  
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const Delete = user.functions.find(x => x.code == "DeleteSupplier")
+    const Edit = user.functions.find(x => x.code == "EditSupplier")
 
     useEffect(() => {
         // server call by queryParams
@@ -94,6 +95,8 @@ export function CategoriesTable() {
                 openEditCategoryDialog: categoriesUIProps.openEditCategoryDialog,
                 openEditCategoryInRoleDialog: categoriesUIProps.openEditCategoryInRoleDialog,
                 openDeleteCategoryDialog: categoriesUIProps.openDeleteCategoryDialog,
+                Delete: Delete,
+                Edit: Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

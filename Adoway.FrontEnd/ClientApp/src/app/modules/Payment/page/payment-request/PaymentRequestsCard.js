@@ -8,6 +8,7 @@ import {
 import { PaymentRequestsFilter } from "./payment-requests-filter/PaymentRequestFilter";
 import { PaymentRequestsTable } from "./payment-requests-table/PaymentRequestsTable";
 import { usePaymentRequestsUIContext } from "./PaymentRequestsUIContext";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function PaymentRequestsCard() {
   const paymentRequestsUIContext = usePaymentRequestsUIContext();
@@ -17,17 +18,21 @@ export function PaymentRequestsCard() {
     };
   }, [paymentRequestsUIContext]);
 
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const AddPayment = user.functions.find(x => x.code == "CreatePaymentRequest")
   return (
     <Card>
       <CardHeader title="PaymentRequests list">
-        <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={paymentRequestsUIProps.newPaymentRequestButtonClick}
-          >
-            New Payment Request
-          </button>
+            <CardHeaderToolbar>
+            {AddPayment &&
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={paymentRequestsUIProps.newPaymentRequestButtonClick}
+                >
+                    New Payment Request
+                </button>
+            }
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>

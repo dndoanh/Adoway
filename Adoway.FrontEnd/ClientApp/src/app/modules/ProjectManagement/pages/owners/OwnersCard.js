@@ -8,6 +8,7 @@ import {
 import { OwnersFilter } from "./owner-filter/OwnersFilter";
 import { OwnersTable } from "./owner-table/OwnersTable";
 import { useOwnersUIContext } from "./OwnersUIContext";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function OwnersCard() {
   const ownersUIContext = useOwnersUIContext();
@@ -17,6 +18,8 @@ export function OwnersCard() {
     };
   }, [ownersUIContext]);
 
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const AddOwner = user.functions.find(x => x.code == "CreateOwner")
   return (
     <Card>
       <CardHeader title="Owners list">

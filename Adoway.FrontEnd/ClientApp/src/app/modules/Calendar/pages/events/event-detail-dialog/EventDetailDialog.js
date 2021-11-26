@@ -52,6 +52,7 @@ export function EventDetailDialog({ id, show, onHide,start,end }) {
     const saveEvent = (event) => {
     if (!id) {
       // server request for creating event
+        debugger;
         const { id, ...eventForCreate } = event;
         dispatch(actions.createEvent({
             ...eventForCreate,

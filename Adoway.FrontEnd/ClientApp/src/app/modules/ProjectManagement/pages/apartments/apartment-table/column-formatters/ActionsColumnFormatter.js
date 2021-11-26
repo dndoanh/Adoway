@@ -9,31 +9,36 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-    { openEditApartmentDialog, openDeleteApartmentDialog }
+    { openEditApartmentDialog, openDeleteApartmentDialog, Edit, Delete }
 ) {
   return (
-    <>
-      <a
-        title="Edit user"
-        className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditApartmentDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-primary">
-          <SVG
-            src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
-          />
-        </span>
-      </a>
-         
-      <a
-        title="Delete user"
-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteApartmentDialog(row.id)}
-      >
-        <span className="svg-icon svg-icon-md svg-icon-danger">
-          <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
-        </span>
-      </a>
+      <>
+          {
+              Edit &&
+              <a
+                  title="Edit user"
+                  className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  onClick={() => openEditApartmentDialog(row.id)}
+              >
+                  <span className="svg-icon svg-icon-md svg-icon-primary">
+                      <SVG
+                          src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+                      />
+                  </span>
+              </a>
+          }
+          {
+              Delete &&
+              <a
+                  title="Delete user"
+                  className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                  onClick={() => openDeleteApartmentDialog(row.id)}
+              >
+                  <span className="svg-icon svg-icon-md svg-icon-danger">
+                      <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
+                  </span>
+              </a>
+          }
     </>
   );
 }

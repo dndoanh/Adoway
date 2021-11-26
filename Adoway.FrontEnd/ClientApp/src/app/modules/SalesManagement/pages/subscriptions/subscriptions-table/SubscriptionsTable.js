@@ -57,7 +57,10 @@ export function SubscriptionsTable() {
     }, [subscriptionsUIProps.queryParams, dispatch, needReload]);
 
     // get all languages for upper item
-  
+
+    const user = useSelector(({ auth }) => auth.user, shallowEqual);
+    const Delete = user.functions.find(x => x.code == "DeleteSubscription")
+    const Edit = user.functions.find(x => x.code == "EditSubscription")
 
     useEffect(() => {
         // server call by queryParams
@@ -120,6 +123,8 @@ export function SubscriptionsTable() {
             formatExtraData: {
                 openEditSubscriptionPage: subscriptionsUIProps.openEditSubscriptionPage,
                 openDeleteSubscriptionDialog: subscriptionsUIProps.openDeleteSubscriptionDialog,
+                Edit: Edit,
+                Delete:Delete
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",
