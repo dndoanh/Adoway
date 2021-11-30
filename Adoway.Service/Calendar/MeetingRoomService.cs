@@ -39,6 +39,7 @@ namespace Adoway.Service.Calendar
             if (meetingRoomEntity != null)
             {
                 meetingRoomEntity.Name = model.Name;
+                meetingRoomEntity.Color = model.Color;
                 meetingRoomEntity.Description = model.Description;
                 meetingRoomEntity.AllowOverlap = model.AllowOverlap;
                 meetingRoomEntity.Status = model.Status;

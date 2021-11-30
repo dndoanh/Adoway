@@ -15,6 +15,7 @@ namespace Adoway.Data.Entities.Calendar
     {
         [Required]
         public string Name { get; set; }
+        public string Color { get; set; }
         public string Description { get; set; }
         public bool AllowOverlap { get; set; }
         public Status Status { get; set; }
