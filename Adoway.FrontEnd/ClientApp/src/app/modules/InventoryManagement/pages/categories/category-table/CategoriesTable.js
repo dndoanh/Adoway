@@ -95,8 +95,8 @@ export function CategoriesTable() {
                 openEditCategoryDialog: categoriesUIProps.openEditCategoryDialog,
                 openEditCategoryInRoleDialog: categoriesUIProps.openEditCategoryInRoleDialog,
                 openDeleteCategoryDialog: categoriesUIProps.openDeleteCategoryDialog,
-                Delete: Delete,
-                Edit: Edit
+                Delete: user.isSuperAdmin || Delete,
+                Edit: user.isSuperAdmin || Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

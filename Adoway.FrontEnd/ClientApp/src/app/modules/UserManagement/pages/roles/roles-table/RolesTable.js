@@ -86,8 +86,8 @@ export function RolesTable() {
                 openEditRoleDialog: rolesUIProps.openEditRoleDialog,
                 openEditRoleInScreensDialog: rolesUIProps.openEditRoleInScreensDialog,
                 openDeleteRoleDialog: rolesUIProps.openDeleteRoleDialog,
-                DeleteRole: DeleteRole,
-                EditRole: EditRole
+                DeleteRole: user.isSuperAdmin ||  DeleteRole,
+                EditRole: user.isSuperAdmin || EditRole
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

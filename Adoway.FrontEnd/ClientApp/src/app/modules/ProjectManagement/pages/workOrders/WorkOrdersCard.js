@@ -18,20 +18,24 @@ export function WorkOrdersCard() {
     };
   }, [workOrdersUIContext]);
 
-
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const AddWorkOrder= user.functions.find(x => x.code == "CreateWorkOrder")
   return (
     <Card>
       <CardHeader title="WorkOrders list">
         <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={workOrdersUIProps.newWorkOrderButtonClick}
-          >
-            New Work Order
-          </button>
+            {
+                user.isSuperAdmin || (AddWorkOrder &&
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={workOrdersUIProps.newWorkOrderButtonClick}
+                >
+                    New Work Order
+                          </button>
+                 )
+            }
+       
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>

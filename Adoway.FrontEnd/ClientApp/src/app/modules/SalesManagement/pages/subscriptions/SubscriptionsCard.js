@@ -24,7 +24,7 @@ export function SubscriptionsCard() {
       <CardHeader title="Subscriptions list">
         <CardHeaderToolbar>
         {
-             AddSubscription &&
+             user.isSuperAdmin || (AddSubscription &&
             <button
                 type="button"
                 className="btn btn-primary"
@@ -32,6 +32,7 @@ export function SubscriptionsCard() {
             >
                 New SubScription
             </button>
+            )
         }
        
         </CardHeaderToolbar>

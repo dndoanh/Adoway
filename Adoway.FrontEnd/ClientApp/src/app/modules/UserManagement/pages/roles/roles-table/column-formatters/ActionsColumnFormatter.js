@@ -41,7 +41,7 @@ export function ActionsColumnFormatter(
                </>
           }
           {
-              EditRole &&
+              DeleteRole &&
               <a
                   title="Delete role"
                   className="btn btn-icon btn-light btn-hover-danger btn-sm"

@@ -37,3 +37,22 @@ export function createWorkOrderInRoles(workOrderInRoles) {
 export function deleteWorkOrderInRoles(id) {
     return axios.post(`${USERS_URL}/deleteWorkOrderInRole?id=${id}`);
 }
+
+export function updateStatusPassed() {
+    return axios.post(`${USERS_URL}/deleteWorkOrderInRole`);
+}
+
+export function updateStatusInprogress() {
+    return axios.post(`${USERS_URL}/deleteWorkOrderInRole`);
+}
+
+export function updateStatusReturn() {
+    return axios.post(`${USERS_URL}/deleteWorkOrderInRole`);
+}
+
+export function updateStatusFinish() {
+    return axios.post(`${USERS_URL}/deleteWorkOrderInRole`);
+}
+export function updateStatusPending() {
+    return axios.post(`${USERS_URL}/deleteWorkOrderInRole`);
+}

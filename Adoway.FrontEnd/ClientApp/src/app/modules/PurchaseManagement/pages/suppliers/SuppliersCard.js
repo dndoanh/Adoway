@@ -25,14 +25,15 @@ export function SuppliersCard() {
       <CardHeader title="Suppliers list">
         <CardHeaderToolbar>
             {
-                AddSupplier &&
+                user.isSuperAdmin || (AddSupplier &&
                 <button
                     type="button"
                     className="btn btn-primary"
                     onClick={suppliersUIProps.newSupplierButtonClick}
                 >
                     New Supplier
-                </button>
+                 </button>
+                )
             }
         </CardHeaderToolbar>
       </CardHeader>

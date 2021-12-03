@@ -138,8 +138,8 @@ export function ProjectsTable() {
             formatExtraData: {
                 openEditProjectPage: projectsUIProps.openEditProjectPage,
                 openDeleteProjectDialog: projectsUIProps.openDeleteProjectDialog,
-                Delete: Delete,
-                Edit: Edit
+                Delete: user.isSuperAdmin|| Delete,
+                Edit: user.isSuperAdmin|| Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

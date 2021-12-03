@@ -131,8 +131,8 @@ export function InvoicesTable() {
             formatExtraData: {
                 openEditInvoicePage: invoicesUIProps.openEditInvoicePage,
                 openDeleteInvoiceDialog: invoicesUIProps.openDeleteInvoiceDialog,
-                Edit: Edit,
-                Delete: Delete
+                Edit: user.isSuperAdmin || Edit,
+                Delete: user.isSuperAdmin || Delete
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

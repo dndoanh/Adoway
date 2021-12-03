@@ -49,7 +49,6 @@ export function ProductsTable() {
     // Products Redux state
     const dispatch = useDispatch();
     useEffect(() => {
-     
         // server call by queryParams
         dispatch(actions.fetchProducts(productsUIProps.queryParams));
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -113,8 +112,8 @@ export function ProductsTable() {
             formatExtraData: {
                 openEditProductPage: productsUIProps.openEditProductPage,
                 openDeleteProductDialog: productsUIProps.openDeleteProductDialog,
-                Delete: Delete,
-                Edit: Edit
+                Delete: user.isSuperAdmin || Delete,
+                Edit: user.isSuperAdmin || Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

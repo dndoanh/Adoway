@@ -31,7 +31,7 @@ export function MeetingRoomEditDialog({ id, show, onHide }) {
   }, [id, dispatch]);
 
   // server request for saving meetingRoom
-  const saveMeetingRoom = (meetingRoom) => {
+    const saveMeetingRoom = (meetingRoom) => {
     if (!id) {
       // server request for creating meetingRoom
       dispatch(actions.createMeetingRoom(meetingRoom)).then(() => onHide());

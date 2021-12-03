@@ -25,21 +25,40 @@ export function EventsTable() {
         shallowEqual
     );
     const { entities } = currentState;
+    const { currentRoomState } = useSelector(
+        (state) => ({ currentRoomState: state.meetingrooms}),
+        shallowEqual
+    );
+    const { allMeetingRooms } = currentRoomState;
+
+   
     const eventList = entities.map(e => ({
         id:e.id,
         title: e.title,
         start: new Date(Date.parse(e.startDate)),
         end: new Date(Date.parse(e.endDate)),
+        roomId: e.meetingRoomId
     }))
     useEffect(() => {
         // server call by queryParams
         dispatch(usersActions.fetchAllUsers);
         dispatch(roomsActions.fetchAllMeetingRooms)
-        dispatch(eventsActions.fetchEvents({ filter: { title: "" }, pageSize:100,pageNumber:1,sortOrder:"asc", sortField:"title"}))
+        dispatch(eventsActions.fetchEvents({ filter: { title: "" }, pageSize: 100, pageNumber: 1, sortOrder: "asc", sortField: "title" }))
+       
+
     }, []);
 
-    const eventPropGetter = ( event ) => {
-        var style = RoomColors[event.Room];
+    const eventPropGetter = (event) => {
+        var color = allMeetingRooms.find(r => r.id == event.roomId).color;
+        /*     var style = RoomColors[event.Room];*/
+        var style ={
+            backgroundColor: color,
+            borderRadius: '0px',
+            opacity: 0.8,
+            color: "black",
+            border: '0px',
+            display: 'block'
+        }
         return {
             style: style
         };
@@ -51,7 +70,7 @@ export function EventsTable() {
         <>
             <BigCalendar
                 events={eventList}
-                onSelectSlot={Add && eventUIProps.openNewPage}
+                onSelectSlot={!Add && eventUIProps.openNewPage}
                 onSelectEvent={Edit && eventUIProps.openEditPage}
                 eventPropGetter={eventPropGetter}
             />

@@ -10,32 +10,30 @@ import { ContentRoute } from "../../../../../_metronic/layout";
 export function PaymentRequestsPage({ history }) {
     const paymentRequestsUIEvents = {
         newPaymentRequestButtonClick: () => {
-            history.push("/paymentRequests/new");
+            history.push("/payment-requests/new");
         },
         openEditPaymentRequestPage: (id) => {
-            history.push(`/paymentRequests/${id}/edit`);
+            history.push(`/payment-requests/${id}/edit`);
         },
         openDeletePaymentRequestDialog: (id) => {
-            history.push(`/paymentRequests/${id}/delete`);
+            history.push(`/payment-requests/${id}/delete`);
         },
-       
     }
-
     return (
         <PaymentRequestsUIProvider paymentRequestsUIEvents={paymentRequestsUIEvents}>
             <PaymentRequestsLoadingDialog />
-            <ContentRoute path="/paymentRequests/new" component={PaymentRequestEdit} />
+            <ContentRoute path="/payment-requests/new" component={PaymentRequestEdit} />
             <ContentRoute
-                path="/paymentRequests/:id/edit"
+                path="/payment-requests/:id/edit"
                 component={PaymentRequestEdit}
             />
-            <Route path="/paymentRequests/:id/delete">
+            <Route path="/payment-requests/:id/delete">
                 {({ history, match }) => (
                     <PaymentRequestDeleteDialog
                         show={match != null}
                         id={match && match.params.id}
                         onHide={() => {
-                            history.push("/paymentRequests");
+                            history.push("/payment-requests");
                         }}
                     />
                 )}

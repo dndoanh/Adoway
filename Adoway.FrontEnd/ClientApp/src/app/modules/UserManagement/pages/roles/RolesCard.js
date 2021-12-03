@@ -25,7 +25,7 @@ export function RolesCard() {
       <CardHeader title="Roles list">
         <CardHeaderToolbar>
             {
-                AddRole &&
+                user.isSuperAdmin || (AddRole &&
                 <button
                     type="button"
                     className="btn btn-primary"
@@ -33,6 +33,7 @@ export function RolesCard() {
                 >
                     New Role
                 </button>
+                 )
             }
         </CardHeaderToolbar>
       </CardHeader>

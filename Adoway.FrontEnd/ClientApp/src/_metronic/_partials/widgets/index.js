@@ -42,3 +42,8 @@ export { TilesWidget11 } from "./tiles/TilesWidget11";
 export { TilesWidget12 } from "./tiles/TilesWidget12";
 export { TilesWidget13 } from "./tiles/TilesWidget13";
 export { TilesWidget14 } from "./tiles/TilesWidget14";
+
+// DashBoard
+export { EventTableWidget } from "./dashboard/EventTableWidget";
+export { PaymentRequestTableWidget } from "./dashboard/PaymentRequestTableWidget";
+export { WorkOrderTableWidget} from "./dashboard/WorkOrderTableWidget";

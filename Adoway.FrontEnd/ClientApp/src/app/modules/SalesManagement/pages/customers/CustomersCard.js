@@ -24,7 +24,7 @@ export function CustomersCard() {
       <CardHeader title="Customers list">
         <CardHeaderToolbar>
         {
-            AddCustomer &&
+             user.isSuperAdmin || (AddCustomer &&
             <button
                 type="button"
                 className="btn btn-primary"
@@ -32,6 +32,7 @@ export function CustomersCard() {
             >
                 New Customer
             </button>
+            )
         }
     </CardHeaderToolbar>
       </CardHeader>

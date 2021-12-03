@@ -109,8 +109,8 @@ export function UsersTable() {
                 openEditUserDialog: usersUIProps.openEditUserDialog,
                 openEditUserInRoleDialog: usersUIProps.openEditUserInRoleDialog,
                 openDeleteUserDialog: usersUIProps.openDeleteUserDialog,
-                DeleteUser: DeleteUser,
-                EditUser: EditUser
+                DeleteUser: user.isSuperAdmin || DeleteUser,
+                EditUser: user.isSuperAdmin || EditUser
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

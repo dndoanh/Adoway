@@ -9,56 +9,47 @@ import { MeetingRoomsCard } from "./MeetingRoomsCard";
 export function MeetingRoomsPage({ history }) {
     const meetingRoomsUIEvents = {
         newMeetingRoomButtonClick: () => {
-            history.push("/meetingRooms/new");
-        },
-        newMeetingRoomInRolesButtonClick: () => {
-            history.push("/meetingRooms/new-meetingRoom-in-roles");
+            history.push("/meeting-rooms/new");
         },
         openEditMeetingRoomDialog: (id) => {
-            history.push(`/meetingRooms/${id}/edit`);
-        },
-        openEditMeetingRoomInRoleDialog: (id) => {
-            history.push(`/meetingRooms/${id}/edit-role`);
+            history.push(`/meeting-rooms/${id}/edit`);
         },
         openDeleteMeetingRoomDialog: (id) => {
-            history.push(`/meetingRooms/${id}/delete`);
+            history.push(`/meeting-rooms/${id}/delete`);
         },
-        openDeleteMeetingRoomInRolesDialog: (id) => {
-            history.push(`/meetingRooms/${id}/delete-meetingRoom-in-roles`);
-        }
     }
 
     return (
         <MeetingRoomsUIProvider meetingRoomsUIEvents={meetingRoomsUIEvents}>
             <MeetingRoomsLoadingDialog />
-            <Route path="/meetingRooms/new">
+            <Route path="/meeting-rooms/new">
                 {({ history, match }) => (
                     <MeetingRoomEditDialog
                         show={match != null}
                         onHide={() => {
-                            history.push("/meetingRooms");
+                            history.push("/meeting-rooms");
                         }}
                     />
                 )}
             </Route>
-            <Route path="/meetingRooms/:id/edit">
+            <Route path="/meeting-rooms/:id/edit">
                 {({ history, match }) => (
                     <MeetingRoomEditDialog
                         show={match != null}
                         id={match && match.params.id}
                         onHide={() => {
-                            history.push("/meetingRooms");
+                            history.push("/meeting-rooms");
                         }}
                     />
                 )}
             </Route>
-            <Route path="/meetingRooms/:id/delete">
+            <Route path="/meeting-rooms/:id/delete">
                 {({ history, match }) => (
                     <MeetingRoomDeleteDialog
                         show={match != null}
                         id={match && match.params.id}
                         onHide={() => {
-                            history.push("/meetingRooms");
+                            history.push("/meeting-rooms");
                         }}
                     />
                 )}

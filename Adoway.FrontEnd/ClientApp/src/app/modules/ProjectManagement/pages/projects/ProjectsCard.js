@@ -25,13 +25,17 @@ export function ProjectsCard() {
     <Card>
       <CardHeader title="Projects list">
         <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={projectsUIProps.newProjectButtonClick}
-          >
-            New Work Order
-          </button>
+            {
+                user.isSuperAdmin || (AddProject &&
+                    <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={projectsUIProps.newProjectButtonClick}
+                    >
+                        New Work Order
+                    </button>
+                )
+            }
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>

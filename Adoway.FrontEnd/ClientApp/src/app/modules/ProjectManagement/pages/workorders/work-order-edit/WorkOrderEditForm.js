@@ -2,8 +2,8 @@
 // Data validation is based on Yup
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React, { useEffect, useState}  from "react";
-import { Formik, Form, Field } from "formik";
+import React, { useEffect, useState, submitForm } from "react";
+import { Formik, Form, Field, useFormikContext, setFieldValue } from "formik";
 import * as Yup from "yup";
 import {
     Input, Select, DatePickerField
@@ -16,7 +16,7 @@ import {
     WorkOrderCategoryTitles
 } from "../WorkOrdersUIHelpers";
 import * as apartmentsActions from "../../../../ProjectManagement/_redux/apartments/apartmentsActions";
-
+import * as actions from "../../../../ProjectManagement/_redux/workorders/workOrdersActions";
 // Validation schema
 const WorkOrderEditSchema = Yup.object().shape({
     code: Yup.string()
@@ -30,7 +30,7 @@ export function WorkOrderEditForm({
   btnRef,
   saveWorkOrder,
 }) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const { currentProjectsState } = useSelector(
         (state) => ({ currentProjectsState: state.projects }),
         shallowEqual
@@ -59,6 +59,11 @@ export function WorkOrderEditForm({
         //setFilterApartments(workorder.projectId==null ? filterApartments : entities.find(e => e.projectId = workorder.projectId));
         setFilterApartments(entities)
     }, [workorder.projectId]);
+
+    
+    const user = useSelector(({ auth }) => auth.user, shallowEqual)
+    const FinishWorkOrder = user.functions.find(x => x.code == "FinishWorkOrder")
+    const ReturnWorkOrder = user.functions.find(x => x.code == "ReturnWorkOrder")
   return (
     <>
       <Formik
@@ -68,10 +73,93 @@ export function WorkOrderEditForm({
         onSubmit={(values) => {
           saveWorkOrder(values);
         }}
-      >
-        {({ handleSubmit }) => (
+          >
+              {({ handleSubmit}) => (
           <>
             <Form className="form form-label-right">
+            <div className="form-group row">
+                {workorder.status==1 &&
+                    (
+                        <>
+                            <button
+                                type="button"
+                                onClick={() => dispatch(actions.updateStatusPassed)}
+                                className="btn btn-primary"
+                            > Passed
+                            </button>
+                         </>
+                    )
+                }
+                {workorder.status == 2 &&
+                    (
+                        <>
+                            <button
+                                 type="button"
+                                 onClick={() => dispatch(actions.updateStatusInprogress)}
+                                 className="btn btn-primary"
+                            > Inprogress
+                            </button>
+                         </>
+                    )
+                }
+                {workorder.status == 3 &&
+                    (
+                        <>
+                            <button type="button"
+                                 onClick={() => dispatch(actions.updateStatusPending)}
+                                 className="btn btn-primary"
+                            >Pending
+                             </button>
+                             {ReturnWorkOrder && (
+                                <button type="button"
+                                    onClick={() => dispatch(actions.updateStatusReturn)}
+                                    className="btn btn-primary"
+                                >Return
+                                 </button>)
+                            }
+                            {FinishWorkOrder && (
+                                <button type="button"
+                                    onClick={() => dispatch(actions.updateStatusFinished)}
+                                    className="btn btn-primary"
+                                >Finish
+                                </button>)
+                            }
+                        </>
+                    )
+                }
+                {workorder.status == 6 &&
+                    (
+                        <>
+                            {ReturnWorkOrder && (
+                                <button type="button"
+                                    onClick={() => dispatch(actions.updateStatusReturn)}
+                                    className="btn btn-primary"
+                                >Return
+                                 </button>)
+                            }
+                            {FinishWorkOrder && (
+                                <button type="button"
+                                    onClick={() => dispatch(actions.updateStatusFinished)}
+                                    className="btn btn-primary"
+                                >Finish
+                                </button>)
+                            }
+                        </>
+                    )
+                }
+                {workorder.status == 8 &&
+                    (
+                        <>
+                             <button
+                                 type="button"
+                                 onClick={() => dispatch(actions.updateStatusPassed)}
+                                 className="btn btn-primary"
+                            > Passed
+                            </button>
+                        </>
+                    )
+                }
+            </div>
               <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
@@ -132,7 +220,7 @@ export function WorkOrderEditForm({
                         ))}
                     </Select>
                 </div>
-</div>
+                </div>
               <div className="form-group row">
                 <div className="col-lg-4">
                     <Select name="customerId" label="Customer">

@@ -106,8 +106,8 @@ export function SuppliersTable() {
                 openEditSupplierDialog: suppliersUIProps.openEditSupplierDialog,
                 openEditSupplierInRoleDialog: suppliersUIProps.openEditSupplierInRoleDialog,
                 openDeleteSupplierDialog: suppliersUIProps.openDeleteSupplierDialog,
-                Delete: Delete,
-                Edit:Edit
+                Delete: user.isSuperAdmin || Delete,
+                Edit: user.isSuperAdmin || Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

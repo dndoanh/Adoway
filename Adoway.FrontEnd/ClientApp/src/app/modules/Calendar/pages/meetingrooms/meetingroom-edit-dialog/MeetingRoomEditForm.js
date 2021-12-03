@@ -13,6 +13,9 @@ import {
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
+import {
+    ColorPicker
+} from "../../../../../../_metronic/_partials/controls";
 
 // Validation schema
 const MeetingRoomEditSchema = Yup.object().shape({
@@ -77,6 +80,17 @@ export function MeetingRoomEditForm({
                                             className="form-check"
                                             type="checkbox"
                                         />
+                                    </div>
+                                </div>
+
+                                <div className="form-group row">
+                                    <div className="col-lg-12">
+                                        {/*<Field*/}
+                                        {/*    name="color"*/}
+                                        {/*    component={Input}*/}
+                                           
+                                        {/*/>*/}
+                                        <ColorPicker name="color" />
                                     </div>
                                 </div>
                                 <div className="form-group row">

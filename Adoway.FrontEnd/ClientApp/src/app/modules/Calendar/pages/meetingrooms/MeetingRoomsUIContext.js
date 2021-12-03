@@ -7,9 +7,7 @@ const MeetingRoomsUIContext = createContext();
 export function useMeetingRoomsUIContext() {
     return useContext(MeetingRoomsUIContext);
 }
-
 export const MeetingRoomsUIConsumer = MeetingRoomsUIContext.Consumer;
-
 export function MeetingRoomsUIProvider({ meetingRoomsUIEvents, children }) {
     const [queryParams, setQueryParamsBase] = useState(initialFilter);
     const setQueryParams = useCallback(nextQueryParams => {
@@ -17,11 +15,9 @@ export function MeetingRoomsUIProvider({ meetingRoomsUIEvents, children }) {
             if (isFunction(nextQueryParams)) {
                 nextQueryParams = nextQueryParams(prevQueryParams);
             }
-
             if (isEqual(prevQueryParams, nextQueryParams)) {
                 return prevQueryParams;
             }
-
             return nextQueryParams;
         });
     }, []);
@@ -30,9 +26,8 @@ export function MeetingRoomsUIProvider({ meetingRoomsUIEvents, children }) {
         id: undefined,
         name: "",
         email: "",
-        languageId: undefined,
+        color:"",
         status: 0,
-        avatarUrl: null
     };
 
     const value = {

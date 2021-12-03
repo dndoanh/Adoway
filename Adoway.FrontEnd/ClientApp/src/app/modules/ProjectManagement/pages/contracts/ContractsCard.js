@@ -24,13 +24,17 @@ export function ContractsCard() {
     <Card>
       <CardHeader title="Contracts list">
         <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={contractsUIProps.newContractButtonClick}
-          >
-            New Contract
-          </button>
+            {
+                user.isSuperAdmin || (AddContract &&
+                    <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={contractsUIProps.newContractButtonClick}
+                    >
+                    New Contract
+                    </button>
+                    )
+            }
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>

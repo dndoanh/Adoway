@@ -24,7 +24,7 @@ export function PaymentRequestsCard() {
     <Card>
       <CardHeader title="PaymentRequests list">
             <CardHeaderToolbar>
-            {AddPayment &&
+            {user.isSuperAdmin || (AddPayment &&
                 <button
                     type="button"
                     className="btn btn-primary"
@@ -32,7 +32,7 @@ export function PaymentRequestsCard() {
                 >
                     New Payment Request
                 </button>
-            }
+            )}
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>

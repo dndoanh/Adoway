@@ -24,14 +24,15 @@ export function CategoriesCard() {
     <Card>
       <CardHeader title="Categories list">
          <CardHeaderToolbar>
-            {AddCategories &&
+            {user.isSuperAdmin || (AddCategories &&
                 <button
                     type="button"
                     className="btn btn-primary"
                     onClick={categoriesUIProps.newCategoryButtonClick}
                 >
-                    New Category
+                New Category
                 </button>
+                )
             }
         </CardHeaderToolbar>
       </CardHeader>

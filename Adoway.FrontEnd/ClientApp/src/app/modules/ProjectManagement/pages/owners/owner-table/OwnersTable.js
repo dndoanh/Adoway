@@ -113,8 +113,8 @@ export function OwnersTable() {
             formatExtraData: {
                 openEditOwnerDialog: ownersUIProps.openEditOwnerDialog,
                 openDeleteOwnerDialog: ownersUIProps.openDeleteOwnerDialog,
-                Delete: Delete,
-                Edit: Edit
+                Delete: user.isSuperAdmin || Delete,
+                Edit: user.isSuperAdmin || Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

@@ -32,10 +32,9 @@ export {Notice} from "./Notice";
 export {SplashScreen} from "./SplashScreen";
 export {SVGIcon} from "./SVGIcon";
 export { ModalProgressBar } from "./ModalProgressBar";
-
 //Calendar
 export { BigCalendar } from "./big-calendar/BigCalendar";
-
 //stepper
-
-export {HorizontalNonLinearStepper } from "./stepper/Stepper"
+export { HorizontalNonLinearStepper } from "./stepper/Stepper"
+//Color Picker
+export { ColorPicker } from "./color-picker/ColorPicker"

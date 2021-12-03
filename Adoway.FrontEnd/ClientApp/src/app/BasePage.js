@@ -62,7 +62,7 @@ export default function BasePage() {
                 {/*Project Management*/}
                 <Route path="/apartments" component={ApartmentsPage} />
                 <Route path="/owners" component={OwnersPage} />
-                <Route path="/workorders" component={WorkOrdersPage} />
+                <Route path="/work-orders" component={WorkOrdersPage} />
 
                 <Route path="/projects" component={ProjectsPage} />
                 {/*Sale*/}
@@ -83,11 +83,11 @@ export default function BasePage() {
            {/*     <Redirect to="error/error-v1" />*/}
              
 
-                <Route path="/meetingrooms" component={MeetingRoomsPage} />
+                <Route path="/meeting-rooms" component={MeetingRoomsPage} />
                 <Route path="/events" component={EventsPage} />
 
                 <Route path="/invoices" component={InvoicesPage} />
-                <Route path="/paymentrequests" component={PaymentRequestsPage} />
+                <Route path="/payment-requests" component={PaymentRequestsPage} />
                 
             </Switch>
         </Suspense>

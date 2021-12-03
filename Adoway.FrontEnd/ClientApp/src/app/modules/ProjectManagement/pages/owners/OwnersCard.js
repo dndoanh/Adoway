@@ -22,16 +22,21 @@ export function OwnersCard() {
     const AddOwner = user.functions.find(x => x.code == "CreateOwner")
   return (
     <Card>
-      <CardHeader title="Owners list">
-        <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={ownersUIProps.newOwnerButtonClick}
-          >
-            New Owner
-          </button>
-        </CardHeaderToolbar>
+          <CardHeader title="Owners list">
+              {
+                  user.isSuperAdmin || (AddOwner &&
+                      <CardHeaderToolbar>
+                          <button
+                              type="button"
+                              className="btn btn-primary"
+                              onClick={ownersUIProps.newOwnerButtonClick}
+                          >
+                              New Owner
+                          </button>
+                      </CardHeaderToolbar>
+                  )
+              }
+       
       </CardHeader>
       <CardBody>
         <OwnersFilter />

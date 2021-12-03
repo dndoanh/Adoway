@@ -25,14 +25,15 @@ export function UsersCard() {
       <CardHeader title="Users list">
         <CardHeaderToolbar>
             {
-                AddUser &&
+                user.isSuperAdmin || (AddUser &&
                 <button
                     type="button"
                     className="btn btn-primary"
                     onClick={usersUIProps.newUserButtonClick}
                 >
                     New User
-                </button>
+                 </button>
+                )
             }
         </CardHeaderToolbar>
       </CardHeader>

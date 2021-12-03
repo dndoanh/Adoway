@@ -12,7 +12,6 @@ import * as projectsActions from "../../../../ProjectManagement/_redux/projects/
 import * as usersActions from "../../../../UserManagement/_redux/users/usersActions";
 import * as customersActions from "../../../../SalesManagement/_redux/customers/customersActions";
 import * as apartmentsActions from "../../../../ProjectManagement/_redux/apartments/apartmentsActions";
-
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -149,8 +148,8 @@ export function WorkOrdersTable() {
             formatExtraData: {
                 openEditWorkOrderPage: workOrdersUIProps.openEditWorkOrderPage,
                 openDeleteWorkOrderDialog: workOrdersUIProps.openDeleteWorkOrderDialog,
-                Delete: Delete,
-                Edit: Edit
+                Delete: user.isSuperAdmin || Delete,
+                Edit: user.isSuperAdmin || Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

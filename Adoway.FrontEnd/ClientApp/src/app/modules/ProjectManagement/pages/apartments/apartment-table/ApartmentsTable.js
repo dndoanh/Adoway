@@ -109,8 +109,8 @@ export function ApartmentsTable() {
                 openEditApartmentDialog: apartmentsUIProps.openEditApartmentDialog,
                 openEditApartmentInRoleDialog: apartmentsUIProps.openEditApartmentInRoleDialog,
                 openDeleteApartmentDialog: apartmentsUIProps.openDeleteApartmentDialog,
-                Delete: Delete,
-                Edit: Edit
+                Delete: user.isSuperAdmin || Delete,
+                Edit: user.isSuperAdmin || Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

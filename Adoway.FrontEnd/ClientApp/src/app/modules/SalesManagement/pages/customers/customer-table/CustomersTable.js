@@ -116,8 +116,8 @@ export function CustomersTable() {
                 openEditCustomerDialog: customersUIProps.openEditCustomerDialog,
                 openEditCustomerInRoleDialog: customersUIProps.openEditCustomerInRoleDialog,
                 openDeleteCustomerDialog: customersUIProps.openDeleteCustomerDialog,
-                Edit: Edit,
-                Delete: Delete
+                Edit: user.isSuperAdmin || Edit,
+                Delete: user.isSuperAdmin || Delete
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

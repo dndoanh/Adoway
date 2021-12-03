@@ -58,8 +58,8 @@ export function PaymentRequestsTable() {
 
     // get all languages for upper item
     const user = useSelector(({ auth }) => auth.user, shallowEqual);
-    const Delete = user.functions.find(x => x.code == "DeleteSupplier")
-    const Edit = user.functions.find(x => x.code == "EditSupplier")
+    const Delete = user.functions.find(x => x.code == "DeletePaymentRequest")
+    const Edit = user.functions.find(x => x.code == "EditPaymentRequest")
 
     useEffect(() => {
         // server call by queryParams
@@ -116,8 +116,8 @@ export function PaymentRequestsTable() {
             formatExtraData: {
                 openEditPaymentRequestPage: paymentRequestsUIProps.openEditPaymentRequestPage,
                 openDeletePaymentRequestDialog: paymentRequestsUIProps.openDeletePaymentRequestDialog,
-                Delete: Delete,
-                Edit:Edit
+                Delete: user.isSuperAdmin || Delete,
+                Edit: user.isSuperAdmin || Edit
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",

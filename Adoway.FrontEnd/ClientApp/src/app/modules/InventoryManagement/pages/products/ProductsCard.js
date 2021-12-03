@@ -24,7 +24,7 @@ export function ProductsCard() {
     <Card>
       <CardHeader title="Products list">
         <CardHeaderToolbar>
-            {AddProduct &&
+            {user.isSuperAdmin || (AddProduct &&
                 <button
                     type="button"
                     className="btn btn-primary"
@@ -32,6 +32,7 @@ export function ProductsCard() {
                 >
                     New Product
                 </button>
+                )
             }
         </CardHeaderToolbar>
       </CardHeader>

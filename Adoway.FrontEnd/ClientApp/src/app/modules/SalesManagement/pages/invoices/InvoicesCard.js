@@ -24,7 +24,7 @@ export function InvoicesCard() {
       <CardHeader title="Invoices list">
         <CardHeaderToolbar>
         {
-            AddInvoice  &&
+              user.isSuperAdmin || (AddInvoice  &&
             <button
                 type="button"
                 className="btn btn-primary"
@@ -32,6 +32,7 @@ export function InvoicesCard() {
             >
                 New Invoice
             </button>
+            )
         }
         </CardHeaderToolbar>
       </CardHeader>

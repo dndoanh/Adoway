@@ -25,7 +25,7 @@ export function ApartmentsCard() {
     <Card>
       <CardHeader title="Apartments list">
          <CardHeaderToolbar>
-            {AddApartment &&
+                  {user.isSuperAdmin || (AddApartment &&
                 <button
                     type="button"
                     className="btn btn-primary"
@@ -33,6 +33,7 @@ export function ApartmentsCard() {
                 >
                     New Apartment
                 </button>
+                      )
             }
         </CardHeaderToolbar>
       </CardHeader>

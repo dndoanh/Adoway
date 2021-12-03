@@ -10,13 +10,13 @@ import { ContentRoute } from "../../../../../_metronic/layout";
 export function WorkOrdersPage({ history }) {
     const workOrdersUIEvents = {
         newWorkOrderButtonClick: () => {
-            history.push("/workorders/new");
+            history.push("/work-orders/new");
         },
         openEditWorkOrderPage: (id) => {
-            history.push(`/workorders/${id}/edit`);
+            history.push(`/work-orders/${id}/edit`);
         },
         openDeleteWorkOrderDialog: (id) => {
-            history.push(`/workorders/${id}/delete`);
+            history.push(`/work-orders/${id}/delete`);
         },
        
     }
@@ -24,18 +24,18 @@ export function WorkOrdersPage({ history }) {
     return (
         <WorkOrdersUIProvider workOrdersUIEvents={workOrdersUIEvents}>
             <WorkOrdersLoadingDialog />
-            <ContentRoute path="/workorders/new" component={WorkOrderEdit} />
+            <ContentRoute path="/work-orders/new" component={WorkOrderEdit} />
             <ContentRoute
-                path="/workorders/:id/edit"
+                path="/work-orders/:id/edit"
                 component={WorkOrderEdit}
             />
-            <Route path="/workorders/:id/delete">
+            <Route path="/work-orders/:id/delete">
                 {({ history, match }) => (
                     <WorkOrderDeleteDialog
                         show={match != null}
                         id={match && match.params.id}
                         onHide={() => {
-                            history.push("/workorders");
+                            history.push("/work-orders");
                         }}
                     />
                 )}
