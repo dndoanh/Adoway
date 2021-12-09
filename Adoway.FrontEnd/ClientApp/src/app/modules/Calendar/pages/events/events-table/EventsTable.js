@@ -44,12 +44,10 @@ export function EventsTable() {
         dispatch(usersActions.fetchAllUsers);
         dispatch(roomsActions.fetchAllMeetingRooms)
         dispatch(eventsActions.fetchEvents({ filter: { title: "" }, pageSize: 100, pageNumber: 1, sortOrder: "asc", sortField: "title" }))
-       
-
     }, []);
 
     const eventPropGetter = (event) => {
-        var color = allMeetingRooms.find(r => r.id == event.roomId).color;
+        var color = allMeetingRooms.find(r => r.id == event.roomId)?.color;
         /*     var style = RoomColors[event.Room];*/
         var style ={
             backgroundColor: color,
