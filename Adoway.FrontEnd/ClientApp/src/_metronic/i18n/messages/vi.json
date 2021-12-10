@@ -67,21 +67,21 @@
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
   "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
 
-  "INVENTORY.PRODUCTS.NEW_PRODUCT": "New Product",
-  "INVENTORY.PRODUCTS.PRODUCT_LIST": "Product List",
-  "INVENTORY.PRODUCTS.EDIT_PRODUCT": "Edit Product",
-  "INVENTORY.PRODUCTS.DETELE_PRODUCT": "Delete Product",
+  "INVENTORY.PRODUCTS.NEW_PRODUCT": "Sản phẩm mới",
+  "INVENTORY.PRODUCTS.PRODUCT_LIST": "Danh sách sản phẩm",
+  "INVENTORY.PRODUCTS.EDIT_PRODUCT": "Sửa sản phẩm",
+  "INVENTORY.PRODUCTS.DETELE_PRODUCT": "Xóa sản phẩm",
 
-  "TITLE.NAME": "Name",
-  "TITLE.CATEGORY_NAME": "Category Name",
-  "TITLE.CATEGORY": "Category",
-  "TITLE.SALES_PRICE": "Sales Price",
-  "TITLE.MEASURE_UNIT": "Measure Unit",
-  "TITLE.STATUS": "Status",
-  "TITLE.ACTION": "Action",
-  "TITLE.SUPPLIER": "Supplier",
+  "TITLE.NAME": "Tên",
+  "TITLE.CATEGORY_NAME": "Tên nhóm sản phẩm",
+  "TITLE.CATEGORY": "Nhóm sản phẩm",
+  "TITLE.SALES_PRICE": "Giá bán",
+  "TITLE.MEASURE_UNIT": "Đơn vị",
+  "TITLE.STATUS": "Trạng thái",
+  "TITLE.ACTION": "Hiệu chỉnh",
+  "TITLE.SUPPLIER": "Nhà cung cấp",
 
-  "COMMON.SAVE": "Save",
-  "COMMON.BACK": "Back",
-  "COMMON.RESET": "Reset"
+  "COMMON.SAVE": "Lưu",
+  "COMMON.BACK": "Quay lại",
+  "COMMON.RESET": "Thiết lập lại"
 }

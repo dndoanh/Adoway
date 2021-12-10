@@ -12,12 +12,13 @@ import {
 import { ProductEditForm } from "./ProductEditForm";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 const initProduct = {
   id: undefined,
   code: "",
     productId: null
 };
+
 
 export function ProductEdit({
   history,
@@ -29,9 +30,10 @@ export function ProductEdit({
   const suhbeader = useSubheader();
 
   // Tabs
-  const [tab, setTab] = useState("basic");
+    const [tab, setTab] = useState("basic"); intl
   const [title, setTitle] = useState("");
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const intl = useIntl()
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
     const { actionsLoading, productForEdit } = useSelector(
     (state) => ({
@@ -46,9 +48,9 @@ export function ProductEdit({
   }, [id, dispatch]);
 
     useEffect(() => {
-    let _title = id ? "" : "New Product";
+        let _title = id ? "" : intl.formatMessage({ id:"INVENTORY.PRODUCTS.NEW_PRODUCT"});
     if (productForEdit && id) {
-        _title = `Edit product`;
+        _title = intl.formatMessage({ id: "INVENTORY.PRODUCTS.EDIT_PRODUCT" });
     }
 
     setTitle(_title);
@@ -86,12 +88,12 @@ export function ProductEdit({
             className="btn btn-light"
           >
             <i className="fa fa-arrow-left"></i>
-            Back
+            <FormattedMessage id="COMMON.BACK" />
           </button>
           {`  `}
           <button className="btn btn-light ml-2">
             <i className="fa fa-redo"></i>
-            Reset
+               <FormattedMessage id="COMMON.RESET" />
           </button>
           {`  `}
           <button
@@ -99,7 +101,7 @@ export function ProductEdit({
             className="btn btn-primary ml-2"
             onClick={saveProductClick}
           >
-            Save
+            <FormattedMessage id="COMMON.SAVE" />
           </button>
         </CardHeaderToolbar>
       </CardHeader>

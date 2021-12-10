@@ -52,7 +52,6 @@ export const meetingRoomsSlice = createSlice({
                 entity.dob = entity.dob && new Date(entity.dob) || null;
                 return entity;
             });
-            
         },
         // createMeetingRoom
         meetingRoomCreated: (state, action) => {
@@ -74,7 +73,6 @@ export const meetingRoomsSlice = createSlice({
             });
         },
         allMeetingRoomsFetched: (state, action) => {
-            debugger;
             const meetingRooms = action.payload;
             state.allMeetingRooms = meetingRooms;
         },

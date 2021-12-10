@@ -5,19 +5,22 @@ import React from "react";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../../../../../_metronic/_helpers";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
     { openEditProductPage, openDeleteProductDialog,Edit,Delete }
 ) {
+    const intl = useIntl()
+    const deleteTitle = intl.formatMessage({ id: "INVENTORY.PRODUCTS.DETELE_PRODUCT" })
+    const editTitle = intl.formatMessage({ id: "INVENTORY.PRODUCTS.EDIT_PRODUCT" })
   return (
       <>
           {
               Edit &&
               <OverlayTrigger
-                  overlay={<Tooltip id="projects-edit-tooltip">Edit work order</Tooltip>}
+                  overlay={<Tooltip id="projects-edit-tooltip">{editTitle}</Tooltip>}
               >
                   <a
                       className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
@@ -34,7 +37,7 @@ export function ActionsColumnFormatter(
           {
               Delete &&
               <a
-                  title="Delete user"
+                  title={deleteTitle}
                   className="btn btn-icon btn-light btn-hover-danger btn-sm"
                   onClick={() => openDeleteProductDialog(row.id)}
               >

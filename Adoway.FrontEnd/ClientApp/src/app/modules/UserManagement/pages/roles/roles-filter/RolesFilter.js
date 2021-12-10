@@ -38,7 +38,6 @@ export function RolesFilter({ listLoading }) {
             rolesUIProps.setQueryParams(newQueryParams);
         }
     };
-
     return (
         <>
             <Formik

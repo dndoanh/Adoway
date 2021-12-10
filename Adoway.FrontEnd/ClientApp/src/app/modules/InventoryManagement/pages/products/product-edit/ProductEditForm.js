@@ -8,7 +8,8 @@ import * as Yup from "yup";
 import {
     Input, Select, DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
-import { shallowEqual, useSelector, useDispatch} from "react-redux";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
 
   ProductStatusTitles,
@@ -42,6 +43,13 @@ export function ProductEditForm({
         shallowEqual
     );
     const { allUsers } = currentUsersState;
+    const intl = useIntl()
+    const meatureUnitTitle = intl.formatMessage({ id: "TITLE.MEASURE_UNIT" })
+    const nameTitle = intl.formatMessage({ id: "TITLE.NAME" })
+    const statusTitle = intl.formatMessage({ id: "TITLE.STATUS" })
+    const salespriceTitle = intl.formatMessage({ id: "TITLE.SALES_PRICE" })
+    const categoryTitle = intl.formatMessage({ id: "TITLE.CATEGORY" })
+    const supplierTitle = intl.formatMessage({ id: "TITLE.SUPPLIER" })
   return (
     <>
       <Formik
@@ -61,22 +69,22 @@ export function ProductEditForm({
                     <Field
                         name="name"
                         component={Input}
-                        placeholder="Name"
-                        label="Name"
+                        placeholder={nameTitle}
+                        label={nameTitle}
                     />
                 </div>
                 <div className="col-lg-6">
                     <Field
                         name="salesPrice"
                         component={Input}
-                        placeholder="Sales Price"
-                        label="Sales Price"
+                        placeholder={salespriceTitle}
+                        label={salespriceTitle}
                     />
                 </div>
              </div>
             <div className="form-group row">
                  <div className="col-lg-6">
-                    <Select name="measureUnit" label="Measure Unit">
+                    <Select name="measureUnit" label={meatureUnitTitle}>
                         {ProductTypeTitles.map((status, index) => (
                             <option key={status} value={index}>
                                 {status}
@@ -85,7 +93,7 @@ export function ProductEditForm({
                     </Select>
                  </div>
                 <div className="col-lg-6">
-                    <Select name="status" label="Status">
+                    <Select name="status" label={statusTitle}>
                             <option value=""></option>
                         {ProductStatusTitles.map((status, index) => (
                             <option key={status} value={index}>
@@ -97,7 +105,7 @@ export function ProductEditForm({
              </div>
             <div className="form-group row">
                 <div className="col-lg-6">
-                     <Select name="categoryId" label="Category">
+                <Select name="categoryId" label={categoryTitle}>
                         <option value=""></option>
                         {allCategories.map((c) => (
                             <option key={c.id} value={c.id}>
@@ -107,7 +115,7 @@ export function ProductEditForm({
                 </Select>
                  </div>
                 <div className="col-lg-6">
-                    <Select name="supplierId" label="Supplier">
+                    <Select name="supplierId" label={supplierTitle}>
                         <option value=""></option>
                         {allUsers.map((s) => (
                             <option key={s.id} value={s.id}>

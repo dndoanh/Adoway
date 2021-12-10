@@ -18,7 +18,7 @@ import { SuppliersPage } from "./modules/PurchaseManagement/pages/suppliers/Supp
 import { ProductsPage } from "./modules/InventoryManagement/pages/products/ProductsPage";
 import { CategoriesPage } from "./modules/InventoryManagement/pages/categories/CategoriesPage";
 import { MeetingRoomsPage } from "./modules/Calendar/pages/meetingrooms/MeetingRoomsPage";
-import {EventsPage } from "./modules/Calendar/pages/events/EventsPage";
+import { EventsPage } from "./modules/Calendar/pages/events/EventsPage";
 import { InvoicesPage } from "./modules/SalesManagement/pages/invoices/InvoicesPage";
 import { PaymentRequestsPage } from "./modules/Payment/page/payment-request/PaymentRequestsPage";
 
@@ -55,7 +55,6 @@ export default function BasePage() {
                 <Route path="/react-bootstrap" component={ReactBootstrapPage} />
                 <Route path="/e-commerce" component={ECommercePage} />
                 <Route path="/user-profile" component={UserProfilepage} />
-
                 {/*User Management*/}
                 <Route path="/users" component={UsersPage} />
                 <Route path="/roles" component={RolesPage} />
@@ -63,11 +62,7 @@ export default function BasePage() {
                 <Route path="/apartments" component={ApartmentsPage} />
                 <Route path="/owners" component={OwnersPage} />
                 <Route path="/work-orders" component={WorkOrdersPage} />
-
                 <Route path="/projects" component={ProjectsPage} />
-                {/*Sale*/}
-                <Route path="/subscriptions" component={SubscriptionsPage} />
-                <Route path="/customers" component={CustomersPage} />
                 {/*Sale*/}
                 <Route path="/subscriptions" component={SubscriptionsPage} />
                 <Route path="/customers" component={CustomersPage} />
@@ -81,14 +76,10 @@ export default function BasePage() {
                 <Route path="/languages" component={LanguagesPage} />
                 {/*Common*/}
            {/*     <Redirect to="error/error-v1" />*/}
-             
-
                 <Route path="/meeting-rooms" component={MeetingRoomsPage} />
                 <Route path="/events" component={EventsPage} />
-
                 <Route path="/invoices" component={InvoicesPage} />
                 <Route path="/payment-requests" component={PaymentRequestsPage} />
-                
             </Switch>
         </Suspense>
     );

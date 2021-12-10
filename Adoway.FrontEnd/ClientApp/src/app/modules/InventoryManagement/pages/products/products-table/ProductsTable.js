@@ -25,7 +25,7 @@ import * as uiHelpers from "../ProductsUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useProductsUIContext } from "../ProductsUIContext";
-
+import { FormattedMessage, useIntl} from 'react-intl';
 export function ProductsTable() {
     // Products UI Context
     const productsUIContext = useProductsUIContext();
@@ -58,47 +58,47 @@ export function ProductsTable() {
     const user = useSelector(({ auth }) => auth.user, shallowEqual);
     const Delete = user.functions.find(x => x.code == "DeleteSupplier")
     const Edit = user.functions.find(x => x.code == "EditSupplier")
-
+    const intl = useIntl()
     useEffect(() => {
         // server call by queryParams
         dispatch(usersActions.fetchAllUsers);
         dispatch(categoriesActions.fetchAllCategories);
-        //dispatch(apartmentsActions.fetchApartments({ filter: { name: "" }, sortOrder: "asc", sortField: "name", pageNumber: 1, pageSize: 10 }));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
+
+
     const columns = [
         {
             dataField: "name",
-            text: "Name",
+            text: intl.formatMessage({ id:"TITLE.NAME"}),
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "categoryName",
-            text: "Category Name",
+            text: intl.formatMessage({ id: "TITLE.CATEGORY_NAME" }),
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "salesPrice",
-            text: "Sales Price",
+            text: intl.formatMessage({ id: "TITLE.SALES_PRICE" }),
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "measureUnit",
-            text: "Measure Unit",
+            text: intl.formatMessage({ id: "TITLE.MEASURE_UNIT" }),
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "status",
-            text: "Status",
+            text: intl.formatMessage({ id: "TITLE.STATUS" }),
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -107,7 +107,7 @@ export function ProductsTable() {
 
         {
             dataField: "action",
-            text: "Actions",
+            text: intl.formatMessage({ id: "TITLE.ACTION" }),
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditProductPage: productsUIProps.openEditProductPage,
