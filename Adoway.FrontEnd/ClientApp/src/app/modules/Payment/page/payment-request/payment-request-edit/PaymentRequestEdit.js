@@ -12,7 +12,7 @@ import {
 import { PaymentRequestEditForm } from "./PaymentRequestEditForm";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 const initPaymentRequest = {
   id: undefined,
   code: "",
@@ -45,14 +45,17 @@ export function PaymentRequestEdit({
         dispatch(actions.selectPaymentRequest(id));
   }, [id, dispatch]);
 
-    useEffect(() => {
-    let _title = id ? "" : "New Payment Request";
-    if (paymentRequestForEdit && id) {
-        _title = `Edit Payment Request`;
-    }
+    const intl = useIntl()
+    const new_p = intl.formatMessage({ id: "PAYMENT.NEW_PAYMENT" })
+    const edit_p = intl.formatMessage({ id: "PAYMENT.EDIT_PAYMENT" })
 
-    setTitle(_title);
-    suhbeader.setTitle(_title);
+    useEffect(() => {
+        let _title = id ? "" : new_p;
+        if (paymentRequestForEdit && id) {
+            _title = `Edit ${edit_p}`;
+        }
+        setTitle(_title);
+        suhbeader.setTitle(_title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paymentRequestForEdit, id]);
 

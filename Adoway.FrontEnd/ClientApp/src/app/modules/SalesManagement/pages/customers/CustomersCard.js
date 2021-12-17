@@ -9,6 +9,7 @@ import { CustomersFilter } from "./customer-filter/CustomersFilter";
 import { CustomersTable } from "./customer-table/CustomersTable";
 import { useCustomersUIContext } from "./CustomersUIContext";
 import { shallowEqual, useSelector } from "react-redux";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function CustomersCard() {
   const customersUIContext = useCustomersUIContext();
@@ -24,15 +25,17 @@ export function CustomersCard() {
       <CardHeader title="Customers list">
         <CardHeaderToolbar>
         {
-             user.isSuperAdmin || (AddCustomer &&
+             (user.isSuperAdmin || AddCustomer) &&
             <button
                 type="button"
                 className="btn btn-primary"
                 onClick={customersUIProps.newCustomerButtonClick}
             >
-                New Customer
+            <FormattedMessage
+                id="SALES.INVOICES.NEW_INVOICE"
+            />
             </button>
-            )
+           
         }
     </CardHeaderToolbar>
       </CardHeader>

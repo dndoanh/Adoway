@@ -19,27 +19,27 @@ export function ProductsCard() {
     };
   }, [productsUIContext]);
 
-    const user = useSelector(({ auth }) => auth.user, shallowEqual)
-    const AddProduct = user.functions.find(x => x.code == "CreateProducts")
-    const intl = useIntl()
-    const listTitle = intl.formatMessage({ id: "INVENTORY.PRODUCTS.PRODUCT_LIST" })
+const user = useSelector(({ auth }) => auth.user, shallowEqual)
+const AddProduct = user.functions.find(x => x.code == "CreateProducts")
+const intl = useIntl()
+    const listTitle = intl.formatMessage({ id: "SALES.INVOICES.INVOICENO" })
   return (
     <Card>
      <CardHeader title={listTitle}>
         <CardHeaderToolbar>
-      {/*      {user.isSuperAdmin || (AddProduct &&*/}
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={productsUIProps.newProductButtonClick}
-                >
-                      <FormattedMessage
-                          id="INVENTORY.PRODUCTS.NEW_PRODUCT"
-                          defaultMessage="New Product"
-                      />
-                </button>
-            {/*    )*/}
-            {/*}*/}
+        {user.isSuperAdmin || (AddProduct &&
+            <button
+                type="button"
+                className="btn btn-primary"
+                onClick={productsUIProps.newProductButtonClick}
+            >
+                    <FormattedMessage
+                        id="INVENTORY.PRODUCTS.NEW_PRODUCT"
+                        defaultMessage="New Product"
+                    />
+            </button>
+            )
+        }
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>

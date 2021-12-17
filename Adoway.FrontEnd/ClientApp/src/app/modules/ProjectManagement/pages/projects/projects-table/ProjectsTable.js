@@ -13,7 +13,7 @@ import * as usersActions from "../../../../UserManagement/_redux/users/usersActi
 import * as customersActions from "../../../../SalesManagement/_redux/customers/customersActions";
 import * as apartmentsActions from "../../../../ProjectManagement/_redux/apartments/apartmentsActions";
 import * as ownersActions from "../../../../ProjectManagement/_redux/owners/ownersActions";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -69,17 +69,28 @@ export function ProjectsTable() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
+
+    const intl = useIntl()
+    const code = intl.formatMessage({ id: "PROJECT.CODE" })
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const activeDate = intl.formatMessage({ id: "PROJECT.ACTIVE_DATE" })
+    const beginDate = intl.formatMessage({ id: "PROJECT.BEGIN_DATE" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+    const p_type = intl.formatMessage({ id: "PROJECT.AREA_TYPE" })
+    const a_type = intl.formatMessage({ id: "PROJECT.PROJECT_TYPE" })
+    const owner = intl.formatMessage({ id: "COMMON.OWNER" })
     const columns = [
         {
             dataField: "code",
-            text: "Code",
+            text: code,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "name",
-            text: "Name",
+            text: name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -87,21 +98,21 @@ export function ProjectsTable() {
       
         {
             dataField: "activeDate",
-            text: "Active Date",
+            text: activeDate,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "beginDate",
-            text: "Begin Date",
+            text: beginDate ,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "status",
-            text: "Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -109,7 +120,7 @@ export function ProjectsTable() {
         },
         {
             dataField: "areaType",
-            text: "Area Type",
+            text: a_type,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.AreaColumnFormatter,
@@ -117,7 +128,7 @@ export function ProjectsTable() {
         },
         {
             dataField: "projectType",
-            text: "Project Type",
+            text: p_type,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.TypeColumnFormatter,
@@ -125,7 +136,7 @@ export function ProjectsTable() {
         },
         {
             dataField: "ownerName",
-            text: "Owner Name",
+            text: owner,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -133,7 +144,7 @@ export function ProjectsTable() {
 
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditProjectPage: projectsUIProps.openEditProjectPage,

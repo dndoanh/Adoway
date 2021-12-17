@@ -14,9 +14,6 @@ const ColoredDateCellWrapper = ({ children }) =>
         //    backgroundColor: 'lightorange',
         //},
     })
-
-
-
 export function BigCalendar(
     {
         events,
@@ -41,6 +38,7 @@ export function BigCalendar(
             onSelectEvent={onSelectEvent}
             onSelectSlot={onSelectSlot}
             eventPropGetter={eventPropGetter}
+            culture='vi-VN'
     />
     )
 }

@@ -9,7 +9,7 @@ import paginationFactory, {
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/contracts/contractsActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -57,6 +57,14 @@ export function ContractsTable() {
     const Delete = user.functions.find(x => x.code == "DeleteSupplier")
     const Edit = user.functions.find(x => x.code == "EditSupplier")
 
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const floor = intl.formatMessage({ id: "PROJECT.APARTMENT.FLOOR" })
+    const block = intl.formatMessage({ id: "PROJECT.APARTMENT.BLOCK" })
+    const intenet = intl.formatMessage({ id: "PROJECT.APARTMENT.INTERNET_LINE" })
+    const tv = intl.formatMessage({ id: "PROJECT.APARTMENT.TV_LINE" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+
     useEffect(() => {
         // server call by queryParams
         dispatch(languagesActions.fetchAllLanguages);
@@ -66,42 +74,42 @@ export function ContractsTable() {
     const columns = [
         {
             dataField: "name",
-            text: "Name",
+            text: name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "floor",
-            text: "Floor",
+            text: floor,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "block",
-            text: "Block",
+            text: block,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "internetLine",
-            text: "Internet Line",
+            text: intenet,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "TV Line",
-            text: "TV Line",
+            text: tv,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditContractDialog: contractsUIProps.openEditContractDialog,

@@ -65,8 +65,6 @@ export function ProductsTable() {
         dispatch(categoriesActions.fetchAllCategories);
     }, []);
     // Table columns
-
-
     const columns = [
         {
             dataField: "name",

@@ -13,7 +13,7 @@ import {
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 // Validation schema
 //const SupplierEditSchema = Yup.object().shape({
 //    name: Yup.string()
@@ -31,6 +31,15 @@ export function SupplierEditForm({
     actionsLoading,
     onHide,
 }) {
+
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const address = intl.formatMessage({ id: "PURCHASE.SUPPLIER.ADDRESS" })
+    const c_name = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_NAME" })
+    const phone = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_PHONE" })
+    const email = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_EMAIL" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+
     return (
         <>
             <Formik
@@ -55,8 +64,8 @@ export function SupplierEditForm({
                                         <Field
                                             name="name"
                                             component={Input}
-                                            placeholder="Name"
-                                            label="Name"
+                                            placeholder={name}
+                                            label={name}
                                         />
                                     </div>
                                 </div>
@@ -66,8 +75,8 @@ export function SupplierEditForm({
                                             type="text"
                                             name="address"
                                             component={Input}
-                                            placeholder="Address"
-                                            label="Address"
+                                            placeholder={address}
+                                            label={address}
                                         />
                                     </div>
                                 </div>
@@ -77,8 +86,8 @@ export function SupplierEditForm({
                                             type="text"
                                             name="contactName"
                                             component={Input}
-                                            placeholder="Contact Name"
-                                            label="Contact Name"
+                                            placeholder={c_name}
+                                            label={c_name}
                                         />
                                     </div>
                                 </div>
@@ -88,8 +97,8 @@ export function SupplierEditForm({
                                             type="text"
                                             name="contactPhone"
                                             component={Input}
-                                            placeholder="Contact Phone"
-                                            label="Contact Phone"
+                                            placeholder={phone}
+                                            label={phone}
                                         />
                                     </div>
                                 </div>
@@ -99,14 +108,14 @@ export function SupplierEditForm({
                                             type="text"
                                             name="contactEmail"
                                             component={Input}
-                                            placeholder="Contact Email"
-                                            label="Contact Email"
+                                            placeholder={email}
+                                            label={email}
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="status" label="Status">
+                                        <Select name="status" label={status}>
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </Select>
@@ -120,7 +129,9 @@ export function SupplierEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                             <> </>
                             <button
@@ -128,7 +139,9 @@ export function SupplierEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage
+                                    id="COMMON.SAVE"
+                                />
                             </button>
                         </Modal.Footer>
                     </>

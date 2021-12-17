@@ -16,7 +16,7 @@ import {
     ProjectAreaTitles
 } from "../ProjectsUIHelpers";
 import * as apartmentsActions from "../../../../ProjectManagement/_redux/apartments/apartmentsActions";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 // Validation schema
 const ProjectEditSchema = Yup.object().shape({
     code: Yup.string()
@@ -54,7 +54,24 @@ export function ProjectEditForm({
         shallowEqual
     );
     const { entities } = currentApartmentsState;
-  
+    const intl = useIntl()
+    const code = intl.formatMessage({ id: "PROJECT.CODE" })
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const activeDate = intl.formatMessage({ id: "PROJECT.ACTIVE_DATE" })
+    const beginDate = intl.formatMessage({ id: "PROJECT.BEGIN_DATE" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const p_type = intl.formatMessage({ id: "PROJECT.AREA_TYPE" })
+    const a_type = intl.formatMessage({ id: "PROJECT.PROJECT_TYPE" })
+    const owner = intl.formatMessage({ id: "COMMON.OWNER" })
+    const block = intl.formatMessage({ id: "PROJECT.BLOCK_COUNT" })
+    const floor = intl.formatMessage({ id: "PROJECT.FLOOR_COUNT" })
+    const base = intl.formatMessage({ id: "PROJECT.BASEMENT_COUNT" })
+    const square = intl.formatMessage({ id: "PROJECT.SQUARE_COUNT" })
+    const port = intl.formatMessage({ id: "PROJECT.PORT_COUNT" })
+    const apartment = intl.formatMessage({ id: "PROJECT.APARTMENT_COUNT" })
+    const desc = intl.formatMessage({ id: "TITLE.DESCRIPTION" })
+    const sale = intl.formatMessage({ id: "PROJECT.SALE_USER" })
+    const tech = intl.formatMessage({ id: "PROJECT.TECH_USER" })
   return (
     <>
       <Formik
@@ -73,27 +90,25 @@ export function ProjectEditForm({
                   <Field
                     name="code"
                     component={Input}
-                    placeholder="Code"
-                    label="Code"
+                    placeholder={code}
+                    label={code}
                   />
                 </div>
                 <div className="col-lg-4">
                     <Field
                         name="name"
                         component={Input}
-                        placeholder="Name"
-                        label="Name"
+                        placeholder={name}
+                        label={name}
                     />
                 </div>
                 <div className="col-lg-4">
-                    <Select name="projectType" label="ProjectType">
+                    <Select name="projectType" label={p_type}>
                         {ProjectTypeTitles.map((status, index) => (
                             <option key={status} value={index}>
                                 {status}
                             </option>
                         ))}
-                        {/*<option key="1" value="1">Investment</option>*/}
-                        {/*<option key="2" value="2">No Investment</option>*/}
                     </Select>
                  </div>
               
@@ -103,20 +118,20 @@ export function ProjectEditForm({
                     <DatePickerField
                         name="activeDate"
                         component={Input}
-                        placeholder="Active Date"
-                        label="Active Date"
+                        placeholder={activeDate}
+                        label={activeDate}
                     />
                 </div>
                 <div className="col-lg-4">
                     <DatePickerField
                         name="beginDate"
                         component={Input}
-                        placeholder="Begin Date"
-                        label="Begin Date"
+                        placeholder={beginDate}
+                        label={beginDate}
                     />
                 </div>
                 <div className="col-lg-4">
-                    <Select name="status" label="Status">
+                    <Select name="status" label={status}>
                         {ProjectStatusTitles.map((status, index) => (
                             <option key={status} value={index}>
                                 {status}
@@ -130,24 +145,24 @@ export function ProjectEditForm({
                     <Field
                         name="blockCount"
                         component={Input}
-                        placeholder="BlockCount"
-                        label="BlockCount"
+                        placeholder={block}
+                        label={block}
                     />
                 </div>
                 <div className="col-lg-4">
                     <Field
                         name="floorCount"
                         component={Input}
-                        placeholder="Floor Count"
-                        label="Floor Count"
+                        placeholder={floor}
+                        label={floor}
                     />
                 </div>
                  <div className="col-lg-4">
                     <Field
                         name="basementCount"
                         component={Input}
-                        placeholder="Basement Count"
-                        label="Basement Count"
+                        placeholder={base}
+                        label={base}
                     />
                 </div>
               </div>
@@ -156,30 +171,30 @@ export function ProjectEditForm({
                     <Field
                         name="squareCount"
                         component={Input}
-                        placeholder="Square Count"
-                        label="Square Count"
+                        placeholder={square}
+                        label={square}
                     />
                 </div>
                 <div className="col-lg-4">
                     <Field
                         name="portCount"
                         component={Input}
-                        placeholder="Port Count"
-                        label="Port Count"
+                        placeholder={port}
+                        label={port}
                     />
                 </div>
                  <div className="col-lg-4">
                     <Field
                         name="apartmentCount"
                         component={Input}
-                        placeholder="Apartmnent Count"
-                        label="Apartmnent Count"
+                        placeholder={apartment}
+                        label={apartment}
                     />
                 </div>
               </div>
               <div className="form-group row">
                 <div className="col-lg-4">
-                        <Select name="ownerId" label="Owner">
+                    <Select name="ownerId" label={owner}>
                         <option value=""></option>
                             {allOwners  && allOwners.map((user) => (
                                 <option key={user.id} value={user.id}>
@@ -189,7 +204,7 @@ export function ProjectEditForm({
                     </Select>
                 </div>
                 <div className="col-lg-4">
-                 <Select name="salesUserId" label="Sale user">
+                    <Select name="salesUserId" label={sale}>
                         <option value=""></option>
                         {allUsers && allUsers.map((user) => (
                             <option key={user.id} value={user.id}>
@@ -199,7 +214,7 @@ export function ProjectEditForm({
                     </Select>
                 </div>
                 <div className="col-lg-4">
-                    <Select name="techUserId" label="Tech User">
+                     <Select name="techUserId" label={tech}>
                         <option value=""></option>
                         {allUsers && allUsers.map((user) => (
                             <option key={user.id} value={user.id}>
@@ -211,7 +226,7 @@ export function ProjectEditForm({
                           </div>
                 <div className="form-group row">
                     <div className="col-lg-4">
-                      <Select name="areaType" label="Area">
+                    <Select name="areaType" label={a_type}>
                         {ProjectAreaTitles.map((status, index) => (
                             <option key={status} value={index}>
                                 {status}
@@ -223,7 +238,7 @@ export function ProjectEditForm({
                   
                 </div>
               <div className="form-group">
-                <label>Description</label>
+                <label>{desc}</label>
                 <Field
                   name="description"
                   as="textarea"

@@ -6,12 +6,10 @@ import { RoomColors } from "../EventsUIHelpers";
 import * as usersActions from "../../../../UserManagement/_redux/users/usersActions";
 import * as roomsActions from "../../../../Calendar/_redux/meetingrooms/meetingRoomsActions";
 import * as eventsActions from "../../../../Calendar/_redux/events/eventsActions";
-import moment from 'moment'
-
 export function EventsTable() {
     const eventsUIContext = useEventsUIContext();
     const dispatch = useDispatch();
-    const eventUIProps = useMemo(() => {
+    const eventUIProps = useMemo(() => {    
         return {
             openNewPage: eventsUIContext.openNewPage,
             openDetailPage: eventsUIContext.openDetailPage,
@@ -30,8 +28,6 @@ export function EventsTable() {
         shallowEqual
     );
     const { allMeetingRooms } = currentRoomState;
-
-   
     const eventList = entities.map(e => ({
         id:e.id,
         title: e.title,
@@ -48,7 +44,6 @@ export function EventsTable() {
 
     const eventPropGetter = (event) => {
         var color = allMeetingRooms.find(r => r.id == event.roomId)?.color;
-        /*     var style = RoomColors[event.Room];*/
         var style ={
             backgroundColor: color,
             borderRadius: '0px',

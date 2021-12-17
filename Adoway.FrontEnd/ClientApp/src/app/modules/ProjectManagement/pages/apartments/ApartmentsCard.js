@@ -9,6 +9,7 @@ import { ApartmentsFilter } from "./apartment-filter/ApartmentsFilter";
 import { ApartmentsTable } from "./apartment-table/ApartmentsTable";
 import { useApartmentsUIContext } from "./ApartmentsUIContext";
 import { shallowEqual, useSelector } from "react-redux";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function ApartmentsCard() {
   const apartmentsUIContext = useApartmentsUIContext();
@@ -21,19 +22,23 @@ export function ApartmentsCard() {
 
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const AddApartment = user.functions.find(x => x.code == "CreateApartment")
+    const intl = useIntl()
+    const list = intl.formatMessage({ id: "PROJECT.APARTMENT.APARTMENT_LIST" })
   return (
     <Card>
-      <CardHeader title="Apartments list">
+          <CardHeader title={list}>
          <CardHeaderToolbar>
-                  {user.isSuperAdmin || (AddApartment &&
+            {user.isSuperAdmin || (AddApartment &&
                 <button
                     type="button"
                     className="btn btn-primary"
                     onClick={apartmentsUIProps.newApartmentButtonClick}
                 >
-                    New Apartment
+                <FormattedMessage
+                    id="NEW_APARTMENT"
+                />
                 </button>
-                      )
+                 )
             }
         </CardHeaderToolbar>
       </CardHeader>

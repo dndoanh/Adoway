@@ -12,6 +12,8 @@ import {
 import { InvoiceEditForm } from "./InvoiceEditForm";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
+import moment from 'moment'
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const initInvoice = {
   id: undefined,
@@ -36,7 +38,12 @@ export function InvoiceEdit({
     const { actionsLoading, invoiceForEdit } = useSelector(
     (state) => ({
           actionsLoading: state.invoices.actionsLoading,
-          invoiceForEdit: state.invoices.invoiceForEdit,
+            //invoiceForEdit: state.invoices.invoiceForEdit
+            invoiceForEdit: {
+                ...state.invoices.invoiceForEdit,
+                invoicedDate: (state.invoices.invoiceForEdit && state.invoices.invoiceForEdit.invoicedDate) ? moment(state.invoices.invoiceForEdit?.invoicedDate).format("DD/MM/YYYY HH:mm:ss") : "",
+                dueDate: state.invoices.invoiceForEdit ? moment(state.invoices.invoiceForEdit.dueDate).format("DD/MM/YYYY HH:mm:ss") : "",
+            }
     }),
     shallowEqual
   );
@@ -45,10 +52,13 @@ export function InvoiceEdit({
         dispatch(actions.selectInvoice(id));
   }, [id, dispatch]);
 
+    const intl = useIntl()
+    const new_inv = intl.formatMessage({ id: "SALES.INVOICES.NEW_INVOICE" })
+    const edit_inv = intl.formatMessage({ id: "SALES.INVOICES.EDIT_INVOICE" })
     useEffect(() => {
-    let _title = id ? "" : "New Invoice";
+        let _title = id ? "" : new_inv;
     if (invoiceForEdit && id) {
-        _title = `Edit invoice`;
+        _title = edit_inv;
     }
 
     setTitle(_title);
@@ -86,12 +96,12 @@ export function InvoiceEdit({
             className="btn btn-light"
           >
             <i className="fa fa-arrow-left"></i>
-            Back
+            <FormattedMessage id="COMMON.BACK"/>
           </button>
           {`  `}
           <button className="btn btn-light ml-2">
             <i className="fa fa-redo"></i>
-            Reset
+                <FormattedMessage id="COMMON.RESET" />
           </button>
           {`  `}
           <button
@@ -99,7 +109,7 @@ export function InvoiceEdit({
             className="btn btn-primary ml-2"
             onClick={saveInvoiceClick}
           >
-            Save
+            <FormattedMessage id="COMMON.SAVE" />
           </button>
         </CardHeaderToolbar>
       </CardHeader>
@@ -115,31 +125,31 @@ export function InvoiceEdit({
               Basic info
             </a>
           </li>
-          {id && (
-            <>
-              {" "}
-              <li className="nav-item" onClick={() => setTab("remarks")}>
-                <a
-                  className={`nav-link ${tab === "remarks" && "active"}`}
-                  data-toggle="tab"
-                  role="button"
-                  aria-selected={(tab === "remarks").toString()}
-                >
-                  Invoice remarks
-                </a>
-              </li>
-              <li className="nav-item" onClick={() => setTab("specs")}>
-                <a
-                  className={`nav-link ${tab === "specs" && "active"}`}
-                  data-toggle="tab"
-                  role="tab"
-                  aria-selected={(tab === "specs").toString()}
-                >
-                  Invoice specifications
-                </a>
-              </li>
-            </>
-          )}
+          {/*{id && (*/}
+          {/*  <>*/}
+          {/*    {" "}*/}
+          {/*    <li className="nav-item" onClick={() => setTab("remarks")}>*/}
+          {/*      <a*/}
+          {/*        className={`nav-link ${tab === "remarks" && "active"}`}*/}
+          {/*        data-toggle="tab"*/}
+          {/*        role="button"*/}
+          {/*        aria-selected={(tab === "remarks").toString()}*/}
+          {/*      >*/}
+          {/*        Invoice remarks*/}
+          {/*      </a>*/}
+          {/*    </li>*/}
+          {/*    <li className="nav-item" onClick={() => setTab("specs")}>*/}
+          {/*      <a*/}
+          {/*        className={`nav-link ${tab === "specs" && "active"}`}*/}
+          {/*        data-toggle="tab"*/}
+          {/*        role="tab"*/}
+          {/*        aria-selected={(tab === "specs").toString()}*/}
+          {/*      >*/}
+          {/*        Invoice specifications*/}
+          {/*      </a>*/}
+          {/*    </li>*/}
+          {/*  </>*/}
+          {/*)}*/}
         </ul>
         <div className="mt-5">
           {tab === "basic" && (

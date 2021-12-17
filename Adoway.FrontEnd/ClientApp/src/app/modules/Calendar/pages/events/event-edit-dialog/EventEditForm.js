@@ -13,6 +13,7 @@ import {
     MutiSelect,
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 // Validation schema
 const EventEditSchema = Yup.object().shape({
@@ -30,7 +31,6 @@ export function EventEditForm({
     onHide,
     handleDelete
 }) {
-
     const { currentUsersState } = useSelector(
         (state) => ({ currentUsersState: state.users }),
         shallowEqual
@@ -42,9 +42,15 @@ export function EventEditForm({
         shallowEqual
     );
     const { allMeetingRooms } = currentRoomsState;
-
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const Delete = user.functions.find(x => x.code == "DeleteEvent")
+    const intl = useIntl()
+    const title = intl.formatMessage({ id: "TITLE.TITLE" })
+    const attendees = intl.formatMessage({ id: "TITLE.ATTENDEES" })
+    const startDate = intl.formatMessage({ id: "TITLE.START_DATE" })
+    const endDate = intl.formatMessage({ id: "TITLE.END_DATE" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const rooms = intl.formatMessage({ id: "TITLE.MEETING_ROOMS" })
     return (
         <>
             <Formik
@@ -69,8 +75,8 @@ export function EventEditForm({
                                         <Field
                                             name="title"
                                             component={Input}
-                                            placeholder="Title"
-                                            label="Title"
+                                            placeholder={title}
+                                            label={title}
                                         />
                                     </div>
                                 </div>
@@ -78,7 +84,7 @@ export function EventEditForm({
                                     <div className="col-lg-12">
                                         <MutiSelect
                                             name="attendees"
-                                            label="Attendees"
+                                            label={attendees}
                                             options={allUsers && allUsers.map((user) => ({
                                                 value: user.id,
                                                 label: user.name
@@ -96,8 +102,8 @@ export function EventEditForm({
                                         <Field
                                             name="startDate"
                                             component={Input}
-                                            placeholder="Start Date"
-                                            label="Start Date"
+                                            placeholder={startDate}
+                                            label={startDate}
                                         />
                                     </div>
                                
@@ -105,20 +111,20 @@ export function EventEditForm({
                                         <Field
                                             name="endDate"
                                             component={Input}
-                                            placeholder="End Date"
-                                            label="End Date"
+                                            placeholder={endDate}
+                                            label={endDate}
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-6">
-                                        <Select name="Status" label="status">
+                                        <Select name="Status" label={status}>
                                             <option value="1">Draft</option>
                                             <option value="2">Confirm</option>
                                         </Select>
                                     </div>
                                     <div className="col-lg-6">
-                                        <Select name="meetingRoomId" label="Meeeting Room">
+                                        <Select name="meetingRoomId" label={rooms }>
                                             <option value=""></option>
                                             {allMeetingRooms && allMeetingRooms.map((r) => (
                                                 <option key={r.id} value={r.id}>
@@ -130,7 +136,11 @@ export function EventEditForm({
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <label>Description</label>
+                                        <label>
+                                            <FormattedMessage
+                                                id="TITLE.DESCRIPTION"
+                                            />
+                                        </label>
                                     <Field
                                         name="description"
                                         label="Description"
@@ -149,7 +159,7 @@ export function EventEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage id="COMMON.CANCEL" />
                             </button>
                     
                             <> </>
@@ -159,7 +169,7 @@ export function EventEditForm({
                                     onClick={() => handleDelete(event.id)}
                                     className="btn btn-danger btn-elevate"
                                 >
-                                    Delete
+                                    <FormattedMessage id="COMMON.DELETE"/>
                                 </button>
                                 )
                             }
@@ -169,7 +179,7 @@ export function EventEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage id="COMMON.SAVE" />
                             </button>
                         </Modal.Footer>
                     </>

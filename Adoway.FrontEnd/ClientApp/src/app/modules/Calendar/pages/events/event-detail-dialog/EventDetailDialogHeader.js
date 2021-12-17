@@ -20,7 +20,6 @@ export function EventDetailDialogHeader({ id }) {
       if (eventForEdit && id) {
           _title = `Detail Event '${eventForEdit.title}'`;
     }
-
     setTitle(_title);
     // eslint-disable-next-line
   }, [eventForEdit, actionsLoading]);

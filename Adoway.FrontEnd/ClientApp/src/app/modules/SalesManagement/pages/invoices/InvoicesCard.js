@@ -9,6 +9,7 @@ import { InvoicesFilter } from "./invoices-filter/InvoicesFilter";
 import { InvoicesTable } from "./invoices-table/InvoicesTable";
 import { useInvoicesUIContext } from "./InvoicesUIContext";
 import { shallowEqual, useSelector } from "react-redux";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function InvoicesCard() {
   const invoicesUIContext = useInvoicesUIContext();
@@ -19,20 +20,24 @@ export function InvoicesCard() {
   }, [invoicesUIContext]);
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const AddInvoice = user.functions.find(x => x.code == "CreateInvoice")
+    const intl = useIntl()
+    const inv_list = intl.formatMessage({ id: "SALES.INVOICES.INVOICE_LIST" })
   return (
     <Card>
-      <CardHeader title="Invoices list">
+    <CardHeader title={inv_list}>
         <CardHeaderToolbar>
         {
-              user.isSuperAdmin || (AddInvoice  &&
+             ( user.isSuperAdmin || AddInvoice)  &&
             <button
                 type="button"
                 className="btn btn-primary"
                 onClick={invoicesUIProps.newInvoiceButtonClick}
             >
-                New Invoice
+                <FormattedMessage
+                    id="SALES.INVOICES.NEW_INVOICE"
+                />
             </button>
-            )
+            
         }
         </CardHeaderToolbar>
       </CardHeader>

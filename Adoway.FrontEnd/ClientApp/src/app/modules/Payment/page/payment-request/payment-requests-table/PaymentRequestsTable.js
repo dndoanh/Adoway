@@ -26,6 +26,7 @@ import * as uiHelpers from "../PaymentRequestsUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { usePaymentRequestsUIContext } from "../PaymentRequestsUIContext";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function PaymentRequestsTable() {
     // PaymentRequests UI Context
@@ -61,6 +62,7 @@ export function PaymentRequestsTable() {
     const Delete = user.functions.find(x => x.code == "DeletePaymentRequest")
     const Edit = user.functions.find(x => x.code == "EditPaymentRequest")
 
+
     useEffect(() => {
         // server call by queryParams
    /*     dispatch(suppliersActions.fetchAllSuppliers());*/
@@ -70,10 +72,19 @@ export function PaymentRequestsTable() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
+
+    const intl = useIntl()
+    const requestNo = intl.formatMessage({ id: "PAYMENT.REQUESTNO" })
+    const dueDate = intl.formatMessage({ id: "SALES.INVOICES.DUE_DATE" })
+    const cusName = intl.formatMessage({ id: "TITLE.CUSTOMER_NAME" })
+    const projectName = intl.formatMessage({ id: "TITLE.PROJECT_NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+
     const columns = [
         {
             dataField: "requestNo",
-            text: "RequestNo",
+            text: requestNo,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -81,28 +92,28 @@ export function PaymentRequestsTable() {
       
         {
             dataField: "dueDate",
-            text: "Due Date",
+            text: dueDate,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "customerName",
-            text: "Customer Name",
+            text: cusName,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "projectName",
-            text: "Project Name",
+            text: projectName,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "status",
-            text: "status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.TypeColumnFormatter,
@@ -111,7 +122,7 @@ export function PaymentRequestsTable() {
 
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditPaymentRequestPage: paymentRequestsUIProps.openEditPaymentRequestPage,

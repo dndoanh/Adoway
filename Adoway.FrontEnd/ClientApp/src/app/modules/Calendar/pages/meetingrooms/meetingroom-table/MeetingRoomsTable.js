@@ -11,7 +11,7 @@ import * as actions from "../../../_redux/meetingrooms/meetingRoomsActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
 import * as projectsActions from "../../../../ProjectManagement/_redux/projects/projectsActions";
 import * as customersActions from "../../../../SalesManagement/_redux/customers/customersActions";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
     getSelectRow,
     getHandlerTableChange,

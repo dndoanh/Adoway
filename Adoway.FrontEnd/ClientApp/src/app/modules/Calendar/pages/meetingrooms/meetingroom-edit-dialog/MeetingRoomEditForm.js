@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
+import { FormattedMessage, useIntl } from 'react-intl';
 import * as Yup from "yup";
 import {
     Input,
@@ -31,7 +32,13 @@ export function MeetingRoomEditForm({
     actionsLoading,
     onHide,
 }) {
-  
+
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const overlap = intl.formatMessage({ id: "TITLE.OVERLAP" })
+    const desc = intl.formatMessage({ id: "TITLE.DESCRIPTION" })
+
     return (
         <>
             <Formik
@@ -56,15 +63,15 @@ export function MeetingRoomEditForm({
                                         <Field
                                             name="name"
                                             component={Input}
-                                            placeholder="Name"
-                                            label="Name"
+                                            placeholder={name}
+                                            label={name}
                                         />
                                     </div>
                                 </div>
 
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="status" label="Status">
+                                        <Select name="status" label={status}>
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </Select>
@@ -72,7 +79,7 @@ export function MeetingRoomEditForm({
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <label>Allow Overlap</label>
+                                        <label>{overlap}</label>
                                         <Field
                                             name="allowOverlap"
                                             component={Input}
@@ -95,7 +102,7 @@ export function MeetingRoomEditForm({
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <label>Description</label>
+                                        <label>{desc}</label>
                                         <Field
                                             name="description"
                                             as="textarea"
@@ -113,7 +120,9 @@ export function MeetingRoomEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                             <> </>
                             <button
@@ -121,7 +130,9 @@ export function MeetingRoomEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage
+                                    id="COMMON.SAVE"
+                                />
                             </button>
                         </Modal.Footer>
                     </>

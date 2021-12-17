@@ -9,7 +9,6 @@ import paginationFactory, {
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/owners/ownersActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
-
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -22,6 +21,7 @@ import * as uiHelpers from "../OwnersUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useOwnersUIContext } from "../OwnersUIContext";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function OwnersTable() {
     // Owners UI Context
@@ -56,6 +56,15 @@ export function OwnersTable() {
     const Delete = user.functions.find(x => x.code == "DeleteSupplier")
     const Edit = user.functions.find(x => x.code == "EditSupplier")
 
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const address = intl.formatMessage({ id: "PURCHASE.SUPPLIER.ADDRESS" })
+    const contactName = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_NAME" })
+    const contactPhone = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_PHONE" })
+    const contactEmail = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_EMAIL" })
+    const status = intl.formatMessage({ id: "PROJECT.APARTMENT.TV_LINE" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+
     useEffect(() => {
         // server call by queryParams
         dispatch(languagesActions.fetchAllLanguages);
@@ -65,42 +74,42 @@ export function OwnersTable() {
     const columns = [
         {
             dataField: "name",
-            text: "Name",
+            text: name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "address",
-            text: "Address",
+            text: address,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "contactName",
-            text: "Contact Name",
+            text: contactName,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "contactPhone",
-            text: "Contact Phone",
+            text: contactPhone,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "contactEmail",
-            text: "Contact Email",
+            text: contactEmail,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "status",
-            text: "Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -108,7 +117,7 @@ export function OwnersTable() {
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditOwnerDialog: ownersUIProps.openEditOwnerDialog,

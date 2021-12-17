@@ -12,7 +12,7 @@ import {
 import { ProjectEditForm } from "./ProjectEditForm";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 const initProject = {
   id: undefined,
   code: "",
@@ -42,14 +42,17 @@ export function ProjectEdit({
   );
 
     useEffect(() => {
-        debugger;
         dispatch(actions.selectProject(id));
   }, [id, dispatch]);
 
+    const intl = useIntl()
+    const n_project = intl.formatMessage({ id: "PROJECT.NEW_PROJECT" })
+    const e_project = intl.formatMessage({ id: "PROJECT.EDIT_PROJECT" })
+
     useEffect(() => {
-    let _title = id ? "" : "New Work Order";
+        let _title = id ? "" : n_project;
     if (projectForEdit && id) {
-        _title = `Edit product`;
+        _title = e_project;
     }
 
     setTitle(_title);
@@ -58,12 +61,12 @@ export function ProjectEdit({
   }, [projectForEdit, id]);
 
     const saveProject = (values) => {
-    if (!id) {
-      dispatch(actions.createProject(values)).then(() => backToProjectsList());
-    } else {
-      dispatch(actions.updateProject(values)).then(() => backToProjectsList());
-    }
-  };
+        if (!id) {
+          dispatch(actions.createProject(values)).then(() => backToProjectsList());
+        } else {
+          dispatch(actions.updateProject(values)).then(() => backToProjectsList());
+        }
+    };
 
   const btnRef = useRef();  
   const saveProjectClick = () => {
@@ -87,12 +90,16 @@ export function ProjectEdit({
             className="btn btn-light"
           >
             <i className="fa fa-arrow-left"></i>
-            Back
+            <FormattedMessage
+                id="COMMON.BACK"
+            />
           </button>
           {`  `}
           <button className="btn btn-light ml-2">
             <i className="fa fa-redo"></i>
-            Reset
+            <FormattedMessage
+                id="COMMON.RESET"
+            />
           </button>
           {`  `}
           <button
@@ -100,7 +107,9 @@ export function ProjectEdit({
             className="btn btn-primary ml-2"
             onClick={saveProjectClick}
           >
-            Save
+             <FormattedMessage
+                id="COMMON.SAVE"
+            />
           </button>
         </CardHeaderToolbar>
       </CardHeader>

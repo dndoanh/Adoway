@@ -25,15 +25,14 @@ export function WorkOrdersCard() {
       <CardHeader title="WorkOrders list">
         <CardHeaderToolbar>
             {
-                user.isSuperAdmin || (AddWorkOrder &&
+                (user.isSuperAdmin || AddWorkOrder) &&
                 <button
                     type="button"
                     className="btn btn-primary"
                     onClick={workOrdersUIProps.newWorkOrderButtonClick}
                 >
                     New Work Order
-                          </button>
-                 )
+                </button>
             }
        
         </CardHeaderToolbar>

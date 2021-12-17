@@ -13,7 +13,7 @@ import {
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 // Validation schema
 const OwnerEditSchema = Yup.object().shape({
     name: Yup.string()
@@ -39,6 +39,15 @@ export function OwnerEditForm({
         }
     }, [owner]);
 
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const address = intl.formatMessage({ id: "PURCHASE.SUPPLIER.ADDRESS" })
+    const contactName = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_NAME" })
+    const contactPhone = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_PHONE" })
+    const contactEmail = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_EMAIL" })
+    const status = intl.formatMessage({ id: "PROJECT.APARTMENT.TV_LINE" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+
     return (
         <>
             <Formik
@@ -63,8 +72,8 @@ export function OwnerEditForm({
                                         <Field
                                             name="name"
                                             component={Input}
-                                            placeholder="Name"
-                                            label="Name"
+                                            placeholder={name}
+                                            label={name}
                                         />
                                     </div>
                                 </div>
@@ -74,8 +83,8 @@ export function OwnerEditForm({
                                             type="text"
                                             name="address"
                                             component={Input}
-                                            placeholder="Adress"
-                                            label="Address"
+                                            placeholder={address}
+                                            label={address}
                                         />
                                     </div>
                                 </div>
@@ -85,8 +94,8 @@ export function OwnerEditForm({
                                             type="text"
                                             name="contactName"
                                             component={Input}
-                                            placeholder="ContactName"
-                                            label="ContactName"
+                                            placeholder={contactName}
+                                            label={contactName}
                                         />
                                     </div>
                                 </div>
@@ -96,8 +105,8 @@ export function OwnerEditForm({
                                             type="text"
                                             name="contactPhone"
                                             component={Input}
-                                            placeholder="ContactPhone"
-                                            label="ContactPhone"
+                                            placeholder={contactPhone}
+                                            label={contactPhone}
                                         />
                                     </div>
                                 </div>
@@ -107,14 +116,14 @@ export function OwnerEditForm({
                                             type="text"
                                             name="contactEmail"
                                             component={Input}
-                                            placeholder="Contact Email"
-                                            label="Contact Email"
+                                            placeholder={contactEmail}
+                                            label={contactEmail}
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="status" label="Status">
+                                        <Select name="status" label={status}>
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </Select>
@@ -148,7 +157,9 @@ export function OwnerEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                             <> </>
                             <button
@@ -156,7 +167,9 @@ export function OwnerEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage
+                                    id="COMMON.SAVE"
+                                />
                             </button>
                         </Modal.Footer>
                     </>

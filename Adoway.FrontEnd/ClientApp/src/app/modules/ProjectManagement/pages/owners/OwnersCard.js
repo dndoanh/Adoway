@@ -9,7 +9,7 @@ import { OwnersFilter } from "./owner-filter/OwnersFilter";
 import { OwnersTable } from "./owner-table/OwnersTable";
 import { useOwnersUIContext } from "./OwnersUIContext";
 import { shallowEqual, useSelector } from "react-redux";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export function OwnersCard() {
   const ownersUIContext = useOwnersUIContext();
   const ownersUIProps = useMemo(() => {
@@ -20,9 +20,12 @@ export function OwnersCard() {
 
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const AddOwner = user.functions.find(x => x.code == "CreateOwner")
+
+    const intl = useIntl()
+    const list = intl.formatMessage({ id: "OWNER.OWNER_LIST" })
   return (
     <Card>
-          <CardHeader title="Owners list">
+          <CardHeader title={list}>
               {
                   user.isSuperAdmin || (AddOwner &&
                       <CardHeaderToolbar>
@@ -31,7 +34,9 @@ export function OwnersCard() {
                               className="btn btn-primary"
                               onClick={ownersUIProps.newOwnerButtonClick}
                           >
-                              New Owner
+                          <FormattedMessage
+                              id="OWNER.NEW_OWNER"
+                          />
                           </button>
                       </CardHeaderToolbar>
                   )

@@ -21,6 +21,7 @@ import * as uiHelpers from "../SuppliersUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useSuppliersUIContext } from "../SuppliersUIContext";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function SuppliersTable() {
     // Suppliers UI Context
@@ -53,46 +54,55 @@ export function SuppliersTable() {
     const Delete = user.functions.find(x => x.code == "DeleteSupplier")
     const Edit = user.functions.find(x => x.code == "EditSupplier")
 
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const address = intl.formatMessage({ id: "PURCHASE.SUPPLIER.ADDRESS" })
+    const c_name = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_NAME" })
+    const phone= intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_PHONE" })
+    const email = intl.formatMessage({ id: "PURCHASE.SUPPLIER.CONTACT_EMAIL" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+
     // Table columns
     const columns = [
         {
             dataField: "name",
-            text: "Name",
+            text: name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "address",
-            text: "Address",
+            text: address,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "contactName",
-            text: "Contact Name",
+            text: c_name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "contactPhone",
-            text: "Contact Phone",
+            text: phone,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "contactEmail",
-            text: "Contact Email",
+            text: email,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "status",
-            text: "Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -100,7 +110,7 @@ export function SuppliersTable() {
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditSupplierDialog: suppliersUIProps.openEditSupplierDialog,

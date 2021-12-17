@@ -26,6 +26,7 @@ import * as uiHelpers from "../InvoicesUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useInvoicesUIContext } from "../InvoicesUIContext";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function InvoicesTable() {
     // Invoices UI Context
@@ -63,25 +64,33 @@ export function InvoicesTable() {
     const Edit = user.functions.find(x => x.code == "EditInvoice")
 
     useEffect(() => {
-        // server call by queryParams
-   /*     dispatch(suppliersActions.fetchAllSuppliers());*/
         dispatch(suppliersActions.fetchSuppliers({ filter: { name: "" }, sortOrder: "asc", sortField: "name", pageNumber: 1, pageSize: 1000 }));
         dispatch(projectsActions.fetchAllProjects);
         dispatch(customersActions.fetchAllCustomers);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const intl = useIntl()
+    const invoiceNo = intl.formatMessage({ id: "SALES.INVOICES.INVOICENO" })
+    const invoiceDate = intl.formatMessage({ id: "SALES.INVOICES.INVOICE_DATE" })
+    const dueDate = intl.formatMessage({ id: "SALES.INVOICES.DUE_DATE" })
+    const cusName = intl.formatMessage({ id: "TITLE.CUSTOMER_NAME" })
+    const supplierName = intl.formatMessage({ id: "TITLE.SUPPLIER_NAME" })
+    const projectName = intl.formatMessage({ id: "TITLE.PROJECT_NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
     // Table columns
     const columns = [
         {
             dataField: "invoiceNo",
-            text: "InvoiceNo",
+            text: invoiceNo,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "invoicedDate",
-            text: "Invoiced Date",
+            text: invoiceDate ,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -89,35 +98,35 @@ export function InvoicesTable() {
       
         {
             dataField: "dueDate",
-            text: "Due Date",
+            text: dueDate,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "customerName",
-            text: "Customer Name",
+            text: cusName,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "supplierName",
-            text: "Supplier Name",
+            text: supplierName,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "projectName",
-            text: "Project Name",
+            text: projectName,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "paymentStatus",
-            text: "Payment Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.TypeColumnFormatter,
@@ -126,7 +135,7 @@ export function InvoicesTable() {
 
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditInvoicePage: invoicesUIProps.openEditInvoicePage,

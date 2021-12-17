@@ -16,7 +16,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 const initProduct = {
   id: undefined,
   code: "",
-    productId: null
+  productId: null
 };
 
 
@@ -30,8 +30,8 @@ export function ProductEdit({
   const suhbeader = useSubheader();
 
   // Tabs
-    const [tab, setTab] = useState("basic"); intl
-  const [title, setTitle] = useState("");
+    const [tab, setTab] = useState("basic");
+    const [title, setTitle] = useState("");
     const dispatch = useDispatch();
     const intl = useIntl()
   // const layoutDispatch = useContext(LayoutContext.Dispatch);

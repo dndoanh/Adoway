@@ -9,6 +9,7 @@ import { ProjectsFilter } from "./projects-filter/ProjectsFilter";
 import { ProjectsTable } from "./projects-table/ProjectsTable";
 import { useProjectsUIContext } from "./ProjectsUIContext";
 import { shallowEqual, useSelector } from "react-redux";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function ProjectsCard() {
   const projectsUIContext = useProjectsUIContext();
@@ -21,9 +22,12 @@ export function ProjectsCard() {
 
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const AddProject = user.functions.find(x => x.code == "CreateProject")
+
+    const intl = useIntl()
+    const list = intl.formatMessage({ id: "PROJECT.PROJECT_LIST" })
   return (
     <Card>
-      <CardHeader title="Projects list">
+          <CardHeader title={list}>
         <CardHeaderToolbar>
             {
                 user.isSuperAdmin || (AddProject &&
@@ -32,7 +36,9 @@ export function ProjectsCard() {
                         className="btn btn-primary"
                         onClick={projectsUIProps.newProjectButtonClick}
                     >
-                        New Work Order
+                    <FormattedMessage
+                        id="PROJECT.NEW_PROJECT"
+                    />
                     </button>
                 )
             }

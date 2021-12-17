@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function ApartmentEditDialogHeader({ id }) {
   // Apartments Redux state
@@ -12,13 +13,15 @@ export function ApartmentEditDialogHeader({ id }) {
     }),
     shallowEqual
   );
-
+    const intl = useIntl()
+    const n_apartment = intl.formatMessage({ id: "PROJECT.APARTMENT.NEW_APARTMENT" })
+    const e_apartment = intl.formatMessage({ id: "PROJECT.APARTMENT.EDIT_APARTMENT" })
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New Apartment";
+      let _title = id ? "" : n_apartment;
     if (apartmentForEdit && id) {
-      _title = `Edit apartment '${apartmentForEdit.name}'`;
+        _title = `${e_apartment} '${apartmentForEdit.name}'`;
     }
 
     setTitle(_title);

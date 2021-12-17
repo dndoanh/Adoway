@@ -15,6 +15,7 @@ import {
     InvoiceTypeTitles,
     InvoiceAreaTitles
 } from "../InvoicesUIHelpers";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 // Validation schema
 const InvoiceEditSchema = Yup.object().shape({
@@ -53,6 +54,18 @@ export function InvoiceEditForm({
             setFile(invoice.attachment);
         }
     }, [invoice]);
+
+    const intl = useIntl()
+    const invoiceNo = intl.formatMessage({ id: "SALES.INVOICES.INVOICENO" })
+    const invoicedDate = intl.formatMessage({ id: "SALES.INVOICES.INVOICE_DATE" })
+    const dueDate = intl.formatMessage({ id: "SALES.INVOICES.DUE_DATE" })
+    const cusName = intl.formatMessage({ id: "TITLE.CUSTOMER_NAME" })
+    const supplierName = intl.formatMessage({ id: "TITLE.SUPPLIER_NAME" })
+    const projectName = intl.formatMessage({ id: "TITLE.PROJECT_NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const amount = intl.formatMessage({ id: "SALES.INVOICES.AMOUNT" })
+    const attachment = intl.formatMessage({ id: "SALES.INVOICES.ATTACHMENTS" })
+    const desc = intl.formatMessage({ id: "TITLE.DESCRIPTION" })
   return (
     <>
       <Formik
@@ -71,24 +84,24 @@ export function InvoiceEditForm({
                   <Field
                     name="invoiceNo"
                     component={Input}
-                    placeholder="invoiceNo"
-                    label="invoiceNo"
+                    placeholder={invoiceNo}
+                    label={invoiceNo}
                   />
                 </div>
                  <div className="col-lg-4">
                     <DatePickerField
                         name="invoicedDate"
                         component={Input}
-                        placeholder="Invoiced Date"
-                        label="Invoiced Date"
+                        placeholder={invoicedDate}
+                        label={invoicedDate}
                     />
                 </div>
                 <div className="col-lg-4">
                     <DatePickerField
                         name="dueDate"
                         component={Input}
-                        placeholder="Due Date"
-                        label="Due Date"
+                        placeholder={dueDate}
+                        label={dueDate}
                     />
                 </div>
              </div>
@@ -97,8 +110,8 @@ export function InvoiceEditForm({
                     <Field
                         name="amount"
                         component={Input}
-                        placeholder="Amount"
-                        label="Amount"
+                        placeholder={amount}
+                        label={amount}
                         type="number"
                     />
                 </div>
@@ -106,8 +119,8 @@ export function InvoiceEditForm({
                     <Field
                         name="attachments"
                         component={Input}
-                        placeholder="attachments"
-                        label="Attachments"
+                        placeholder={attachment}
+                        label={attachment}
                         value={attachedFile || invoice.attachments}
                     />
                     <input
@@ -126,7 +139,7 @@ export function InvoiceEditForm({
                     />
                 </div>
                 <div className="col-lg-4">
-                    <Select name="paymentStatus" label="Payment Status">
+                    <Select name="paymentStatus" label={status}>
                         <option value="1">Unpaid</option>
                         <option value="2">Paid</option>
                     </Select>
@@ -134,7 +147,7 @@ export function InvoiceEditForm({
             </div>
               <div className="form-group row">
                 <div className="col-lg-4">
-                   <Select name="customerId" label="Customer">
+                    <Select name="customerId" label={cusName}>
                         <option value=""></option>
                             {allCustomers  && allCustomers.map((user) => (
                                 <option key={user.id} value={user.id}>
@@ -143,10 +156,10 @@ export function InvoiceEditForm({
                         ))}
                     </Select>
                 </div>
-                <div className="col-lg-4">
-                 <Select name="supplierId" label="Supplier">
+                    <div className="col-lg-4">
+                        <Select name="supplierId" label={supplierName}>
                         <option value=""></option>
-                        { entities &&  entities.map((s) => (
+                        {entities &&  entities.map((s) => (
                             <option key={s.id} value={s.id}>
                                 {s.name}
                             </option>
@@ -154,7 +167,7 @@ export function InvoiceEditForm({
                     </Select>
                 </div>
                 <div className="col-lg-4">
-                    <Select name="projectId" label="Project">
+                    <Select name="projectId" label={projectName}>
                         <option value=""></option>
                         {allProjects && allProjects.map((user) => (
                             <option key={user.id} value={user.id}>
@@ -166,7 +179,7 @@ export function InvoiceEditForm({
              </div>
     
               <div className="form-group">
-                <label>Description</label>
+                <label>{desc}</label>
                 <Field
                   name="description"
                   as="textarea"

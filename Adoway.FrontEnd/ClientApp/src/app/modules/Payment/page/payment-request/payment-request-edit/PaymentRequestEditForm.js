@@ -15,6 +15,7 @@ import {
     PaymentRequestTypeTitles,
     PaymentRequestAreaTitles
 } from "../PaymentRequestsUIHelpers";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 // Validation schema
 const PaymentRequestEditSchema = Yup.object().shape({
@@ -53,7 +54,19 @@ export function PaymentRequestEditForm({
             setFile(paymentRequest.attachment);
         }
     }, [paymentRequest]);
-  
+
+    const intl = useIntl()
+    const requestNo = intl.formatMessage({ id: "PAYMENT.REQUESTNO" })
+    const dueDate = intl.formatMessage({ id: "SALES.INVOICES.DUE_DATE" })
+    const amount = intl.formatMessage({ id: "SALES.INVOICES.AMOUNT" })
+    const projectName = intl.formatMessage({ id: "TITLE.PROJECT_NAME" })
+    const attachments = intl.formatMessage({ id: "SALES.INVOICES.ATTACHMENTS" })
+    const method = intl.formatMessage({ id: "TITLE.ACTION" })
+    const requester = intl.formatMessage({ id: "PAYMENT.REQUESTER" })
+    const customer = intl.formatMessage({ id: "PAYMENT.CUSTOMER" })
+    const note = intl.formatMessage({ id: "PAYMENT.NOTE" })
+    const desc = intl.formatMessage({ id: "TITLE.DESCRIPTION" })
+    
   return (
     <>
           <Formik
@@ -70,22 +83,21 @@ export function PaymentRequestEditForm({
                           <div className="form-group row">
                               <HorizontalNonLinearStepper name="status" value={paymentRequest.status || 0 } />
                            </div>
-                        
                           <div className="form-group row">
                               <div className="col-lg-4">
                                   <Field
                                       name="requestNo"
                                       component={Input}
-                                      placeholder="RequestNo"
-                                      label="RequestNo"
+                                      placeholder={requestNo}
+                                      label={requestNo}
                                   />
                               </div>
                               <div className="col-lg-4">
                                   <DatePickerField
                                       name="dueDate"
                                       component={Input}
-                                      placeholder="Due Date"
-                                      label="Due Date"
+                                      placeholder={dueDate}
+                                      label={dueDate}
                                   />
                               </div>
                               <div className="col-lg-4">
@@ -103,8 +115,8 @@ export function PaymentRequestEditForm({
                                   <Field
                                       name="amount"
                                       component={Input}
-                                      placeholder="Amount"
-                                      label="Amount"
+                                      placeholder={amount}
+                                      label={amount}
                                       type="number"
                                   />
                               </div>
@@ -112,8 +124,8 @@ export function PaymentRequestEditForm({
                                   <Field
                                       name="attachments"
                                       component={Input}
-                                      placeholder="attachments"
-                                      label="Attachments"
+                                      placeholder={attachments}
+                                      label={attachments}
                                       value={attachedFile || paymentRequest.attachments}
                                   />
                                   <input
@@ -132,7 +144,7 @@ export function PaymentRequestEditForm({
                                   />
                               </div>
                               <div className="col-lg-4">
-                                  <Select name="paymentMethod" label="Payment Method">
+                                  <Select name="paymentMethod" label={method}>
                                       <option value="1">Cash</option>
                                       <option value="2">Bank</option>
                                   </Select>
@@ -140,7 +152,7 @@ export function PaymentRequestEditForm({
                           </div>
                           <div className="form-group row">
                               <div className="col-lg-4">
-                                  <Select name="requesterId" label="Requester">
+                                  <Select name="requesterId" label={requester}>
                                       <option value=""></option>
                                       {allUsers && allUsers.map((s) => (
                                           <option key={s.id} value={s.id}>
@@ -150,7 +162,7 @@ export function PaymentRequestEditForm({
                                   </Select>
                               </div>
                               <div className="col-lg-4">
-                                  <Select name="customerId" label="Customer">
+                                  <Select name="customerId" label={customer}>
                                       <option value=""></option>
                                       {allCustomers && allCustomers.map((s) => (
                                           <option key={s.id} value={s.id}>
@@ -160,7 +172,7 @@ export function PaymentRequestEditForm({
                                   </Select>
                               </div>
                               <div className="col-lg-4">
-                                  <Select name="projectId" label="Project">
+                                  <Select name="projectId" label={projectName}>
                                       <option value=""></option>
                                       {allProjects && allProjects.map((user) => (
                                           <option key={user.id} value={user.id}>
@@ -171,7 +183,7 @@ export function PaymentRequestEditForm({
                               </div>
                           </div>
                           <div className="form-group">
-                              <label>Note</label>
+                              <label>{note}</label>
                               <Field
                                   name="note"
                                   as="textarea"
@@ -180,7 +192,7 @@ export function PaymentRequestEditForm({
                               />
                           </div>
                           <div className="form-group">
-                              <label>Description</label>
+                              <label>{desc}</label>
                               <Field
                                   name="description"
                                   as="textarea"

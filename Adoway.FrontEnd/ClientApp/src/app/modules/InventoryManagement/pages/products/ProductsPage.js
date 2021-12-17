@@ -17,10 +17,8 @@ export function ProductsPage({ history }) {
         },
         openDeleteProductDialog: (id) => {
             history.push(`/products/${id}/delete`);
-        },
-       
+        }
     }
-
     return (
         <ProductsUIProvider productsUIEvents={productsUIEvents}>
             <ProductsLoadingDialog />

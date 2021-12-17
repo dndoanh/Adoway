@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function SupplierEditDialogHeader({ id }) {
   // Suppliers Redux state
@@ -12,13 +13,16 @@ export function SupplierEditDialogHeader({ id }) {
     }),
     shallowEqual
   );
+    const intl = useIntl()
+    const new_s = intl.formatMessage({ id: "PURCHASE.SUPPLIER.NEW_SUPPLIER" })
+    const edit_s = intl.formatMessage({ id: "PURCHASE.SUPPLIER.EDIT_SUPPLIER" })
 
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New Supplier";
+      let _title = id ? "" : new_s;
     if (supplierForEdit && id) {
-      _title = `Edit supplier '${supplierForEdit.name}'`;
+        _title = `${edit_s} supplier '${supplierForEdit.name}'`;
     }
 
     setTitle(_title);

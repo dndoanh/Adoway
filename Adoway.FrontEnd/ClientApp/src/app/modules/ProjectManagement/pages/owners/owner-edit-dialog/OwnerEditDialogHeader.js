@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export function OwnerEditDialogHeader({ id }) {
   // Owners Redux state
   const { ownerForEdit, actionsLoading } = useSelector(

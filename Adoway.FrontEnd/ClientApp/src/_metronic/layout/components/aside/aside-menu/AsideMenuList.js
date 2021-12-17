@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
 import { shallowEqual, useSelector } from "react-redux";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function AsideMenuList({ layoutProps }) {
     const location = useLocation();
@@ -16,6 +17,7 @@ export function AsideMenuList({ layoutProps }) {
             "menu-item-active"} menu-item-open menu-item-not-hightlighted`
             : "";
     };
+
     return (
         <>
             {/* begin::Menu Nav */}
@@ -30,7 +32,11 @@ export function AsideMenuList({ layoutProps }) {
                         <span className="svg-icon menu-icon">
                             <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
                         </span>
-                        <span className="menu-text">Dashboard</span>
+                        <span className="menu-text">
+                            <FormattedMessage
+                                id="COMMON.DASHBOARD"
+                            />
+                        </span>
                     </NavLink>
                 </li>
                 {user.screens && user.screens.map(u => (
@@ -38,7 +44,13 @@ export function AsideMenuList({ layoutProps }) {
                         {
                             u.isUpper ?
                                 <li className="menu-section "> 
-                                    <h4 className="menu-text">{u.name}</h4>
+                                    <h4 className="menu-text">
+                                        <FormattedMessage
+                                            id={`COMMON.${String(u.name).
+                                                replace(" ", "_").
+                                                toUpperCase()}`}
+                                        />
+                                    </h4>
                                 </li> :
                                 <li
                                     className={`menu-item ${getMenuItemActive(u.path, false)}`}
@@ -48,7 +60,14 @@ export function AsideMenuList({ layoutProps }) {
                                         <span className="svg-icon menu-icon">
                                             <SVG src={toAbsoluteUrl(u.icon)} />
                                         </span>
-                                        <span className="menu-text">{u.name}</span>
+                                        <span className="menu-text">
+                                            <FormattedMessage
+                                                id={`COMMON.${String(u.name).
+                                                    replace(" ", "_").
+                                                    toUpperCase()}`}
+                                            />
+                                            
+                                        </span>
                                     </NavLink>
                                 </li>
                         }

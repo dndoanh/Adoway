@@ -8,7 +8,7 @@ import {
 import { MeetingRoomsFilter } from "./meetingroom-filter/MeetingRoomsFilter";
 import { MeetingRoomsTable } from "./meetingroom-table/MeetingRoomsTable";
 import { useMeetingRoomsUIContext } from "./MeetingRoomsUIContext";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export function MeetingRoomsCard() {
   const meetingRoomsUIContext = useMeetingRoomsUIContext();
   const meetingRoomsUIProps = useMemo(() => {
@@ -17,16 +17,20 @@ export function MeetingRoomsCard() {
     };
   }, [meetingRoomsUIContext]);
 
+    const intl = useIntl()
+    const roomList = intl.formatMessage({ id: "CALENDAR.ROOM.ROOM_LIST" })
   return (
     <Card>
-      <CardHeader title="Meeting Rooms list">
+          <CardHeader title={roomList}>
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={meetingRoomsUIProps.newMeetingRoomButtonClick}
           >
-            New Meeting Room
+            <FormattedMessage
+                id="CALENDAR.ROOMS.NEW_ROOM"
+            />
           </button>
         </CardHeaderToolbar>
       </CardHeader>

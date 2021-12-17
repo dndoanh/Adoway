@@ -13,7 +13,7 @@ import {
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 // Validation schema
 const ApartmentEditSchema = Yup.object().shape({
     name: Yup.string()
@@ -40,7 +40,14 @@ export function ApartmentEditForm({
         shallowEqual
     );
     const { allCustomers } = currentOwnersState;
-
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const floor = intl.formatMessage({ id: "PROJECT.APARTMENT.FLOOR" })
+    const block = intl.formatMessage({ id: "PROJECT.APARTMENT.BLOCK" })
+    const intenet = intl.formatMessage({ id: "PROJECT.APARTMENT.INTERNET_LINE" })
+    const tv = intl.formatMessage({ id: "PROJECT.APARTMENT.TV_LINE" })
+    const owner = intl.formatMessage({ id: "COMMON.OWNER" })
+    const project = intl.formatMessage({ id: "COMMON.PROJECT" })
     return (
         <>
             <Formik
@@ -65,8 +72,8 @@ export function ApartmentEditForm({
                                         <Field
                                             name="name"
                                             component={Input}
-                                            placeholder="Name"
-                                            label="Name"
+                                            placeholder={name}
+                                            label={name}
                                         />
                                     </div>
                                 </div>
@@ -86,30 +93,20 @@ export function ApartmentEditForm({
                                             type="text"
                                             name="floor"
                                             component={Input}
-                                            placeholder="Floor"
-                                            label="Floor"
+                                            placeholder={floor}
+                                            label={floor}
                                         />
                                     </div>
                                 </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-12">
-                                        <Field
-                                            type="text"
-                                            name="floor"
-                                            component={Input}
-                                            placeholder="Floor"
-                                            label="Floor"
-                                        />
-                                    </div>
-                                </div>
+                             
                                 <div className="form-group row">
                                     <div className="col-lg-12">
                                         <Field
                                             type="text"
                                             name="block"
                                             component={Input}
-                                            placeholder="Block"
-                                            label="Block"
+                                            placeholder={block}
+                                            label={block}
                                         />
                                     </div>
                                 </div>
@@ -119,8 +116,8 @@ export function ApartmentEditForm({
                                             type="text"
                                             name="internetLine"
                                             component={Input}
-                                            placeholder="Internet Line"
-                                            label="Internet Line"
+                                            placeholder={intenet}
+                                            label={intenet}
                                         />
                                     </div>
                                 </div>
@@ -130,14 +127,14 @@ export function ApartmentEditForm({
                                             type="text"
                                             name="tvLine"
                                             component={Input}
-                                            placeholder="TV Line"
-                                            label="TV Line"
+                                            placeholder={tv}
+                                            label={tv}
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="ownerId" label="Owner">
+                                        <Select name="ownerId" label={owner}>
                                             <option value=""></option>
                                             {allCustomers && allCustomers.map((owner) => (
                                                 <option key={owner.id} value={owner.id}>
@@ -149,7 +146,7 @@ export function ApartmentEditForm({
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="projectId" label="Project">
+                                        <Select name="projectId" label={project}>
                                             <option value=""></option>
                                             {allProjects && allProjects.map((project) => (
                                                 <option key={project.id} value={project.id}>
@@ -168,7 +165,9 @@ export function ApartmentEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                             <> </>
                             <button
@@ -176,7 +175,9 @@ export function ApartmentEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage
+                                    id="COMMON.SAVE"
+                                />
                             </button>
                         </Modal.Footer>
                     </>

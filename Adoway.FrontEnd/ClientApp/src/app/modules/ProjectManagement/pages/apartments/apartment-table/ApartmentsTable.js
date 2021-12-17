@@ -11,7 +11,7 @@ import * as actions from "../../../_redux/apartments/apartmentsActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
 import * as projectsActions from "../../../../ProjectManagement/_redux/projects/projectsActions";
 import * as customersActions from "../../../../SalesManagement/_redux/customers/customersActions";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -58,6 +58,14 @@ export function ApartmentsTable() {
     const Delete = user.functions.find(x => x.code == "DeleteSupplier")
     const Edit = user.functions.find(x => x.code == "EditSupplier")
 
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const floor = intl.formatMessage({ id: "PROJECT.APARTMENT.FLOOR" })
+    const block = intl.formatMessage({ id: "PROJECT.APARTMENT.BLOCK" })
+    const intenet = intl.formatMessage({ id: "PROJECT.APARTMENT.INTERNET_LINE" })
+    const tv = intl.formatMessage({ id: "PROJECT.APARTMENT.TV_LINE" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+
     useEffect(() => {
         // server call by queryParams
         dispatch(projectsActions.fetchAllProjects);
@@ -68,42 +76,42 @@ export function ApartmentsTable() {
     const columns = [
         {
             dataField: "name",
-            text: "Name",
+            text: name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "floor",
-            text: "Floor",
+            text: floor,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "block",
-            text: "Block",
+            text: block,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "internetLine",
-            text: "Internet Line",
+            text: intenet,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "tvLine",
-            text: "TV Line",
+            text: tv,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditApartmentDialog: apartmentsUIProps.openEditApartmentDialog,
@@ -136,21 +144,21 @@ export function ApartmentsTable() {
                             isLoading={listLoading}
                             paginationProps={paginationProps}
                         >
-                            <BootstrapTable
-                                wrapperClasses="table-responsive"
-                                bordered={false}
-                                classes="table table-head-custom table-vertical-center overflow-hidden"
-                                bootstrap4
-                                remote
-                                keyField="id"
-                                data={entities === null ? [] : entities}
-                                columns={columns}
-                                defaultSorted={uiHelpers.defaultSorted}
-                                onTableChange={getHandlerTableChange(
-                                    apartmentsUIProps.setQueryParams
-                                )}
-                                {...paginationTableProps}
-                            >
+                        <BootstrapTable
+                            wrapperClasses="table-responsive"
+                            bordered={false}
+                            classes="table table-head-custom table-vertical-center overflow-hidden"
+                            bootstrap4
+                            remote
+                            keyField="id"
+                            data={entities === null ? [] : entities}
+                            columns={columns}
+                            defaultSorted={uiHelpers.defaultSorted}
+                            onTableChange={getHandlerTableChange(
+                                apartmentsUIProps.setQueryParams
+                            )}
+                            {...paginationTableProps}
+                        >
                                 <PleaseWaitMessage entities={entities} />
                                 <NoRecordsFoundMessage entities={entities} />
                             </BootstrapTable>

@@ -46,8 +46,7 @@ export function I18nProvider({ children }) {
     );
     const { allLanguages } = currentLanguagesState;
     const lang = user?allLanguages.find(l => l.id == user.languageId):""
-    /*   const locale = lang ? lang.locale.substring(0, 2) : "";*/
-    const locale="vi"
+    const locale = lang ? lang.locale.substring(0, 2) : "";
     const messages = allMessages[locale];
 
   return (
