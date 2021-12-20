@@ -9,7 +9,7 @@ import paginationFactory, {
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/customers/customersActions";
 import * as projectsActions from "../../../../ProjectManagement/_redux/projects/projectsActions";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -63,17 +63,26 @@ export function CustomersTable() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
+
+    const intl = useIntl()
+    const cusType = intl.formatMessage({ id: "CUSTOMER.CUSTOMER_TYPE" })
+    const phone = intl.formatMessage({ id: "CUSTOMER.PHONE" })
+    const address = intl.formatMessage({ id: "PURCHASE.SUPPLIER.ADDRESS" })
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+
     const columns = [
         {
             dataField: "name",
-            text: "Name",
+            text: name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "customerType",
-            text: "Customer Type",
+            text: cusType,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.TypeColumnFormatter,
@@ -81,7 +90,7 @@ export function CustomersTable() {
         },
         {
             dataField: "phone",
-            text: "Phone",
+            text: phone,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -95,14 +104,14 @@ export function CustomersTable() {
         },
         {
             dataField: "address",
-            text: "Address",
+            text: address,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "status",
-            text: "Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -110,7 +119,7 @@ export function CustomersTable() {
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditCustomerDialog: customersUIProps.openEditCustomerDialog,

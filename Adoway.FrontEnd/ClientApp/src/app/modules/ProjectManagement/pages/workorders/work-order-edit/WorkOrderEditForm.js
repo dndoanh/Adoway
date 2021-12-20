@@ -17,6 +17,8 @@ import {
 } from "../WorkOrdersUIHelpers";
 import * as apartmentsActions from "../../../../ProjectManagement/_redux/apartments/apartmentsActions";
 import * as actions from "../../../../ProjectManagement/_redux/workorders/workOrdersActions";
+import { FormattedMessage, useIntl } from 'react-intl';
+
 // Validation schema
 const WorkOrderEditSchema = Yup.object().shape({
     code: Yup.string()
@@ -64,6 +66,22 @@ export function WorkOrderEditForm({
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const FinishWorkOrder = user.functions.find(x => x.code == "FinishWorkOrder")
     const ReturnWorkOrder = user.functions.find(x => x.code == "ReturnWorkOrder")
+
+    const intl = useIntl()
+    const code = intl.formatMessage({ id: "WORK_ORDER.CODE" })
+    const type = intl.formatMessage({ id: "WORK_ORDER.TYPE" })
+    const category = intl.formatMessage({ id: "WORK_ORDER.CATEGORY" })
+    const sdate = intl.formatMessage({ id: "TITLE.START_DATE" })
+    const edate = intl.formatMessage({ id: "TITLE.END_DATE" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const requester = intl.formatMessage({ id: "COMMON.REQUESTER" })
+    const salesman = intl.formatMessage({ id: "COMMON.SALESMAN" })
+    const apartment = intl.formatMessage({ id: "COMMON.APARTMENT" })
+    const project = intl.formatMessage({ id: "TITLE.PROJECT_NAME" })
+    const cus = intl.formatMessage({ id: "COMMON.CUSTOMER" })
+    const desc = intl.formatMessage({ id: "TITLE.DESCRIPTION" })
+    const supplier = intl.formatMessage({ id: "TITLE.SUPPLIER" })
+
   return (
     <>
       <Formik
@@ -165,12 +183,12 @@ export function WorkOrderEditForm({
                   <Field
                     name="code"
                     component={Input}
-                    placeholder="Code"
-                    label="Code"
+                    placeholder={code}
+                    label={code}
                   />
                 </div>
                 <div className="col-lg-4">
-                    <Select name="workOrderType" label="WorkOrderType">
+                    <Select name="workOrderType" label={type}>
                         {WorkOrderTypeTitles.map((status, index) => (
                             <option key={status} value={index}>
                                 {status}
@@ -180,7 +198,7 @@ export function WorkOrderEditForm({
                     </Select>
                  </div>
                 <div className="col-lg-4">
-                    <Select name="workOrderCategory" label="WorkOrderCategory">
+                    <Select name="workOrderCategory" label={category}>
                         {WorkOrderCategoryTitles.map((status, index) => (
                             <option key={status} value={index}>
                                 {status}
@@ -191,7 +209,7 @@ export function WorkOrderEditForm({
              </div>
             <div className="form-group row">
                 <div className="col-lg-4">
-                    <Select name="projectId" label="Project">
+                    <Select name="projectId" label={project}>
                         <option value=""></option>
                         {allProjects && allProjects.map((project) => (
                             <option key={project.id} value={project.id}>
@@ -201,7 +219,7 @@ export function WorkOrderEditForm({
                     </Select>
                 </div>
                 <div className="col-lg-4">
-                    <Select name="supplierId" label="Supplier">
+                    <Select name="supplierId" label={supplier}>
                         <option value=""></option>
                         {allProjects && allProjects.map((project) => (
                             <option key={project.id} value={project.id}>
@@ -211,7 +229,7 @@ export function WorkOrderEditForm({
                     </Select>
                 </div>
                 <div className="col-lg-4">
-                    <Select name="apartmentId" label="Apartment">
+                    <Select name="apartmentId" label={apartment}>
                         <option value=""></option>
                         {filterApartments && filterApartments.map((apartment) => (
                             <option key={apartment.id} value={apartment.id}>
@@ -223,7 +241,7 @@ export function WorkOrderEditForm({
                 </div>
               <div className="form-group row">
                 <div className="col-lg-4">
-                    <Select name="customerId" label="Customer">
+                    <Select name="customerId" label={cus}>
                         <option value=""></option>
                         {allCustomers && allCustomers.map((customer) => (
                             <option key={customer.id} value={customer.id}>
@@ -236,22 +254,22 @@ export function WorkOrderEditForm({
                     <DatePickerField
                         name="startDate"
                         component={Input}
-                        placeholder="Start Date"
-                        label="Start Date"
+                        placeholder={sdate}
+                        label={sdate}
                     />
                 </div>
                 <div className="col-lg-4">
                     <DatePickerField
                         name="endDate"
                         component={Input}
-                        placeholder="End Date"
-                        label="End Date"
+                        placeholder={edate}
+                        label={edate}
                     />
                 </div>
               </div>
               <div className="form-group row">
-                <div className="col-lg-4">
-                        <Select name="salesmanId" label="Salesman">
+                    <div className="col-lg-4">
+                        <Select name="salesmanId" label={salesman}>
                         <option value=""></option>
                             {allUsers && allUsers.map((user) => (
                                 <option key={user.id} value={user.id}>
@@ -260,8 +278,8 @@ export function WorkOrderEditForm({
                         ))}
                     </Select>
                 </div>
-                <div className="col-lg-4">
-                 <Select name="requesterId" label="Requester">
+                    <div className="col-lg-4">
+                            <Select name="requesterId" label={requester}>
                         <option value=""></option>
                         {allUsers && allUsers.map((user) => (
                             <option key={user.id} value={user.id}>
@@ -271,7 +289,7 @@ export function WorkOrderEditForm({
                     </Select>
                 </div>
                 <div className="col-lg-4">
-                  <Select name="status" label="Status">
+                <Select name="status" label={status}>
                     {WorkOrderStatusTitles.map((status, index) => (
                       <option key={status} value={index}>
                         {status}
@@ -281,7 +299,7 @@ export function WorkOrderEditForm({
                 </div>
               </div>
               <div className="form-group">
-                <label>Description</label>
+                <label>{desc}</label>
                 <Field
                   name="description"
                   as="textarea"

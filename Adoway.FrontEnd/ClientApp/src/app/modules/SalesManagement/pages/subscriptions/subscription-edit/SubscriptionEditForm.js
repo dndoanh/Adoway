@@ -16,7 +16,7 @@ import {
     SubscriptionAreaTitles
 } from "../SubscriptionsUIHelpers";
 import * as apartmentsActions from "../../../../ProjectManagement/_redux/apartments/apartmentsActions";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 // Validation schema
 const SubscriptionEditSchema = Yup.object().shape({
     contractCode: Yup.string()
@@ -49,7 +49,20 @@ export function SubscriptionEditForm({
         shallowEqual
     );
     const { allCustomers } = currentCustomersState;
-  
+
+    const intl = useIntl()
+    const contractCode = intl.formatMessage({ id: "SALES.SUBS.CONTRACT_CODE" })
+    const customerCode = intl.formatMessage({ id: "SALES.SUBS.CUSTOMER_CODE" })
+    const startDate = intl.formatMessage({ id: "TITLE.START_DATE" })
+    const endDate = intl.formatMessage({ id: "TITLE.END_DATE" })
+    const salesPrice = intl.formatMessage({ id: "SALES.SUBS.SALES_PRICE" })
+    const product = intl.formatMessage({ id: "COMMON.PRODUCT" })
+    const apartment = intl.formatMessage({ id: "COMMON.APARTMENT" })
+    const desc = intl.formatMessage({ id: "TITLE.DESCRIPTION" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const cus = intl.formatMessage({ id: "PAYMENT.CUSTOMER" })
+    
+ 
   return (
     <>
       <Formik
@@ -68,17 +81,17 @@ export function SubscriptionEditForm({
                   <Field
                     name="contractCode"
                     component={Input}
-                    placeholder="Contract Code"
-                    label="Contract Code"
+                    placeholder={contractCode}
+                    label={contractCode}
                   />
                 </div>
                 <div className="col-lg-4">
-                      <Field
+                <Field
                     name="customerCode"
                     component={Input}
-                    placeholder="Customer Code"
-                    label="Customer Code"
-                  />
+                    placeholder={customerCode}
+                    label={customerCode}
+                />
                 </div>
                 <div className="col-lg-4">
                  <Select name="subscriptionPeriod" label="Subscription Period">
@@ -96,20 +109,20 @@ export function SubscriptionEditForm({
                     <DatePickerField
                         name="startDate"
                         component={Input}
-                        placeholder="Start Date"
-                        label="Start Date"
+                        placeholder={startDate}
+                        label={startDate}
                     />
                 </div>
                 <div className="col-lg-4">
                     <DatePickerField
                         name="endDate"
                         component={Input}
-                        placeholder="End Date"
-                        label="End Date"
+                        placeholder={endDate}
+                        label={endDate}
                     />
                 </div>
                 <div className="col-lg-4">
-                    <Select name="status" label="Status">
+                    <Select name="status" label={status}>
                         {SubscriptionStatusTitles.map((status, index) => (
                             <option key={status} value={index}>
                                 {status}
@@ -123,8 +136,8 @@ export function SubscriptionEditForm({
                     <Field
                         name="salesPrice"
                         component={Input}
-                        placeholder="Sales Price"
-                        label="Sales Price"
+                        placeholder={salesPrice}
+                        label={salesPrice}
                     />
                 </div>
                 <div className="col-lg-4">
@@ -136,20 +149,19 @@ export function SubscriptionEditForm({
                     />
                 </div>
                  <div className="col-lg-4">
-                    <Select name="customerId" label="Customer">
+                    <Select name="customerId" label={cus}>
                         <option value=""></option>
                         {allCustomers && allCustomers.map((c) => (
                             <option key={c.id} value={c.id}>
                                 {c.name}
                             </option>
-
                         ))}
                     </Select>
                 </div>
               </div>
               <div className="form-group row">
                 <div className="col-lg-4">
-                  <Select name="productId" label="Product">
+                    <Select name="productId" label={product}>
                          <option value=""></option>
                         {allProducts && allProducts.map((c) => (
                             <option key={c.id} value={c.id}>
@@ -160,7 +172,7 @@ export function SubscriptionEditForm({
                     </Select>
                 </div>
                 <div className="col-lg-4">
-                  <Select name="apartmentId" label="Apartment">
+                    <Select name="apartmentId" label={apartment}>
                          <option value=""></option>
                         {entities && entities.map((c) => (
                             <option key={c.id} value={c.id}>
@@ -174,7 +186,7 @@ export function SubscriptionEditForm({
               </div>
            
               <div className="form-group">
-                <label>Description</label>
+                <label>{desc}</label>
                 <Field
                   name="description"
                   as="textarea"

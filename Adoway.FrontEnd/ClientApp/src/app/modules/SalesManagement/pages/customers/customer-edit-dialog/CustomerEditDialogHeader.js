@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function CustomerEditDialogHeader({ id }) {
   // Customers Redux state
@@ -13,12 +14,18 @@ export function CustomerEditDialogHeader({ id }) {
     shallowEqual
   );
 
+
   const [title, setTitle] = useState("");
   // Title couting
+
+    const intl = useIntl()
+    const n_cus = intl.formatMessage({ id: "CUSTOMER.NEW_CUSTOMER" })
+    const e_cus = intl.formatMessage({ id: "CUSTOMER.EDIT_CUSTOMER" })
+
   useEffect(() => {
-    let _title = id ? "" : "New Customer";
+      let _title = id ? "" : n_cus;
     if (customerForEdit && id) {
-      _title = `Edit customer '${customerForEdit.name}'`;
+        _title = `${e_cus} '${customerForEdit.name}'`;
     }
 
     setTitle(_title);

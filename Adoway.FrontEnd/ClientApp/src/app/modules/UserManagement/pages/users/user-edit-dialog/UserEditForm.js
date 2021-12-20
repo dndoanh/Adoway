@@ -7,6 +7,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
     Input,
     Select,
@@ -54,7 +55,11 @@ export function UserEditForm({
     const removeAvatarUrl = () => {
         setAvatarUrl("");
     };
-
+    const intl = useIntl()
+    const avt = intl.formatMessage({ id: "USER.AVARTAR" })
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const lang = intl.formatMessage({ id: "USER.LANGUAGE" })
     return (
         <>
             <Formik
@@ -144,8 +149,8 @@ export function UserEditForm({
                                         <Field
                                             name="name"
                                             component={Input}
-                                            placeholder="Name"
-                                            label="Name"
+                                            placeholder={name}
+                                            label={name}
                                         />
                                     </div>
                                 </div>
@@ -162,7 +167,7 @@ export function UserEditForm({
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="languageId" label="Language">
+                                        <Select name="languageId" label={lang}>
                                             <option value=""></option>
                                             {allLanguages.map((language) => (
                                                 <option key={language.id} value={language.id}>
@@ -174,7 +179,7 @@ export function UserEditForm({
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="status" label="Status">
+                                        <Select name="status" label={status}>
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </Select>
@@ -188,7 +193,9 @@ export function UserEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                             <> </>
                             <button
@@ -196,7 +203,9 @@ export function UserEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage
+                                    id="COMMON.SAVE"
+                                />
                             </button>
                         </Modal.Footer>
                     </>

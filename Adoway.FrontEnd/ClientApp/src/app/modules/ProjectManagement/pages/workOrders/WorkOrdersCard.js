@@ -9,6 +9,7 @@ import { WorkOrdersFilter } from "./work-orders-filter/WorkOrdersFilter";
 import { WorkOrdersTable } from "./work-orders-table/WorkOrdersTable";
 import { useWorkOrdersUIContext } from "./WorkOrdersUIContext";
 import { shallowEqual, useSelector } from "react-redux";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function WorkOrdersCard() {
   const workOrdersUIContext = useWorkOrdersUIContext();
@@ -19,10 +20,13 @@ export function WorkOrdersCard() {
   }, [workOrdersUIContext]);
 
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
-    const AddWorkOrder= user.functions.find(x => x.code == "CreateWorkOrder")
+    const AddWorkOrder = user.functions.find(x => x.code == "CreateWorkOrder")
+
+    const intl = useIntl()
+    const list = intl.formatMessage({ id: "WORK_ORDER.LIST" })
   return (
     <Card>
-      <CardHeader title="WorkOrders list">
+        <CardHeader title={list}>
         <CardHeaderToolbar>
             {
                 (user.isSuperAdmin || AddWorkOrder) &&
@@ -31,7 +35,9 @@ export function WorkOrdersCard() {
                     className="btn btn-primary"
                     onClick={workOrdersUIProps.newWorkOrderButtonClick}
                 >
-                    New Work Order
+                          <FormattedMessage
+                              id="WORK_ORDER.NEW"
+                          />
                 </button>
             }
        

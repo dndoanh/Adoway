@@ -82,6 +82,18 @@
   "SALES.INVOICES.AMOUNT": "Số lượng",
   "SALES.INVOICES.ATTACHMENTS": "Đính kèm",
 
+  "SALES.SUBS.CONTRACT_CODE": "Mã hợp đồng",
+  "SALES.SUBS.CUSTOMER_CODE": "Mã khách hàng",
+  "SALES.SUBS.SALES_PRICE": "Giá bán",
+  "SALES.SUBS.SUBS_LIST": "Danh sách thuê bao",
+  "SALES.SUBS.NEW_SUBS": "Thuê bao mới",
+  "SALES.SUBS.EDIT_SUBS": "Sửa thuê bao",
+
+  "CATEGORIES.CATEGORIES_LIST": "Danh sách nhóm sản phẩm",
+  "CATEGORIES.NEW_CATEGORIES": "Nhóm sản phẩm mới",
+  "CATEGORIES.EDIT_CATEGORIES": "Sửa nhóm sản phẩm",
+  "CATEGORIES.DELETE_CATEGORIES": "Xóa nhóm sản phẩm",
+
   "PURCHASE.SUPPLIER.ADDRESS": "Địa chỉ",
   "PURCHASE.SUPPLIER.CONTACT_NAME": "Người liên hệ",
   "PURCHASE.SUPPLIER.CONTACT_PHONE": "Địa chỉ người liên hệ",
@@ -117,6 +129,8 @@
   "CUSTOMER.CUSTOMER_LIST": "Danh sách khách hàng",
   "CUSTOMER.EDIT_CUSTOMER": "Sửa khách hàng",
   "CUSTOMER.DELETE_CUSTOMER": "Xóa khách hàng",
+  "CUSTOMER.CUSTOMER_TYPE": "Loại khách hàng",
+  "CUSTOMER.PHONE": "Số điện thoại",
 
   "PROJECT.NEW_PROJECT": "Dự án mới",
   "PROJECT.PROJECT_LIST": "Danh sách dự án",
@@ -135,7 +149,27 @@
   "PROJECT.TECH_USER": "Nhân viên kỹ thuật",
   "PROJECT.SALE_USER": "Nhân viên bán hàng",
 
+
+  "USER.NEW_USER": "Người dùng mới",
+  "USER.USER_LIST": "Danh sách người dùng",
+  "USER.EDIT_USER": "Sửa người dùng",
+  "USER.DELETE_USER": "Xóa người dùng",
+  "USER.AVARTAR": "Hình đại diện",
+  "USER.LANGUAGE": "Ngôn ngữ",
+
+  "ROLE.NEW_ROLE": "Vai trò mới",
+  "ROLE.EDIT_ROLE": "Sửa vai trò",
+  "ROLE.DELETE_ROLE": "Xóa vai trò",
+
+  "WORK_ORDER.NEW": "Công việc mới",
+  "WORK_ORDER.LIST": "Danh sách công việc",
+  "WORK_ORDER.EDIT": "Sửa công việc",
+  "WORK_ORDER.CODE": "Mã phiếu",
+  "WORK_ORDER.TYPE": "Loại phiếu",
+  "WORK_ORDER.CATEGORY": "Nhóm phiếu",
+
   "TITLE.NAME": "Tên",
+  "TITLE.PARENT": "Nhóm sản phẩm cha",
   "TITLE.CATEGORY_NAME": "Tên nhóm sản phẩm",
   "TITLE.CATEGORY": "Nhóm sản phẩm",
   "TITLE.SALES_PRICE": "Giá bán",
@@ -168,6 +202,7 @@
   "COMMON.BACK": "Quay lại",
   "COMMON.RESET": "Thiết lập lại",
   "COMMON.CANCEL": "Hủy",
+  "COMMON.ADD": "Thêm",
   "COMMON.DELETE": "Xóa",
   "COMMON.CALENDAR": "Lịch",
   "COMMON.EVENT": "Sự kiện",
@@ -189,6 +224,8 @@
   "COMMON.SUBSCRIPTION": "Thuê bao",
   "COMMON.USER_MANAGEMENT": "Quản lý người dùng",
   "COMMON.USER": "Người dùng",
+  "COMMON.SALESMAN": "Người bán hàng",
+  "COMMON.REQUESTER": "Người yêu cầu",
   "COMMON.ROLE": "Vai trò",
   "COMMON.DASHBOARD": "Bảng điều khiển"
 

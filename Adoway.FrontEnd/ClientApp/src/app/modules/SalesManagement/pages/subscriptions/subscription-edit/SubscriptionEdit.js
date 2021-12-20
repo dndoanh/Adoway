@@ -12,7 +12,7 @@ import {
 import { SubscriptionEditForm } from "./SubscriptionEditForm";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 const initSubscription = {
   id: undefined,
   code: "",

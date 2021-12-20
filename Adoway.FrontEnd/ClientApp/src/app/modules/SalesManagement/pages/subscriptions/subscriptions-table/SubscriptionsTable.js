@@ -13,7 +13,7 @@ import * as usersActions from "../../../../UserManagement/_redux/users/usersActi
 import * as customersActions from "../../../../SalesManagement/_redux/customers/customersActions";
 import * as apartmentsActions from "../../../../ProjectManagement/_redux/apartments/apartmentsActions";
 import * as productsActions from "../../../../InventoryManagement/_redux/products/productsActions";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -62,6 +62,15 @@ export function SubscriptionsTable() {
     const Delete = user.functions.find(x => x.code == "DeleteSubscription")
     const Edit = user.functions.find(x => x.code == "EditSubscription")
 
+    const intl = useIntl()
+    const contractCode = intl.formatMessage({ id: "SALES.SUBS.CONTRACT_CODE" })
+    const customerCode = intl.formatMessage({ id: "SALES.SUBS.CUSTOMER_CODE" })
+    const startDate = intl.formatMessage({ id: "TITLE.START_DATE" })
+    const endDate = intl.formatMessage({ id: "TITLE.END_DATE" })
+    const salesPrice = intl.formatMessage({ id: "SALES.SUBS.SALES_PRICE" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+
     useEffect(() => {
         // server call by queryParams
         dispatch(productsActions.fetchAllProducts);
@@ -73,14 +82,14 @@ export function SubscriptionsTable() {
     const columns = [
         {
             dataField: "contractCode",
-            text: "ContractCode",
+            text: contractCode,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "customerCode",
-            text: "CustomerCode",
+            text: customerCode,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -88,28 +97,28 @@ export function SubscriptionsTable() {
       
         {
             dataField: "startDate",
-            text: "Start Date",
+            text: startDate,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "endDate",
-            text: "End Date",
+            text: endDate ,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
-            dataField: "salesPrice ",
-            text: "Sales Price ",
+            dataField: "salesPrice",
+            text: salesPrice,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "status",
-            text: "Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -118,7 +127,7 @@ export function SubscriptionsTable() {
 
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditSubscriptionPage: subscriptionsUIProps.openEditSubscriptionPage,

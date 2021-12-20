@@ -24,7 +24,7 @@ import * as uiHelpers from "../WorkOrdersUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useWorkOrdersUIContext } from "../WorkOrdersUIContext";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export function WorkOrdersTable() {
     // WorkOrders UI Context
     const workOrdersUIContext = useWorkOrdersUIContext();
@@ -66,17 +66,30 @@ export function WorkOrdersTable() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
+
+    const intl = useIntl()
+    const code = intl.formatMessage({ id: "WORK_ORDER.CODE" })
+    const type = intl.formatMessage({ id: "WORK_ORDER.TYPE" })
+    const category = intl.formatMessage({ id: "WORK_ORDER.CATEGORY" })
+    const sdate = intl.formatMessage({ id: "TITLE.START_DATE" })
+    const edate = intl.formatMessage({ id: "TITLE.END_DATE" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const requester = intl.formatMessage({ id: "COMMON.REQUESTER" })
+    const salesman = intl.formatMessage({ id: "COMMON.SALESMAN" })
+    const apartment = intl.formatMessage({ id: "COMMON.APARTMENT" })
+    const project = intl.formatMessage({ id: "TITLE.PROJECT_NAME" })
+    const action = intl.formatMessage({ id: "WORK_ORDER.CATEGORY" })
     const columns = [
         {
             dataField: "code",
-            text: "Code",
+            text: code,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "workOrderType",
-            text: "Work Order Type",
+            text: type,
             sort: true,
             formatter: columnFormatters.TypeColumnFormatter,
             sortCaret: sortCaret,
@@ -84,7 +97,7 @@ export function WorkOrdersTable() {
         },
         {
             dataField: "workOrderCategory",
-            text: "Work Order Category",
+            text: category,
             sort: true,
             formatter: columnFormatters.CategoryColumnFormatter,
             sortCaret: sortCaret,
@@ -92,22 +105,21 @@ export function WorkOrdersTable() {
         },
         {
             dataField: "startDate",
-            text: "Start Date",
+            text: sdate,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "endDate",
-            text: "End Date",
+            text: edate ,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
-      
         {
             dataField: "status",
-            text: "Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -115,35 +127,35 @@ export function WorkOrdersTable() {
         },
         {
             dataField: "requesterName",
-            text: "Requester Name",
+            text: requester,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "salesmanName",
-            text: "Salesman Name",
+            text: salesman,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "apartmentName",
-            text: "Apartment Name",
+            text: apartment,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "projectName",
-            text: "ProjectName",
+            text: project,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditWorkOrderPage: workOrdersUIProps.openEditWorkOrderPage,

@@ -21,6 +21,7 @@ import * as uiHelpers from "../CategoriesUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useCategoriesUIContext } from "../CategoriesUIContext";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function CategoriesTable() {
     // Categories UI Context
@@ -61,24 +62,25 @@ export function CategoriesTable() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
+    const intl = useIntl()
     const columns = [
         {
             dataField: "name",
-            text: "Name",
+            text: intl.formatMessage({ id: "TITLE.NAME" }),
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "description",
-            text: "Description",
+            text: intl.formatMessage({ id: "TITLE.DESCRIPTION" }),
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "parent",
-            text: "Parent",
+            text: intl.formatMessage({ id: "TITLE.PARENT" }),
             formatter: columnFormatters.ParentFormatter,
             formatExtraData: {
               
@@ -89,7 +91,7 @@ export function CategoriesTable() {
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: intl.formatMessage({ id: "TITLE.ACTION" }),
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditCategoryDialog: categoriesUIProps.openEditCategoryDialog,

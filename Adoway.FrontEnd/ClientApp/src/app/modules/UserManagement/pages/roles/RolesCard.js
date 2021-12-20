@@ -9,7 +9,7 @@ import { RolesFilter } from "./roles-filter/RolesFilter";
 import { RolesTable } from "./roles-table/RolesTable";
 import { useRolesUIContext } from "./RolesUIContext";
 import { shallowEqual, useSelector } from "react-redux";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export function RolesCard() {
   const rolesUIContext = useRolesUIContext();
   const rolesUIProps = useMemo(() => {

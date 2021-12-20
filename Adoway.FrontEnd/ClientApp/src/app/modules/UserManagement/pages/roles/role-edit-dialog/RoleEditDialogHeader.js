@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export function RoleEditDialogHeader({ id }) {
   // Roles Redux state
   const { roleForEdit, actionsLoading } = useSelector(
@@ -15,10 +15,13 @@ export function RoleEditDialogHeader({ id }) {
 
   const [title, setTitle] = useState("");
   // Title couting
+    const intl = useIntl()
+    const n_role = intl.formatMessage({ id: "ROLE.NEW_ROLE" })
+    const e_role = intl.formatMessage({ id: "ROLE.EDIT_ROLE" })
   useEffect(() => {
-    let _title = id ? "" : "New Role";
+      let _title = id ? "" : n_role;
     if (roleForEdit && id) {
-      _title = `Edit Role '${roleForEdit.name}'`;
+        _title = `${e_role} '${roleForEdit.name}'`;
     }
 
     setTitle(_title);

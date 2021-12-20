@@ -82,6 +82,13 @@
   "SALES.INVOICES.AMOUNT": "Amount",
   "SALES.INVOICES.ATTACHMENTS": "Attachments",
 
+  "SALES.SUBS.CONTRACT_CODE": "Contract Code",
+  "SALES.SUBS.CUSTOMER_CODE": "Customer Code",
+  "SALES.SUBS.SALES_PRICE": "Sale Price",
+  "SALES.SUBS.SUBS_LIST": "Subscription List",
+  "SALES.SUBS.NEW_SUBS": "New Subscription",
+  "SALES.SUBS.EDIT_SUBS": "Edit Subscription",
+
   "CALENDAR.EVENTS.EVENT_LIST": "Event List",
   "CALENDAR.EVENTS.NEW_EVENT": "New Event",
   "CALENDAR.EVENTS.EDIT_EVENT": "Edit Event",
@@ -122,6 +129,8 @@
   "CUSTOMER.CUSTOMER_LIST": "Customer List",
   "CUSTOMER.EDIT_CUSTOMER": "Edit Customer",
   "CUSTOMER.DELETE_CUSTOMER": "Delete Customer",
+  "CUSTOMER.CUSTOMER_TYPE": "Customer Type",
+  "CUSTOMER.PHONE": "Phone",
 
   "PROJECT.NEW_PROJECT": "New Project",
   "PROJECT.PROJECT_LIST": "Project List",
@@ -141,7 +150,24 @@
   "PROJECT.TECH_USER": "Tech User",
   "PROJECT.SALE_USER": "Sale User",
 
+  "USER.NEW_USER": "New User",
+  "USER.USER_LIST": "User List",
+  "USER.EDIT_USER": "Edit User",
+  "USER.DELETE_USER": "Delete User",
+  "USER.AVARTAR": "Avartar",
+  "USER.LANGUAGE": "Language",
+
+  "CATEGORIES.CATEGORIES_LIST": "Category list",
+  "CATEGORIES.NEW_CATEGORIES": "New category",
+  "CATEGORIES.EDIT_CATEGORIES": "Edit category",
+  "CATEGORIES.DELETE_CATEGORIES": "Delete Category",
+
+  "WORK_ORDER.NEW": "New work order",
+  "WORK_ORDER.LIST": "Work order list",
+  "WORK_ORDER.EDIT": "Edit work order",
+
   "TITLE.NAME": "Name",
+  "TITLE.PARENT": "Parent",
   "TITLE.CATEGORY_NAME": "Category Name",
   "TITLE.CATEGORY": "Category",
   "TITLE.SALES_PRICE": "Sales Price",
@@ -163,6 +189,7 @@
 
   "COMMON.SAVE": "Save",
   "COMMON.BACK": "Back",
+  "COMMON.ADD": "Add",
   "COMMON.RESET": "Reset",
   "COMMON.CANCEL": "Cancel",
   "COMMON.DELETE": "Delete",
@@ -187,6 +214,8 @@
   "COMMON.USER_MANAGEMENT": "User Management",
   "COMMON.USER": "User",
   "COMMON.ROLE": "Role",
+  "COMMON.SALESMAN": "Salesman",
+  "COMMON.REQUESTER": "Requester",
   "COMMON.DASHBOARD": "Dashboard"
 
 }

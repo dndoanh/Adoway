@@ -33,11 +33,10 @@ export function InvoicesCard() {
                 className="btn btn-primary"
                 onClick={invoicesUIProps.newInvoiceButtonClick}
             >
-                <FormattedMessage
-                    id="SALES.INVOICES.NEW_INVOICE"
-                />
+            <FormattedMessage
+                id="SALES.INVOICES.NEW_INVOICE"
+            />
             </button>
-            
         }
         </CardHeaderToolbar>
       </CardHeader>

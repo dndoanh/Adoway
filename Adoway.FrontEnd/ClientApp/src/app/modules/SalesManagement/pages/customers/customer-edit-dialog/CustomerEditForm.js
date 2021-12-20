@@ -13,7 +13,7 @@ import {
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 // Validation schema
 const CustomerEditSchema = Yup.object().shape({
     name: Yup.string()
@@ -24,6 +24,8 @@ const CustomerEditSchema = Yup.object().shape({
         .email("Invalid email")
         .required("Email is required")
 });
+
+
 
 export function CustomerEditForm({
     saveCustomer,
@@ -37,6 +39,13 @@ export function CustomerEditForm({
         shallowEqual
     );
     const { allProjects } = currentProjectsState;
+    const intl = useIntl()
+    const cusType = intl.formatMessage({ id: "CUSTOMER.CUSTOMER_TYPE" })
+    const phone = intl.formatMessage({ id: "CUSTOMER.PHONE" })
+    const address = intl.formatMessage({ id: "PURCHASE.SUPPLIER.ADDRESS" })
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const project = intl.formatMessage({ id: "TITLE.PROJECT" })
     return (
         <>
             <Formik
@@ -61,14 +70,14 @@ export function CustomerEditForm({
                                         <Field
                                             name="name"
                                             component={Input}
-                                            placeholder="Name"
-                                            label="Name"
+                                            placeholder={name}
+                                            label={name}
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="customerType" label="CustomerType">
+                                        <Select name="customerType" label={cusType}>
                                             <option value="1">Individual</option>
                                             <option value="2">Business</option>
                                         </Select>
@@ -80,8 +89,8 @@ export function CustomerEditForm({
                                             type="text"
                                             name="phone"
                                             component={Input}
-                                            placeholder="Phone"
-                                            label="Phone"
+                                            placeholder={phone}
+                                            label={phone}
                                         />
                                     </div>
                                 </div>
@@ -102,14 +111,14 @@ export function CustomerEditForm({
                                             type="text"
                                             name="address"
                                             component={Input}
-                                            placeholder="Address"
-                                            label="Address"
+                                            placeholder={address}
+                                            label={address}
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="projectId" label="Project">
+                                        <Select name="projectId" label={project}>
                                             <option value=""></option>
                                             {allProjects && allProjects.map((project) => (
                                                 <option key={project.id} value={project.id}>
@@ -121,7 +130,7 @@ export function CustomerEditForm({
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="status" label="Status">
+                                        <Select name="status" label={status}>
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </Select>
@@ -135,7 +144,9 @@ export function CustomerEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                             <> </>
                             <button
@@ -143,7 +154,9 @@ export function CustomerEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage
+                                    id="COMMON.SAVE"
+                                />
                             </button>
                         </Modal.Footer>
                     </>

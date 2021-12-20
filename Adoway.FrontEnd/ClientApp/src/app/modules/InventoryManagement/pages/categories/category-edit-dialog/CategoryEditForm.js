@@ -12,7 +12,7 @@ import {
     Select,
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 // Validation schema
 const CategoryEditSchema = Yup.object().shape({
     name: Yup.string()
@@ -38,6 +38,11 @@ export function CategoryEditForm({
         let filterdList = category == null ? entities : entities.filter(e => e.id != category.id);
         setFilteredCategories(filterdList);
     }, [entities, category]);
+
+    const intl = useIntl()
+    const name =intl.formatMessage({ id: "TITLE.NAME" })
+    const desc =intl.formatMessage({ id: "TITLE.DESCRIPTION" })
+    const parent =intl.formatMessage({ id: "TITLE.PARENT" })
     return (
         <>
             <Formik
@@ -62,13 +67,14 @@ export function CategoryEditForm({
                                         <Field
                                             name="name"
                                             component={Input}
-                                            placeholder="Name"
-                                            label="Name"
+                                            placeholder={name}
+                                            label={name}
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
+                                        <label>{desc}</label>
                                         <Field
                                             name="description"
                                             as="textarea"
@@ -80,7 +86,7 @@ export function CategoryEditForm({
                             
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="parentId" label="Parent">
+                                        <Select name="parentId" label={parent}>
                                             <option value=""></option>
                                             {filteredCategories.map((entity) => (
                                                 <option key={entity.id} value={entity.id}>
@@ -99,7 +105,9 @@ export function CategoryEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                             <> </>
                             <button
@@ -107,7 +115,9 @@ export function CategoryEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage
+                                    id="COMMON.SAVE"
+                                />
                             </button>
                         </Modal.Footer>
                     </>

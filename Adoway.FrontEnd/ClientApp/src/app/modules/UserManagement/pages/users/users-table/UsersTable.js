@@ -10,7 +10,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/users/usersActions";
 import * as languagesActions from "../../../../System/_redux/languages/languagesActions";
 import * as rolesActions from "../../../../UserManagement/_redux/roles/rolesActions";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
     getSelectRow,
     getHandlerTableChange,
@@ -68,12 +68,16 @@ export function UsersTable() {
     const user = useSelector(({ auth }) => auth.user, shallowEqual);
     const DeleteUser = user.functions.find(x => x.code == "DeleteUser")
     const EditUser = user.functions.find(x => x.code == "EditUser")
-
+    const intl = useIntl()
+    const avt = intl.formatMessage({ id: "USER.AVARTAR" })
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
     // Table columns
     const columns = [
         {
             dataField: "avatarUrl",
-            text: "Avatar",
+            text: avt,
             sort: false,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -81,7 +85,7 @@ export function UsersTable() {
         },
         {
             dataField: "name",
-            text: "Name",
+            text: name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -95,7 +99,7 @@ export function UsersTable() {
         },
         {
             dataField: "status",
-            text: "Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -103,7 +107,7 @@ export function UsersTable() {
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditUserDialog: usersUIProps.openEditUserDialog,

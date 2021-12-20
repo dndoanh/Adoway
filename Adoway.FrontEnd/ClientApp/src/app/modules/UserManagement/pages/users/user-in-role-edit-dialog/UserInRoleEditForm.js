@@ -17,7 +17,7 @@ import {
 } from "../../../../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
 import { useUsersUIContext } from "../UsersUIContext";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 // Validation schema
 const UserEditSchema = Yup.object().shape({
     name: Yup.string()
@@ -63,7 +63,8 @@ export function UserInRoleEditForm({
         setFilteredRoles(filterdList);
     }, [allRoles, userInRoles]);
 
-
+    const intl = useIntl()
+    const role = intl.formatMessage({ id: "COMMON.ROLE" })
     return (
         <>
             <Formik
@@ -85,7 +86,7 @@ export function UserInRoleEditForm({
                             <Form className="form form-label-right">
                                 <div className="form-group row">
                                     <div className="col-lg-8">
-                                        <Select name="roleId" label="Role"
+                                        <Select name="roleId" label={role}
                                             onChange={(e) => {
                                                 setSelectRole(e.target.value)
                                             }}
@@ -104,7 +105,9 @@ export function UserInRoleEditForm({
                                             className="btn btn-primary btn-elevate mt-3"
                                             onClick={addUserInRoles}
                                         >
-                                            Add
+                                            <FormattedMessage
+                                                id="COMMON.ADD"
+                                            />
                                         </button>
                                     </div>
                                 </div>
@@ -122,7 +125,9 @@ export function UserInRoleEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                          
                         </Modal.Footer>

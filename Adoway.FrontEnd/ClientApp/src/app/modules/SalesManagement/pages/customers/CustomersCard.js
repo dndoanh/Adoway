@@ -20,9 +20,12 @@ export function CustomersCard() {
   }, [customersUIContext]);
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const AddCustomer = user.functions.find(x => x.code == "CreateCustomer")
+
+    const intl = useIntl()
+    const list = intl.formatMessage({ id: "CUSTOMER.CUSTOMER_LIST" })
   return (
     <Card>
-      <CardHeader title="Customers list">
+          <CardHeader title={list}>
         <CardHeaderToolbar>
         {
              (user.isSuperAdmin || AddCustomer) &&
@@ -32,7 +35,7 @@ export function CustomersCard() {
                 onClick={customersUIProps.newCustomerButtonClick}
             >
             <FormattedMessage
-                id="SALES.INVOICES.NEW_INVOICE"
+                id="CUSTOMER.NEW_CUSTOMER"
             />
             </button>
            
