@@ -30,7 +30,7 @@ export function ProjectsCard() {
           <CardHeader title={list}>
         <CardHeaderToolbar>
             {
-                user.isSuperAdmin || (AddProject &&
+                (user.isSuperAdmin || AddProject) &&
                     <button
                         type="button"
                         className="btn btn-primary"
@@ -40,7 +40,6 @@ export function ProjectsCard() {
                         id="PROJECT.NEW_PROJECT"
                     />
                     </button>
-                )
             }
         </CardHeaderToolbar>
       </CardHeader>

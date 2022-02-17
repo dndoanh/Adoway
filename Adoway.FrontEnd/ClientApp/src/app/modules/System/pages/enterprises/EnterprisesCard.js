@@ -8,6 +8,7 @@ import {
 import { EnterprisesFilter } from "./enterprises-filter/EnterprisesFilter";
 import { EnterprisesTable } from "./enterprises-table/EnterprisesTable";
 import { useEnterprisesUIContext } from "./EnterprisesUIContext";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function EnterprisesCard() {
   const enterprisesUIContext = useEnterprisesUIContext();
@@ -17,16 +18,21 @@ export function EnterprisesCard() {
     };
   }, [enterprisesUIContext]);
 
+    const intl = useIntl()
+    const list = intl.formatMessage({ id: "ENTERPRISE.ENTERPRISE_LIST" })
+
   return (
     <Card>
-      <CardHeader title="Enterprises list">
+    <CardHeader title={list}>
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={enterprisesUIProps.newEnterpriseButtonClick}
           >
-            New Enterprise
+            <FormattedMessage
+                id="ENTERPRISE.NEW_ENTERPRISE"
+            />
           </button>
         </CardHeaderToolbar>
       </CardHeader>

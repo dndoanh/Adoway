@@ -34,9 +34,9 @@ export function CustomersCard() {
                 className="btn btn-primary"
                 onClick={customersUIProps.newCustomerButtonClick}
             >
-            <FormattedMessage
-                id="CUSTOMER.NEW_CUSTOMER"
-            />
+                <FormattedMessage
+                    id="CUSTOMER.NEW_CUSTOMER"
+                />
             </button>
            
         }

@@ -25,21 +25,20 @@ export function SuppliersCard() {
     const list = intl.formatMessage({ id: "PURCHASE.SUPPLIER.SUPPLIER_LIST" })
   return (
     <Card>
-          <CardHeader title={list}>
+        <CardHeader title={list}>
         <CardHeaderToolbar>
-            {
-                (user.isSuperAdmin || AddSupplier) &&
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={suppliersUIProps.newSupplierButtonClick}
-                >
+        {
+            (user.isSuperAdmin || AddSupplier) &&
+            <button
+                type="button"
+                className="btn btn-primary"
+                onClick={suppliersUIProps.newSupplierButtonClick}
+            >
                 <FormattedMessage
                     id="PURCHASE.SUPPLIER.NEW_SUPPLIER"
                 />
-                 </button>
-                
-            }
+            </button>
+        }   
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
@@ -49,3 +48,5 @@ export function SuppliersCard() {
     </Card>
   );
 }
+
+

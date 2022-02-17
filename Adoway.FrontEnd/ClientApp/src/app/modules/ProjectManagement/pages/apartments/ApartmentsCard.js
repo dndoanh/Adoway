@@ -19,26 +19,25 @@ export function ApartmentsCard() {
     };
   }, [apartmentsUIContext]);
 
-
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const AddApartment = user.functions.find(x => x.code == "CreateApartment")
     const intl = useIntl()
     const list = intl.formatMessage({ id: "PROJECT.APARTMENT.APARTMENT_LIST" })
   return (
     <Card>
-          <CardHeader title={list}>
+      <CardHeader title={list}>
          <CardHeaderToolbar>
-            {user.isSuperAdmin || (AddApartment &&
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={apartmentsUIProps.newApartmentButtonClick}
-                >
-                <FormattedMessage
-                    id="NEW_APARTMENT"
-                />
-                </button>
-                 )
+            {
+                (user.isSuperAdmin || AddApartment) &&
+                    <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={apartmentsUIProps.newApartmentButtonClick}
+                    >
+                    <FormattedMessage
+                        id="NEW_APARTMENT"
+                    />
+                    </button>
             }
         </CardHeaderToolbar>
       </CardHeader>

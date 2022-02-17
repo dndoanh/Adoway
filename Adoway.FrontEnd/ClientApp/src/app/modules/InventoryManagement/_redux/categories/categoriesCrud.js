@@ -27,3 +27,4 @@ export function updateCategory(category) {
 export function deleteCategory(categoryId) {
     return axios.post(`${USERS_URL}/deleteCategory?id=${categoryId}`);
 }
+ 

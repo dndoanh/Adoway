@@ -13,6 +13,7 @@ import {
     DatePickerField
 } from "../../../../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 // Validation schema
 const EnterpriseEditSchema = Yup.object().shape({
@@ -35,6 +36,13 @@ export function EnterpriseEditForm({
     actionsLoading,
     onHide,
 }) {
+
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const phone = intl.formatMessage({ id: "CUSTOMER.PHONE" })
+    const address = intl.formatMessage({ id: "PURCHASE.SUPPLIER.ADDRESS" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
 
     return (
         <>
@@ -60,8 +68,8 @@ export function EnterpriseEditForm({
                                         <Field
                                             name="name"
                                             component={Input}
-                                            placeholder="Name"
-                                            label="Name"
+                                            placeholder={name}
+                                            label={name}
                                         />
                                     </div>
                                     <div className="col-lg-6">
@@ -79,8 +87,8 @@ export function EnterpriseEditForm({
                                         <Field
                                             name="address"
                                             component={Input}
-                                            placeholder="Address"
-                                            label="Address"
+                                            placeholder={address}
+                                            label={address}
                                         />
                                     </div>
                                 </div>
@@ -89,12 +97,12 @@ export function EnterpriseEditForm({
                                         <Field
                                             name="phone"
                                             component={Input}
-                                            placeholder="Phone"
-                                            label="Phone"
+                                            placeholder={phone}
+                                            label={phone}
                                         />
                                     </div>
                                     <div className="col-lg-6">
-                                        <Select name="status" label="Status">
+                                        <Select name="status" label={status}>
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </Select>
@@ -108,7 +116,9 @@ export function EnterpriseEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                             <> </>
                             <button
@@ -116,7 +126,9 @@ export function EnterpriseEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage
+                                    id="COMMON.SAVE"
+                                />
                             </button>
                         </Modal.Footer>
                     </>
