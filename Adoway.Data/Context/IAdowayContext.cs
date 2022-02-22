@@ -37,6 +37,7 @@ namespace Adoway.Data.Context
         // Sales
         DbSet<CustomerEntity> Customers { get; set; }
         DbSet<SubscriptionEntity> Subscriptions { get; set; }
+        DbSet<SubscriptionPaymentEntity> SubscriptionPayments { get; set; }
         DbSet<InvoiceEntity> Invoices { get; set; }
         // Payment
         DbSet<PaymentRequestEntity> PaymentRequests { get; set; }

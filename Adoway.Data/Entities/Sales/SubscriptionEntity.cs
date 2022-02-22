@@ -7,6 +7,7 @@ using Adoway.Common.Enums;
 using Adoway.Data.Entities.Base;
 using Adoway.Data.Entities.Inventory;
 using Adoway.Data.Entities.Project;
+using Adoway.Data.Entities.Purchase;
 
 namespace Adoway.Data.Entities.Sales
 {
@@ -22,14 +23,20 @@ namespace Adoway.Data.Entities.Sales
         public int FreeMonth { get; set; }
         public string Description { get; set; }
         public Status Status { get; set; }
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
         [ForeignKey("CustomerId")]
         public CustomerEntity Customer { get; set; }
-        public Guid ProductId { get; set; }
+        public Guid? ProductId { get; set; }
         [ForeignKey("ProductId")]
         public ProductEntity Product { get; set; }
         public Guid? ApartmentId { get; set; }
         [ForeignKey("ApartmentId")]
         public ApartmentEntity Apartment { get; set; }
+        public Guid ProjectId { get; set; }
+        [ForeignKey("ProjectId")]
+        public ProjectEntity Project { get; set; }
+        public Guid SupplierId { get; set; }
+        [ForeignKey("SupplierId")]
+        public SupplierEntity Supplier { get; set; }
     }
 }

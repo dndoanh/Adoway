@@ -63,6 +63,7 @@ namespace Adoway.Data.Context
         // Sales
         public DbSet<CustomerEntity> Customers { get; set; }
         public DbSet<SubscriptionEntity> Subscriptions { get; set; }
+        public DbSet<SubscriptionPaymentEntity> SubscriptionPayments { get; set; }
         public DbSet<InvoiceEntity> Invoices { get; set; }
         // Payment
         public DbSet<PaymentRequestEntity> PaymentRequests { get; set; }
@@ -123,6 +124,7 @@ namespace Adoway.Data.Context
             // sales
             modelBuilder.Entity<CustomerViewModel>().HasNoKey().ToView("CustomerViewModel");
             modelBuilder.Entity<SubscriptionViewModel>().HasNoKey().ToView("SubscriptionViewModel");
+            modelBuilder.Entity<SubscriptionPaymentViewModel>().HasNoKey().ToView("SubscriptionPaymentViewModel");
             modelBuilder.Entity<InvoiceViewModel>().HasNoKey().ToView("InvoiceViewModel");
             // payment
             modelBuilder.Entity<PaymentRequestViewModel>().HasNoKey().ToView("PaymentRequestViewModel");
