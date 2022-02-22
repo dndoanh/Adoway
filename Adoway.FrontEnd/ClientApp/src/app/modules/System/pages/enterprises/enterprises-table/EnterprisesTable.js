@@ -21,6 +21,7 @@ import * as uiHelpers from "../EnterprisesUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useEnterprisesUIContext } from "../EnterprisesUIContext";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function EnterprisesTable() {
     // Enterprises UI Context
@@ -49,11 +50,19 @@ export function EnterprisesTable() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [enterprisesUIProps.queryParams, dispatch]);
 
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const phone = intl.formatMessage({ id: "CUSTOMER.PHONE" })
+    const address = intl.formatMessage({ id: "PURCHASE.SUPPLIER.ADDRESS" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+    
+
     // Table columns
     const columns = [
         {
             dataField: "name",
-            text: "Name",
+            text: name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
@@ -67,21 +76,21 @@ export function EnterprisesTable() {
         },
         {
             dataField: "phone",
-            text: "Phone",
+            text: phone,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "address",
-            text: "Address",
+            text: address,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "status",
-            text: "Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -89,7 +98,7 @@ export function EnterprisesTable() {
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditEnterpriseDialog: enterprisesUIProps.openEditEnterpriseDialog,

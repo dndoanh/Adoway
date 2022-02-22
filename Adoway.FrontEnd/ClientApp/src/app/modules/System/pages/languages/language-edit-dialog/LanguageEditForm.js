@@ -10,6 +10,7 @@ import {
     Input,
     Select,
 } from "../../../../../../_metronic/_partials/controls";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 // Validation schema
 const LanguageEditSchema = Yup.object().shape({
@@ -35,6 +36,11 @@ export function LanguageEditForm({
         console.log("Changed");
         //language.isDefault = false;
     };
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const IsDefault = intl.formatMessage({ id: "TITLE.ISDEFAULT" })
+
     return (
         <>
             <Formik
@@ -59,8 +65,8 @@ export function LanguageEditForm({
                                         <Field
                                             name="name"
                                             component={Input}
-                                            placeholder="Name"
-                                            label="Name"
+                                            placeholder={name}
+                                            label={name}
                                         />
                                     </div>
                                 </div>
@@ -76,7 +82,7 @@ export function LanguageEditForm({
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-12">
-                                        <Select name="status" label="Status">
+                                        <Select name="status" label={status}>
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </Select>
@@ -94,7 +100,7 @@ export function LanguageEditForm({
                                                     checked={values.isDefault}
                                                     onChange={handleChange}
                                                 />
-                                                <span></span>Is Default
+                                                <span></span>{IsDefault}
                                             </label>
                                         </div>
                                     </div>
@@ -107,7 +113,9 @@ export function LanguageEditForm({
                                 onClick={onHide}
                                 className="btn btn-light btn-elevate"
                             >
-                                Cancel
+                                <FormattedMessage
+                                    id="COMMON.CANCEL"
+                                />
                             </button>
                             <> </>
                             <button
@@ -115,7 +123,9 @@ export function LanguageEditForm({
                                 onClick={() => handleSubmit()}
                                 className="btn btn-primary btn-elevate"
                             >
-                                Save
+                                <FormattedMessage
+                                    id="COMMON.SAVE"
+                                />
                             </button>
                         </Modal.Footer>
                     </>

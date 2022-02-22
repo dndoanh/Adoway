@@ -63,17 +63,22 @@ export function MeetingRoomsTable() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // Table columns
+
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
     const columns = [
         {
             dataField: "name",
-            text: "Name",
+            text: name,
             sort: true,
             sortCaret: sortCaret,
             headerSortingClasses,
         },
         {
             dataField: "status",
-            text: "Status",
+            text: status,
             sort: true,
             sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
@@ -81,7 +86,7 @@ export function MeetingRoomsTable() {
         },
         {
             dataField: "action",
-            text: "Actions",
+            text: action,
             formatter: columnFormatters.ActionsColumnFormatter,
             formatExtraData: {
                 openEditMeetingRoomDialog: meetingRoomsUIProps.openEditMeetingRoomDialog,

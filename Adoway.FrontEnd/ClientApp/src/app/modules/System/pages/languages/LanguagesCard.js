@@ -8,7 +8,7 @@ import {
 import { LanguagesFilter } from "./languages-filter/LanguagesFilter";
 import { LanguagesTable } from "./languages-table/LanguagesTable";
 import { useLanguagesUIContext } from "./LanguagesUIContext";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export function LanguagesCard() {
   const languagesUIContext = useLanguagesUIContext();
   const languagesUIProps = useMemo(() => {
@@ -17,16 +17,21 @@ export function LanguagesCard() {
     };
   }, [languagesUIContext]);
 
+    const intl = useIntl()
+    const list = intl.formatMessage({ id: "LANGUAGE.LANGUAGE_LIST" })
+
   return (
     <Card>
-      <CardHeader title="Languages list">
+    <CardHeader title={list}>
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={languagesUIProps.newLanguageButtonClick}
           >
-            New Language
+            <FormattedMessage
+                id="LANGUAGE.NEW_LANGUAGE"
+            />
           </button>
         </CardHeaderToolbar>
       </CardHeader>

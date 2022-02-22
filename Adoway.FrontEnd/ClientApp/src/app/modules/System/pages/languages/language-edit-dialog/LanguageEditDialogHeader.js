@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function LanguageEditDialogHeader({ id }) {
   // Languages Redux state
@@ -15,10 +16,14 @@ export function LanguageEditDialogHeader({ id }) {
 
   const [title, setTitle] = useState("");
   // Title couting
+
+    const intl = useIntl()
+    const n_lang = intl.formatMessage({ id: "LANGUAGE.NEW_LANGUAGE" })
+    const e_lang = intl.formatMessage({ id: "LANGUAGE.EDIT_LANGUAGE" })
   useEffect(() => {
-    let _title = id ? "" : "New Language";
+      let _title = id ? "" : n_lang ;
     if (languageForEdit && id) {
-      _title = `Edit language '${languageForEdit.name}'`;
+        _title = `${e_lang} '${languageForEdit.name}'`;
     }
 
     setTitle(_title);

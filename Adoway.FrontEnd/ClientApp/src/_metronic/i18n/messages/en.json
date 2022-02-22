@@ -150,6 +150,10 @@
   "PROJECT.TECH_USER": "Tech User",
   "PROJECT.SALE_USER": "Sale User",
 
+  "ENTERPRISE.ENTERPRISE_LIST": "Enterprise list",
+  "ENTERPRISE.NEW_ENTERPRISE": " New enterprise",
+  "ENTERPRISE.EDIT_ENTERPRISE": "Edit enterprise",
+
   "USER.NEW_USER": "New User",
   "USER.USER_LIST": "User List",
   "USER.EDIT_USER": "Edit User",
@@ -166,6 +170,10 @@
   "WORK_ORDER.LIST": "Work order list",
   "WORK_ORDER.EDIT": "Edit work order",
 
+  "LANGUAGE.NEW_LANGUAGE": "New language",
+  "LANGUAGE.LANGUAGE_LIST": "Language list",
+  "LANGUAGE.EDIT_LANGUAGE": "Edit work order",
+
   "TITLE.NAME": "Name",
   "TITLE.PARENT": "Parent",
   "TITLE.CATEGORY_NAME": "Category Name",
@@ -173,6 +181,7 @@
   "TITLE.SALES_PRICE": "Sales Price",
   "TITLE.MEASURE_UNIT": "Measure Unit",
   "TITLE.STATUS": "Status",
+  "TITLE.ISDEFAULT": "IsDefault",
   "TITLE.ACTION": "Action",
   "TITLE.SUPPLIER": "Supplier",
   "TITLE.TITLE": "Title",
@@ -210,12 +219,15 @@
   "COMMON.SALES": "Sales",
   "COMMON.CUSTOMER": "Customer",
   "COMMON.INVOICE": "Invoice",
+  "COMMON.SYSTEM": "System",
   "COMMON.SUBSCRIPTION": "Subscription",
   "COMMON.USER_MANAGEMENT": "User Management",
   "COMMON.USER": "User",
   "COMMON.ROLE": "Role",
   "COMMON.SALESMAN": "Salesman",
   "COMMON.REQUESTER": "Requester",
+  "COMMON.ENTERPRISE": "Enterprise",
+  "COMMON.SETTING": "Setting",
   "COMMON.DASHBOARD": "Dashboard"
 
 }

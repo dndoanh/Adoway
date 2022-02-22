@@ -157,7 +157,7 @@ export function InvoiceEditForm({
                     </Select>
                 </div>
                     <div className="col-lg-4">
-                        <Select name="supplierId" label={supplierName}>
+                    <Select name="supplierId" label={supplierName}>
                         <option value=""></option>
                         {entities &&  entities.map((s) => (
                             <option key={s.id} value={s.id}>

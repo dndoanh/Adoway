@@ -20,6 +20,7 @@ import * as uiHelpers from "../LanguagesUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useLanguagesUIContext } from "../LanguagesUIContext";
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export function LanguagesTable() {
   // Languages UI Context
@@ -48,24 +49,30 @@ export function LanguagesTable() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [languagesUIProps.queryParams, dispatch]);
   // Table columns
+
+    const intl = useIntl()
+    const name = intl.formatMessage({ id: "TITLE.NAME" })
+    const status = intl.formatMessage({ id: "TITLE.STATUS" })
+    const action = intl.formatMessage({ id: "TITLE.ACTION" })
+    const IsDefault = intl.formatMessage({ id: "TITLE.ISDEFAULT" })
   const columns = [
-    {
-      dataField: "name",
-      text: "Name",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "locale",
-      text: "Locale",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
+        {
+            dataField: "name",
+            text: name,
+            sort: true,
+            sortCaret: sortCaret,
+            headerSortingClasses,
+        },
+        {
+            dataField: "locale",
+            text: "Locale",
+            sort: true,
+            sortCaret: sortCaret,
+            headerSortingClasses,
+        },
       {
           dataField: "isDefault",
-          text: "Default",
+          text: IsDefault,
           sort: false,
           sortCaret: sortCaret,
           formatter: columnFormatters.DefaultColumnFormatter,
@@ -73,7 +80,7 @@ export function LanguagesTable() {
       },
       {
       dataField: "status",
-      text: "Status",
+      text:  status,
       sort: true,
       sortCaret: sortCaret,
       formatter: columnFormatters.StatusColumnFormatter,
@@ -81,7 +88,7 @@ export function LanguagesTable() {
     },
     {
       dataField: "action",
-      text: "Actions",
+       text: action,
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
         openEditLanguageDialog: languagesUIProps.openEditLanguageDialog,

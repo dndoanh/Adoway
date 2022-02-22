@@ -125,6 +125,10 @@
   "OWNER.EDIT_OWNER": "Sửa chủ đầu tư",
   "OWNER.DELETE_OWNER": "Xóa chủ đầu tư",
 
+  "ENTERPRISE.ENTERPRISE_LIST": "Danh sách công ty",
+  "ENTERPRISE.NEW_ENTERPRISE": "Công ty mới",
+  "ENTERPRISE.EDIT_ENTERPRISE": "Sửa công ty",
+
   "CUSTOMER.NEW_CUSTOMER": "Khách hàng mới",
   "CUSTOMER.CUSTOMER_LIST": "Danh sách khách hàng",
   "CUSTOMER.EDIT_CUSTOMER": "Sửa khách hàng",
@@ -149,7 +153,6 @@
   "PROJECT.TECH_USER": "Nhân viên kỹ thuật",
   "PROJECT.SALE_USER": "Nhân viên bán hàng",
 
-
   "USER.NEW_USER": "Người dùng mới",
   "USER.USER_LIST": "Danh sách người dùng",
   "USER.EDIT_USER": "Sửa người dùng",
@@ -167,6 +170,10 @@
   "WORK_ORDER.CODE": "Mã phiếu",
   "WORK_ORDER.TYPE": "Loại phiếu",
   "WORK_ORDER.CATEGORY": "Nhóm phiếu",
+
+  "LANGUAGE.NEW_LANGUAGE": "Ngôn ngữ mới",
+  "LANGUAGE.LANGUAGE_LIST": "Danh sách ngôn ngữ",
+  "LANGUAGE.EDIT_LANGUAGE": "Sửa ngôn ngữ",
 
   "TITLE.NAME": "Tên",
   "TITLE.PARENT": "Nhóm sản phẩm cha",
@@ -188,6 +195,7 @@
   "TITLE.PROJECT_NAME": "Tên dự án",
   "TITLE.OVERLAP": "Cho phép trùng",
   "TITLE.REQUESTNO": "Yêu cầu số",
+  "TITLE.ISDEFAULT": "Là ngôn ngữ mặc định",
 
   "PAYMENT.PAYMENT_LIST": "Danh sách yêu cầu thanh toán",
   "PAYMENT.EDIT_PAYMENT": "Sửa yêu cầu thanh toán",
@@ -224,9 +232,12 @@
   "COMMON.SUBSCRIPTION": "Thuê bao",
   "COMMON.USER_MANAGEMENT": "Quản lý người dùng",
   "COMMON.USER": "Người dùng",
+  "COMMON.SYSTEM": "Hệ thống",
   "COMMON.SALESMAN": "Người bán hàng",
   "COMMON.REQUESTER": "Người yêu cầu",
   "COMMON.ROLE": "Vai trò",
+  "COMMON.ENTERPRISE": "Công ty",
+  "COMMON.SETTING": "Cài đặt",
   "COMMON.DASHBOARD": "Bảng điều khiển"
 
 }

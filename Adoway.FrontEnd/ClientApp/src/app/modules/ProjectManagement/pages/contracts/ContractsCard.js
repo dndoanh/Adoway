@@ -20,20 +20,20 @@ export function ContractsCard() {
 
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
     const AddContract = user.functions.find(x => x.code == "CreateContract")
+
   return (
     <Card>
       <CardHeader title="Contracts list">
         <CardHeaderToolbar>
             {
-                user.isSuperAdmin || (AddContract &&
+                (user.isSuperAdmin || AddContract) &&
                     <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={contractsUIProps.newContractButtonClick}
-                    >
-                    New Contract
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={contractsUIProps.newContractButtonClick}
+                        >
+                        New Contract
                     </button>
-                    )
             }
         </CardHeaderToolbar>
       </CardHeader>

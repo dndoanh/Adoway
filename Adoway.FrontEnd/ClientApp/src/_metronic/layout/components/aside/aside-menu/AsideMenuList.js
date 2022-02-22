@@ -43,33 +43,32 @@ export function AsideMenuList({ layoutProps }) {
                     <>
                         {
                             u.isUpper ?
-                                <li className="menu-section "> 
-                                    <h4 className="menu-text">
+                            <li className="menu-section "> 
+                                <h4 className="menu-text">
+                                    <FormattedMessage
+                                        id={`COMMON.${String(u.name).
+                                            replace(" ", "_").
+                                            toUpperCase()}`}
+                                    />
+                                </h4>
+                            </li> :
+                            <li
+                                className={`menu-item ${getMenuItemActive(u.path, false)}`}
+                                aria-haspopup="true"
+                            >
+                                <NavLink className="menu-link" to={`${u.path}`}>
+                                    <span className="svg-icon menu-icon">
+                                        <SVG src={toAbsoluteUrl(u.icon)} />
+                                    </span>
+                                    <span className="menu-text">
                                         <FormattedMessage
                                             id={`COMMON.${String(u.name).
                                                 replace(" ", "_").
                                                 toUpperCase()}`}
                                         />
-                                    </h4>
-                                </li> :
-                                <li
-                                    className={`menu-item ${getMenuItemActive(u.path, false)}`}
-                                    aria-haspopup="true"
-                                >
-                                    <NavLink className="menu-link" to={`${u.path}`}>
-                                        <span className="svg-icon menu-icon">
-                                            <SVG src={toAbsoluteUrl(u.icon)} />
-                                        </span>
-                                        <span className="menu-text">
-                                            <FormattedMessage
-                                                id={`COMMON.${String(u.name).
-                                                    replace(" ", "_").
-                                                    toUpperCase()}`}
-                                            />
-                                            
-                                        </span>
-                                    </NavLink>
-                                </li>
+                                    </span>
+                                </NavLink>
+                            </li>
                         }
                     </>
                    ))
@@ -77,7 +76,11 @@ export function AsideMenuList({ layoutProps }) {
                 {user.isSuperAdmin && (
                     <>
                         <li className="menu-section ">
-                            <h4 className="menu-text">User Management</h4>
+                            <h4 className="menu-text">
+                                <FormattedMessage
+                                    id="COMMON.USER_MANAGEMENT"
+                                />
+                            </h4>
                             <i className="menu-icon flaticon-more-v2"></i>
                         </li>
                         <li
@@ -88,7 +91,12 @@ export function AsideMenuList({ layoutProps }) {
                                 <span className="svg-icon menu-icon">
                                     <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
                                 </span>
-                                <span className="menu-text">User</span>
+                                <span className="menu-text">
+                                    <FormattedMessage
+                                        id="COMMON.USER"
+                                    />
+
+                                </span>
                             </NavLink>
                         </li>
                         <li
@@ -99,11 +107,19 @@ export function AsideMenuList({ layoutProps }) {
                                 <span className="svg-icon menu-icon">
                                     <SVG src={toAbsoluteUrl("/media/svg/icons/General/Shield-protected.svg")} />
                                 </span>
-                                <span className="menu-text">Roles</span>
+                                <span className="menu-text">
+                                    <FormattedMessage
+                                        id="COMMON.ROLE"
+                                    />
+                                </span>
                             </NavLink>
                         </li>
                         <li className="menu-section ">
-                            <h4 className="menu-text">Systems</h4>
+                            <h4 className="menu-text">
+                                <FormattedMessage
+                                    id="COMMON.SYSTEM"
+                                />
+                            </h4>
                             <i className="menu-icon flaticon-more-v2"></i>
                         </li>
                         {/* end:: section */}
@@ -115,7 +131,11 @@ export function AsideMenuList({ layoutProps }) {
                                 <span className="svg-icon menu-icon">
                                     <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Route.svg")} />
                                 </span>
-                                <span className="menu-text">Enterprises</span>
+                                <span className="menu-text">
+                                    <FormattedMessage
+                                        id="COMMON.ENTERPRISE"
+                                    />
+                                </span>
                             </NavLink>
                         </li>
                         <li
@@ -126,7 +146,11 @@ export function AsideMenuList({ layoutProps }) {
                                 <span className="svg-icon menu-icon">
                                     <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
                                 </span>
-                                <span className="menu-text">Languages</span>
+                                <span className="menu-text">
+                                    <FormattedMessage
+                                        id="USER.LANGUAGE"
+                                    />
+                                </span>
                             </NavLink>
                         </li>
                         <li
@@ -137,7 +161,11 @@ export function AsideMenuList({ layoutProps }) {
                                 <span className="svg-icon menu-icon">
                                     <SVG src={toAbsoluteUrl("/media/svg/icons/General/Settings-2.svg")} />
                                 </span>
-                                <span className="menu-text">Settings</span>
+                                <span className="menu-text">
+                                    <FormattedMessage
+                                        id="COMMON.SETTING"
+                                    />
+                                </span>
                             </NavLink>
                         </li>
                     </>
