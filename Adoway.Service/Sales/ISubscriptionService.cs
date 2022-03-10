@@ -11,6 +11,11 @@ namespace Adoway.Service.Sales
         Task<SubscriptionViewModel> Create(SubscriptionViewModel model);
         Task<SubscriptionViewModel> Edit(SubscriptionViewModel model);
         Task<SubscriptionViewModel> Remove(Guid id);
+        Task<SubscriptionViewModel> FindByContractCode(string ContractCode);
         Task<ApiResponseViewModel<SubscriptionViewModel>> SearchSubscriptions(SubscriptionFilterViewModel model);
+        Task<List<SubscriptionViewModel>> Import(SubscriptionImportViewModel model, string Supplier);
+        Task<byte[]> Export(List<SubscriptionPaymentViewModel> model,string path);
+        Task<List<SubscriptionViewModel>> FindSubs(SubscriptionExportViewModel model);
+
     }
 }

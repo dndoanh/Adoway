@@ -16,13 +16,15 @@ namespace Adoway.Common.ViewModels.Sales
         public int FreeMonth { get; set; }
         public string Description { get; set; }
         public Status Status { get; set; }
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public Guid ProductId { get; set; }
+        public Guid? ProductId { get; set; }
         public string ProductName { get; set; }
         public Guid? ApartmentId { get; set; }
         public string ApartmentName { get; set; }
+        public Guid ProjectId { get; set; }
         public string ProjectName { get; set; }
+        public Guid SupplierId { get; set; }
     }
     public class SubscriptionFilterViewModel : BaseFilterViewModel
     {
@@ -37,5 +39,18 @@ namespace Adoway.Common.ViewModels.Sales
         public Status? Status { get; set; }
         public Guid? ProductId { get; set; }
         public Guid? ProjectId { get; set; }
+    }
+    public class SubscriptionImportViewModel 
+    {
+        public string FileUrl { get; set; }
+        public Guid SupplierId { get; set; }
+        public string SupplierName { get; set; }
+        public Guid ProjectId { get; set; }
+    }
+    public class SubscriptionExportViewModel
+    {
+        public int Year { get; set; }
+        public Guid SupplierId { get; set; }
+        public Guid ProjectId { get; set; }
     }
 }

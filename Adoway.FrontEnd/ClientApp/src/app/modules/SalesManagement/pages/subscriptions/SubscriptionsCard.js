@@ -14,7 +14,9 @@ export function SubscriptionsCard() {
   const subscriptionsUIContext = useSubscriptionsUIContext();
   const subscriptionsUIProps = useMemo(() => {
     return {
-      newSubscriptionButtonClick: subscriptionsUIContext.newSubscriptionButtonClick,
+        newSubscriptionButtonClick: subscriptionsUIContext.newSubscriptionButtonClick,
+        importButtonClick: subscriptionsUIContext.importButtonClick,
+        exportButtonClick: subscriptionsUIContext.exportButtonClick,
     };
   }, [subscriptionsUIContext]);
     const user = useSelector(({ auth }) => auth.user, shallowEqual)
@@ -25,20 +27,33 @@ export function SubscriptionsCard() {
   return (
     <Card>
           <CardHeader title={list}>
-        <CardHeaderToolbar>
-        {
-             (user.isSuperAdmin || AddSubscription) &&
-            <button
-                type="button"
-                className="btn btn-primary"
-                onClick={subscriptionsUIProps.newSubscriptionButtonClick}
-            >
-            <FormattedMessage
-                id="SALES.SUBS.NEW_SUBS"
-            />
-            </button>
-            
-        }
+              <CardHeaderToolbar>
+                  <button
+                      type="button"
+                      className="btn btn-success mr-5"
+                      onClick={subscriptionsUIProps.importButtonClick}
+                  >
+                   Import
+                  </button>
+                  <button
+                      type="button"
+                      className="btn btn-warning mr-5"
+                      onClick={subscriptionsUIProps.exportButtonClick}
+                  >
+                      Export
+                  </button>
+                  {
+                (user.isSuperAdmin || AddSubscription) &&
+                    <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={subscriptionsUIProps.newSubscriptionButtonClick}
+                    >
+                    <FormattedMessage
+                        id="SALES.SUBS.NEW_SUBS"
+                    />
+                    </button>
+                }
        
         </CardHeaderToolbar>
       </CardHeader>

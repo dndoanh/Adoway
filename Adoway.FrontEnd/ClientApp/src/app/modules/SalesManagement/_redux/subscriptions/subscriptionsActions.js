@@ -60,3 +60,37 @@ export const deleteSubscription = id => dispatch => {
             dispatch(actions.catchError({ error, callType: callTypes.action }));
         });
 };
+
+export const importSubscription = subscriptionForCreation => dispatch => {
+    dispatch(actions.startCall({ callType: callTypes.action }));
+    return requestFromServer
+        .importSubscription(subscriptionForCreation)
+        .then(response => {
+            //const subscription = response.data;
+            //dispatch(actions.subscriptionCreated({ subscription }));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't create subscription";
+            dispatch(actions.catchError({ error, callType: callTypes.action }));
+        });
+};
+
+export const exportSubscription = subscriptionForCreation => dispatch => {
+    dispatch(actions.startCall({ callType: callTypes.action }));
+    return requestFromServer
+        .exportSubscription(subscriptionForCreation)
+        .then(response => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'baocaodoisoat.xlsx'); 
+            document.body.appendChild(link);
+            link.click();
+            debugger;
+        })
+        .catch(error => {
+            debugger;
+            error.clientMessage = "Can't create subscription";
+            dispatch(actions.catchError({ error, callType: callTypes.action }));
+        });
+};

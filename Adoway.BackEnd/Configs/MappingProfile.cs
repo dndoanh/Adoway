@@ -53,6 +53,10 @@ namespace Adoway.BackEnd.Configs
             CreateMap<CustomerEntity, CustomerViewModel>();
             CreateMap<SubscriptionViewModel, SubscriptionEntity>();
             CreateMap<SubscriptionEntity, SubscriptionViewModel>();
+            CreateMap<SubscriptionPaymentImportViewModel, SubscriptionPaymentEntity>();
+            CreateMap<SubscriptionPaymentEntity, SubscriptionPaymentImportViewModel>();
+
+
             CreateMap<InvoiceViewModel, InvoiceEntity>();
             CreateMap<InvoiceEntity, InvoiceViewModel>();
             // Payment

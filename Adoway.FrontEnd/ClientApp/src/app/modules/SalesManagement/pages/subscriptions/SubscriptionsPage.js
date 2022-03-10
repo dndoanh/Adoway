@@ -5,12 +5,20 @@ import { SubscriptionDeleteDialog } from "./subscription-delete-dialog/Subscript
 import { SubscriptionsUIProvider } from "./SubscriptionsUIContext";
 import { SubscriptionsCard } from "./SubscriptionsCard";
 import { SubscriptionEdit } from "./subscription-edit/SubscriptionEdit";
+import { ImportPage } from "./subscription-import/ImportPage";
+import { ExportPage } from "./subscription-export/ExportPage";
 import { ContentRoute } from "../../../../../_metronic/layout";
 
 export function SubscriptionsPage({ history }) {
     const subscriptionsUIEvents = {
         newSubscriptionButtonClick: () => {
             history.push("/subscriptions/new");
+        },
+        importButtonClick: () => {
+            history.push("/subscriptions/import");
+        },
+        exportButtonClick: () => {
+            history.push("/subscriptions/export");
         },
         openEditSubscriptionPage: (id) => {
             history.push(`/subscriptions/${id}/edit`);
@@ -28,6 +36,14 @@ export function SubscriptionsPage({ history }) {
             <ContentRoute
                 path="/subscriptions/:id/edit"
                 component={SubscriptionEdit}
+            />
+            <ContentRoute
+                path="/subscriptions/import"
+                component={ImportPage}
+            />
+            <ContentRoute
+                path="/subscriptions/export"
+                component={ExportPage}
             />
             <Route path="/subscriptions/:id/delete">
                 {({ history, match }) => (

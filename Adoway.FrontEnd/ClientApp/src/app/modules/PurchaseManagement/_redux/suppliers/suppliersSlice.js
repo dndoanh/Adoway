@@ -70,6 +70,10 @@ export const suppliersSlice = createSlice({
                 return entity;
             });
         },
+        allSuppliersFetched: (state, action) => {
+            const suppliers = action.payload;
+            state.allSuppliers = suppliers;
+        },
         // deleteSupplier
         supplierDeleted: (state, action) => {
             state.error = null;

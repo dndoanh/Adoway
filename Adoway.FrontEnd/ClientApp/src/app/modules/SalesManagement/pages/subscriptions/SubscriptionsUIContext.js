@@ -40,6 +40,8 @@ export function SubscriptionsUIProvider({ subscriptionsUIEvents, children }) {
         setQueryParamsBase,
         setQueryParams,
         initSubscription,
+        exportButtonClick: subscriptionsUIEvents.exportButtonClick,
+        importButtonClick: subscriptionsUIEvents.importButtonClick,
         openEditSubscriptionPage: subscriptionsUIEvents.openEditSubscriptionPage,
         newSubscriptionButtonClick: subscriptionsUIEvents.newSubscriptionButtonClick,
         openDeleteSubscriptionDialog: subscriptionsUIEvents.openDeleteSubscriptionDialog,

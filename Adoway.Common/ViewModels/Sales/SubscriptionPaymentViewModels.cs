@@ -51,6 +51,7 @@ namespace Adoway.Common.ViewModels.Sales
         public decimal Nov { get; set; }
         public decimal Dec { get; set; }
         public decimal Total { get; set; }
+        public Guid SubscriptionId { get; set; }
     }
     public class SubscriptionPaymentFilterViewModel : BaseFilterViewModel
     {
@@ -60,5 +61,12 @@ namespace Adoway.Common.ViewModels.Sales
     {
         public Guid? ProjectId { get; set; }
         public Guid? SupplierId { get; set; }
+    }
+    public class SubscriptionPaymentImportViewModel : BaseEnterpriseViewModel
+    {
+        public DateTime PaymentDate { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
+        public Guid SubscriptionId { get; set; }
     }
 }

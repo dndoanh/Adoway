@@ -22,3 +22,17 @@ export function updateSubscription(subscription) {
 export function deleteSubscription(subscriptionId) {
     return axios.post(`${USERS_URL}/deleteSubscription?id=${subscriptionId}`);
 }
+
+export function importSubscription(subscription) {
+    return axios.post(`${USERS_URL}/importSubscription`, subscription);
+}
+export function exportSubscription(subscription) {
+    return axios({
+        url: `${USERS_URL}/exportSubscription`, //your url
+        method: 'POST',
+        responseType: 'blob', // important
+        data: subscription
+    })
+
+    /*return axios.post(`${USERS_URL}/exportSubscription`, subscription);*/
+}

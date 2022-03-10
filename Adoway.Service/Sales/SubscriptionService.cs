@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Adoway.Data.Context;
 using Adoway.Service.Base;
 using System.Data;
+using Adoway.Common.Helpers;
 
 namespace Adoway.Service.Sales
 {
@@ -83,6 +84,62 @@ namespace Adoway.Service.Sales
                 Entities = result,
                 TotalCount = (int)totalCount.Value
             };
+        }
+
+        public async Task<List<SubscriptionViewModel>> Import(SubscriptionImportViewModel model,string Supplier)
+        {
+            var stream = StringExtensions.GenerateStreamFromString(model.FileUrl);
+            var errormessage = "";
+            var result = new List<SubscriptionViewModel>();
+            switch (Supplier)
+            {
+                case "VNPT":
+                     result = ExcelHelper.ExcelImportVNPT<SubscriptionViewModel>(stream, ref errormessage);
+                    break;
+                case "Viettel":
+                    result = ExcelHelper.ExcelImportViettel<SubscriptionViewModel>(stream, ref errormessage);
+                    break;
+                case "CMC":
+                    result = ExcelHelper.ExcelImportCMC<SubscriptionViewModel>(stream, ref errormessage);
+                    break;
+                case "FPT":
+                    result = ExcelHelper.ExcelImportFPT<SubscriptionViewModel>(stream, ref errormessage);
+                    break;
+                default:
+                    break;
+            }
+          
+
+           return result;
+        }
+        public async Task<byte[]> Export(SubscriptionExportViewModel model,string path)
+        {
+
+            byte[] result = null;
+
+            result = ExcelHelper.ExcelExport(path, null);
+            return result;
+        }
+
+        public async Task<SubscriptionViewModel> FindByContractCode(string ContractCode)
+        {
+            var entity = await _subsRepo.SingleBy(u=>u.ContractCode== ContractCode);
+            return _mapper.Map<SubscriptionViewModel>(entity);
+        }
+        public async Task<List<SubscriptionViewModel>> FindSubs(SubscriptionExportViewModel model)
+        {
+            var StartDate = new DateTime(model.Year, 1, 1,0,0,0);
+            var EndDate = new DateTime(model.Year+1, 1, 1, 0, 0, 0);
+            var entity = await _subsRepo.FindByAsync(u => u.SupplierId==model.SupplierId && u.ProjectId==model.ProjectId
+                && u.StartDate>= StartDate && u.StartDate < EndDate
+            );
+            return _mapper.Map<List<SubscriptionViewModel>>(entity);
+        }
+
+        public async Task<byte[]> Export(List<SubscriptionPaymentViewModel> model, string path)
+        {
+            var result=  ExcelHelper.ExcelExport(path, model);
+            return result;
         }
     }
 }

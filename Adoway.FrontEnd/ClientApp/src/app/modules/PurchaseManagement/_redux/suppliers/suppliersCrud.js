@@ -4,6 +4,10 @@ export const OWNERS_URL = `${process.env.REACT_APP_API_URL}/supplier`;
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
+
+export function getAllSuppliers() {
+    return axios.get(OWNERS_URL + '/getSuppliers');
+}
 export function findSupplier(queryParams) {
     return axios.post(`${OWNERS_URL}/searchSuppliers`, queryParams);
 }
